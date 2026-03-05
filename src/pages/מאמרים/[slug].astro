@@ -1,0 +1,79 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+
+const WP_URL = import.meta.env.WP_URL || 'http://mazeget-local.local';
+
+export async function getStaticPaths() {
+  const wpUrl = import.meta.env.WP_URL || 'http://mazeget-local.local';
+  try {
+    const res = await fetch(`${wpUrl}/wp-json/wp/v2/posts?per_page=100&_fields=slug`);
+    const posts = await res.json();
+    return posts.map((post: any) => ({ params: { slug: post.slug } }));
+  } catch (e) {
+    return [];
+  }
+}
+
+const { slug } = Astro.params;
+
+let post = null;
+try {
+  const res = await fetch(`${WP_URL}/wp-json/wp/v2/posts?slug=${slug}&_embed`);
+  const data = await res.json();
+  post = data[0] || null;
+} catch (e) {
+  post = null;
+}
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+
+<Layout title={post ? post.title.rendered + ' — Mazeget' : 'מאמר — Mazeget'}>
+  <Header />
+
+  {!post ? (
+    <div class="py-40 text-center">
+      <p class="text-gray-400 text-xl">המאמר לא נמצא</p>
+      <a href="/מאמרים" class="text-[#6C22FF] mt-4 inline-block hover:underline">חזרה למאמרים</a>
+    </div>
+  ) : (
+    <>
+      <!-- Hero -->
+      <section class="py-20 px-6 text-center" style="background: linear-gradient(135deg, #12023C 0%, #6C22FF 100%);">
+        <p class="text-white/60 text-sm mb-4">{formatDate(post.date)}</p>
+        <h1 class="text-4xl md:text-5xl text-white font-black max-w-3xl mx-auto leading-tight"
+          style="font-family: 'Secular One', sans-serif;"
+          set:html={post.title.rendered} />
+      </section>
+
+      <!-- Content -->
+      <article class="py-16 px-6">
+        <div class="max-w-2xl mx-auto text-right">
+          <div class="prose prose-lg prose-headings:font-black prose-headings:text-[#12023C] prose-p:text-gray-600 prose-p:leading-relaxed max-w-none"
+            set:html={post.content.rendered} />
+
+          <!-- Back Link -->
+          <div class="mt-16 pt-8 border-t border-gray-100">
+            <a href="/מאמרים" class="text-[#6C22FF] font-medium hover:underline">
+              ← חזרה לכל המאמרים
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- CTA -->
+      <section class="py-16 px-6 text-center bg-[#F8F7FF]">
+        <h2 class="text-2xl font-black text-[#12023C] mb-4" style="font-family: 'Secular One', sans-serif;">
+          מעוניינים במצגת לאירוע שלכם?
+        </h2>
+        <a href="/#contact"
+          class="inline-block bg-[#6C22FF] text-white font-bold text-lg px-10 py-4 rounded-full hover:bg-[#5a1dd6] transition-colors">
+          צרו קשר עכשיו
+        </a>
+      </section>
+    </>
+  )}
+</Layout>

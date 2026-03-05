@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+
+const WP_URL = import.meta.env.WP_URL || 'http://mazeget-local.local';
+
+let posts = [];
+let categories = [];
+
+try {
+  const [postsRes, catsRes] = await Promise.all([
+    fetch(`${WP_URL}/wp-json/wp/v2/posts?per_page=100&_fields=id,slug,title,excerpt,date,categories,featured_media`),
+    fetch(`${WP_URL}/wp-json/wp/v2/categories?per_page=50`)
+  ]);
+  posts = await postsRes.json();
+  categories = await catsRes.json();
+} catch (e) {
+  posts = [];
+  categories = [];
+}
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+
+<Layout title="מאמרים — Mazeget מצגות">
+  <Header />
+
+  <!-- Hero -->
+  <section class="py-20 px-6 text-center" style="background: linear-gradient(135deg, #12023C 0%, #6C22FF 100%);">
+    <h1 class="text-5xl text-white font-black mb-4" style="font-family: 'Secular One', sans-serif;">מאמרים וטיפים</h1>
+    <p class="text-white/90 text-xl max-w-xl mx-auto">כל מה שצריך לדעת על מצגות וידאו לאירועים</p>
+  </section>
+
+  <!-- Category Filter -->
+  {categories.length > 0 && (
+    <section class="py-8 px-6 bg-white border-b border-gray-100">
+      <div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-3">
+        <button data-cat="all"
+          class="cat-btn px-5 py-2 rounded-full text-sm font-medium border-2 border-[#6C22FF] bg-[#6C22FF] text-white transition-all">
+          הכל
+        </button>
+        {categories.filter((c: any) => c.count > 0).map((cat: any) => (
+          <button data-cat={cat.id}
+            class="cat-btn px-5 py-2 rounded-full text-sm font-medium border-2 border-[#6C22FF] text-[#6C22FF] bg-white hover:bg-[#6C22FF] hover:text-white transition-all">
+            {cat.name} ({cat.count})
+          </button>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Posts Grid -->
+  <section class="py-16 px-6 bg-[#F8F7FF]">
+    <div class="max-w-5xl mx-auto">
+      {posts.length === 0 ? (
+        <p class="text-center text-gray-400 py-20">אין מאמרים להצגה כרגע</p>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="posts-grid">
+          {posts.map((post: any) => (
+            <article
+              class="post-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer"
+              data-categories={JSON.stringify(post.categories)}
+            >
+              <a href={`/מאמרים/${post.slug}`}>
+                <div class="p-6 text-right">
+                  <p class="text-xs text-gray-400 mb-2">{formatDate(post.date)}</p>
+                  <h2 class="font-black text-[#12023C] text-lg mb-3 leading-tight"
+                    set:html={post.title.rendered} />
+                  <p class="text-gray-500 text-sm leading-relaxed line-clamp-3"
+                    set:html={post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 120) + '...'} />
+                  <span class="inline-block mt-4 text-[#6C22FF] font-medium text-sm hover:underline">
+                    קרא עוד ←
+                  </span>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+</Layout>
+
+<script>
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = (btn as HTMLElement).dataset.cat;
+
+      document.querySelectorAll('.cat-btn').forEach(b => {
+        b.classList.remove('bg-[#6C22FF]', 'text-white');
+        b.classList.add('bg-white', 'text-[#6C22FF]');
+      });
+      btn.classList.add('bg-[#6C22FF]', 'text-white');
+      btn.classList.remove('bg-white', 'text-[#6C22FF]');
+
+      document.querySelectorAll('.post-card').forEach(card => {
+        const el = card as HTMLElement;
+        const cats = JSON.parse(el.dataset.categories || '[]');
+        if (cat === 'all' || cats.includes(Number(cat))) {
+          el.style.display = 'block';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
