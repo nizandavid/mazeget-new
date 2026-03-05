@@ -2,7 +2,7 @@
 import { categories } from '../data/categories';
 ---
 
-<footer style="position:relative; z-index:1; border-top:1px solid var(--border); background:var(--surface);">
+<footer style="position:relative; z-index:1; background:#1e0a4a;">
 
   <!-- Main footer content -->
   <div style="max-width:1280px; margin:0 auto; padding:3.5rem 6% 2rem; display:grid; grid-template-columns:2fr 1fr 1fr; gap:3rem; text-align:right;" class="footer-grid">
@@ -10,20 +10,20 @@ import { categories } from '../data/categories';
     <!-- Brand -->
     <div>
       <div style="margin-bottom:1rem;">
-        <a href="/"><img src="/logo-matzget.png" alt="מצגת – זה כל הסיפור" style="height:60px; width:auto; display:block;" /></a>
+        <a href="/"><img src="/logo-matzget.png" alt="מצגת – זה כל הסיפור" style="height:60px; width:auto; display:block; filter:brightness(0) invert(1);" /></a>
       </div>
-      <p style="font-size:.85rem; color:var(--text-muted); line-height:1.7; max-width:300px;">
+      <p style="font-size:.85rem; color:rgba(255,255,255,.6); line-height:1.7; max-width:300px;">
         מצגות וידאו מקצועיות לאירועים משפחתיים — בר מצווה, בת מצווה, ימי הולדת וחתונות. עריכה מושקעת עם טכנולוגיית AI.
       </p>
     </div>
 
     <!-- Categories -->
     <div>
-      <h4 style="font-size:.78rem; font-weight:700; color:var(--text-mid); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:1rem;">מצגות</h4>
+      <h4 style="font-size:.78rem; font-weight:700; color:rgba(255,255,255,.45); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:1rem;">מצגות</h4>
       <ul style="list-style:none; display:flex; flex-direction:column; gap:.6rem;">
         {categories.map(cat => (
           <li>
-            <a href={`/מצגות/${cat.key}`} style="color:var(--text-muted); text-decoration:none; font-size:.85rem; transition:color .2s;" onmouseover="this.style.color='var(--purple)'" onmouseout="this.style.color='var(--text-muted)'">
+            <a href={`/מצגות/${cat.key}`} style="color:rgba(255,255,255,.7); text-decoration:none; font-size:.85rem; transition:color .2s;" onmouseover="this.style.color='#C4B5FD'" onmouseout="this.style.color='rgba(255,255,255,.7)'">
               {cat.emoji} {cat.label}
             </a>
           </li>
@@ -33,7 +33,7 @@ import { categories } from '../data/categories';
 
     <!-- Links -->
     <div>
-      <h4 style="font-size:.78rem; font-weight:700; color:var(--text-mid); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:1rem;">ניווט</h4>
+      <h4 style="font-size:.78rem; font-weight:700; color:rgba(255,255,255,.45); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:1rem;">ניווט</h4>
       <ul style="list-style:none; display:flex; flex-direction:column; gap:.6rem;">
         {[
           { label:'מחירון', href:'/מחירון' },
@@ -42,7 +42,7 @@ import { categories } from '../data/categories';
           { label:'אודותינו', href:'/אודותינו' },
         ].map(link => (
           <li>
-            <a href={link.href} style="color:var(--text-muted); text-decoration:none; font-size:.85rem;" onmouseover="this.style.color='var(--purple)'" onmouseout="this.style.color='var(--text-muted)'">{link.label}</a>
+            <a href={link.href} style="color:rgba(255,255,255,.7); text-decoration:none; font-size:.85rem;" onmouseover="this.style.color='#C4B5FD'" onmouseout="this.style.color='rgba(255,255,255,.7)'">{link.label}</a>
           </li>
         ))}
       </ul>
@@ -51,8 +51,8 @@ import { categories } from '../data/categories';
   </div>
 
   <!-- Bottom bar -->
-  <div style="max-width:1280px; margin:0 auto; padding:1.2rem 6%; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
-    <span style="font-size:.78rem; color:var(--text-muted);">© {new Date().getFullYear()} Mazeget · כל הזכויות שמורות</span>
+  <div style="max-width:1280px; margin:0 auto; padding:1.2rem 6%; border-top:1px solid rgba(255,255,255,.1); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+    <span style="font-size:.78rem; color:rgba(255,255,255,.45);">© {new Date().getFullYear()} Mazeget · כל הזכויות שמורות</span>
     <a href="https://wa.me/972526780531" target="_blank"
       style="display:inline-flex; align-items:center; gap:.5rem; background:#25D366; color:white; padding:.45rem 1.1rem; border-radius:50px; font-size:.82rem; font-weight:600; text-decoration:none;">
       <svg width="16" height="16" fill="white" viewBox="0 0 24 24">
