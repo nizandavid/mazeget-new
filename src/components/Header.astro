@@ -1,59 +1,126 @@
 ---
 import { categories } from '../data/categories';
-
-const navLinks = [
-  { label: 'מחירון', href: '/מחירון' },
-  { label: 'מאמרים', href: '/מאמרים' },
-  { label: 'העלאת קבצים', href: '/העלאת-קבצים' },
-  { label: 'אודותינו', href: '/אודותינו' },
-];
 ---
 
-<header class="fixed top-0 right-0 left-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
-  <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+<style>
+  nav {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 200;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6%;
+    background: rgba(250,250,250,0.82);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 24px rgba(124,58,237,.08); }
 
-    <!-- Logo -->
-    <a href="/">
-      <img src="/logo.png" alt="Mazeget" class="h-12 object-contain" />
-    </a>
+  .nav-logo { display:flex; align-items:center; gap:.5rem; text-decoration:none; }
+  .nav-logo-mark {
+    width:36px; height:36px; border-radius:10px;
+    background: linear-gradient(135deg, var(--purple), var(--purple-mid));
+    display:flex; align-items:center; justify-content:center;
+    color:white; font-weight:900; font-size:.9rem;
+  }
+  .nav-logo-text { font-size:1.05rem; font-weight:800; color:var(--text); line-height:1; }
+  .nav-logo-sub  { font-size:.68rem; color:var(--text-muted); font-weight:400; }
 
-    <!-- Nav -->
-    <nav class="hidden md:flex items-center gap-6">
+  .nav-links { display:flex; align-items:center; gap:1.8rem; list-style:none; }
+  .nav-links a {
+    color:var(--text-mid); text-decoration:none;
+    font-size:.88rem; font-weight:500;
+    position:relative; transition:color .2s;
+  }
+  .nav-links a::after {
+    content:''; position:absolute; bottom:-4px; right:0;
+    width:0; height:2px;
+    background: linear-gradient(90deg, var(--purple), var(--pink));
+    transition: width .3s;
+  }
+  .nav-links a:hover { color:var(--purple); }
+  .nav-links a:hover::after { width:100%; }
 
-      <!-- Dropdown: מצגות -->
-      <div class="relative group">
-        <button class="text-[#12023C] font-medium hover:text-[#6C22FF] transition-colors flex items-center gap-1">
-          מצגות
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-          </svg>
-        </button>
-        <div class="absolute top-full right-0 mt-2 bg-white rounded-2xl shadow-xl p-3 min-w-[180px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-          {categories.map((cat) => (
-            <a href={`/מצגות/${cat.key}`}
-              class="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-[#F8F7FF] text-[#12023C] hover:text-[#6C22FF] transition-colors text-sm">
-              <span>{cat.emoji}</span>
-              <span>{cat.label}</span>
-            </a>
-          ))}
-        </div>
+  /* Dropdown */
+  .dropdown { position:relative; }
+  .dropdown-btn {
+    background:none; border:none; cursor:pointer;
+    color:var(--text-mid); font-size:.88rem; font-weight:500;
+    font-family:'Heebo',sans-serif;
+    display:flex; align-items:center; gap:.3rem;
+    transition:color .2s; padding:0;
+  }
+  .dropdown-btn:hover { color:var(--purple); }
+  .dropdown-menu {
+    position:absolute; top:calc(100% + 12px); right:0;
+    background:white; border:1px solid var(--border);
+    border-radius:16px; padding:.5rem;
+    min-width:180px;
+    box-shadow:0 16px 40px rgba(124,58,237,.12);
+    opacity:0; visibility:hidden;
+    transform:translateY(-6px);
+    transition:opacity .2s, transform .2s, visibility .2s;
+  }
+  .dropdown:hover .dropdown-menu {
+    opacity:1; visibility:visible; transform:translateY(0);
+  }
+  .dropdown-menu a {
+    display:flex; align-items:center; gap:.6rem;
+    padding:.55rem 1rem; border-radius:10px;
+    color:var(--text-mid); text-decoration:none;
+    font-size:.85rem; font-weight:500;
+    transition:background .15s, color .15s;
+  }
+  .dropdown-menu a:hover { background:var(--purple-light); color:var(--purple); }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--purple), var(--purple-mid));
+    color:#fff; padding:.5rem 1.3rem;
+    border-radius:50px; font-weight:600;
+    font-size:.85rem; text-decoration:none;
+    box-shadow:0 4px 18px rgba(124,58,237,.3);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .nav-cta:hover { transform:translateY(-1px); box-shadow:0 6px 26px rgba(124,58,237,.45); }
+  .nav-cta::after { display:none !important; }
+
+  .spacer { height:68px; }
+</style>
+
+<nav id="main-nav">
+  <!-- Logo -->
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-mark">מ</div>
+    <div>
+      <div class="nav-logo-text">ניצן שמיר מצגות</div>
+      <div class="nav-logo-sub">מצגת – זה כל הסיפור</div>
+    </div>
+  </a>
+
+  <!-- Links -->
+  <ul class="nav-links">
+    <li class="dropdown">
+      <button class="dropdown-btn">
+        המצגות שלנו
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      <div class="dropdown-menu">
+        {categories.map(cat => (
+          <a href={`/מצגות/${cat.key}`}>{cat.emoji} {cat.label}</a>
+        ))}
       </div>
+    </li>
+    <li><a href="/#gallery">דוגמאות</a></li>
+    <li><a href="/מחירון">מחירון</a></li>
+    <li><a href="/מאמרים">מאמרים</a></li>
+    <li><a href="/אודותינו">אודותינו</a></li>
+    <li><a href="/#contact" class="nav-cta">צרו קשר</a></li>
+  </ul>
+</nav>
 
-      {navLinks.map((link) => (
-        <a href={link.href}
-          class="text-[#12023C] font-medium hover:text-[#6C22FF] transition-colors text-sm">
-          {link.label}
-        </a>
-      ))}
-    </nav>
-
-    <!-- CTA -->
-    <a href="/#contact"
-      class="bg-[#6C22FF] text-white font-bold px-6 py-2 rounded-full hover:bg-[#5a1dd6] transition-colors text-sm">
-      צרו קשר
-    </a>
-
-  </div>
-</header>
-
-<div class="h-20"></div>
+<div class="spacer"></div>

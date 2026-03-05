@@ -3,9 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Gallery from '../components/Gallery.astro';
 import Contact from '../components/Contact.astro';
+import { categories } from '../data/categories';
 
 const WP_URL = import.meta.env.WP_URL || 'http://mazeget-local.local';
-
 let presentations = [];
 try {
   const response = await fetch(`${WP_URL}/wp-json/wp/v2/presentations`);
@@ -15,35 +15,156 @@ try {
 }
 ---
 
-<Layout title="Mazeget — מצגות לאירועים משפחתיים">
-
+<Layout title="Mazeget — מצגות וידאו לאירועים משפחתיים">
   <Header />
 
   <!-- HERO -->
-  <section class="relative min-h-screen flex items-center justify-center text-center overflow-hidden"
-    style="background: linear-gradient(135deg, #6C22FF 0%, #E879F9 50%, #06B6D4 100%);">
-    <div class="absolute inset-0 bg-black/30"></div>
-    <div class="relative z-10 px-6 py-20">
-      <h1 class="text-5xl md:text-7xl text-white mb-6 leading-tight" style="font-family: 'Secular One', sans-serif;">
-        מצגות וידאו לאירועים<br/>שלא נשכחים
+  <section style="padding: 5rem 6% 4rem; text-align:center; position:relative;">
+    <div style="max-width:860px; margin:0 auto;">
+
+      <!-- Eyebrow -->
+      <div style="display:inline-flex; align-items:center; gap:.6rem; background:var(--purple-light); border-radius:50px; padding:.35rem 1rem; font-size:.78rem; font-weight:700; color:var(--purple); margin-bottom:1.6rem; letter-spacing:.5px;" class="reveal">
+        <div style="width:7px; height:7px; border-radius:50%; background:var(--purple); animation:blink 2s ease infinite;"></div>
+        מצגות וידאו לאירועים משפחתיים
+      </div>
+
+      <!-- Title -->
+      <h1 style="font-size:clamp(2.6rem,5vw,4.4rem); font-weight:900; line-height:1.1; margin-bottom:1.2rem; color:var(--text);" class="reveal">
+        כל אירוע מגיע לסיפור<br>
+        <em class="shimmer-text" style="font-style:normal;">שמרגש את כולם</em>
       </h1>
-      <p class="text-xl text-white/90 mb-10 max-w-xl mx-auto">
-        עריכה מקצועית עם AI — בר מצווה, בת מצווה, ימי הולדת וחתונות
+
+      <!-- Subtitle -->
+      <p style="font-size:1.05rem; color:var(--text-muted); line-height:1.85; margin-bottom:2.2rem; max-width:580px; margin-inline:auto;" class="reveal">
+        מצגות וידאו מקצועיות עם תזמון מושלם, כתוביות שנוגעות בלב, וקסם של AI —<br>שהופכות זיכרונות לחוויה שתישאר לנצח.
       </p>
-      <div class="mx-auto mb-10 max-w-3xl rounded-2xl overflow-hidden shadow-2xl">
-        <video autoplay muted loop playsinline class="w-full">
+
+      <!-- CTA -->
+      <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; margin-bottom:2.5rem;" class="reveal">
+        <a href="#contact" style="display:inline-flex; align-items:center; gap:.5rem; background:linear-gradient(135deg,var(--purple),var(--purple-mid)); color:#fff; padding:.85rem 2rem; border-radius:50px; font-weight:700; font-size:.95rem; text-decoration:none; box-shadow:0 8px 28px rgba(124,58,237,.35); transition:transform .2s, box-shadow .2s;">
+          קבלו הצעת מחיר
+        </a>
+        <a href="#gallery" style="display:inline-flex; align-items:center; gap:.5rem; background:transparent; border:1.5px solid var(--border); color:var(--text-mid); padding:.85rem 2rem; border-radius:50px; font-weight:600; font-size:.95rem; text-decoration:none; transition:border-color .2s, color .2s;">
+          צפו בדוגמאות
+        </a>
+      </div>
+
+      <!-- VIDEO -->
+      <div style="border-radius:24px; overflow:hidden; box-shadow:0 32px 64px rgba(124,58,237,.15), 0 8px 24px rgba(0,0,0,.08); border:1px solid var(--border); margin-bottom:2.5rem;" class="reveal">
+        <video autoplay muted loop playsinline style="width:100%; display:block;">
           <source src="https://mazeget.com/wp-content/uploads/2025/09/Ai-story-10mb.mp4" type="video/mp4" />
         </video>
       </div>
-      <a href="#gallery"
-        class="inline-block bg-white text-[#6C22FF] font-bold text-lg px-10 py-4 rounded-full hover:scale-105 transition-transform">
-        לדוגמאות שלנו
-      </a>
+
+      <!-- Trust numbers -->
+      <div style="display:flex; justify-content:center; align-items:center; gap:2.5rem; flex-wrap:wrap; padding-top:2rem; border-top:1px solid var(--border);" class="reveal">
+        <div style="text-align:center;">
+          <div style="font-size:1.8rem; font-weight:900; color:var(--purple);">500+</div>
+          <div style="font-size:.75rem; color:var(--text-muted); margin-top:.2rem;">מצגות שנוצרו</div>
+        </div>
+        <div style="width:1px; height:36px; background:var(--border);"></div>
+        <div style="text-align:center;">
+          <div style="font-size:1.8rem; font-weight:900; color:var(--purple);">3–4</div>
+          <div style="font-size:.75rem; color:var(--text-muted); margin-top:.2rem;">ימי עבודה</div>
+        </div>
+        <div style="width:1px; height:36px; background:var(--border);"></div>
+        <div style="text-align:center;">
+          <div style="font-size:1.8rem; font-weight:900; color:var(--purple);">15+</div>
+          <div style="font-size:.75rem; color:var(--text-muted); margin-top:.2rem;">שנות ניסיון</div>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- CATEGORIES -->
+  <section style="padding:5rem 6%; position:relative;">
+    <div style="max-width:1280px; margin:0 auto;">
+      <div style="text-align:center; margin-bottom:3rem;" class="reveal">
+        <div style="display:inline-block; background:var(--purple-light); color:var(--purple); font-size:.72rem; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; padding:.35rem 1rem; border-radius:50px; margin-bottom:1rem;">הקטגוריות שלנו</div>
+        <h2 style="font-size:clamp(1.9rem,3.5vw,2.9rem); font-weight:900; color:var(--text);">לכל אירוע <em class="shimmer-text" style="font-style:normal;">המצגת המושלמת</em></h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.2rem;">
+        {categories.map((cat, i) => (
+          <a href={`/מצגות/${cat.key}`}
+            style={`border-radius:24px; overflow:hidden; cursor:pointer; position:relative; aspect-ratio:3/4; text-decoration:none; display:block; border:1px solid var(--border); transition:transform .35s, box-shadow .35s;`}
+            class="cat-tile reveal">
+            <div class={`cat-bg cat-bg-${i}`} style="position:absolute; inset:0; transition:transform .5s;"></div>
+            <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:1.6rem; background:linear-gradient(to top, rgba(0,0,0,.12) 0%, transparent 55%);">
+              <div style="font-size:2.8rem; margin-bottom:auto; padding-top:.4rem;">{cat.emoji}</div>
+              <div style="font-size:1.2rem; font-weight:900; color:var(--text); margin-bottom:.3rem;">{cat.label}</div>
+              <div style="font-size:.78rem; color:rgba(26,16,64,.65); line-height:1.5;">{cat.description}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
   <Gallery presentations={presentations} />
 
+  <!-- PROCESS -->
+  <section style="padding:5rem 6%; position:relative;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <div style="text-align:center; margin-bottom:3.5rem;" class="reveal">
+        <div style="display:inline-block; background:var(--purple-light); color:var(--purple); font-size:.72rem; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; padding:.35rem 1rem; border-radius:50px; margin-bottom:1rem;">איך זה עובד</div>
+        <h2 style="font-size:clamp(1.9rem,3.5vw,2.9rem); font-weight:900; color:var(--text);">4 צעדים ל<em class="shimmer-text" style="font-style:normal;">אירוע בלתי נשכח</em></h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; position:relative;">
+        {[
+          { icon:'📸', title:'מעלים תמונות', desc:'מעלים תמונות וסרטונים דרך מערכת ייחודית — קל ומהיר מהטלפון או המחשב' },
+          { icon:'🎵', title:'בוחרים סגנון', desc:'מוזיקה, עריכה ותוספות AI — הכל לפי הטעם האישי שלכם' },
+          { icon:'✂️', title:'אנחנו עורכים', desc:'3–4 ימי עבודה מקצועית עם ליווי צמוד לכל אורך הדרך' },
+          { icon:'🎉', title:'מקבלים מצגת', desc:'מוכנה לאירוע ומביאה בכי שמחה ומחיאות כפיים' },
+        ].map((step, i) => (
+          <div style="text-align:center;" class="reveal">
+            <div style="width:88px; height:88px; border-radius:24px; margin:0 auto 1.3rem; display:flex; align-items:center; justify-content:center; font-size:2rem; position:relative; background:var(--surface); border:1px solid var(--border); box-shadow:0 8px 24px rgba(124,58,237,.07);">
+              {step.icon}
+              <div style="position:absolute; top:-8px; left:-8px; width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg,var(--purple),var(--purple-mid)); color:white; font-size:.65rem; font-weight:900; display:flex; align-items:center; justify-content:center;">{i+1}</div>
+            </div>
+            <div style="font-size:.95rem; font-weight:800; margin-bottom:.45rem; color:var(--text);">{step.title}</div>
+            <div style="font-size:.8rem; color:var(--text-muted); line-height:1.6;">{step.desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMO BANNER -->
+  <div style="padding:1rem 6%; position:relative;" class="reveal">
+    <div style="max-width:1100px; margin:0 auto; border-radius:28px; padding:3rem 3.5rem; background:linear-gradient(120deg,var(--purple) 0%,#6D28D9 40%,#4C1D95 100%); display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:center; box-shadow:0 24px 64px rgba(124,58,237,.35); overflow:hidden; position:relative;">
+      <div>
+        <div style="display:inline-block; background:rgba(255,255,255,.2); color:white; font-size:.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:.3rem 1rem; border-radius:50px; margin-bottom:.9rem;">מבצע 2026</div>
+        <div style="font-size:1.9rem; font-weight:900; color:white; margin-bottom:.5rem;">דקה נוספת במתנה 🎁</div>
+        <div style="color:rgba(255,255,255,.75); font-size:.9rem;">בכל הזמנת מצגת של 6 או 10 דקות — דקה נוספת בחינם!</div>
+      </div>
+      <a href="#contact" style="display:inline-flex; align-items:center; gap:.5rem; background:white; color:var(--purple); padding:.85rem 2rem; border-radius:50px; font-weight:700; font-size:.95rem; text-decoration:none; white-space:nowrap; box-shadow:0 8px 24px rgba(0,0,0,.15); flex-shrink:0; position:relative; z-index:1;">
+        הזמינו עכשיו
+      </a>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
   <Contact />
 
 </Layout>
+
+<style>
+  .cat-tile:hover { transform:translateY(-10px) scale(1.02); box-shadow:0 28px 56px rgba(0,0,0,.12); }
+  .cat-bg-0 { background:linear-gradient(160deg,#EDE9FE 0%,#C4B5FD 50%,#7C3AED 100%); }
+  .cat-bg-1 { background:linear-gradient(160deg,#CCFBF1 0%,#5EEAD4 50%,#0D9488 100%); }
+  .cat-bg-2 { background:linear-gradient(160deg,#FEF3C7 0%,#FCD34D 50%,#D97706 100%); }
+  .cat-bg-3 { background:linear-gradient(160deg,#FCE7F3 0%,#F9A8D4 50%,#EC4899 100%); }
+  .cat-bg-4 { background:linear-gradient(160deg,#CCFBF1 0%,#67E8F9 50%,#0891B2 100%); }
+  .cat-tile:hover .cat-bg { transform:scale(1.06); }
+
+  @media(max-width:768px){
+    div[style*="grid-template-columns:repeat(4,1fr)"] {
+      grid-template-columns: repeat(2,1fr) !important;
+    }
+    div[style*="grid-template-columns:1fr auto"] {
+      grid-template-columns: 1fr !important;
+      text-align: center;
+    }
+  }
+</style>
