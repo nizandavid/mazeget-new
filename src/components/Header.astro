@@ -77,14 +77,15 @@ import { categories } from '../data/categories';
   .dropdown-menu a:hover { background:var(--purple-light); color:var(--purple); }
 
   .nav-cta {
-    background: linear-gradient(135deg, var(--purple), var(--purple-mid));
-    color:#fff; padding:.5rem 1.3rem;
-    border-radius:50px; font-weight:600;
+    background: #fff;
+    color: var(--purple);
+    border: 2px solid var(--purple);
+    padding:.5rem 1.3rem;
+    border-radius:50px; font-weight:700;
     font-size:.85rem; text-decoration:none;
-    box-shadow:0 4px 18px rgba(124,58,237,.3);
-    transition:transform .2s, box-shadow .2s;
+    transition:background .2s, color .2s;
   }
-  .nav-cta:hover { transform:translateY(-1px); box-shadow:0 6px 26px rgba(124,58,237,.45); }
+  .nav-cta:hover { background: var(--purple); color: #fff; }
   .nav-cta::after { display:none !important; }
 
   .spacer { height:68px; }
