@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title?: string;
@@ -21,5 +22,6 @@ const { title = 'Mazeget — אירועים משפחתיים' } = Astro.props;
   </head>
   <body class="bg-[#F8F7FF] text-[#12023C] font-heebo">
     <slot />
+    <Footer />
   </body>
 </html>
