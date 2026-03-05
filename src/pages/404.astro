@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+---
+
+<Layout title="דף לא נמצא — Mazeget">
+  <Header />
+
+  <section class="min-h-screen flex items-center justify-center px-6 text-center"
+    style="background: linear-gradient(135deg, #F8F7FF 0%, #e9e6ff 100%);">
+    <div>
+      <div class="text-8xl mb-6">🎬</div>
+      <h1 class="text-8xl font-black text-[#6C22FF] mb-4" style="font-family: 'Secular One', sans-serif;">
+        404
+      </h1>
+      <h2 class="text-2xl font-black text-[#12023C] mb-4" style="font-family: 'Secular One', sans-serif;">
+        אופס, הדף הזה לא קיים
+      </h2>
+      <p class="text-gray-500 mb-10 max-w-sm mx-auto">
+        נראה שהלכתם לאיבוד — אבל לא נורא, יש לנו הרבה מה להציע
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/"
+          class="bg-[#6C22FF] text-white font-bold px-8 py-3 rounded-full hover:bg-[#5a1dd6] transition-colors">
+          לדף הבית
+        </a>
+        <a href="/#gallery"
+          class="bg-white text-[#6C22FF] border-2 border-[#6C22FF] font-bold px-8 py-3 rounded-full hover:bg-[#F8F7FF] transition-colors">
+          לדוגמאות שלנו
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
