@@ -4,8 +4,15 @@ import Header from '../components/Header.astro';
 import Gallery from '../components/Gallery.astro';
 import Contact from '../components/Contact.astro';
 
-const response = await fetch('http://mazeget-local.local/wp-json/wp/v2/presentations');
-const presentations = await response.json();
+const WP_URL = import.meta.env.WP_URL || 'http://mazeget-local.local';
+
+let presentations = [];
+try {
+  const response = await fetch(`${WP_URL}/wp-json/wp/v2/presentations`);
+  presentations = await response.json();
+} catch (e) {
+  presentations = [];
+}
 ---
 
 <Layout title="Mazeget — מצגות לאירועים משפחתיים">
