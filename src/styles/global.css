@@ -96,3 +96,13 @@ body {
 @keyframes blink {
   0%,100% { opacity:1; } 50% { opacity:.3; }
 }
+
+/* Per-section animated orbs */
+.section-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.18;
+  pointer-events: none;
+  animation: drift 22s ease-in-out infinite;
+}
