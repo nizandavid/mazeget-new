@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+---
+
+<Layout title="אודותינו — Mazeget מצגות">
+  <Header />
+
+  <!-- Hero -->
+  <section class="py-20 px-6 text-center" style="background: linear-gradient(135deg, #6C22FF 0%, #06B6D4 100%);">
+    <h1 class="text-5xl text-white font-black mb-4" style="font-family: 'Secular One', sans-serif;">אודותינו</h1>
+    <p class="text-white/90 text-xl">הסיפור שלנו</p>
+  </section>
+
+  <!-- Story -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-3xl mx-auto text-right">
+      <h2 class="text-3xl font-black text-[#12023C] mb-6" style="font-family: 'Secular One', sans-serif;">
+        ניצן שמיר מצגות
+      </h2>
+      <p class="text-gray-600 text-lg leading-relaxed mb-6">
+        התחלנו כמשרד לעיצוב גרפי, ועם הזמן הרחבנו את פעילותנו לעולם מצגות הוידאו לאירועים משפחתיים.
+      </p>
+      <p class="text-gray-600 text-lg leading-relaxed mb-6">
+        אנחנו מתמחים ביצירת מצגות וידאו מתמונות וסרטונים שמסכמות תקופה בחיים — ומשאירות מזכרת מרגשת לכל החיים.
+      </p>
+      <p class="text-gray-600 text-lg leading-relaxed">
+        כל מצגת מותאמת אישית לאופי האירוע ולטעם האישי של המשפחה. אנחנו מספקים שירות אישי ומקצועי מתחילת התהליך ועד הרגע שהמצגת עולה על המסך.
+      </p>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="py-20 px-6 bg-[#F8F7FF]">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-black text-[#12023C] text-center mb-12" style="font-family: 'Secular One', sans-serif;">
+        למה לבחור בנו?
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl p-8 text-right shadow-md">
+          <div class="text-4xl mb-4">🎬</div>
+          <h3 class="font-black text-[#12023C] text-xl mb-3">עריכה מקצועית</h3>
+          <p class="text-gray-500">כל מצגת עוברת עריכה מדוקדקת עם שימוש בטכנולוגיית AI מתקדמת</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 text-right shadow-md">
+          <div class="text-4xl mb-4">💜</div>
+          <h3 class="font-black text-[#12023C] text-xl mb-3">שירות אישי</h3>
+          <p class="text-gray-500">מותאם לטעם שלכם ולאופי האירוע — מתחילת התהליך ועד הסוף</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 text-right shadow-md">
+          <div class="text-4xl mb-4">⚡</div>
+          <h3 class="font-black text-[#12023C] text-xl mb-3">מהירות ואמינות</h3>
+          <p class="text-gray-500">זמני עריכה מהירים ומחירים נוחים — בלי הפתעות בדרך</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Info -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-2xl mx-auto text-right">
+      <h2 class="text-3xl font-black text-[#12023C] mb-10 text-center" style="font-family: 'Secular One', sans-serif;">
+        פרטי התקשרות
+      </h2>
+      <div class="flex flex-col gap-6">
+        <div class="flex items-center gap-4 bg-[#F8F7FF] rounded-2xl p-6">
+          <span class="text-3xl">📍</span>
+          <div>
+            <p class="font-bold text-[#12023C]">כתובת</p>
+            <p class="text-gray-500">רחוב הנדיב 3, הרצליה</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 bg-[#F8F7FF] rounded-2xl p-6">
+          <span class="text-3xl">📞</span>
+          <div>
+            <p class="font-bold text-[#12023C]">טלפון</p>
+            <a href="tel:074-764-86-37" class="text-[#6C22FF] hover:underline">074-764-86-37</a>
+            <span class="text-gray-400 text-sm"> (דליה/דוד)</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 bg-[#F8F7FF] rounded-2xl p-6">
+          <span class="text-3xl">✉️</span>
+          <div>
+            <p class="font-bold text-[#12023C]">אימייל</p>
+            <a href="mailto:nizan.shamir@gmail.com" class="text-[#6C22FF] hover:underline">nizan.shamir@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 px-6 text-center" style="background: linear-gradient(135deg, #E879F9 0%, #6C22FF 100%);">
+    <h2 class="text-3xl font-black text-white mb-4" style="font-family: 'Secular One', sans-serif;">מוכנים להתחיל?</h2>
+    <p class="text-white/90 mb-8">צרו קשר ונבנה יחד את המצגת המושלמת לאירוע שלכם</p>
+    <a href="/#contact" class="inline-block bg-white text-[#6C22FF] font-bold text-lg px-10 py-4 rounded-full hover:scale-105 transition-transform">
+      צרו קשר עכשיו
+    </a>
+  </section>
+
+</Layout>
