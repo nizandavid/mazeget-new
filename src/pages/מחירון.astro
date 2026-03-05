@@ -1,0 +1,133 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+---
+
+<Layout title="מחירון — Mazeget מצגות">
+  <Header />
+
+  <!-- Hero -->
+  <section class="py-20 px-6 text-center" style="background: linear-gradient(135deg, #6C22FF 0%, #E879F9 100%);">
+    <h1 class="text-5xl text-white font-black mb-4" style="font-family: 'Secular One', sans-serif;">מחירון</h1>
+    <p class="text-white/90 text-xl">שקוף, פשוט, ללא הפתעות</p>
+  </section>
+
+  <!-- Packages -->
+  <section class="py-20 px-6 bg-[#F8F7FF]">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-black text-[#12023C] text-center mb-12" style="font-family: 'Secular One', sans-serif;">חבילות מצגות</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- Basic -->
+        <div class="bg-white rounded-2xl p-8 shadow-md text-right hover:shadow-xl transition-shadow">
+          <h3 class="text-xl font-black text-[#12023C] mb-2">מצגת קצרה</h3>
+          <div class="text-4xl font-black text-[#6C22FF] mb-4">₪360</div>
+          <ul class="text-gray-600 text-sm flex flex-col gap-2 mb-6">
+            <li>✓ עד 3 דקות</li>
+            <li>✓ כ-60 תמונות</li>
+            <li>✓ כותרת פתיחה</li>
+            <li>✓ סרטוני וידאו</li>
+            <li>✓ מוזיקה וברכה</li>
+            <li class="text-gray-400">דקה נוספת: ₪75</li>
+          </ul>
+          <a href="/#contact" class="block text-center bg-[#F8F7FF] text-[#6C22FF] font-bold py-3 rounded-full hover:bg-[#6C22FF] hover:text-white transition-colors">
+            לפרטים
+          </a>
+        </div>
+
+        <!-- Standard - highlighted -->
+        <div class="bg-[#6C22FF] rounded-2xl p-8 shadow-xl text-right relative">
+          <div class="absolute -top-4 right-1/2 translate-x-1/2 bg-[#F59E0B] text-white text-sm font-bold px-4 py-1 rounded-full">
+            הכי פופולרי
+          </div>
+          <h3 class="text-xl font-black text-white mb-2">מצגת בסיסית</h3>
+          <div class="text-4xl font-black text-white mb-4">₪550</div>
+          <ul class="text-white/90 text-sm flex flex-col gap-2 mb-6">
+            <li>✓ עד 6 דקות</li>
+            <li>✓ כ-120 תמונות</li>
+            <li>✓ תוכן מורחב</li>
+            <li class="font-bold text-[#F59E0B]">🎁 דקה נוספת במתנה!</li>
+            <li>✓ סרטוני וידאו</li>
+            <li class="text-white/60">דקה נוספת: ₪75</li>
+          </ul>
+          <a href="/#contact" class="block text-center bg-white text-[#6C22FF] font-bold py-3 rounded-full hover:bg-[#F8F7FF] transition-colors">
+            לפרטים
+          </a>
+        </div>
+
+        <!-- Premium -->
+        <div class="bg-white rounded-2xl p-8 shadow-md text-right hover:shadow-xl transition-shadow">
+          <h3 class="text-xl font-black text-[#12023C] mb-2">מצגת פרימיום</h3>
+          <div class="text-4xl font-black text-[#6C22FF] mb-4">₪750</div>
+          <ul class="text-gray-600 text-sm flex flex-col gap-2 mb-6">
+            <li>✓ עד 10 דקות</li>
+            <li>✓ כ-170 תמונות</li>
+            <li>✓ וידאו ללא הגבלה</li>
+            <li>✓ חלוקה לנושאים</li>
+            <li class="font-bold text-[#F59E0B]">🎁 דקה נוספת במתנה!</li>
+            <li class="text-gray-400">דקה נוספת: ₪75</li>
+          </ul>
+          <a href="/#contact" class="block text-center bg-[#F8F7FF] text-[#6C22FF] font-bold py-3 rounded-full hover:bg-[#6C22FF] hover:text-white transition-colors">
+            לפרטים
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Extra Services -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-black text-[#12023C] text-center mb-12" style="font-family: 'Secular One', sans-serif;">שירותים נוספים</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <div class="bg-[#F8F7FF] rounded-2xl p-8 text-right">
+          <h3 class="text-xl font-black text-[#12023C] mb-2">שיר שלטים</h3>
+          <div class="text-3xl font-black text-[#E879F9] mb-3">₪540</div>
+          <p class="text-gray-500 text-sm mb-2">עד 3 דקות עם משתתפי המשפחה</p>
+          <p class="text-gray-400 text-sm">דקה נוספת: ₪180</p>
+        </div>
+
+        <div class="bg-[#F8F7FF] rounded-2xl p-8 text-right">
+          <h3 class="text-xl font-black text-[#12023C] mb-2">סליחה על השאלה</h3>
+          <div class="text-3xl font-black text-[#E879F9] mb-3">₪540</div>
+          <p class="text-gray-500 text-sm mb-2">עד 3 דקות בסגנון קוויז משפחתי</p>
+          <p class="text-gray-400 text-sm">דקה נוספת: ₪180</p>
+        </div>
+
+      </div>
+
+      <!-- Add-ons -->
+      <div class="mt-12 bg-[#F8F7FF] rounded-2xl p-8 text-right">
+        <h3 class="text-xl font-black text-[#12023C] mb-6">תוספות בתשלום</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🤖</span>
+            <span class="text-gray-600">דיבוב AI של דמויות מוכרות</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🖼️</span>
+            <span class="text-gray-600">הוספת תמונות AI</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🎬</span>
+            <span class="text-gray-600">עריכת וידאו מיוחדת</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 px-6 text-center" style="background: linear-gradient(135deg, #6C22FF 0%, #06B6D4 100%);">
+    <h2 class="text-3xl font-black text-white mb-4" style="font-family: 'Secular One', sans-serif;">מוכנים להתחיל?</h2>
+    <p class="text-white/90 mb-8">צרו קשר ונבנה יחד את המצגת המושלמת</p>
+    <a href="/#contact" class="inline-block bg-white text-[#6C22FF] font-bold text-lg px-10 py-4 rounded-full hover:scale-105 transition-transform">
+      צרו קשר עכשיו
+    </a>
+  </section>
+
+</Layout>
