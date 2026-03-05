@@ -1,9 +1,7 @@
 ---
+import { categories } from '../data/categories';
+
 const navLinks = [
-  { label: 'בר מצווה', href: '/#gallery' },
-  { label: 'בת מצווה', href: '/#gallery' },
-  { label: 'ימי הולדת', href: '/#gallery' },
-  { label: 'חתונות', href: '/#gallery' },
   { label: 'מחירון', href: '/מחירון' },
   { label: 'מאמרים', href: '/מאמרים' },
   { label: 'העלאת קבצים', href: '/העלאת-קבצים' },
@@ -19,18 +17,38 @@ const navLinks = [
       <img src="/logo.png" alt="Mazeget" class="h-12 object-contain" />
     </a>
 
-    <!-- Nav Links -->
-    <nav class="hidden md:flex gap-8">
+    <!-- Nav -->
+    <nav class="hidden md:flex items-center gap-6">
+
+      <!-- Dropdown: מצגות -->
+      <div class="relative group">
+        <button class="text-[#12023C] font-medium hover:text-[#6C22FF] transition-colors flex items-center gap-1">
+          מצגות
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="absolute top-full right-0 mt-2 bg-white rounded-2xl shadow-xl p-3 min-w-[180px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+          {categories.map((cat) => (
+            <a href={`/מצגות/${cat.key}`}
+              class="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-[#F8F7FF] text-[#12023C] hover:text-[#6C22FF] transition-colors text-sm">
+              <span>{cat.emoji}</span>
+              <span>{cat.label}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
       {navLinks.map((link) => (
         <a href={link.href}
-          class="text-[#12023C] font-medium hover:text-[#6C22FF] transition-colors">
+          class="text-[#12023C] font-medium hover:text-[#6C22FF] transition-colors text-sm">
           {link.label}
         </a>
       ))}
     </nav>
 
-    <!-- CTA Button -->
-    <a href="#contact"
+    <!-- CTA -->
+    <a href="/#contact"
       class="bg-[#6C22FF] text-white font-bold px-6 py-2 rounded-full hover:bg-[#5a1dd6] transition-colors text-sm">
       צרו קשר
     </a>
@@ -38,5 +56,4 @@ const navLinks = [
   </div>
 </header>
 
-<!-- Spacer so content doesn't hide behind fixed header -->
 <div class="h-20"></div>
