@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+  --color-purple: #6C22FF;
+  --color-pink: #E879F9;
+  --color-cyan: #06B6D4;
+  --color-amber: #F59E0B;
+  --font-heebo: 'Heebo', sans-serif;
+}
+
+* {
+  font-family: 'Heebo', sans-serif;
+}

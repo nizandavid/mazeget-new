@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Gallery from '../components/Gallery.astro';
+import Contact from '../components/Contact.astro';
+
+const response = await fetch('http://mazeget-local.local/wp-json/wp/v2/presentations');
+const presentations = await response.json();
+---
+
+<Layout title="Mazeget — מצגות לאירועים משפחתיים">
+
+  <Header />
+
+  <!-- HERO -->
+  <section class="relative min-h-screen flex items-center justify-center text-center overflow-hidden"
+    style="background: linear-gradient(135deg, #6C22FF 0%, #E879F9 50%, #06B6D4 100%);">
+    <div class="absolute inset-0 bg-black/30"></div>
+    <div class="relative z-10 px-6 py-20">
+      <h1 class="text-5xl md:text-7xl text-white mb-6 leading-tight" style="font-family: 'Secular One', sans-serif;">
+        מצגות וידאו לאירועים<br/>שלא נשכחים
+      </h1>
+      <p class="text-xl text-white/90 mb-10 max-w-xl mx-auto">
+        עריכה מקצועית עם AI — בר מצווה, בת מצווה, ימי הולדת וחתונות
+      </p>
+      <div class="mx-auto mb-10 max-w-3xl rounded-2xl overflow-hidden shadow-2xl">
+        <video autoplay muted loop playsinline class="w-full">
+          <source src="https://mazeget.com/wp-content/uploads/2025/09/Ai-story-10mb.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <a href="#gallery"
+        class="inline-block bg-white text-[#6C22FF] font-bold text-lg px-10 py-4 rounded-full hover:scale-105 transition-transform">
+        לדוגמאות שלנו
+      </a>
+    </div>
+  </section>
+
+  <Gallery presentations={presentations} />
+
+  <Contact />
+
+</Layout>

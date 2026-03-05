@@ -1,0 +1,129 @@
+---
+interface Props {
+  presentations: any[];
+}
+
+const { presentations } = Astro.props;
+
+const categories = [
+  { key: 'all', label: 'הכל' },
+  { key: 'bar_mitzva', label: 'בר מצווה' },
+  { key: 'bat_mitzva', label: 'בת מצווה' },
+  { key: 'birthday', label: 'ימי הולדת' },
+  { key: 'wedding', label: 'חתונות' },
+];
+---
+
+<section id="gallery" class="py-20 px-6 bg-[#F8F7FF]">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl font-black text-[#12023C] text-center mb-4" style="font-family: 'Secular One', sans-serif;">
+      דוגמאות עבודות
+    </h2>
+    <p class="text-center text-gray-500 mb-12">לחצו על סרטון לצפייה</p>
+
+    <!-- Filter Tabs -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12" id="filter-tabs">
+      {categories.map((cat) => (
+        <button
+          data-filter={cat.key}
+          class={`filter-btn px-6 py-2 rounded-full font-medium transition-all border-2 ${cat.key === 'all' ? 'bg-[#6C22FF] text-white border-[#6C22FF]' : 'bg-white text-[#6C22FF] border-[#6C22FF] hover:bg-[#6C22FF] hover:text-white'}`}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery-grid">
+      {presentations.map((p: any) => {
+        const vimeoId = p.acf_fields?.vimeo_url?.match(/vimeo\.com\/(\d+)/)?.[1];
+        const category = p.acf_fields?.category || 'all';
+        return (
+          <div class="gallery-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1"
+            data-category={category}>
+            {vimeoId ? (
+              <div class="aspect-video relative group cursor-pointer" data-vimeo-id={vimeoId}>
+                <img
+                  src={`https://vumbnail.com/${vimeoId}.jpg`}
+                  alt={p.title.rendered}
+                  class="w-full h-full object-cover"
+                />
+                <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-[#6C22FF] mr-[-3px]" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div class="aspect-video bg-gradient-to-br from-[#6C22FF] to-[#E879F9] flex items-center justify-center">
+                <span class="text-white text-4xl">🎬</span>
+              </div>
+            )}
+            <div class="p-4">
+              <h3 class="font-bold text-[#12023C] text-lg">{p.title.rendered}</h3>
+              <span class="inline-block mt-2 text-sm px-3 py-1 rounded-full text-white"
+                style="background: linear-gradient(135deg, #6C22FF, #E879F9);">
+                {categories.find(c => c.key === category)?.label || category}
+              </span>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-6">
+  <button id="lightbox-close" class="absolute top-6 left-6 text-white text-4xl hover:text-gray-300">&times;</button>
+  <div class="w-full max-w-4xl aspect-video">
+    <iframe id="lightbox-iframe" src="" class="w-full h-full rounded-xl" frameborder="0"
+      allow="autoplay; fullscreen" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+  // Filter
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = (btn as HTMLElement).dataset.filter;
+
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('bg-[#6C22FF]', 'text-white');
+        b.classList.add('bg-white', 'text-[#6C22FF]');
+      });
+      btn.classList.add('bg-[#6C22FF]', 'text-white');
+      btn.classList.remove('bg-white', 'text-[#6C22FF]');
+
+      document.querySelectorAll('.gallery-card').forEach(card => {
+        const el = card as HTMLElement;
+        if (filter === 'all' || el.dataset.category === filter) {
+          el.style.display = 'block';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const iframe = document.getElementById('lightbox-iframe') as HTMLIFrameElement;
+
+  document.querySelectorAll('[data-vimeo-id]').forEach(el => {
+    el.addEventListener('click', () => {
+      const id = (el as HTMLElement).dataset.vimeoId;
+      iframe.src = `https://player.vimeo.com/video/${id}?autoplay=1`;
+      lightbox!.classList.remove('hidden');
+      lightbox!.classList.add('flex');
+    });
+  });
+
+  document.getElementById('lightbox-close')?.addEventListener('click', () => {
+    lightbox!.classList.add('hidden');
+    lightbox!.classList.remove('flex');
+    iframe.src = '';
+  });
+</script>

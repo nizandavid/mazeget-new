@@ -1,0 +1,38 @@
+---
+const navLinks = [
+  { label: 'בר מצווה', href: '#gallery' },
+  { label: 'בת מצווה', href: '#gallery' },
+  { label: 'ימי הולדת', href: '#gallery' },
+  { label: 'חתונות', href: '#gallery' },
+];
+---
+
+<header class="fixed top-0 right-0 left-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+  <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="/">
+      <img src="/logo.png" alt="Mazeget" class="h-12 object-contain" />
+    </a>
+
+    <!-- Nav Links -->
+    <nav class="hidden md:flex gap-8">
+      {navLinks.map((link) => (
+        <a href={link.href}
+          class="text-[#12023C] font-medium hover:text-[#6C22FF] transition-colors">
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- CTA Button -->
+    <a href="#contact"
+      class="bg-[#6C22FF] text-white font-bold px-6 py-2 rounded-full hover:bg-[#5a1dd6] transition-colors text-sm">
+      צרו קשר
+    </a>
+
+  </div>
+</header>
+
+<!-- Spacer so content doesn't hide behind fixed header -->
+<div class="h-20"></div>
