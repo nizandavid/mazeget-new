@@ -2,6 +2,24 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Contact from '../components/Contact.astro';
+
+// Vimeo IDs per section
+const barMitzvaIds = ['344487714', '284683819', '982461502'];
+const batMitzvaIds = ['1141048032', '1155967673', '1128579581'];
+const birthdayIds  = ['893673435', '308974332', '337083151'];
+const allVimeoIds  = [...barMitzvaIds, ...batMitzvaIds, ...birthdayIds, '291657952'];
+
+// Fetch titles + thumbnails at build time via Vimeo oEmbed (ללא API key)
+const vimeoData: Record<string, { title: string; thumbnail: string }> = {};
+await Promise.all(allVimeoIds.map(async (id) => {
+  try {
+    const res = await fetch(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/${id}&width=640`);
+    if (res.ok) {
+      const d = await res.json();
+      vimeoData[id] = { title: d.title, thumbnail: d.thumbnail_url };
+    }
+  } catch {}
+}));
 ---
 
 <Layout title="Mazeget — מצגות וידאו לאירועים משפחתיים">
@@ -86,25 +104,22 @@ import Contact from '../components/Contact.astro';
         <a href="/מצגות/bar_mitzva" style="display:inline-flex; align-items:center; gap:.5rem; background:var(--purple); color:white; padding:.7rem 1.6rem; border-radius:50px; font-weight:700; font-size:.88rem; text-decoration:none; white-space:nowrap; flex-shrink:0;">לכל המצגות ←</a>
       </div>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;" class="reveal thumb-grid">
-        {[
-          { title:'בר מצווה של אורי', desc:'מצגת 8 דקות עם תמונות מהילדות, רגעי ספורט וסיפור גדילה מרגש...' },
-          { title:'בר מצווה של דוד', desc:'מצגת 6 דקות עם קטעי וידאו, כותרות מיוחדות ומוזיקה מותאמת אישית...' },
-          { title:'בר מצווה של נועם', desc:'מצגת 10 דקות עם חלוקה לפרקים, תמונות משפחה ואפקטים מרהיבים...' },
-        ].map(item => (
-          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card">
-            <div style="aspect-ratio:16/9; position:relative; background:linear-gradient(160deg,#2d1457 0%,#4c1d95 60%,#7C3AED 100%); overflow:hidden;">
+        {barMitzvaIds.map(id => (
+          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-id={id} data-video-type="vimeo">
+            <div style="aspect-ratio:16/9; position:relative; background:#1a0533; overflow:hidden;">
+              {vimeoData[id]?.thumbnail && <img src={vimeoData[id].thumbnail} alt={vimeoData[id].title} style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />}
               <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-                <div style="width:64px; height:64px; border-radius:50%; background:white; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(0,0,0,.25);">
+                <div style="width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(0,0,0,.3);">
                   <svg width="22" height="22" fill="#7C3AED" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </div>
               </div>
             </div>
             <div style="padding:1.1rem 1.2rem; text-align:right;">
               <div style="display:flex; align-items:center; justify-content:space-between; flex-direction:row-reverse; gap:.6rem; margin-bottom:.5rem;">
-                <h3 style="font-size:.97rem; font-weight:800; color:var(--text); margin:0;">{item.title}</h3>
+                <h3 style="font-size:.97rem; font-weight:800; color:var(--text); margin:0;">{vimeoData[id]?.title || 'בר מצווה'}</h3>
                 <span style="background:#EDE9FE; color:#7C3AED; font-size:.7rem; font-weight:700; padding:.22rem .75rem; border-radius:50px; white-space:nowrap; flex-shrink:0;">בר מצווה</span>
               </div>
-              <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">{item.desc}</p>
+              <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">מצגת וידאו מרגשת לאירוע הגדול</p>
             </div>
           </div>
         ))}
@@ -124,25 +139,22 @@ import Contact from '../components/Contact.astro';
         <a href="/מצגות/bat_mitzva" style="display:inline-flex; align-items:center; gap:.5rem; background:#BE185D; color:white; padding:.7rem 1.6rem; border-radius:50px; font-weight:700; font-size:.88rem; text-decoration:none; white-space:nowrap; flex-shrink:0;">לכל המצגות ←</a>
       </div>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;" class="reveal thumb-grid">
-        {[
-          { title:'בת מצווה של נועה', desc:'סרטון מרהיב בן 8 דקות המשלב תמונות מהילדות, שירה וביצוע מקצועי עם אפקטים...' },
-          { title:'בת מצווה של מיה', desc:'מצגת 6 דקות עם רגעים מרגשים, מוזיקה מותאמת אישית ועריכה בסגנון סינמטי...' },
-          { title:'בת מצווה של שירה', desc:'מצגת 10 דקות עם חלוקה לפרקים, תמונות משפחה ודיבוב AI מיוחד...' },
-        ].map(item => (
-          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card">
-            <div style="aspect-ratio:16/9; position:relative; background:linear-gradient(160deg,#500724 0%,#9d174d 60%,#EC4899 100%); overflow:hidden;">
+        {batMitzvaIds.map(id => (
+          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-id={id} data-video-type="vimeo">
+            <div style="aspect-ratio:16/9; position:relative; background:#500724; overflow:hidden;">
+              {vimeoData[id]?.thumbnail && <img src={vimeoData[id].thumbnail} alt={vimeoData[id].title} style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />}
               <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-                <div style="width:64px; height:64px; border-radius:50%; background:white; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(0,0,0,.25);">
+                <div style="width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(0,0,0,.3);">
                   <svg width="22" height="22" fill="#BE185D" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </div>
               </div>
             </div>
             <div style="padding:1.1rem 1.2rem; text-align:right;">
               <div style="display:flex; align-items:center; justify-content:space-between; flex-direction:row-reverse; gap:.6rem; margin-bottom:.5rem;">
-                <h3 style="font-size:.97rem; font-weight:800; color:var(--text); margin:0;">{item.title}</h3>
+                <h3 style="font-size:.97rem; font-weight:800; color:var(--text); margin:0;">{vimeoData[id]?.title || 'בת מצווה'}</h3>
                 <span style="background:#FCE7F3; color:#BE185D; font-size:.7rem; font-weight:700; padding:.22rem .75rem; border-radius:50px; white-space:nowrap; flex-shrink:0;">בת מצווה</span>
               </div>
-              <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">{item.desc}</p>
+              <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">מצגת וידאו שמדברת ישר ללב</p>
             </div>
           </div>
         ))}
@@ -162,25 +174,22 @@ import Contact from '../components/Contact.astro';
         <a href="/מצגות/birthday" style="display:inline-flex; align-items:center; gap:.5rem; background:#D97706; color:white; padding:.7rem 1.6rem; border-radius:50px; font-weight:700; font-size:.88rem; text-decoration:none; white-space:nowrap; flex-shrink:0;">לכל המצגות ←</a>
       </div>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;" class="reveal thumb-grid">
-        {[
-          { title:'יום הולדת 50 לרונית', desc:'מצגת 8 דקות מרגשת עם 50 שנות זיכרונות, מוזיקה מיוחדת וכותרות אישיות...' },
-          { title:'יום הולדת 1 לתמר', desc:'מצגת 3 דקות חמודה עם תמונות מהשנה הראשונה ואנימציות מיוחדות לתינוקות...' },
-          { title:'יום הולדת 70 לאבא', desc:'מצגת 10 דקות עם תמונות מכל השנים, ברכות הילדים ורגעים משפחתיים...' },
-        ].map(item => (
-          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card">
-            <div style="aspect-ratio:16/9; position:relative; background:linear-gradient(160deg,#451a03 0%,#92400e 60%,#D97706 100%); overflow:hidden;">
+        {birthdayIds.map(id => (
+          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-id={id} data-video-type="vimeo">
+            <div style="aspect-ratio:16/9; position:relative; background:#451a03; overflow:hidden;">
+              {vimeoData[id]?.thumbnail && <img src={vimeoData[id].thumbnail} alt={vimeoData[id].title} style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />}
               <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-                <div style="width:64px; height:64px; border-radius:50%; background:white; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(0,0,0,.25);">
+                <div style="width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(0,0,0,.3);">
                   <svg width="22" height="22" fill="#D97706" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </div>
               </div>
             </div>
             <div style="padding:1.1rem 1.2rem; text-align:right;">
               <div style="display:flex; align-items:center; justify-content:space-between; flex-direction:row-reverse; gap:.6rem; margin-bottom:.5rem;">
-                <h3 style="font-size:.97rem; font-weight:800; color:var(--text); margin:0;">{item.title}</h3>
+                <h3 style="font-size:.97rem; font-weight:800; color:var(--text); margin:0;">{vimeoData[id]?.title || 'יום הולדת'}</h3>
                 <span style="background:#FEF3C7; color:#92400E; font-size:.7rem; font-weight:700; padding:.22rem .75rem; border-radius:50px; white-space:nowrap; flex-shrink:0;">יום הולדת</span>
               </div>
-              <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">{item.desc}</p>
+              <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">מצגת וידאו מרגשת ליום המיוחד</p>
             </div>
           </div>
         ))}
@@ -200,28 +209,62 @@ import Contact from '../components/Contact.astro';
         <a href="/מחירון" style="display:inline-flex; align-items:center; gap:.5rem; background:#0D9488; color:white; padding:.7rem 1.6rem; border-radius:50px; font-weight:700; font-size:.88rem; text-decoration:none; white-space:nowrap; flex-shrink:0;">לפרטים ומחירים ←</a>
       </div>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;" class="reveal thumb-grid">
-        {[
-          { title:'שיר שלטים של המשפחה', desc:'שיר מותאם אישית עם כל המשפחה — 3 דקות של שמחה ומוזיקה חיה...' },
-          { title:'סליחה על השאלה', desc:'קוויז משפחתי מצחיק ומרגש — כמה הם באמת מכירים אתכם?...' },
-          { title:'תוספות AI מיוחדות', desc:'דיבוב AI של דמויות מוכרות, תמונות AI ועריכה מיוחדת לאירוע...' },
-        ].map(item => (
-          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card">
-            <div style="aspect-ratio:16/9; position:relative; background:linear-gradient(160deg,#042f2e 0%,#0f766e 60%,#0D9488 100%); overflow:hidden;">
-              <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-                <div style="width:64px; height:64px; border-radius:50%; background:white; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(0,0,0,.25);">
-                  <svg width="22" height="22" fill="#0D9488" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
+
+        <!-- פתיחות למצגות — MP4 -->
+        <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-src="https://mazeget.com/wp-content/uploads/2024/08/intro-movie-1.mp4" data-video-type="mp4">
+          <div style="aspect-ratio:16/9; position:relative; background:linear-gradient(160deg,#042f2e 0%,#0f766e 60%,#0D9488 100%); overflow:hidden;">
+            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+              <div style="width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(0,0,0,.3);">
+                <svg width="22" height="22" fill="#0D9488" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               </div>
-            </div>
-            <div style="padding:1.1rem 1.2rem; text-align:right;">
-              <div style="display:flex; align-items:center; justify-content:space-between; flex-direction:row-reverse; gap:.6rem; margin-bottom:.5rem;">
-                <h3 style="font-size:.97rem; font-weight:800; color:var(--text); margin:0;">{item.title}</h3>
-                <span style="background:#CCFBF1; color:#0F766E; font-size:.7rem; font-weight:700; padding:.22rem .75rem; border-radius:50px; white-space:nowrap; flex-shrink:0;">תוספת</span>
-              </div>
-              <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">{item.desc}</p>
             </div>
           </div>
-        ))}
+          <div style="padding:1.1rem 1.2rem; text-align:right;">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-direction:row-reverse; gap:.6rem; margin-bottom:.5rem;">
+              <h3 style="font-size:.97rem; font-weight:800; color:var(--text); margin:0;">פתיחות למצגות</h3>
+              <span style="background:#CCFBF1; color:#0F766E; font-size:.7rem; font-weight:700; padding:.22rem .75rem; border-radius:50px; white-space:nowrap; flex-shrink:0;">תוספת</span>
+            </div>
+            <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">אנימציות פתיחה מרשימות לתחילת כל מצגת</p>
+          </div>
+        </div>
+
+        <!-- סליחה על השאלה — MP4 -->
+        <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-src="https://mazeget.com/wp-content/uploads/2021/04/ma-hashela.mp4" data-video-type="mp4">
+          <div style="aspect-ratio:16/9; position:relative; background:linear-gradient(160deg,#042f2e 0%,#0f766e 60%,#0D9488 100%); overflow:hidden;">
+            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+              <div style="width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(0,0,0,.3);">
+                <svg width="22" height="22" fill="#0D9488" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div style="padding:1.1rem 1.2rem; text-align:right;">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-direction:row-reverse; gap:.6rem; margin-bottom:.5rem;">
+              <h3 style="font-size:.97rem; font-weight:800; color:var(--text); margin:0;">סליחה על השאלה</h3>
+              <span style="background:#CCFBF1; color:#0F766E; font-size:.7rem; font-weight:700; padding:.22rem .75rem; border-radius:50px; white-space:nowrap; flex-shrink:0;">תוספת</span>
+            </div>
+            <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">קוויז משפחתי מצחיק ומרגש — כמה הם מכירים אתכם?</p>
+          </div>
+        </div>
+
+        <!-- שיר שלטים — Vimeo -->
+        <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-id="291657952" data-video-type="vimeo">
+          <div style="aspect-ratio:16/9; position:relative; background:#042f2e; overflow:hidden;">
+            {vimeoData['291657952']?.thumbnail && <img src={vimeoData['291657952'].thumbnail} alt="שיר שלטים" style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />}
+            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+              <div style="width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(0,0,0,.3);">
+                <svg width="22" height="22" fill="#0D9488" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div style="padding:1.1rem 1.2rem; text-align:right;">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-direction:row-reverse; gap:.6rem; margin-bottom:.5rem;">
+              <h3 style="font-size:.97rem; font-weight:800; color:var(--text); margin:0;">{vimeoData['291657952']?.title || 'שיר שלטים'}</h3>
+              <span style="background:#CCFBF1; color:#0F766E; font-size:.7rem; font-weight:700; padding:.22rem .75rem; border-radius:50px; white-space:nowrap; flex-shrink:0;">תוספת</span>
+            </div>
+            <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">שיר מותאם אישית עם כל המשפחה</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -257,6 +300,12 @@ import Contact from '../components/Contact.astro';
   <!-- CONTACT -->
   <Contact />
 
+  <!-- LIGHTBOX -->
+  <div id="video-lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:600; align-items:center; justify-content:center; padding:1rem;">
+    <button id="lightbox-close" style="position:absolute; top:1.2rem; left:1.2rem; background:rgba(255,255,255,.15); border:none; color:white; width:46px; height:46px; border-radius:50%; font-size:1.8rem; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Heebo',sans-serif; line-height:1;">×</button>
+    <div id="lightbox-content" style="width:min(960px,95vw); aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#000;"></div>
+  </div>
+
   <!-- POPUP -->
   <div id="popup-overlay" style="position:fixed; inset:0; background:rgba(0,0,0,.65); z-index:500; display:flex; align-items:center; justify-content:center; padding:1.5rem; backdrop-filter:blur(6px);">
     <div style="background:linear-gradient(145deg,#4c1d95,#7c3aed); border-radius:28px; padding:2.5rem 2rem; max-width:420px; width:100%; position:relative; box-shadow:0 40px 80px rgba(0,0,0,.5); text-align:center;">
@@ -274,6 +323,7 @@ import Contact from '../components/Contact.astro';
 </Layout>
 
 <script>
+  // ── Popup ──────────────────────────────────────────
   function closePopup() {
     const el = document.getElementById('popup-overlay');
     if (el) el.style.display = 'none';
@@ -284,7 +334,7 @@ import Contact from '../components/Contact.astro';
     if (e.target === document.getElementById('popup-overlay')) closePopup();
   });
 
-  // Announcement bar hide on scroll
+  // ── Announcement bar hide on scroll ────────────────
   window.addEventListener('scroll', () => {
     const bar = document.getElementById('announcement-bar');
     if (!bar) return;
@@ -297,6 +347,44 @@ import Contact from '../components/Contact.astro';
       bar.style.opacity = '1';
       bar.style.pointerEvents = 'auto';
     }
+  });
+
+  // ── Video Lightbox ──────────────────────────────────
+  function closeLightbox() {
+    const lb = document.getElementById('video-lightbox');
+    const content = document.getElementById('lightbox-content');
+    if (lb) lb.style.display = 'none';
+    if (content) content.innerHTML = '';
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.video-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const el = card as HTMLElement;
+      const type = el.dataset.videoType;
+      const id   = el.dataset.videoId;
+      const src  = el.dataset.videoSrc;
+      const content = document.getElementById('lightbox-content');
+      const lb = document.getElementById('video-lightbox');
+      if (!content || !lb) return;
+
+      if (type === 'vimeo' && id) {
+        content.innerHTML = `<iframe src="https://player.vimeo.com/video/${id}?autoplay=1&color=7C3AED" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+      } else if (type === 'mp4' && src) {
+        content.innerHTML = `<video src="${src}" controls autoplay playsinline style="width:100%;height:100%;background:#000;"></video>`;
+      }
+
+      lb.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+  document.getElementById('video-lightbox')?.addEventListener('click', (e) => {
+    if (e.target === document.getElementById('video-lightbox')) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
   });
 </script>
 
