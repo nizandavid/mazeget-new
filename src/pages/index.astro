@@ -199,16 +199,27 @@ import Contact from '../components/Contact.astro';
         </div>
         <a href="/מחירון" style="display:inline-flex; align-items:center; gap:.5rem; background:#0D9488; color:white; padding:.7rem 1.6rem; border-radius:50px; font-weight:700; font-size:.88rem; text-decoration:none; white-space:nowrap; flex-shrink:0;">לפרטים ומחירים ←</a>
       </div>
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem;" class="reveal thumb-grid">
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;" class="reveal thumb-grid">
         {[
-          { title:'שיר שלטים', desc:'שיר מותאם אישית עם כל המשפחה', icon:'🎵' },
-          { title:'סליחה על השאלה', desc:'קוויז משפחתי מצחיק ומרגש', icon:'🎯' },
-          { title:'תוספות AI', desc:'דיבוב, תמונות AI ועריכה מיוחדת', icon:'🤖' },
+          { title:'שיר שלטים של המשפחה', desc:'שיר מותאם אישית עם כל המשפחה — 3 דקות של שמחה ומוזיקה חיה...' },
+          { title:'סליחה על השאלה', desc:'קוויז משפחתי מצחיק ומרגש — כמה הם באמת מכירים אתכם?...' },
+          { title:'תוספות AI מיוחדות', desc:'דיבוב AI של דמויות מוכרות, תמונות AI ועריכה מיוחדת לאירוע...' },
         ].map(item => (
-          <div style="border-radius:16px; padding:2rem; background:white; border:1.5px solid #CCFBF1; text-align:right; display:flex; flex-direction:column; gap:.8rem; box-shadow:0 4px 16px rgba(13,148,136,.07);">
-            <div style="font-size:2.2rem;">{item.icon}</div>
-            <div style="font-size:1.05rem; font-weight:800; color:var(--text);">{item.title}</div>
-            <div style="font-size:.85rem; color:var(--text-muted); line-height:1.6;">{item.desc}</div>
+          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card">
+            <div style="aspect-ratio:16/9; position:relative; background:linear-gradient(160deg,#042f2e 0%,#0f766e 60%,#0D9488 100%); overflow:hidden;">
+              <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+                <div style="width:64px; height:64px; border-radius:50%; background:white; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(0,0,0,.25);">
+                  <svg width="22" height="22" fill="#0D9488" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+              </div>
+            </div>
+            <div style="padding:1.1rem 1.2rem; text-align:right;">
+              <div style="display:flex; align-items:center; justify-content:space-between; flex-direction:row-reverse; gap:.6rem; margin-bottom:.5rem;">
+                <h3 style="font-size:.97rem; font-weight:800; color:var(--text); margin:0;">{item.title}</h3>
+                <span style="background:#CCFBF1; color:#0F766E; font-size:.7rem; font-weight:700; padding:.22rem .75rem; border-radius:50px; white-space:nowrap; flex-shrink:0;">תוספת</span>
+              </div>
+              <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">{item.desc}</p>
+            </div>
           </div>
         ))}
       </div>
