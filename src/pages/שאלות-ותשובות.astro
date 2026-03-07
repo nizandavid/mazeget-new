@@ -1,0 +1,122 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Contact from '../components/Contact.astro';
+
+const faqs = [
+  {
+    q: "כמה זמן לוקח להכין מצגת?",
+    a: "בדרך כלל 3–7 ימי עסקים מרגע קבלת כל התמונות והסרטונים. לאירועים דחופים — צרו קשר ונתאים לוח זמנים."
+  },
+  {
+    q: "כמה תמונות וסרטונים צריך לשלוח?",
+    a: "אין מינימום ואין מקסימום. לרוב, מצגת של 5–8 דקות צריכה בין 80 ל-150 תמונות. אנחנו נדריך אתכם לפי האירוע והחבילה שבחרתם."
+  },
+  {
+    q: "באילו פורמטים אפשר לשלוח תמונות וסרטונים?",
+    a: "כל פורמט סטנדרטי — JPG, PNG, HEIC לתמונות, ו-MP4, MOV, AVI לסרטונים. תמונות מהטלפון עובדות מצוין כמו שהן, לא צריך להמיר כלום."
+  },
+  {
+    q: "איך שולחים לכם את התמונות?",
+    a: "אחרי שיוצרים איתנו קשר, אתם מקבלים קישור אישי למערכת ההעלאה שלנו. מעלים ישירות מהטלפון או מהמחשב, מסדרים לפי סדר, ומוסיפים כותרות — הכל בלחיצות פשוטות, בלי להוריד שום דבר."
+  },
+  {
+    q: "אפשר לבקש שינויים אחרי שמקבלים את המצגת?",
+    a: "כן! בכל החבילות כלולה לפחות סבב תיקונים אחד. ניתן לבקש שינויים בטקסטים, בסדר, במוזיקה ועוד."
+  },
+  {
+    q: "מי בוחר את המוזיקה?",
+    a: "אתם! אנחנו נשאל אתכם מראש אילו שירים אתם אוהבים, ואם אין לכם העדפה — נבחר מוזיקה שמתאימה לאופי האירוע."
+  },
+  {
+    q: "איך מקבלים את המצגת הסופית?",
+    a: "שולחים לכם קישור להורדה עם קובץ MP4 באיכות מלאה, מוכן להקרנה בטלפון, מחשב, טלוויזיה או מקרן."
+  },
+  {
+    q: "האם משתמשים בבינה מלאכותית?",
+    a: "כן — אנחנו משלבים כלי AI מתקדמים שמאפשרים אפקטים וסגנונות שלא ניתן ליצור ידנית. זה מה שמייחד את המצגות שלנו."
+  },
+  {
+    q: "מה ההבדל בין מצגת בסיסית לפרימיום?",
+    a: "ראו את דף המחירון המלא. בקצרה: החבילות הגבוהות כוללות עריכה מתקדמת יותר, אורך מצגת גדול יותר, סאונד מיקס, ואפקטים AI מורכבים."
+  },
+  {
+    q: "עובדים רק עם אירועים באזור מרכז?",
+    a: "לא — אנחנו עובדים עם לקוחות מכל הארץ. הכל מתנהל אונליין, ולכן אין חשיבות למיקום."
+  },
+  {
+    q: "אפשר לקבל דוגמה לפני שמזמינים?",
+    a: "בוודאי! יש לנו גלרייה עם מאות מצגות אמיתיות שיצרנו — אחת מקטגוריית האירוע שלכם. אפשר לראות בדפי המצגות באתר."
+  },
+  {
+    q: "איך משלמים?",
+    a: "מקבלים דרישות תשלום, ביט, פייבוקס, העברה בנקאית, או כרטיס אשראי. מחצית מראש, מחצית בסיום."
+  },
+];
+---
+
+<Layout title="שאלות ותשובות — Mazeget מצגות">
+  <Header />
+
+  <!-- Hero -->
+  <section class="py-20 px-6 text-center" style="background: linear-gradient(135deg, #12023C 0%, #6C22FF 100%);">
+    <h1 class="text-5xl text-white font-black mb-4" style="font-family: 'Secular One', sans-serif;">שאלות ותשובות</h1>
+    <p class="text-white/90 text-xl max-w-xl mx-auto">כל מה שרציתם לדעת על מצגות הוידאו שלנו</p>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 px-6 bg-[#F8F7FF]">
+    <div class="max-w-3xl mx-auto">
+      <div class="flex flex-col gap-4" id="faq-list">
+        {faqs.map((item, i) => (
+          <div class="faq-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+            <button
+              class="faq-btn w-full text-right px-8 py-6 flex items-center justify-between gap-4 hover:bg-[#F8F7FF] transition-colors"
+              data-index={i}
+            >
+              <span class="font-bold text-[#12023C] text-lg">{item.q}</span>
+              <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-[#6C22FF]/10 flex items-center justify-center text-[#6C22FF] font-bold text-xl transition-transform">+</span>
+            </button>
+            <div class="faq-answer hidden px-8 pb-6">
+              <p class="text-gray-600 leading-relaxed text-right">{item.a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 px-6 bg-white text-center">
+    <p class="text-xl text-gray-500 mb-6">לא מצאתם תשובה? אנחנו כאן</p>
+    <a href="/#contact"
+      class="inline-block bg-[#6C22FF] text-white font-bold text-lg px-10 py-4 rounded-full hover:bg-[#5a1dd6] transition-colors">
+      שלחו לנו הודעה
+    </a>
+  </section>
+
+  <Contact />
+</Layout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item')!;
+      const answer = item.querySelector('.faq-answer')!;
+      const icon = btn.querySelector('.faq-icon')!;
+      const isOpen = !answer.classList.contains('hidden');
+
+      // סגור את כולם
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+      document.querySelectorAll('.faq-icon').forEach(ic => {
+        ic.textContent = '+';
+        (ic as HTMLElement).style.transform = '';
+      });
+
+      if (!isOpen) {
+        answer.classList.remove('hidden');
+        icon.textContent = '−';
+      }
+    });
+  });
+</script>
