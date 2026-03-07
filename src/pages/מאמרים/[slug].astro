@@ -29,6 +29,20 @@ try {
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' });
 }
+
+function processContent(html: string): string {
+  return html
+    // URL גולמי של MP4 בתוך <p> → <video>
+    .replace(
+      /<p>(https?:\/\/[^\s<"]+\.mp4[^<]*)<\/p>/gi,
+      '<p><video src="$1" controls style="max-width:100%;border-radius:8px;"></video></p>'
+    )
+    // URL גולמי של תמונה בתוך <p> → <img>
+    .replace(
+      /<p>(https?:\/\/[^\s<"]+\.(jpg|jpeg|png|gif|webp)[^<]*)<\/p>/gi,
+      '<p><img src="$1" style="max-width:100%;border-radius:8px;"></p>'
+    );
+}
 ---
 
 <Layout title={post ? post.title.rendered + ' — Mazeget' : 'מאמר — Mazeget'}>
@@ -53,7 +67,7 @@ function formatDate(dateStr: string) {
       <article class="py-16 px-6">
         <div class="max-w-2xl mx-auto text-right">
           <div class="prose prose-lg prose-headings:font-black prose-headings:text-[#12023C] prose-p:text-gray-600 prose-p:leading-relaxed max-w-none"
-            set:html={post.content.rendered} />
+            set:html={processContent(post.content.rendered)} />
 
           <!-- Back Link -->
           <div class="mt-16 pt-8 border-t border-gray-100">
