@@ -6,6 +6,7 @@ const WP_URL = 'https://wp.mazeget.com';
 
 let posts = [];
 let categories = [];
+let debugError = '';
 
 try {
   const [postsRes, catsRes] = await Promise.all([
@@ -14,7 +15,8 @@ try {
   ]);
   posts = await postsRes.json();
   categories = await catsRes.json();
-} catch (e) {
+} catch (e: any) {
+  debugError = e.message || 'unknown error';
   posts = [];
   categories = [];
 }
@@ -54,6 +56,8 @@ function formatDate(dateStr: string) {
   <!-- Posts Grid -->
   <section class="py-16 px-6 bg-[#F8F7FF]">
     <div class="max-w-5xl mx-auto">
+      {debugError && <p class="text-center text-red-500 py-4 font-mono text-sm">שגיאה: {debugError}</p>}
+      {!debugError && posts.length === 0 && <p class="text-center text-orange-500 py-4">הגיע 0 פוסטים מ-{WP_URL}</p>}
       {posts.length === 0 ? (
         <p class="text-center text-gray-400 py-20">אין מאמרים להצגה כרגע</p>
       ) : (
