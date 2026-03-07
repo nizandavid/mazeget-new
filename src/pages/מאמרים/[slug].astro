@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   try {
     const res = await fetch(`${wpUrl}/wp-json/wp/v2/posts?per_page=100&_fields=slug`);
     const posts = await res.json();
-    return posts.map((post: any) => ({ params: { slug: post.slug } }));
+    return posts.map((post: any) => ({ params: { slug: decodeURIComponent(post.slug) } }));
   } catch (e) {
     return [];
   }
@@ -19,7 +19,7 @@ const { slug } = Astro.params;
 
 let post = null;
 try {
-  const res = await fetch(`${WP_URL}/wp-json/wp/v2/posts?slug=${slug}&_embed`);
+  const res = await fetch(`${WP_URL}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_embed`);
   const data = await res.json();
   post = data[0] || null;
 } catch (e) {

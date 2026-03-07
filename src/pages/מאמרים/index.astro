@@ -67,7 +67,7 @@ function formatDate(dateStr: string) {
               class="post-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer"
               data-categories={JSON.stringify(post.categories)}
             >
-              <a href={`/מאמרים/${post.slug}`}>
+              <a href={`/מאמרים/${decodeURIComponent(post.slug)}`}>
                 <div class="p-6 text-right">
                   <p class="text-xs text-gray-400 mb-2">{formatDate(post.date)}</p>
                   <h2 class="font-black text-[#12023C] text-lg mb-3 leading-tight"
