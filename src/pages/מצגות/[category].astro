@@ -3,8 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Contact from '../../components/Contact.astro';
 import { categories } from '../../data/categories';
-
-const WP_URL = import.meta.env.WP_URL || 'http://mazeget-local.local';
+import { getVideosForCategory } from '../../lib/sheets';
 
 export async function getStaticPaths() {
   const { categories } = await import('../../data/categories');
@@ -13,15 +12,7 @@ export async function getStaticPaths() {
 
 const { category } = Astro.params;
 const catInfo = categories.find(c => c.key === category);
-
-let presentations = [];
-try {
-  const res = await fetch(`${WP_URL}/wp-json/wp/v2/presentations`);
-  const all = await res.json();
-  presentations = all.filter((p: any) => p.acf_fields?.category === category);
-} catch (e) {
-  presentations = [];
-}
+const videos = await getVideosForCategory(category!);
 ---
 
 <Layout title={`${catInfo?.label} — מצגות וידאו | Mazeget`}>
@@ -36,47 +27,59 @@ try {
     <p class="text-white/90 text-xl max-w-xl mx-auto">{catInfo?.description}</p>
   </section>
 
-  <!-- Presentations -->
+  <!-- Gallery -->
   <section class="py-20 px-6 bg-[#F8F7FF]">
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl font-black text-[#12023C] text-center mb-12" style="font-family: 'Secular One', sans-serif;">
-        דוגמאות עבודות
+        מצגות מקצועיות נוספות
       </h2>
 
-      {presentations.length === 0 ? (
+      {videos.length === 0 ? (
         <div class="text-center py-20">
           <p class="text-gray-400 text-lg">בקרוב יתווספו דוגמאות לקטגוריה זו</p>
-          <a href="/#contact" class="inline-block mt-6 bg-[#6C22FF] text-white font-bold px-8 py-3 rounded-full hover:bg-[#5a1dd6] transition-colors">
+          <a href="/#contact" class="inline-block mt-6 bg-[#6C22FF] text-white font-bold px-8 py-3 rounded-full">
             צרו קשר לפרטים
           </a>
         </div>
       ) : (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {presentations.map((p: any) => {
-            const vimeoId = p.acf_fields?.vimeo_url?.match(/vimeo\.com\/(\d+)/)?.[1];
-            return (
-              <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
-                {vimeoId ? (
-                  <div class="aspect-video">
-                    <iframe
-                      src={`https://player.vimeo.com/video/${vimeoId}`}
-                      class="w-full h-full"
-                      frameborder="0"
-                      allow="autoplay; fullscreen"
-                    ></iframe>
+        <>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="video-grid">
+            {videos.map((v, i) => (
+              <div
+                class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer video-card"
+                data-video-id={v.vimeo_id}
+                data-index={i}
+                style={i >= 6 ? 'display:none' : ''}
+              >
+                <div class="aspect-video relative bg-gray-900">
+                  {v.thumbnail && (
+                    <img src={v.thumbnail} alt={v.title} class="w-full h-full object-cover" loading="lazy" />
+                  )}
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                      <svg width="22" height="22" fill="#7C3AED" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
                   </div>
-                ) : (
-                  <div class="aspect-video bg-gradient-to-br from-[#6C22FF] to-[#E879F9] flex items-center justify-center">
-                    <span class="text-white text-4xl">{catInfo?.emoji}</span>
-                  </div>
-                )}
+                </div>
                 <div class="p-4 text-right">
-                  <h3 class="font-bold text-[#12023C]">{p.title.rendered}</h3>
+                  <h3 class="font-bold text-[#12023C] mb-1">{v.title}</h3>
+                  {v.description && <p class="text-sm text-gray-500 leading-relaxed">{v.description}</p>}
                 </div>
               </div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+
+          {videos.length > 6 && (
+            <div class="text-center mt-12" id="load-more-wrap">
+              <button id="load-more-btn" class="bg-[#6C22FF] text-white font-bold px-10 py-3 rounded-full hover:bg-[#5a1dd6] transition-colors text-lg">
+                הצג 6 נוספים
+              </button>
+              <p class="text-gray-400 text-sm mt-3" id="video-counter">
+                מציג 6 מתוך {videos.length}
+              </p>
+            </div>
+          )}
+        </>
       )}
     </div>
   </section>
@@ -97,3 +100,60 @@ try {
   <Contact />
 
 </Layout>
+
+<!-- Lightbox -->
+<div id="video-lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:600; align-items:center; justify-content:center; padding:1rem;">
+  <button id="lightbox-close" style="position:absolute; top:1.2rem; left:1.2rem; background:rgba(255,255,255,.15); border:none; color:white; width:46px; height:46px; border-radius:50%; font-size:1.8rem; cursor:pointer; display:flex; align-items:center; justify-content:center;">×</button>
+  <div id="lightbox-content" style="width:min(960px,95vw); aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#000;"></div>
+</div>
+
+<script define:vars={{ total: videos.length }}>
+  let shown = 6;
+  const STEP = 6;
+
+  document.getElementById('load-more-btn').addEventListener('click', function() {
+    const cards = document.querySelectorAll('.video-card');
+    const next = Math.min(shown + STEP, total);
+    for (let i = shown; i < next; i++) {
+      cards[i].style.display = '';
+    }
+    shown = next;
+
+    const counter = document.getElementById('video-counter');
+    if (counter) counter.textContent = 'מציג ' + shown + ' מתוך ' + total;
+
+    if (shown >= total) {
+      const wrap = document.getElementById('load-more-wrap');
+      if (wrap) wrap.remove();
+    }
+  });
+</script>
+
+<script>
+  // Lightbox
+  document.querySelectorAll('.video-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const id = card.dataset.videoId;
+      const content = document.getElementById('lightbox-content');
+      const lb = document.getElementById('video-lightbox');
+      if (!content || !lb || !id) return;
+      content.innerHTML = `<iframe src="https://player.vimeo.com/video/${id}?autoplay=1&color=7C3AED" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+      lb.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox() {
+    const lb = document.getElementById('video-lightbox');
+    const content = document.getElementById('lightbox-content');
+    if (lb) lb.style.display = 'none';
+    if (content) content.innerHTML = '';
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+  document.getElementById('video-lightbox')?.addEventListener('click', e => {
+    if (e.target === document.getElementById('video-lightbox')) closeLightbox();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
