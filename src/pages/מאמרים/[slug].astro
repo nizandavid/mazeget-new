@@ -2,10 +2,10 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 
-const WP_URL = import.meta.env.WP_URL || 'http://mazeget-local.local';
+const WP_URL = 'https://wp.mazeget.com';
 
 export async function getStaticPaths() {
-  const wpUrl = import.meta.env.WP_URL || 'http://mazeget-local.local';
+  const wpUrl = 'https://wp.mazeget.com';
   try {
     const res = await fetch(`${wpUrl}/wp-json/wp/v2/posts?per_page=100&_fields=slug`);
     const posts = await res.json();
