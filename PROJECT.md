@@ -3,8 +3,9 @@
 ## מה בונים
 אתר חדש ומודרני שיחליף את mazeget.com — מצגות וידאו לאירועים משפחתיים.
 
-## סטטוס נוכחי — עובד ב-Netlify
-🌐 https://aesthetic-treacle-775323.netlify.app/
+## סטטוס נוכחי — עובד ב-Vercel
+🌐 (URL מ-Vercel — עדכן כאן)
+~~Netlify — הועברנו בגלל מגבלות חינמי~~
 
 ## Stack
 - **Frontend:** Astro + Tailwind CSS v4
@@ -54,10 +55,13 @@
 - Repo: https://github.com/nizandavid/mazeget-new
 
 ## צעדים הבאים
-1. חיבור Vimeo API — החלפת thumbnails placeholder במצגות אמיתיות בדפי הקטגוריות
-2. העלאת WordPress לשרת אמיתי (סאבדומיין)
-3. חיבור Netlify לוורדפרס האמיתי עם env variable (`WP_URL`)
-4. הגדרת Webhook — עדכון אוטומטי כשמוסיפים מצגת
+1. **Vimeo Content Manager** — כלי נפרד (תיקייה `vimeo-manager`) שמושך סרטונים מכל חשבונות Vimeo לפי קטגוריה → Google Sheet לעריכה ובחירה
+2. **חיבור Vercel ל-WordPress** — env variable `WP_URL=https://wp.mazeget.com`
+3. **דפי קטגוריות** — לשלוף מצגות מ-Google Sheet (✅ בלבד, לפי סדר)
+4. **רוטציה בדף הבית** — 3 סרטונים אקראיים מכל קטגוריה בכל ביקור
+5. **טקסטים שיווקיים** — לנהל דרך WordPress (כותרות, תיאורים לכל דף קטגוריה)
+6. **מאמרים** — לבנות דפי מאמרים מ-WordPress
+7. **new.mazeget.com** — לחבר לאתר ב-Vercel
 
 ## החלטות שהתקבלו
 - שם תיקיות בעברית לדפים (מחירון, אודותינו, העלאת-קבצים, מאמרים)
