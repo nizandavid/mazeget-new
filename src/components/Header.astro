@@ -107,12 +107,11 @@ import { categories } from '../data/categories';
         </svg>
       </button>
       <div class="dropdown-menu">
-        {categories.map(cat => (
+        {categories.filter(cat => !cat.hideFromNav).map(cat => (
           <a href={`/מצגות/${cat.key}`}>{cat.emoji} {cat.label}</a>
         ))}
       </div>
     </li>
-    <li><a href="/#gallery">דוגמאות</a></li>
     <li><a href="/מחירון">מחירון</a></li>
     <li><a href="/העלאת-קבצים">העלאת קבצים</a></li>
     <li><a href="/שאלות-ותשובות">שאלות ותשובות</a></li>

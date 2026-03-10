@@ -45,7 +45,7 @@ function processContent(html: string): string {
 }
 ---
 
-<Layout title={post ? post.title.rendered + ' — Mazeget' : 'מאמר — Mazeget'}>
+<Layout title={post ? post.title.rendered + ' — Mazeget' : 'מאמר — Mazeget'} pageUrl={post?.link}>
   <Header />
 
   {!post ? (

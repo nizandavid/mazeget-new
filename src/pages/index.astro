@@ -11,7 +11,7 @@ const [barMitzvaVideos, batMitzvaVideos, birthdayVideos] = await Promise.all([
 ]);
 ---
 
-<Layout title="Mazeget — מצגות וידאו לאירועים משפחתיים">
+<Layout title="Mazeget — מצגות וידאו לאירועים משפחתיים" description="מצגות וידאו מרגשות לבר מצווה, בת מצווה, ימי הולדת וחתונות. עיצוב מקצועי עם AI, מוכן להקרנה באירוע. צרו קשר עוד היום.">
   <Header />
 
   <!-- ANNOUNCEMENT BAR -->
@@ -55,10 +55,14 @@ const [barMitzvaVideos, batMitzvaVideos, birthdayVideos] = await Promise.all([
       </div>
 
       <!-- VIDEO -->
-      <div style="border-radius:24px; overflow:hidden; box-shadow:0 32px 64px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.15); margin-bottom:2.5rem;" class="reveal">
-        <video autoplay muted loop playsinline style="width:100%; display:block;">
+      <div style="border-radius:24px; overflow:hidden; box-shadow:0 32px 64px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.15); margin-bottom:2.5rem; position:relative;" class="reveal">
+        <video id="hero-video" autoplay muted loop playsinline style="width:100%; display:block;">
           <source src="https://mazeget.com/wp-content/uploads/2025/09/Ai-story-10mb.mp4" type="video/mp4" />
         </video>
+        <button id="hero-sound-btn" style="position:absolute; bottom:1rem; left:1rem; background:rgba(0,0,0,.6); border:none; color:white; padding:.5rem 1rem; border-radius:50px; font-size:.8rem; font-family:'Heebo',sans-serif; cursor:pointer; display:flex; align-items:center; gap:.4rem; backdrop-filter:blur(4px); transition:background .2s;">
+          <span id="hero-sound-icon">🔇</span>
+          <span id="hero-sound-label">מומלץ להפעיל סאונד</span>
+        </button>
       </div>
 
       <!-- Trust numbers -->
@@ -296,13 +300,14 @@ const [barMitzvaVideos, batMitzvaVideos, birthdayVideos] = await Promise.all([
   </div>
 
   <!-- POPUP -->
-  <div id="popup-overlay" style="position:fixed; inset:0; background:rgba(0,0,0,.65); z-index:500; display:flex; align-items:center; justify-content:center; padding:1.5rem; backdrop-filter:blur(6px);">
-    <div style="background:linear-gradient(145deg,#4c1d95,#7c3aed); border-radius:28px; padding:2.5rem 2rem; max-width:420px; width:100%; position:relative; box-shadow:0 40px 80px rgba(0,0,0,.5); text-align:center;">
-      <button id="popup-close" style="position:absolute; top:1rem; left:1rem; background:rgba(255,255,255,.2); border:none; color:white; width:34px; height:34px; border-radius:50%; font-size:1.4rem; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Heebo',sans-serif;">×</button>
+  <div id="popup-overlay" style="position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:500; display:flex; align-items:center; justify-content:center; padding:1.5rem; backdrop-filter:blur(4px);">
+    <div style="background:#ffffff; border-radius:28px; padding:2.5rem 2rem; max-width:420px; width:100%; position:relative; box-shadow:0 40px 80px rgba(0,0,0,.25); text-align:center;">
+      <button id="popup-close" style="position:absolute; top:1rem; left:1rem; background:#f3e8ff; border:none; color:#6d28d9; width:34px; height:34px; border-radius:50%; font-size:1.4rem; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Heebo',sans-serif;">×</button>
+      <div id="popup-timer" style="position:absolute; top:1rem; right:1rem; font-size:.75rem; color:#9ca3af; font-family:'Heebo',sans-serif;">נסגר בעוד <span id="popup-countdown">8</span>״</div>
       <div style="font-size:2.8rem; margin-bottom:.8rem;">🎁</div>
       <div style="display:inline-block; background:linear-gradient(135deg,#EC4899,#F59E0B); color:white; font-size:.7rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; padding:.3rem 1rem; border-radius:50px; margin-bottom:1rem;">מבצע מיוחד</div>
-      <h3 style="font-size:1.5rem; font-weight:900; color:white; margin-bottom:.8rem; line-height:1.3;">הזמן מצגת של 6 או 10 דקות<br>וקבל דקה נוספת במתנה!</h3>
-      <p style="color:rgba(255,255,255,.75); font-size:.88rem; margin-bottom:1.8rem; line-height:1.6;">מבצע מיוחד לזמן מוגבל — אל תפספסו!</p>
+      <h3 style="font-size:1.5rem; font-weight:900; color:#1e0a4a; margin-bottom:.8rem; line-height:1.3;">הזמן מצגת של 6 או 10 דקות<br>וקבל דקה נוספת במתנה!</h3>
+      <p style="color:#6b7280; font-size:.88rem; margin-bottom:1.8rem; line-height:1.6;">מבצע מיוחד לזמן מוגבל — אל תפספסו!</p>
       <a href="#contact" id="popup-cta" style="display:inline-flex; align-items:center; gap:.5rem; background:linear-gradient(135deg,#EC4899,#F59E0B); color:white; padding:.85rem 2.2rem; border-radius:50px; font-weight:700; font-size:.95rem; text-decoration:none; box-shadow:0 8px 28px rgba(236,72,153,.4);">
         הזמינו עכשיו ←
       </a>
@@ -321,6 +326,32 @@ const [barMitzvaVideos, batMitzvaVideos, birthdayVideos] = await Promise.all([
   document.getElementById('popup-cta')?.addEventListener('click', closePopup);
   document.getElementById('popup-overlay')?.addEventListener('click', (e) => {
     if (e.target === document.getElementById('popup-overlay')) closePopup();
+  });
+
+  // טיימר 8 שניות
+  let seconds = 8;
+  const countdownEl = document.getElementById('popup-countdown');
+  const timer = setInterval(() => {
+    seconds--;
+    if (countdownEl) countdownEl.textContent = String(seconds);
+    if (seconds <= 0) { clearInterval(timer); closePopup(); }
+  }, 1000);
+
+  // ── Hero sound toggle ───────────────────────────────
+  const heroVideo = document.getElementById('hero-video') as HTMLVideoElement;
+  const soundBtn = document.getElementById('hero-sound-btn');
+  const soundIcon = document.getElementById('hero-sound-icon');
+  const soundLabel = document.getElementById('hero-sound-label');
+  soundBtn?.addEventListener('click', () => {
+    if (!heroVideo) return;
+    heroVideo.muted = !heroVideo.muted;
+    if (heroVideo.muted) {
+      soundIcon!.textContent = '🔇';
+      soundLabel!.textContent = 'מומלץ להפעיל סאונד';
+    } else {
+      soundIcon!.textContent = '🔊';
+      soundLabel!.textContent = 'השתקה';
+    }
   });
 
   // ── Announcement bar hide on scroll ────────────────

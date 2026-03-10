@@ -8,6 +8,7 @@ export interface Video {
   duration: number;
   status: 'ראשי' | 'דוגמאות' | 'מוסתר';
   order: number;
+  subcategory: string; // תת-קטגוריה (עמודה K) — לשימוש בדף שונות
 }
 
 // מיפוי: מפתח קטגוריה באתר → שם טאב בגיליון
@@ -41,6 +42,7 @@ async function fetchTab(tabName: string): Promise<Video[]> {
         duration:    Number(val(6)) || 0,
         status:      String(val(8) || 'דוגמאות') as Video['status'],
         order:       Number(val(9)) || 999,
+        subcategory: String(val(10) || ''),
       };
     })
     .filter(v => v.vimeo_id && v.status !== 'מוסתר');

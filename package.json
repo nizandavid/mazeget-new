@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/client": "^4.1.6",
+    "@astrojs/sitemap": "^3.7.0",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^5.17.1",
     "graphql": "^16.13.1",

@@ -4,9 +4,26 @@ import Footer from '../components/Footer.astro';
 
 interface Props {
   title?: string;
+  description?: string;
+  pageUrl?: string;
 }
 
-const { title = 'Mazeget — מצגות לאירועים משפחתיים' } = Astro.props;
+const {
+  title = 'Mazeget — מצגות לאירועים משפחתיים',
+  description = 'Mazeget מתמחה במצגות וידאו מרגשות לאירועים משפחתיים — בר מצווה, בת מצווה, ימי הולדת וחתונות.',
+  pageUrl
+} = Astro.props;
+
+let rankMathHead = '';
+if (pageUrl) {
+  try {
+    const res = await fetch(`https://wp.mazeget.com/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(pageUrl)}`);
+    const data = await res.json();
+    if (data.success) rankMathHead = data.head;
+  } catch (e) {
+    // אם ה-API לא זמין — ממשיכים בלי SEO
+  }
+}
 ---
 
 <html lang="he" dir="rtl">
@@ -16,6 +33,11 @@ const { title = 'Mazeget — מצגות לאירועים משפחתיים' } = A
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    {!rankMathHead && <meta name="description" content={description} />}
+    {!rankMathHead && <meta property="og:title" content={title} />}
+    {!rankMathHead && <meta property="og:description" content={description} />}
+    {!rankMathHead && <meta property="og:type" content="website" />}
+    {rankMathHead && <Fragment set:html={rankMathHead} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Secular+One&display=swap" rel="stylesheet" />

@@ -13,6 +13,11 @@ export async function getStaticPaths() {
 const { category } = Astro.params;
 const catInfo = categories.find(c => c.key === category);
 const videos = await getVideosForCategory(category!);
+
+const isOther = category === 'other';
+const subcategories = isOther
+  ? ['הכל', ...Array.from(new Set(videos.map(v => v.subcategory).filter(Boolean)))]
+  : [];
 ---
 
 <Layout title={`${catInfo?.label} — מצגות וידאו | Mazeget`}>
@@ -30,9 +35,23 @@ const videos = await getVideosForCategory(category!);
   <!-- Gallery -->
   <section class="py-20 px-6 bg-[#F8F7FF]">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-black text-[#12023C] text-center mb-12" style="font-family: 'Secular One', sans-serif;">
+      <h2 class="text-3xl font-black text-[#12023C] text-center mb-8" style="font-family: 'Secular One', sans-serif;">
         מצגות מקצועיות נוספות
       </h2>
+
+      {isOther && subcategories.length > 1 && (
+        <div class="flex flex-wrap gap-3 justify-center mb-10" id="filter-buttons">
+          {subcategories.map(sub => (
+            <button
+              class="filter-btn px-5 py-2 rounded-full border-2 font-bold text-sm transition-all"
+              data-filter={sub}
+              style={sub === 'הכל' ? 'background:#6C22FF; color:white; border-color:#6C22FF;' : 'background:white; color:#6C22FF; border-color:#6C22FF;'}
+            >
+              {sub}
+            </button>
+          ))}
+        </div>
+      )}
 
       {videos.length === 0 ? (
         <div class="text-center py-20">
@@ -48,6 +67,7 @@ const videos = await getVideosForCategory(category!);
               <div
                 class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer video-card"
                 data-video-id={v.vimeo_id}
+                data-subcategory={v.subcategory || ''}
                 data-index={i}
                 style={i >= 6 ? 'display:none' : ''}
               >
@@ -130,6 +150,33 @@ const videos = await getVideosForCategory(category!);
 </script>
 
 <script>
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = (btn as HTMLElement).dataset.filter || 'הכל';
+
+      // עדכון כפתורים
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        const el = b as HTMLElement;
+        if (el.dataset.filter === filter) {
+          el.style.background = '#6C22FF';
+          el.style.color = 'white';
+        } else {
+          el.style.background = 'white';
+          el.style.color = '#6C22FF';
+        }
+      });
+
+      // הצגת/הסתרת כרטיסים
+      document.querySelectorAll('.video-card').forEach(card => {
+        const el = card as HTMLElement;
+        const sub = el.dataset.subcategory || '';
+        const show = filter === 'הכל' || sub === filter;
+        el.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
   // Lightbox
   document.querySelectorAll('.video-card').forEach(card => {
     card.addEventListener('click', () => {

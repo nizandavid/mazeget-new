@@ -1,4 +1,4 @@
-export const categories = [
+export const categories: { key: string; label: string; description: string; emoji: string; hideFromNav?: boolean }[] = [
   {
     key: 'bar_mitzva',
     label: 'בר מצווה',
@@ -30,9 +30,30 @@ export const categories = [
     emoji: '✈️',
   },
   {
+    key: 'retirement',
+    label: 'פרישה',
+    description: 'מצגות וידאו לאירועי פרישה — סיכום דרך, הישגים ורגעים מיוחדים',
+    emoji: '🏆',
+    hideFromNav: true,
+  },
+  {
+    key: 'memorial',
+    label: 'לזכר',
+    description: 'מצגות וידאו לזכרו של יקיר — הנצחה מכובדת ומרגשת',
+    emoji: '🕯️',
+    hideFromNav: true,
+  },
+  {
+    key: 'sign_song',
+    label: 'שיר שלטים',
+    description: 'שיר שלטים ייחודי לאירוע — כל אורח מקבל שלט עם מילות השיר',
+    emoji: '🎵',
+    hideFromNav: true,
+  },
+  {
     key: 'other',
-    label: 'מצגות שונות',
-    description: 'מצגות וידאו ליום נישואין, בר/בת מצווה מיוחד ואירועים נוספים',
+    label: 'שונות',
+    description: 'מצגות וידאו לאירועים מיוחדים — יצירתיות ללא גבולות',
     emoji: '✨',
   },
 ];
