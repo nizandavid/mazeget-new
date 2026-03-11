@@ -27,7 +27,7 @@ const subcategories = isOther
   <section class="py-24 px-6 text-center" style="background: linear-gradient(135deg, #6C22FF 0%, #E879F9 100%);">
     <div class="text-6xl mb-4">{catInfo?.emoji}</div>
     <h1 class="text-5xl text-white font-black mb-4" style="font-family: 'Secular One', sans-serif;">
-      מצגות {catInfo?.label}
+      {isOther ? 'מצגות שוות לכל אירוע' : `מצגות ${catInfo?.label}`}
     </h1>
     <p class="text-white/90 text-xl max-w-xl mx-auto">{catInfo?.description}</p>
   </section>
@@ -63,7 +63,7 @@ const subcategories = isOther
       ) : (
         <>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="video-grid">
-            {videos.map((v, i) => (
+            {videos.slice(0, 24).map((v, i) => (
               <div
                 class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer video-card"
                 data-video-id={v.vimeo_id}
@@ -89,13 +89,13 @@ const subcategories = isOther
             ))}
           </div>
 
-          {videos.length > 6 && (
+          {videos.slice(0, 24).length > 6 && (
             <div class="text-center mt-12" id="load-more-wrap">
               <button id="load-more-btn" class="bg-[#6C22FF] text-white font-bold px-10 py-3 rounded-full hover:bg-[#5a1dd6] transition-colors text-lg">
                 הצג 6 נוספים
               </button>
               <p class="text-gray-400 text-sm mt-3" id="video-counter">
-                מציג 6 מתוך {videos.length}
+                מציג 6 מתוך {Math.min(videos.length, 24)}
               </p>
             </div>
           )}
@@ -108,7 +108,7 @@ const subcategories = isOther
   <section class="py-16 px-6 bg-white">
     <div class="max-w-2xl mx-auto text-right">
       <h2 class="text-2xl font-black text-[#12023C] mb-4" style="font-family: 'Secular One', sans-serif;">
-        מצגת {catInfo?.label} מקצועית
+        {isOther ? 'מצגות מקצועיות לכל אירוע' : `מצגת ${catInfo?.label} מקצועית`}
       </h2>
       <p class="text-gray-600 leading-relaxed">
         {catInfo?.description} אנחנו ב-Mazeget מתמחים ביצירת מצגות וידאו מותאמות אישית לכל אירוע.
@@ -127,7 +127,7 @@ const subcategories = isOther
   <div id="lightbox-content" style="width:min(960px,95vw); aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#000;"></div>
 </div>
 
-<script define:vars={{ total: videos.length }}>
+<script define:vars={{ total: Math.min(videos.length, 24) }}>
   let shown = 6;
   const STEP = 6;
 

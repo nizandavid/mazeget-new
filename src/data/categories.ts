@@ -52,7 +52,7 @@ export const categories: { key: string; label: string; description: string; emoj
   },
   {
     key: 'other',
-    label: 'שונות',
+    label: 'מצגות שונות',
     description: 'מצגות וידאו לאירועים מיוחדים — יצירתיות ללא גבולות',
     emoji: '✨',
   },

@@ -21,7 +21,7 @@ import { categories } from '../data/categories';
     <div>
       <h4 style="font-size:.78rem; font-weight:700; color:rgba(255,255,255,.45); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:1rem;">מצגות</h4>
       <ul style="list-style:none; display:flex; flex-direction:column; gap:.6rem;">
-        {categories.map(cat => (
+        {categories.filter(cat => !cat.hideFromNav).map(cat => (
           <li>
             <a href={`/מצגות/${cat.key}`} style="color:rgba(255,255,255,.7); text-decoration:none; font-size:.85rem; transition:color .2s;" onmouseover="this.style.color='#C4B5FD'" onmouseout="this.style.color='rgba(255,255,255,.7)'">
               {cat.emoji} {cat.label}

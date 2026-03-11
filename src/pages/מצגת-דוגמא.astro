@@ -1,0 +1,214 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Contact from '../components/Contact.astro';
+
+const video = {
+  vimeo_id: '1154935608',
+  title: 'מצגת בר מצווה ליאיר',
+  name: 'יאיר',
+  category: 'בר מצווה',
+  categoryKey: 'bar_mitzva',
+  categoryHe: 'מצגות בר מצווה',
+  emoji: '✡️',
+  details: [
+    { label: 'סוג אירוע',          value: 'בר מצווה' },
+    { label: 'סגנון',               value: 'קצבי ומרגש' },
+    { label: 'אלמנטים מיוחדים',    value: 'פתיח AI, תמונות חברים, אפקטים' },
+    { label: 'אורך משוער',          value: '5–6 דקות' },
+    { label: 'מוזיקה',              value: 'קצבית עם רגעי רגש' },
+  ],
+  sections: [
+    {
+      title: 'על המצגת',
+      text: 'מצגת בר המצווה של יאיר נבנתה כמצגת מרגשת שמשלבת בין רגעי ילדות מתוקים, תמונות משפחתיות מרגשות ותמונות עם החברים הקרובים. פתיחת המצגת כוללת אלמנט AI מיוחד שיוצר תחושה של מסע בזמן מילדות לבגרות ומכניס את הקהל לאווירה חגיגית ומרשימה.',
+    },
+    {
+      title: 'מה מיוחד במצגת הזאת',
+      text: 'אחד הדגשים המרכזיים במצגת הוא השילוב בין קצב לרגש. מצד אחד יש פתיח מודרני ומרשים, ומצד שני מעבר עדין לרגעים אישיים יותר עם המשפחה והחברים. זה יוצר סרטון שמתאים להקרנה באולם ונותן תחושת וואו לצד חיבור אישי לחוגג.',
+    },
+    {
+      title: 'רעיונות למצגת בר מצווה',
+      text: 'אם אתם מחפשים רעיונות למצגת בר מצווה, אפשר לקחת השראה ממצגת כזו ולשלב פתיח ייחודי, תמונות ילדות, סיפור חיים, תחביבים, טיולים משפחתיים ורגעי חברות. כל מצגת נבנית בצורה אישית לפי הסגנון והאופי של החוגג.',
+    },
+  ],
+};
+
+const relatedVideos = [
+  { vimeo_id: '1145186240', title: 'מצגת בר מצווה לדורון האלוף' },
+  { vimeo_id: '1121807527', title: 'מצגת וידאו לתומר' },
+  { vimeo_id: '1124563831', title: 'בר מצווה לעומר' },
+];
+---
+
+<Layout
+  title={`${video.title} — מצגת וידאו לבר מצווה | Mazeget`}
+  description="מצגת וידאו מרגשת לבר מצווה — מרגע הלידה ועד הגדלה, עם פתיח AI ומוזיקה מותאמת אישית."
+>
+  <Header />
+
+  <!-- 1. כותרת + Breadcrumb -->
+  <section style="background:linear-gradient(145deg,#1e0a4a 0%,#4c1d95 55%,#7c3aed 100%); padding:3.5rem 6% 3rem; position:relative; overflow:hidden; text-align:center;">
+    <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:#6d28d9;top:-200px;right:-100px;opacity:.25;filter:blur(60px);"></div>
+    <div style="position:absolute;width:350px;height:350px;border-radius:50%;background:#EC4899;bottom:-100px;left:-80px;opacity:.2;filter:blur(60px);"></div>
+
+    <div style="max-width:900px; margin:0 auto; position:relative; z-index:1;">
+
+      <!-- Breadcrumb -->
+      <nav style="display:flex; justify-content:center; align-items:center; gap:.5rem; font-size:.8rem; color:rgba(255,255,255,.55); margin-bottom:1.5rem; flex-wrap:wrap;">
+        <a href="/" style="color:rgba(255,255,255,.55); text-decoration:none;">בית</a>
+        <span>›</span>
+        <a href={`/מצגות/${video.categoryKey}`} style="color:rgba(255,255,255,.55); text-decoration:none;">{video.categoryHe}</a>
+        <span>›</span>
+        <span style="color:white;">{video.title}</span>
+      </nav>
+
+      <!-- Badge -->
+      <div style="display:inline-flex; align-items:center; gap:.5rem; background:rgba(255,255,255,.15); border-radius:50px; padding:.35rem 1rem; font-size:.78rem; font-weight:700; color:white; margin-bottom:1rem;">
+        {video.emoji} {video.category}
+      </div>
+
+      <!-- כותרת ממורכזת -->
+      <h1 style="font-size:clamp(2rem,4vw,3rem); font-weight:900; color:white; margin:0; font-family:'Secular One',sans-serif; line-height:1.2;">
+        {video.title}
+      </h1>
+
+    </div>
+  </section>
+
+  <!-- 2. וידאו (מתחת לפס הסגול, לא חופף) -->
+  <section style="background:#F8F7FF; padding:3rem 6%;">
+    <div style="max-width:860px; margin:0 auto;">
+      <div style="border-radius:20px; overflow:hidden; box-shadow:0 16px 48px rgba(0,0,0,.18); aspect-ratio:16/9;">
+        <iframe
+          src={`https://player.vimeo.com/video/${video.vimeo_id}?color=7C3AED&title=0&byline=0&portrait=0`}
+          style="width:100%; height:100%; display:block;"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. תוכן + סיידבר -->
+  <section style="padding:0 6% 4rem; background:#F8F7FF;">
+    <div style="max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 280px; gap:2.5rem; align-items:start;">
+
+      <!-- תיאור עם כותרות -->
+      <div style="text-align:right;">
+        {video.sections.map(section => (
+          <div style="margin-bottom:2rem;">
+            <h2 style="font-size:1.2rem; font-weight:900; color:#12023C; margin-bottom:.7rem; font-family:'Secular One',sans-serif; border-bottom:2px solid #EDE9FE; padding-bottom:.5rem;">
+              {section.title}
+            </h2>
+            <p style="color:#4b5563; line-height:1.9; font-size:.95rem; margin:0;">{section.text}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- סיידבר: פרטים + CTA -->
+      <div style="position:sticky; top:90px;">
+
+        <!-- פרטי מצגת -->
+        <div style="background:white; border-radius:16px; padding:1.4rem; border:1px solid #ede9fe; margin-bottom:1rem;">
+          <h3 style="font-size:.95rem; font-weight:900; color:#12023C; margin-bottom:1rem; text-align:right;">פרטי המצגת</h3>
+          <div style="display:flex; flex-direction:column; gap:.55rem;">
+            {video.details.map(d => (
+              <p style="font-size:.85rem; color:#374151; margin:0; text-align:right; line-height:1.5;">
+                <span style="color:#6b7280;">{d.label}:</span> <strong style="color:#12023C;">{d.value}</strong>
+              </p>
+            ))}
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div style="background:white; border-radius:16px; padding:1.4rem; border:1px solid #ede9fe; text-align:center;">
+          <p style="font-size:.82rem; color:#6b7280; margin-bottom:1rem; line-height:1.6;">גם הבר מצווה שלכם מגיע למצגת כזו</p>
+          <a href="/#contact" style="display:block; background:linear-gradient(135deg,#7C3AED,#4c1d95); color:white; padding:.85rem 1.5rem; border-radius:50px; font-weight:700; font-size:.88rem; text-decoration:none; margin-bottom:.7rem;">
+            הזמינו מצגת כזו ←
+          </a>
+          <a href="/מחירון" style="display:block; border:1.5px solid #7C3AED; color:#7C3AED; padding:.65rem 1.5rem; border-radius:50px; font-weight:600; font-size:.83rem; text-decoration:none;">
+            לצפייה במחירון
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. מצגות נוספות -->
+  <section style="padding:4rem 6%; background:white;">
+    <div style="max-width:900px; margin:0 auto;">
+      <h2 style="font-size:1.5rem; font-weight:900; color:#12023C; margin-bottom:2rem; font-family:'Secular One',sans-serif; text-align:right;">
+        מצגות בר מצווה נוספות
+      </h2>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;">
+        {relatedVideos.map(v => (
+          <div style="border-radius:16px; overflow:hidden; background:#F8F7FF; box-shadow:0 4px 16px rgba(0,0,0,.06); cursor:pointer;" class="related-card" data-video-id={v.vimeo_id}>
+            <div style="aspect-ratio:16/9; position:relative; background:#1a0533; overflow:hidden;">
+              <img src={`https://vumbnail.com/${v.vimeo_id}.jpg`} alt={v.title} style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />
+              <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+                <div style="width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,.9); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(0,0,0,.25);">
+                  <svg width="18" height="18" fill="#7C3AED" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+              </div>
+            </div>
+            <div style="padding:.9rem 1rem; text-align:right;">
+              <div style="display:inline-block; background:#EDE9FE; color:#7C3AED; font-size:.65rem; font-weight:700; padding:.15rem .6rem; border-radius:50px; margin-bottom:.4rem;">בר מצווה</div>
+              <h3 style="font-size:.88rem; font-weight:800; color:#12023C; margin:0;">{v.title}</h3>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="text-align:center; margin-top:2rem;">
+        <a href={`/מצגות/${video.categoryKey}`} style="display:inline-flex; align-items:center; gap:.5rem; border:2px solid #7C3AED; color:#7C3AED; padding:.7rem 2rem; border-radius:50px; font-weight:700; font-size:.88rem; text-decoration:none;">
+          לכל מצגות הבר מצווה ←
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Contact />
+
+</Layout>
+
+<div id="video-lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:600; align-items:center; justify-content:center; padding:1rem;">
+  <button id="lightbox-close" style="position:absolute; top:1.2rem; left:1.2rem; background:rgba(255,255,255,.15); border:none; color:white; width:46px; height:46px; border-radius:50%; font-size:1.8rem; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Heebo',sans-serif;">×</button>
+  <div id="lightbox-content" style="width:min(900px,95vw); aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#000;"></div>
+</div>
+
+<script>
+  document.querySelectorAll('.related-card').forEach(card => {
+    card.addEventListener('mouseenter', () => { (card as HTMLElement).style.transform = 'translateY(-4px)'; (card as HTMLElement).style.boxShadow = '0 12px 32px rgba(0,0,0,.12)'; });
+    card.addEventListener('mouseleave', () => { (card as HTMLElement).style.transform = ''; (card as HTMLElement).style.boxShadow = ''; });
+    card.addEventListener('click', () => {
+      const id = (card as HTMLElement).dataset.videoId;
+      const content = document.getElementById('lightbox-content');
+      const lb = document.getElementById('video-lightbox');
+      if (!content || !lb || !id) return;
+      content.innerHTML = `<iframe src="https://player.vimeo.com/video/${id}?autoplay=1&color=7C3AED" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+      lb.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  function closeLightbox() {
+    const lb = document.getElementById('video-lightbox');
+    const content = document.getElementById('lightbox-content');
+    if (lb) lb.style.display = 'none';
+    if (content) content.innerHTML = '';
+    document.body.style.overflow = '';
+  }
+  document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+  document.getElementById('video-lightbox')?.addEventListener('click', e => { if (e.target === document.getElementById('video-lightbox')) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+
+<style>
+  .related-card { transition: transform .2s, box-shadow .2s; }
+  @media (max-width: 768px) {
+    div[style*="grid-template-columns:1fr 280px"] { grid-template-columns: 1fr !important; }
+    div[style*="position:sticky"] { position: static !important; }
+    div[style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+  }
+</style>

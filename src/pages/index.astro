@@ -4,10 +4,11 @@ import Header from '../components/Header.astro';
 import Contact from '../components/Contact.astro';
 import { getHomepageVideos } from '../lib/sheets';
 
-const [barMitzvaVideos, batMitzvaVideos, birthdayVideos] = await Promise.all([
+const [barMitzvaVideos, batMitzvaVideos, birthdayVideos, extrasVideos] = await Promise.all([
   getHomepageVideos('bar_mitzva'),
   getHomepageVideos('bat_mitzva'),
   getHomepageVideos('birthday'),
+  getHomepageVideos('other'),
 ]);
 ---
 
@@ -85,8 +86,18 @@ const [barMitzvaVideos, batMitzvaVideos, birthdayVideos] = await Promise.all([
     </div>
   </section>
 
+  <!-- GALLERY HEADING -->
+  <section id="gallery" style="padding:3.5rem 6% 0; background:#F5F3FF; text-align:center;">
+    <div style="max-width:800px; margin:0 auto;" class="reveal">
+      <h2 style="font-size:clamp(1.9rem,3.5vw,2.8rem); font-weight:900; color:#12023C; margin-bottom:.6rem; font-family:'Secular One',sans-serif;">
+        דוגמאות למצגות וידאו מקצועיות
+      </h2>
+      <p style="font-size:1rem; color:#6b7280; line-height:1.7;">בחרו קטגוריה וצפו במצגות אמיתיות שיצרנו — כל אחת מותאמת אישית לאירוע ולמשפחה</p>
+    </div>
+  </section>
+
   <!-- BAR MITZVAH -->
-  <section style="padding:5rem 6%; background:#F5F3FF; position:relative;">
+  <section style="padding:3.5rem 6% 5rem; background:#F5F3FF; position:relative;">
     <div style="max-width:1200px; margin:0 auto;">
       <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; flex-wrap:wrap; gap:1.5rem;" class="reveal">
         <div style="text-align:right;">
@@ -199,65 +210,28 @@ const [barMitzvaVideos, batMitzvaVideos, birthdayVideos] = await Promise.all([
           <h2 style="font-size:clamp(1.6rem,2.5vw,2.4rem); font-weight:900; color:var(--text); margin-bottom:.5rem;">עוד קצת קסם לאירוע</h2>
           <p style="font-size:.9rem; color:var(--text-muted); max-width:480px; line-height:1.7;">שיר שלטים, "סליחה על השאלה", דיבוב AI של דמויות מוכרות ועוד — תוספות שהופכות כל אירוע לבלתי נשכח.</p>
         </div>
-        <a href="/מחירון" style="display:inline-flex; align-items:center; gap:.5rem; background:#0D9488; color:white; padding:.7rem 1.6rem; border-radius:50px; font-weight:700; font-size:.88rem; text-decoration:none; white-space:nowrap; flex-shrink:0;">לפרטים ומחירים ←</a>
+        <a href="/מצגות/other" style="display:inline-flex; align-items:center; gap:.5rem; background:#0D9488; color:white; padding:.7rem 1.6rem; border-radius:50px; font-weight:700; font-size:.88rem; text-decoration:none; white-space:nowrap; flex-shrink:0;">לכל המצגות השונות ←</a>
       </div>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;" class="reveal thumb-grid">
-
-        <!-- פתיחות למצגות — MP4 -->
-        <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-src="https://mazeget.com/wp-content/uploads/2024/08/intro-movie-1.mp4" data-video-type="mp4">
-          <div style="aspect-ratio:16/9; position:relative; background:linear-gradient(160deg,#042f2e 0%,#0f766e 60%,#0D9488 100%); overflow:hidden;">
-            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-              <div style="width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(0,0,0,.3);">
-                <svg width="22" height="22" fill="#0D9488" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        {extrasVideos.map(v => (
+          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo">
+            <div style="aspect-ratio:16/9; position:relative; background:#042f2e; overflow:hidden;">
+              {v.thumbnail && <img src={v.thumbnail} alt={v.title} style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />}
+              <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+                <div style="width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(0,0,0,.3);">
+                  <svg width="22" height="22" fill="#0D9488" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
               </div>
             </div>
-          </div>
-          <div style="padding:1.1rem 1.2rem; text-align:right;">
-            <div style="display:flex; align-items:center; justify-content:space-between; flex-direction:row-reverse; gap:.6rem; margin-bottom:.5rem;">
-              <h3 style="font-size:.97rem; font-weight:800; color:var(--text); margin:0;">פתיחות למצגות</h3>
-              <span style="background:#CCFBF1; color:#0F766E; font-size:.7rem; font-weight:700; padding:.22rem .75rem; border-radius:50px; white-space:nowrap; flex-shrink:0;">תוספת</span>
-            </div>
-            <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">אנימציות פתיחה מרשימות לתחילת כל מצגת</p>
-          </div>
-        </div>
-
-        <!-- סליחה על השאלה — MP4 -->
-        <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-src="https://mazeget.com/wp-content/uploads/2021/04/ma-hashela.mp4" data-video-type="mp4">
-          <div style="aspect-ratio:16/9; position:relative; background:linear-gradient(160deg,#042f2e 0%,#0f766e 60%,#0D9488 100%); overflow:hidden;">
-            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-              <div style="width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(0,0,0,.3);">
-                <svg width="22" height="22" fill="#0D9488" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <div style="padding:1.1rem 1.2rem; text-align:right;">
+              <div style="display:flex; align-items:center; justify-content:space-between; flex-direction:row-reverse; gap:.6rem; margin-bottom:.5rem;">
+                <h3 style="font-size:.97rem; font-weight:800; color:var(--text); margin:0;">{v.title}</h3>
+                <span style="background:#CCFBF1; color:#0F766E; font-size:.7rem; font-weight:700; padding:.22rem .75rem; border-radius:50px; white-space:nowrap; flex-shrink:0;">תוספת</span>
               </div>
+              <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">{v.description || 'תוספת מיוחדת לאירוע שלכם'}</p>
             </div>
           </div>
-          <div style="padding:1.1rem 1.2rem; text-align:right;">
-            <div style="display:flex; align-items:center; justify-content:space-between; flex-direction:row-reverse; gap:.6rem; margin-bottom:.5rem;">
-              <h3 style="font-size:.97rem; font-weight:800; color:var(--text); margin:0;">סליחה על השאלה</h3>
-              <span style="background:#CCFBF1; color:#0F766E; font-size:.7rem; font-weight:700; padding:.22rem .75rem; border-radius:50px; white-space:nowrap; flex-shrink:0;">תוספת</span>
-            </div>
-            <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">קוויז משפחתי מצחיק ומרגש — כמה הם מכירים אתכם?</p>
-          </div>
-        </div>
-
-        <!-- שיר שלטים — Vimeo -->
-        <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-id="291657952" data-video-type="vimeo">
-          <div style="aspect-ratio:16/9; position:relative; background:#042f2e; overflow:hidden;">
-            <img src="https://vumbnail.com/291657952.jpg" alt="שיר שלטים" style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />
-            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-              <div style="width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(0,0,0,.3);">
-                <svg width="22" height="22" fill="#0D9488" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
-          </div>
-          <div style="padding:1.1rem 1.2rem; text-align:right;">
-            <div style="display:flex; align-items:center; justify-content:space-between; flex-direction:row-reverse; gap:.6rem; margin-bottom:.5rem;">
-              <h3 style="font-size:.97rem; font-weight:800; color:var(--text); margin:0;">שיר שלטים</h3>
-              <span style="background:#CCFBF1; color:#0F766E; font-size:.7rem; font-weight:700; padding:.22rem .75rem; border-radius:50px; white-space:nowrap; flex-shrink:0;">תוספת</span>
-            </div>
-            <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">שיר מותאם אישית עם כל המשפחה</p>
-          </div>
-        </div>
-
+        ))}
       </div>
     </div>
   </section>
