@@ -75,7 +75,7 @@ const subcategories = isOther
                 data-video-id={v.vimeo_id}
                 data-subcategory={v.subcategory || ''}
                 data-index={i}
-                data-page-slug={slugMap.get(v.vimeo_id) || ''}
+                data-page-slug={slugMap.get(v.vimeo_id) || `video-${v.vimeo_id}`}
                 style={i >= 6 ? 'display:none' : ''}
               >
                 <div class="aspect-video relative bg-gray-900">

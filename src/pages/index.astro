@@ -115,7 +115,7 @@ try {
       </div>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;" class="reveal thumb-grid">
         {barMitzvaVideos.map(v => (
-          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || ''}>
+          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || `video-${v.vimeo_id}`}>
             <div style="aspect-ratio:16/9; position:relative; background:#1a0533; overflow:hidden;">
               {v.thumbnail && <img src={v.thumbnail} alt={v.title} style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />}
               <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
@@ -150,7 +150,7 @@ try {
       </div>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;" class="reveal thumb-grid">
         {batMitzvaVideos.map(v => (
-          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || ''}>
+          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || `video-${v.vimeo_id}`}>
             <div style="aspect-ratio:16/9; position:relative; background:#500724; overflow:hidden;">
               {v.thumbnail && <img src={v.thumbnail} alt={v.title} style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />}
               <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
@@ -185,7 +185,7 @@ try {
       </div>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;" class="reveal thumb-grid">
         {birthdayVideos.map(v => (
-          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || ''}>
+          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || `video-${v.vimeo_id}`}>
             <div style="aspect-ratio:16/9; position:relative; background:#451a03; overflow:hidden;">
               {v.thumbnail && <img src={v.thumbnail} alt={v.title} style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />}
               <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
@@ -220,7 +220,7 @@ try {
       </div>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;" class="reveal thumb-grid">
         {extrasVideos.map(v => (
-          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || ''}>
+          <div style="border-radius:18px; overflow:hidden; background:white; box-shadow:0 4px 24px rgba(0,0,0,.08); cursor:pointer;" class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || `video-${v.vimeo_id}`}>
             <div style="aspect-ratio:16/9; position:relative; background:#042f2e; overflow:hidden;">
               {v.thumbnail && <img src={v.thumbnail} alt={v.title} style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />}
               <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
