@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Contact from '../../components/Contact.astro';
 import { categories } from '../../data/categories';
-import { getVideosForCategory, getVideoPages } from '../../lib/sheets';
+import { getVideosForCategory } from '../../lib/sheets';
 
 export async function getStaticPaths() {
   const { categories } = await import('../../data/categories');
@@ -13,12 +13,7 @@ export async function getStaticPaths() {
 const { category } = Astro.params;
 const catInfo = categories.find(c => c.key === category);
 const videos = await getVideosForCategory(category!);
-
-const slugMap = new Map<string, string>();
-try {
-  const pages = await getVideoPages();
-  for (const p of pages) slugMap.set(p.vimeo_id, p.slug);
-} catch {}
+const slugMap = new Map<string, string>(); // placeholder — fallback מטופל ב-template
 
 const isOther = category === 'other';
 const subcategories = isOther
