@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Contact from '../../components/Contact.astro';
 import { categories } from '../../data/categories';
-import { getVideosForCategory } from '../../lib/sheets';
+import { getVideosForCategory, getVideoPages } from '../../lib/sheets';
 
 export async function getStaticPaths() {
   const { categories } = await import('../../data/categories');
@@ -13,6 +13,12 @@ export async function getStaticPaths() {
 const { category } = Astro.params;
 const catInfo = categories.find(c => c.key === category);
 const videos = await getVideosForCategory(category!);
+
+const slugMap = new Map<string, string>();
+try {
+  const pages = await getVideoPages();
+  for (const p of pages) slugMap.set(p.vimeo_id, p.slug);
+} catch {}
 
 const isOther = category === 'other';
 const subcategories = isOther
@@ -69,6 +75,7 @@ const subcategories = isOther
                 data-video-id={v.vimeo_id}
                 data-subcategory={v.subcategory || ''}
                 data-index={i}
+                data-page-slug={slugMap.get(v.vimeo_id) || ''}
                 style={i >= 6 ? 'display:none' : ''}
               >
                 <div class="aspect-video relative bg-gray-900">
@@ -177,10 +184,13 @@ const subcategories = isOther
     });
   });
 
-  // Lightbox
+  // Navigation to presentation page
   document.querySelectorAll('.video-card').forEach(card => {
     card.addEventListener('click', () => {
-      const id = card.dataset.videoId;
+      const el = card as HTMLElement;
+      const slug = el.dataset.pageSlug;
+      if (slug) { window.location.href = '/matzget/' + slug; return; }
+      const id = el.dataset.videoId;
       const content = document.getElementById('lightbox-content');
       const lb = document.getElementById('video-lightbox');
       if (!content || !lb || !id) return;
