@@ -28,15 +28,57 @@ const sections = [
 const details = [
   { label: 'סוג האירוע',    value: page.detail_event },
   { label: 'נושא',          value: page.detail_style },
+  { label: 'ענף',           value: page.branch },
   { label: 'פתיח',          value: page.detail_elements },
   { label: 'סדר המצגת',     value: page.detail_duration },
   { label: 'סגנון ומוסיקה', value: page.detail_music },
 ].filter(d => d.value);
+
+const FAQ_MAP: Record<string, { q: string; a: string }[]> = {
+  bar_mitzva: [
+    { q: 'כמה זמן נמשכת מצגת בר מצווה?', a: 'בדרך כלל 3–7 דקות, תלוי בכמות החומרים שתספקו והסגנון שתבחרו.' },
+    { q: 'איזה חומרים צריך לספק?', a: 'תמונות מהילדות, קטעי וידאו, ושיר אחד-שניים שאהובים עליכם — ואנחנו מסדרים את השאר.' },
+    { q: 'האם אפשר להוסיף אפקטים מיוחדים?', a: 'בוודאי! ניתן להוסיף אנימציות, אפקטי AI, כתוביות ועוד — הכל לפי הסגנון שתרצו.' },
+    { q: 'כמה זמן לוקח הייצור?', a: 'בדרך כלל 5–10 ימי עבודה לאחר קבלת כל החומרים.' },
+  ],
+  bat_mitzva: [
+    { q: 'כמה זמן נמשכת מצגת בת מצווה?', a: 'בממוצע 3–7 דקות, תלוי בכמות הצילומים והסגנון.' },
+    { q: 'איזה חומרים צריך למצגת בת מצווה?', a: 'תמונות מהילדות, סרטונים אהובים ושיר שמייצג אותה — ואנחנו מסדרים את הכל.' },
+    { q: 'האם אפשר להוסיף אפקטים מיוחדים?', a: 'כן! אפקטי AI, אנימציות ומעברים קינמטיים — הכל לפי מה שתרצו.' },
+    { q: 'כמה זמן לוקח הייצור?', a: 'בדרך כלל 5–10 ימי עבודה לאחר קבלת כל החומרים.' },
+  ],
+  birthday: [
+    { q: 'לאיזה גיל מתאימה מצגת וידאו?', a: 'לכל גיל! מ-1 ועד 100+ — כל יום הולדת ראוי לסרטון שישמר לנצח.' },
+    { q: 'כמה זמן לוקחת ההכנה?', a: 'בדרך כלל 3–5 ימי עבודה לאחר קבלת כל החומרים.' },
+    { q: 'איזה מוסיקה ניתן לבחור?', a: 'כל שיר שתרצו — מתוך מבחר גדול אצלנו, או שיר שתבחרו בעצמכם.' },
+    { q: 'האם צריך תמונות מקצועיות?', a: 'לא! גם תמונות מהטלפון עובדות מצוין. אנחנו נטפל בכל העריכה.' },
+  ],
+  wedding: [
+    { q: 'מתי כדאי להזמין מצגת חתונה?', a: 'מומלץ 3–6 שבועות לפני האירוע, כדי שיהיה זמן לתיקונים ושידרוגים.' },
+    { q: 'האם צריך לספק תמונות מוגמרות?', a: 'לא חייב — ניתן לספק גם תמונות גולמיות ואנו מטפלים בכל העריכה.' },
+    { q: 'האם אפשר לקבל עותק לשיתוף?', a: 'כן! הסרטון המוגמר מועלה לאינטרנט ומוכן לשיתוף מיידי עם כל המשפחה.' },
+    { q: 'כמה תמונות צריך לספק?', a: 'ככל שיותר — כך יותר טוב, אבל עובדים מצוין גם עם 50–80 תמונות.' },
+  ],
+  trip: [
+    { q: 'איזה חומרים צריך לסרטון טיול?', a: 'תמונות וסרטונים מהמסע, פרטים על היעדים, ושיר שמתאים לאווירה.' },
+    { q: 'האם ניתן לשלב קטעי וידאו?', a: 'בוודאי! ניתן לשלב צילומי וידאו יחד עם תמונות לתוצאה מדהימה.' },
+    { q: 'כמה זמן נמשך הסרטון?', a: 'בדרך כלל 4–8 דקות, תלוי בכמות החומרים שתספקו.' },
+    { q: 'האם ניתן להוסיף כיתובים ושמות יעדים?', a: 'כן! נוסיף כיתובים, תאריכים ושמות מקומות לפי בחירתכם.' },
+  ],
+  other: [
+    { q: 'לאיזה אירועים מתאימה מצגת וידאו?', a: 'לכל אירוע! פרישה לגמלאות, יובל, כנס חברה, השקת מוצר ועוד.' },
+    { q: 'האם ניתן להכין מצגת לאירוע עסקי?', a: 'כן, אנו מכינים מצגות לאירועי חברה, השקות מוצר וכנסים מקצועיים.' },
+    { q: 'כמה זמן נמשכת ההכנה?', a: 'תלוי בסוג ומורכבות המצגת, בדרך כלל 5–10 ימי עבודה.' },
+    { q: 'האם ניתן לקבל גרסאות שונות?', a: 'כן, ניתן להזמין מספר גרסאות — קצרה לרשתות חברתיות וארוכה לאירוע עצמו.' },
+  ],
+};
+
+const faqs = FAQ_MAP[page.category_key] ?? FAQ_MAP['other'];
 ---
 
 <Layout
   title={`${page.title} — מצגת וידאו ל${page.category_label} | Mazeget`}
-  description={`${page.section1?.slice(0, 150) || `מצגת וידאו ל${page.category_label} — מקצועית ומרגשת`}.`}
+  description={page.description || `${page.section1?.slice(0, 150) || `מצגת וידאו ל${page.category_label} — מקצועית ומרגשת`}.`}
 >
   <Header />
 
@@ -44,6 +86,13 @@ const details = [
   <section style="background:linear-gradient(145deg,#1e0a4a 0%,#4c1d95 55%,#7c3aed 100%); padding:3.5rem 6% 3rem; position:relative; overflow:hidden; text-align:center;">
     <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:#6d28d9;top:-200px;right:-100px;opacity:.25;filter:blur(60px);"></div>
     <div style="position:absolute;width:350px;height:350px;border-radius:50%;background:#EC4899;bottom:-100px;left:-80px;opacity:.2;filter:blur(60px);"></div>
+    <!-- כוכבים צפים -->
+    <span class="hero-star" style="top:12%;right:8%;width:5px;height:5px;animation-delay:0s;animation-duration:3.2s;"></span>
+    <span class="hero-star" style="top:30%;left:12%;width:4px;height:4px;animation-delay:0.8s;animation-duration:4s;"></span>
+    <span class="hero-star" style="top:60%;right:22%;width:6px;height:6px;animation-delay:1.4s;animation-duration:3.6s;"></span>
+    <span class="hero-star" style="top:20%;left:35%;width:3px;height:3px;animation-delay:0.3s;animation-duration:4.5s;"></span>
+    <span class="hero-star" style="top:75%;left:8%;width:5px;height:5px;animation-delay:2s;animation-duration:3s;"></span>
+    <span class="hero-star" style="top:50%;right:6%;width:4px;height:4px;animation-delay:1s;animation-duration:5s;"></span>
 
     <div style="max-width:900px; margin:0 auto; position:relative; z-index:1;">
 
@@ -65,6 +114,12 @@ const details = [
       <h1 style="font-size:clamp(2rem,4vw,3rem); font-weight:900; color:white; margin:0; font-family:'Secular One',sans-serif; line-height:1.2;">
         {page.title}
       </h1>
+
+      {page.description && (
+        <p style="margin:1.2rem auto 0; max-width:600px; font-size:1.05rem; color:rgba(255,255,255,.8); line-height:1.7;">
+          {page.description}
+        </p>
+      )}
 
     </div>
   </section>
@@ -140,7 +195,7 @@ const details = [
           מצגות {page.category_label} נוספות
         </h2>
         <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;">
-          {page.related.map(v => (
+          {page.related.map((v, i) => (
             <div style="border-radius:16px; overflow:hidden; background:#F8F7FF; box-shadow:0 4px 16px rgba(0,0,0,.06); cursor:pointer;" class="related-card" data-video-id={v.id}>
               <div style="aspect-ratio:16/9; position:relative; background:#1a0533; overflow:hidden;">
                 <img src={`https://vumbnail.com/${v.id}.jpg`} alt={v.title} style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />
@@ -165,6 +220,41 @@ const details = [
       </div>
     </section>
   )}
+
+  <!-- 5. כפתורי CTA + FAQ -->
+  <section style="padding:3rem 6% 4rem; background:#F8F7FF;">
+    <div style="max-width:900px; margin:0 auto;">
+
+      <!-- כפתורי ניווט -->
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:3.5rem;">
+        <a href={`/מצגות/${page.category_key}`} style="display:inline-flex; align-items:center; gap:.5rem; background:white; border:2px solid #7C3AED; color:#7C3AED; padding:.75rem 1.8rem; border-radius:50px; font-weight:700; font-size:.9rem; text-decoration:none;">
+          עוד מצגות {page.category_label} ←
+        </a>
+        <a href="/#contact" style="display:inline-flex; align-items:center; gap:.5rem; background:linear-gradient(135deg,#7C3AED,#4c1d95); color:white; padding:.75rem 1.8rem; border-radius:50px; font-weight:700; font-size:.9rem; text-decoration:none;">
+          רוצים מצגת כזו? דברו איתי ←
+        </a>
+      </div>
+
+      <!-- שאלות נפוצות -->
+      <h2 style="font-size:1.5rem; font-weight:900; color:#12023C; margin-bottom:1.5rem; font-family:'Secular One',sans-serif; text-align:right;">
+        שאלות נפוצות על מצגות {page.category_label}
+      </h2>
+      <div class="faq-list">
+        {faqs.map((item, i) => (
+          <div class="faq-item" data-index={i}>
+            <button class="faq-q" aria-expanded="false">
+              <span>{item.q}</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a">
+              <p>{item.a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
 
   <Contact />
 
@@ -199,10 +289,48 @@ const details = [
   document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
   document.getElementById('video-lightbox')?.addEventListener('click', e => { if (e.target === document.getElementById('video-lightbox')) closeLightbox(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item') as HTMLElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
 </script>
 
 <style>
   .related-card { transition: transform .2s, box-shadow .2s; }
+
+  /* ── כוכבי היירו ── */
+  .hero-star {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,.65);
+    animation: float-star linear infinite;
+  }
+  @keyframes float-star {
+    0%,100% { transform: translateY(0) scale(1);   opacity: .6; }
+    50%      { transform: translateY(-14px) scale(1.3); opacity: .2; }
+  }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; gap: .6rem; }
+  .faq-item { background: white; border-radius: 14px; border: 1px solid #ede9fe; overflow: hidden; }
+  .faq-q {
+    width: 100%; display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; padding: 1.1rem 1.3rem; background: none; border: none; cursor: pointer;
+    font-size: .97rem; font-weight: 700; color: #12023C; text-align: right; direction: rtl;
+  }
+  .faq-q:hover { background: #faf8ff; }
+  .faq-icon { flex-shrink: 0; transition: transform .25s; }
+  .faq-item.open .faq-icon { transform: rotate(180deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s; }
+  .faq-item.open .faq-a { max-height: 200px; }
+  .faq-a p { margin: 0; padding: .2rem 1.3rem 1.1rem; font-size: .9rem; color: #4b5563; line-height: 1.75; text-align: right; direction: rtl; }
+
   @media (max-width: 768px) {
     div[style*="grid-template-columns:1fr 280px"] { grid-template-columns: 1fr !important; }
     div[style*="position:sticky"] { position: static !important; }

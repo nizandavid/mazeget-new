@@ -5,3 +5,6 @@ dist/
 seo-posts.mjs
 categorize-posts.mjs
 *.xml
+
+.superpowers/
+.claude/

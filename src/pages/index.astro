@@ -41,14 +41,14 @@ try {
       </div>
 
       <!-- Title -->
-      <h1 style="font-size:clamp(2.6rem,5vw,4.4rem); font-weight:900; line-height:1.1; margin-bottom:1.2rem; color:white;" class="reveal">
-        כל אירוע מגיע לסיפור<br>
-        <em class="shimmer-text" style="font-style:normal;">שמרגש את כולם</em>
+      <h1 style="font-size:clamp(2.6rem,5vw,4.4rem); font-weight:900; line-height:1.15; margin-bottom:1.2rem; color:white;" class="reveal">
+        כל אירוע הוא סיפור.<br>
+        <em class="shimmer-text" style="font-style:normal;">אנחנו הופכים אותו למצגת שמרגשת את כולם.</em>
       </h1>
 
       <!-- Subtitle -->
       <p style="font-size:1.05rem; color:rgba(255,255,255,.8); line-height:1.85; margin-bottom:2.2rem; max-width:580px; margin-inline:auto;" class="reveal">
-        מצגות וידאו מקצועיות עם תזמון מושלם, כתוביות שנוגעות בלב, וקסם של AI —<br>שהופכות זיכרונות לחוויה שתישאר לנצח.
+        מצגות וידאו מקצועיות עם עריכה מדויקת, מוזיקה מרגשת וטכנולוגיית AI יצירתית.
       </p>
 
       <!-- CTA -->
@@ -62,14 +62,24 @@ try {
       </div>
 
       <!-- VIDEO -->
-      <div style="border-radius:24px; overflow:hidden; box-shadow:0 32px 64px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.15); margin-bottom:2.5rem; position:relative;" class="reveal">
-        <video id="hero-video" autoplay muted loop playsinline style="width:100%; display:block;">
-          <source src="https://mazeget.com/wp-content/uploads/2025/09/Ai-story-10mb.mp4" type="video/mp4" />
-        </video>
-        <button id="hero-sound-btn" style="position:absolute; bottom:1rem; left:1rem; background:rgba(0,0,0,.6); border:none; color:white; padding:.5rem 1rem; border-radius:50px; font-size:.8rem; font-family:'Heebo',sans-serif; cursor:pointer; display:flex; align-items:center; gap:.4rem; backdrop-filter:blur(4px); transition:background .2s;">
-          <span id="hero-sound-icon">🔇</span>
-          <span id="hero-sound-label">מומלץ להפעיל סאונד</span>
-        </button>
+      <div style="position:relative; padding-bottom:58px; margin-bottom:2.5rem;" class="reveal">
+        <div style="border-radius:24px; overflow:hidden; box-shadow:0 32px 64px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.15);">
+          <video id="hero-video" autoplay muted loop playsinline style="width:100%; display:block;">
+            <source src="https://mazeget.com/wp-content/uploads/2025/09/Ai-story-10mb.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <!-- כפתור סאונד + טקסט -->
+        <div style="position:absolute; bottom:0; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:6px;">
+          <button id="hero-sound-btn" class="sound-round-btn">
+            <svg id="hero-sound-icon-muted" width="26" height="26" viewBox="0 0 24 24" fill="white">
+              <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+            </svg>
+            <svg id="hero-sound-icon-on" width="26" height="26" viewBox="0 0 24 24" fill="white" style="display:none;">
+              <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM19 12c0-2.95-1.68-5.5-4.15-6.78v2.22c1.55 1.1 2.58 2.88 2.58 4.56s-1.03 3.46-2.58 4.56v2.22C17.32 17.5 19 14.95 19 12z"/>
+            </svg>
+          </button>
+          <span id="hero-sound-label" style="font-size:.72rem; font-weight:700; color:rgba(255,255,255,.9); white-space:nowrap; background:rgba(255,255,255,.15); backdrop-filter:blur(4px); padding:.2rem .75rem; border-radius:50px;">מומלץ להפעיל סאונד</span>
+        </div>
       </div>
 
       <!-- Trust numbers -->
@@ -318,20 +328,17 @@ try {
   }, 1000);
 
   // ── Hero sound toggle ───────────────────────────────
-  const heroVideo = document.getElementById('hero-video') as HTMLVideoElement;
-  const soundBtn = document.getElementById('hero-sound-btn');
-  const soundIcon = document.getElementById('hero-sound-icon');
-  const soundLabel = document.getElementById('hero-sound-label');
+  const heroVideo  = document.getElementById('hero-video') as HTMLVideoElement;
+  const soundBtn   = document.getElementById('hero-sound-btn');
+  const iconMuted  = document.getElementById('hero-sound-icon-muted') as HTMLElement;
+  const iconOn     = document.getElementById('hero-sound-icon-on')    as HTMLElement;
+  const soundLabel = document.getElementById('hero-sound-label')      as HTMLElement;
   soundBtn?.addEventListener('click', () => {
     if (!heroVideo) return;
     heroVideo.muted = !heroVideo.muted;
-    if (heroVideo.muted) {
-      soundIcon!.textContent = '🔇';
-      soundLabel!.textContent = 'מומלץ להפעיל סאונד';
-    } else {
-      soundIcon!.textContent = '🔊';
-      soundLabel!.textContent = 'השתקה';
-    }
+    iconMuted.style.display  = heroVideo.muted ? '' : 'none';
+    iconOn.style.display     = heroVideo.muted ? 'none' : '';
+    soundLabel.textContent   = heroVideo.muted ? 'מומלץ להפעיל סאונד' : 'השתקה';
   });
 
   // ── Announcement bar hide on scroll ────────────────
@@ -392,6 +399,25 @@ try {
 
 <style>
   .video-card { transition: transform .2s ease, box-shadow .2s ease; }
+
+  /* ── כפתור סאונד עגול ── */
+  .sound-round-btn {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: linear-gradient(135deg, #7C3AED, #4c1d95);
+    border: 4px solid white;
+    cursor: pointer; z-index: 10;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0;
+    box-shadow: 0 8px 24px rgba(124,58,237,.4);
+    animation: sound-pulse 2.2s ease-out infinite;
+    transition: transform .2s;
+  }
+  .sound-round-btn:hover { transform: scale(1.07); }
+  @keyframes sound-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(124,58,237,.55), 0 8px 24px rgba(124,58,237,.35); }
+    70%  { box-shadow: 0 0 0 14px rgba(124,58,237,0), 0 8px 24px rgba(124,58,237,.35); }
+    100% { box-shadow: 0 0 0 0 rgba(124,58,237,0),   0 8px 24px rgba(124,58,237,.35); }
+  }
   .video-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,.13) !important; }
 
   @media(max-width:768px){

@@ -79,6 +79,9 @@ export interface VideoPage {
   detail_elements: string;
   detail_duration: string;
   detail_music:    string;
+  description:     string;  // תיאור מקוצר (עמודה V)
+  page_status:     string;  // ראשי / דוגמאות / מוסתר (עמודה W)
+  branch:          string;  // ענף: כדורגל, ריקוד, מוסיקה... (עמודה X)
   related: { id: string; title: string }[];
 }
 
@@ -109,6 +112,9 @@ export async function getVideoPages(): Promise<VideoPage[]> {
         detail_elements: val(12),
         detail_duration: val(13),
         detail_music:    val(14),
+        description:     val(21),
+        page_status:     val(22),
+        branch:          val(23),
         related: [
           { id: val(15), title: val(16) },
           { id: val(17), title: val(18) },

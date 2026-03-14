@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Contact from '../../components/Contact.astro';
 import { categories } from '../../data/categories';
-import { getVideosForCategory } from '../../lib/sheets';
+import { getVideosForCategory, getVideoPages } from '../../lib/sheets';
 
 export async function getStaticPaths() {
   const { categories } = await import('../../data/categories');
@@ -19,6 +19,19 @@ const isOther = category === 'other';
 const subcategories = isOther
   ? ['הכל', ...Array.from(new Set(videos.map(v => v.subcategory).filter(Boolean)))]
   : [];
+
+// נתוני עמודי מצגות לסינון לפי נושא / פתיח
+const allPages = await getVideoPages();
+const pageMap = new Map(allPages.filter(p => p.category_key === category).map(p => [p.vimeo_id, p]));
+
+const topicValues = [...new Set([...pageMap.values()].map(p => p.detail_style).filter(Boolean))];
+const introValues = [...new Set(
+  [...pageMap.values()].flatMap(p =>
+    p.detail_elements ? p.detail_elements.split(',').map(s => s.trim()).filter(Boolean) : []
+  )
+)];
+const showTopicFilter = topicValues.length > 1;
+const showIntroFilter = introValues.length > 1;
 ---
 
 <Layout title={`${catInfo?.label} — מצגות וידאו | Mazeget`}>
@@ -39,6 +52,29 @@ const subcategories = isOther
       <h2 class="text-3xl font-black text-[#12023C] text-center mb-8" style="font-family: 'Secular One', sans-serif;">
         מצגות מקצועיות נוספות
       </h2>
+
+      {(showTopicFilter || showIntroFilter) && (
+        <div class="mb-8 space-y-3">
+          {showTopicFilter && (
+            <div class="flex flex-wrap gap-2 justify-center items-center">
+              <span class="text-sm font-bold text-[#12023C] ml-3">נושא:</span>
+              <button class="topic-btn px-4 py-1.5 rounded-full border-2 font-bold text-sm transition-all" data-value="" style="background:#6C22FF; color:white; border-color:#6C22FF;">הכל</button>
+              {topicValues.map(t => (
+                <button class="topic-btn px-4 py-1.5 rounded-full border-2 font-bold text-sm transition-all" data-value={t} style="background:white; color:#6C22FF; border-color:#6C22FF;">{t}</button>
+              ))}
+            </div>
+          )}
+          {showIntroFilter && (
+            <div class="flex flex-wrap gap-2 justify-center items-center">
+              <span class="text-sm font-bold text-[#12023C] ml-3">פתיח:</span>
+              <button class="intro-btn px-4 py-1.5 rounded-full border-2 font-bold text-sm transition-all" data-value="" style="background:#6C22FF; color:white; border-color:#6C22FF;">הכל</button>
+              {introValues.map(i => (
+                <button class="intro-btn px-4 py-1.5 rounded-full border-2 font-bold text-sm transition-all" data-value={i} style="background:white; color:#6C22FF; border-color:#6C22FF;">{i}</button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       {isOther && subcategories.length > 1 && (
         <div class="flex flex-wrap gap-3 justify-center mb-10" id="filter-buttons">
@@ -64,13 +100,15 @@ const subcategories = isOther
       ) : (
         <>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="video-grid">
-            {videos.slice(0, 24).map((v, i) => (
+            {videos.map((v, i) => (
               <div
                 class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer video-card"
                 data-video-id={v.vimeo_id}
                 data-subcategory={v.subcategory || ''}
                 data-index={i}
                 data-page-slug={slugMap.get(v.vimeo_id) || `video-${v.vimeo_id}`}
+                data-topic={pageMap.get(v.vimeo_id)?.detail_style || ''}
+                data-intro={pageMap.get(v.vimeo_id)?.detail_elements || ''}
                 style={i >= 6 ? 'display:none' : ''}
               >
                 <div class="aspect-video relative bg-gray-900">
@@ -91,13 +129,13 @@ const subcategories = isOther
             ))}
           </div>
 
-          {videos.slice(0, 24).length > 6 && (
+          {videos.length > 6 && (
             <div class="text-center mt-12" id="load-more-wrap">
               <button id="load-more-btn" class="bg-[#6C22FF] text-white font-bold px-10 py-3 rounded-full hover:bg-[#5a1dd6] transition-colors text-lg">
                 הצג 6 נוספים
               </button>
               <p class="text-gray-400 text-sm mt-3" id="video-counter">
-                מציג 6 מתוך {Math.min(videos.length, 24)}
+                מציג 6 מתוך {videos.length}
               </p>
             </div>
           )}
@@ -129,21 +167,41 @@ const subcategories = isOther
   <div id="lightbox-content" style="width:min(960px,95vw); aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#000;"></div>
 </div>
 
-<script define:vars={{ total: Math.min(videos.length, 24) }}>
+<script define:vars={{ total: videos.length }}>
   let shown = 6;
   const STEP = 6;
+  let activeTopic = '';
+  let activeIntro = '';
+  let activeSubcat = 'הכל';
 
-  document.getElementById('load-more-btn').addEventListener('click', function() {
+  function applyFilters() {
     const cards = document.querySelectorAll('.video-card');
-    const next = Math.min(shown + STEP, total);
-    for (let i = shown; i < next; i++) {
-      cards[i].style.display = '';
-    }
-    shown = next;
+    const filterActive = activeTopic || activeIntro || activeSubcat !== 'הכל';
+    cards.forEach((card, i) => {
+      const el = card;
+      const topic = el.dataset.topic || '';
+      const intro = el.dataset.intro || '';
+      const sub   = el.dataset.subcategory || '';
+      const topicMatch  = !activeTopic  || topic === activeTopic;
+      const introMatch  = !activeIntro  || intro.split(',').map(s => s.trim()).includes(activeIntro);
+      const subcatMatch = activeSubcat === 'הכל' || sub === activeSubcat;
+      const matches = topicMatch && introMatch && subcatMatch;
+      el.style.display = filterActive ? (matches ? '' : 'none') : (i < shown ? '' : 'none');
+    });
+    const wrap = document.getElementById('load-more-wrap');
+    if (wrap) wrap.style.display = filterActive || shown >= total ? 'none' : '';
+  }
 
+  window.__applyFilters      = applyFilters;
+  window.__setActiveTopic    = v => { activeTopic  = v; applyFilters(); };
+  window.__setActiveIntro    = v => { activeIntro  = v; applyFilters(); };
+  window.__setActiveSubcat   = v => { activeSubcat = v; applyFilters(); };
+
+  document.getElementById('load-more-btn')?.addEventListener('click', function() {
+    shown = Math.min(shown + STEP, total);
+    applyFilters();
     const counter = document.getElementById('video-counter');
     if (counter) counter.textContent = 'מציג ' + shown + ' מתוך ' + total;
-
     if (shown >= total) {
       const wrap = document.getElementById('load-more-wrap');
       if (wrap) wrap.remove();
@@ -152,30 +210,39 @@ const subcategories = isOther
 </script>
 
 <script>
-  // Filter buttons
+  function setActive(btns: NodeListOf<Element>, value: string, attr: string) {
+    btns.forEach(b => {
+      const el = b as HTMLElement;
+      const isActive = (el.dataset[attr] ?? el.dataset.value) === value;
+      el.style.background = isActive ? '#6C22FF' : 'white';
+      el.style.color      = isActive ? 'white'   : '#6C22FF';
+    });
+  }
+
+  // topic filter
+  document.querySelectorAll('.topic-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = (btn as HTMLElement).dataset.value ?? '';
+      setActive(document.querySelectorAll('.topic-btn'), val, 'value');
+      (window as any).__setActiveTopic?.(val);
+    });
+  });
+
+  // intro filter
+  document.querySelectorAll('.intro-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = (btn as HTMLElement).dataset.value ?? '';
+      setActive(document.querySelectorAll('.intro-btn'), val, 'value');
+      (window as any).__setActiveIntro?.(val);
+    });
+  });
+
+  // subcategory filter (קטגוריה "אחר")
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const filter = (btn as HTMLElement).dataset.filter || 'הכל';
-
-      // עדכון כפתורים
-      document.querySelectorAll('.filter-btn').forEach(b => {
-        const el = b as HTMLElement;
-        if (el.dataset.filter === filter) {
-          el.style.background = '#6C22FF';
-          el.style.color = 'white';
-        } else {
-          el.style.background = 'white';
-          el.style.color = '#6C22FF';
-        }
-      });
-
-      // הצגת/הסתרת כרטיסים
-      document.querySelectorAll('.video-card').forEach(card => {
-        const el = card as HTMLElement;
-        const sub = el.dataset.subcategory || '';
-        const show = filter === 'הכל' || sub === filter;
-        el.style.display = show ? '' : 'none';
-      });
+      setActive(document.querySelectorAll('.filter-btn'), filter, 'filter');
+      (window as any).__setActiveSubcat?.(filter);
     });
   });
 
