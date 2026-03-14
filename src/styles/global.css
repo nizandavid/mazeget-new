@@ -70,13 +70,9 @@ body {
   background-size: 32px 32px;
 }
 
-/* Scroll reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity .65s ease, transform .65s ease;
-}
-.reveal.in { opacity: 1; transform: translateY(0); }
+/* Scroll reveal — disabled, elements always visible */
+.reveal { opacity: 1; transform: none; }
+.reveal.in { opacity: 1; transform: none; }
 
 /* Shimmer text */
 .shimmer-text {

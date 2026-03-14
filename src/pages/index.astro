@@ -28,7 +28,7 @@ try {
   </div>
 
   <!-- HERO -->
-  <section style="padding: 5rem 6% 4rem; text-align:center; position:relative; background:linear-gradient(145deg,#1e0a4a 0%,#4c1d95 55%,#7c3aed 100%); overflow:hidden;">
+  <section style="padding: 3.5rem 6% 3rem; text-align:center; position:relative; background:linear-gradient(145deg,#1e0a4a 0%,#4c1d95 55%,#7c3aed 100%); overflow:hidden;">
     <div class="section-orb" style="width:600px;height:600px;background:#6d28d9;top:-200px;right:-150px;animation-delay:0s;opacity:0.3;"></div>
     <div class="section-orb" style="width:400px;height:400px;background:#EC4899;bottom:-100px;left:-100px;animation-delay:-8s;opacity:0.2;"></div>
 
@@ -52,7 +52,7 @@ try {
       </p>
 
       <!-- CTA -->
-      <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; margin-bottom:2.5rem;" class="reveal">
+      <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;" class="reveal">
         <a href="#contact" style="display:inline-flex; align-items:center; gap:.5rem; background:linear-gradient(135deg,#EC4899,#9D5CF6); color:#fff; padding:.85rem 2rem; border-radius:50px; font-weight:700; font-size:.95rem; text-decoration:none; box-shadow:0 8px 28px rgba(236,72,153,.4);">
           קבלו הצעת מחיר
         </a>
@@ -60,51 +60,33 @@ try {
           ▷ צפו בדוגמאות
         </a>
       </div>
-
-      <!-- VIDEO -->
-      <div style="position:relative; padding-bottom:58px; margin-bottom:2.5rem;" class="reveal">
-        <div style="border-radius:24px; overflow:hidden; box-shadow:0 32px 64px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.15);">
-          <video id="hero-video" autoplay muted loop playsinline style="width:100%; display:block;">
-            <source src="https://mazeget.com/wp-content/uploads/2025/09/Ai-story-10mb.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <!-- כפתור סאונד + טקסט -->
-        <div style="position:absolute; bottom:0; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:6px;">
-          <button id="hero-sound-btn" class="sound-round-btn">
-            <svg id="hero-sound-icon-muted" width="26" height="26" viewBox="0 0 24 24" fill="white">
-              <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
-            </svg>
-            <svg id="hero-sound-icon-on" width="26" height="26" viewBox="0 0 24 24" fill="white" style="display:none;">
-              <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM19 12c0-2.95-1.68-5.5-4.15-6.78v2.22c1.55 1.1 2.58 2.88 2.58 4.56s-1.03 3.46-2.58 4.56v2.22C17.32 17.5 19 14.95 19 12z"/>
-            </svg>
-          </button>
-          <span id="hero-sound-label" style="font-size:.72rem; font-weight:700; color:rgba(255,255,255,.9); white-space:nowrap; background:rgba(255,255,255,.15); backdrop-filter:blur(4px); padding:.2rem .75rem; border-radius:50px;">מומלץ להפעיל סאונד</span>
-        </div>
-      </div>
-
-      <!-- Trust numbers -->
-      <div style="display:flex; justify-content:center; align-items:center; gap:2.5rem; flex-wrap:wrap; padding-top:2rem; border-top:1px solid rgba(255,255,255,.2);" class="reveal">
-        <div style="text-align:center;">
-          <div style="font-size:1.8rem; font-weight:900; color:#C4B5FD;">500+</div>
-          <div style="font-size:.75rem; color:rgba(255,255,255,.65); margin-top:.2rem;">מצגות שנוצרו</div>
-        </div>
-        <div style="width:1px; height:36px; background:rgba(255,255,255,.2);"></div>
-        <div style="text-align:center;">
-          <div style="font-size:1.8rem; font-weight:900; color:#C4B5FD;">3–4</div>
-          <div style="font-size:.75rem; color:rgba(255,255,255,.65); margin-top:.2rem;">ימי עבודה</div>
-        </div>
-        <div style="width:1px; height:36px; background:rgba(255,255,255,.2);"></div>
-        <div style="text-align:center;">
-          <div style="font-size:1.8rem; font-weight:900; color:#C4B5FD;">15+</div>
-          <div style="font-size:.75rem; color:rgba(255,255,255,.65); margin-top:.2rem;">שנות ניסיון</div>
-        </div>
-      </div>
     </div>
   </section>
 
+  <!-- VIDEO — מצד לצד, ללא שוליים -->
+  <div style="position:relative; line-height:0;">
+    <video id="hero-video" autoplay muted loop playsinline style="width:100%; display:block; max-height:80vh; object-fit:cover;">
+      <source src="https://mazeget.com/wp-content/uploads/2025/09/Ai-story-10mb.mp4" type="video/mp4" />
+    </video>
+    <!-- כפתור סאונד -->
+    <div style="position:absolute; bottom:-28px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:6px; z-index:10;">
+      <button id="hero-sound-btn" class="sound-round-btn">
+        <svg id="hero-sound-icon-muted" width="26" height="26" viewBox="0 0 24 24" fill="white">
+          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
+        <svg id="hero-sound-icon-on" width="26" height="26" viewBox="0 0 24 24" fill="white" style="display:none;">
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM19 12c0-2.95-1.68-5.5-4.15-6.78v2.22c1.55 1.1 2.58 2.88 2.58 4.56s-1.03 3.46-2.58 4.56v2.22C17.32 17.5 19 14.95 19 12z"/>
+        </svg>
+      </button>
+      <span id="hero-sound-label" style="font-size:.72rem; font-weight:700; color:#4c1d95; white-space:nowrap; background:white; box-shadow:0 2px 8px rgba(0,0,0,.1); padding:.2rem .75rem; border-radius:50px;">מומלץ להפעיל סאונד</span>
+    </div>
+  </div>
+  <!-- spacer for sound button overlap -->
+  <div style="height:44px; background:#F5F3FF;"></div>
+
   <!-- GALLERY HEADING -->
-  <section id="gallery" style="padding:3.5rem 6% 0; background:#F5F3FF; text-align:center;">
-    <div style="max-width:800px; margin:0 auto;" class="reveal">
+  <section id="gallery" style="padding:1.5rem 6% 0; background:#F5F3FF; text-align:center;">
+    <div style="max-width:800px; margin:0 auto;">
       <h2 style="font-size:clamp(1.9rem,3.5vw,2.8rem); font-weight:900; color:#12023C; margin-bottom:.6rem; font-family:'Secular One',sans-serif;">
         דוגמאות למצגות וידאו מקצועיות
       </h2>
@@ -113,11 +95,11 @@ try {
   </section>
 
   <!-- BAR MITZVAH -->
-  <section style="padding:3.5rem 6% 5rem; background:#F5F3FF; position:relative;">
+  <section style="padding:2rem 6% 3rem; background:#F5F3FF; position:relative;">
     <div style="max-width:1200px; margin:0 auto;">
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; flex-wrap:wrap; gap:1.5rem;" class="reveal">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
         <div style="text-align:right;">
-          <div style="display:inline-block; background:#EDE9FE; color:var(--purple); font-size:.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:.3rem 1rem; border-radius:50px; margin-bottom:.8rem;">✡️ בר מצווה</div>
+          <div style="display:inline-block; background:#EDE9FE; color:var(--purple); font-size:.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:.3rem 1rem; border-radius:50px; margin-bottom:.5rem;">בר מצווה</div>
           <h2 style="font-size:clamp(1.6rem,2.5vw,2.4rem); font-weight:900; color:var(--text); margin-bottom:.5rem;">מהרגע הראשון עד הרגע הגדול</h2>
           <p style="font-size:.9rem; color:var(--text-muted); max-width:480px; line-height:1.7;">מצגת שמספרת את הסיפור האישי — מהלידה ועד הגדלה, עם רגעים שיחרטו בזיכרון לנצח.</p>
         </div>
@@ -148,11 +130,11 @@ try {
   </section>
 
   <!-- BAT MITZVAH -->
-  <section style="padding:5rem 6%; background:#FFF0F8; position:relative;">
+  <section style="padding:2.5rem 6% 3rem; background:#FFF0F8; position:relative;">
     <div style="max-width:1200px; margin:0 auto;">
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; flex-wrap:wrap; gap:1.5rem;" class="reveal">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
         <div style="text-align:right;">
-          <div style="display:inline-block; background:#FCE7F3; color:#BE185D; font-size:.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:.3rem 1rem; border-radius:50px; margin-bottom:.8rem;">🌸 בת מצווה</div>
+          <div style="display:inline-block; background:#FCE7F3; color:#BE185D; font-size:.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:.3rem 1rem; border-radius:50px; margin-bottom:.5rem;">בת מצווה</div>
           <h2 style="font-size:clamp(1.6rem,2.5vw,2.4rem); font-weight:900; color:var(--text); margin-bottom:.5rem;">מצגת שמדברת ישר ללב</h2>
           <p style="font-size:.9rem; color:var(--text-muted); max-width:480px; line-height:1.7;">מצגת מיוחדת שמדגישה את הייחוד והאישיות, עם תמונות ורגעים שנבחרו בקפידה לאורך השנים.</p>
         </div>
@@ -183,11 +165,11 @@ try {
   </section>
 
   <!-- BIRTHDAYS -->
-  <section style="padding:5rem 6%; background:#FFFBEB; position:relative;">
+  <section style="padding:2.5rem 6% 3rem; background:#FFFBEB; position:relative;">
     <div style="max-width:1200px; margin:0 auto;">
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; flex-wrap:wrap; gap:1.5rem;" class="reveal">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
         <div style="text-align:right;">
-          <div style="display:inline-block; background:#FEF3C7; color:#92400E; font-size:.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:.3rem 1rem; border-radius:50px; margin-bottom:.8rem;">🎂 ימי הולדת</div>
+          <div style="display:inline-block; background:#FEF3C7; color:#92400E; font-size:.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:.3rem 1rem; border-radius:50px; margin-bottom:.5rem;">ימי הולדת</div>
           <h2 style="font-size:clamp(1.6rem,2.5vw,2.4rem); font-weight:900; color:var(--text); margin-bottom:.5rem;">כי כל יום הולדת מגיע לסיפור שלו</h2>
           <p style="font-size:.9rem; color:var(--text-muted); max-width:480px; line-height:1.7;">מצגת צבעונית ומרגשת לכל גיל — מיום הולדת ראשון ועד יובל זהב, עם הרגעים שהכי אוהבים.</p>
         </div>
@@ -218,11 +200,11 @@ try {
   </section>
 
   <!-- EXTRAS -->
-  <section style="padding:5rem 6%; background:#F0FDFA; position:relative;">
+  <section style="padding:2.5rem 6% 3rem; background:#F0FDFA; position:relative;">
     <div style="max-width:1200px; margin:0 auto;">
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; flex-wrap:wrap; gap:1.5rem;" class="reveal">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
         <div style="text-align:right;">
-          <div style="display:inline-block; background:#CCFBF1; color:#0F766E; font-size:.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:.3rem 1rem; border-radius:50px; margin-bottom:.8rem;">✨ תוספות מיוחדות</div>
+          <div style="display:inline-block; background:#CCFBF1; color:#0F766E; font-size:.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:.3rem 1rem; border-radius:50px; margin-bottom:.5rem;">תוספות מיוחדות</div>
           <h2 style="font-size:clamp(1.6rem,2.5vw,2.4rem); font-weight:900; color:var(--text); margin-bottom:.5rem;">עוד קצת קסם לאירוע</h2>
           <p style="font-size:.9rem; color:var(--text-muted); max-width:480px; line-height:1.7;">שיר שלטים, "סליחה על השאלה", דיבוב AI של דמויות מוכרות ועוד — תוספות שהופכות כל אירוע לבלתי נשכח.</p>
         </div>
@@ -246,34 +228,6 @@ try {
               </div>
               <p style="font-size:.8rem; color:var(--text-muted); line-height:1.6; margin:0;">{v.description || 'תוספת מיוחדת לאירוע שלכם'}</p>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- PROCESS -->
-  <section style="padding:5rem 6%; position:relative; background:linear-gradient(180deg,#b8f0e6 0%,#d8faf3 100%);">
-
-    <div style="max-width:1100px; margin:0 auto;">
-      <div style="text-align:center; margin-bottom:3.5rem;" class="reveal">
-        <div style="display:inline-block; background:var(--purple-light); color:var(--purple); font-size:.72rem; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; padding:.35rem 1rem; border-radius:50px; margin-bottom:1rem;">איך זה עובד</div>
-        <h2 style="font-size:clamp(1.9rem,3.5vw,2.9rem); font-weight:900; color:var(--text);">4 צעדים ל<em class="shimmer-text" style="font-style:normal;">אירוע בלתי נשכח</em></h2>
-      </div>
-      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; position:relative;">
-        {[
-          { icon:'📸', title:'מעלים תמונות', desc:'מעלים תמונות וסרטונים דרך מערכת ייחודית — קל ומהיר מהטלפון או המחשב' },
-          { icon:'🎵', title:'בוחרים סגנון', desc:'מוזיקה, עריכה ותוספות AI — הכל לפי הטעם האישי שלכם' },
-          { icon:'✂️', title:'אנחנו עורכים', desc:'3–4 ימי עבודה מקצועית עם ליווי צמוד לכל אורך הדרך' },
-          { icon:'🎉', title:'מקבלים מצגת', desc:'מוכנה לאירוע ומביאה בכי שמחה ומחיאות כפיים' },
-        ].map((step, i) => (
-          <div style="text-align:center;" class="reveal">
-            <div style="width:88px; height:88px; border-radius:24px; margin:0 auto 1.3rem; display:flex; align-items:center; justify-content:center; font-size:2rem; position:relative; background:var(--surface); border:1px solid var(--border); box-shadow:0 8px 24px rgba(124,58,237,.07);">
-              {step.icon}
-              <div style="position:absolute; top:-8px; left:-8px; width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg,var(--purple),var(--purple-mid)); color:white; font-size:.65rem; font-weight:900; display:flex; align-items:center; justify-content:center;">{i+1}</div>
-            </div>
-            <div style="font-size:.95rem; font-weight:800; margin-bottom:.45rem; color:var(--text);">{step.title}</div>
-            <div style="font-size:.8rem; color:var(--text-muted); line-height:1.6;">{step.desc}</div>
           </div>
         ))}
       </div>

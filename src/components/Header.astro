@@ -108,7 +108,7 @@ import { categories } from '../data/categories';
       </button>
       <div class="dropdown-menu">
         {categories.filter(cat => !cat.hideFromNav).map(cat => (
-          <a href={`/מצגות/${cat.key}`}>{cat.emoji} {cat.label}</a>
+          <a href={`/מצגות/${cat.key}`}>{cat.label}</a>
         ))}
       </div>
     </li>

@@ -20,11 +20,11 @@ import { categories } from '../data/categories';
     <!-- Categories -->
     <div>
       <h4 style="font-size:.78rem; font-weight:700; color:rgba(255,255,255,.45); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:1rem;">מצגות</h4>
-      <ul style="list-style:none; display:flex; flex-direction:column; gap:.6rem;">
+      <ul style="list-style:disc; padding-right:1.1rem; display:flex; flex-direction:column; gap:.6rem;">
         {categories.filter(cat => !cat.hideFromNav).map(cat => (
-          <li>
+          <li style="color:rgba(255,255,255,.4);">
             <a href={`/מצגות/${cat.key}`} style="color:rgba(255,255,255,.7); text-decoration:none; font-size:.85rem; transition:color .2s;" onmouseover="this.style.color='#C4B5FD'" onmouseout="this.style.color='rgba(255,255,255,.7)'">
-              {cat.emoji} {cat.label}
+              {cat.label}
             </a>
           </li>
         ))}
@@ -34,14 +34,14 @@ import { categories } from '../data/categories';
     <!-- Links -->
     <div>
       <h4 style="font-size:.78rem; font-weight:700; color:rgba(255,255,255,.45); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:1rem;">ניווט</h4>
-      <ul style="list-style:none; display:flex; flex-direction:column; gap:.6rem;">
+      <ul style="list-style:disc; padding-right:1.1rem; display:flex; flex-direction:column; gap:.6rem;">
         {[
           { label:'מחירון', href:'/מחירון' },
           { label:'מאמרים', href:'/מאמרים' },
           { label:'העלאת קבצים', href:'/העלאת-קבצים' },
           { label:'אודותינו', href:'/אודותינו' },
         ].map(link => (
-          <li>
+          <li style="color:rgba(255,255,255,.4);">
             <a href={link.href} style="color:rgba(255,255,255,.7); text-decoration:none; font-size:.85rem;" onmouseover="this.style.color='#C4B5FD'" onmouseout="this.style.color='rgba(255,255,255,.7)'">{link.label}</a>
           </li>
         ))}
@@ -53,6 +53,12 @@ import { categories } from '../data/categories';
   <!-- Bottom bar -->
   <div style="max-width:1280px; margin:0 auto; padding:1.2rem 6%; border-top:1px solid rgba(255,255,255,.1); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
     <span style="font-size:.78rem; color:rgba(255,255,255,.45);">© {new Date().getFullYear()} Mazeget · כל הזכויות שמורות</span>
+    <div style="display:flex; gap:.6rem; flex-wrap:wrap; justify-content:flex-end;">
+    <a href="https://g.page/r/CWIZB_5YqAWXEBM/review" target="_blank" rel="noopener"
+      style="display:inline-flex; align-items:center; gap:.5rem; background:#4285F4; color:white; padding:.45rem 1.1rem; border-radius:50px; font-size:.82rem; font-weight:600; text-decoration:none;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+      ביקורת בגוגל
+    </a>
     <a href="https://wa.me/972526780531" target="_blank"
       style="display:inline-flex; align-items:center; gap:.5rem; background:#25D366; color:white; padding:.45rem 1.1rem; border-radius:50px; font-size:.82rem; font-weight:600; text-decoration:none;">
       <svg width="16" height="16" fill="white" viewBox="0 0 24 24">
@@ -60,6 +66,7 @@ import { categories } from '../data/categories';
       </svg>
       וואטסאפ
     </a>
+    </div>
   </div>
 
 </footer>
