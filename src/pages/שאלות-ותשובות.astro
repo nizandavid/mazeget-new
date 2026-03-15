@@ -59,26 +59,27 @@ const faqs = [
   <Header />
 
   <!-- Hero -->
-  <section class="py-20 px-6 text-center" style="background: linear-gradient(135deg, #12023C 0%, #6C22FF 100%);">
-    <h1 class="text-5xl text-white font-black mb-4" style="font-family: 'Secular One', sans-serif;">שאלות ותשובות</h1>
-    <p class="text-white/90 text-xl max-w-xl mx-auto">כל מה שרציתם לדעת על מצגות הוידאו שלנו</p>
+  <section class="text-center" style="padding:3.5rem 1.5rem 3rem; background:linear-gradient(135deg,#12023C 0%,#6C22FF 100%);">
+    <h1 class="text-white font-black" style="font-size:clamp(2.2rem,5vw,3.2rem); font-family:'Secular One',sans-serif; margin-bottom:.6rem;">שאלות ותשובות</h1>
+    <p style="color:rgba(255,255,255,0.88); font-size:1.05rem; max-width:34rem; margin:0 auto;">כל מה שרציתם לדעת על מצגות הוידאו שלנו</p>
   </section>
 
   <!-- FAQ -->
-  <section class="py-20 px-6 bg-[#F8F7FF]">
-    <div class="max-w-3xl mx-auto">
-      <div class="flex flex-col gap-4" id="faq-list">
+  <section style="padding:3.5rem 1.5rem; background:#F8F7FF;">
+    <div style="max-width:46rem; margin:0 auto;">
+      <div style="display:flex; flex-direction:column; gap:.75rem;" id="faq-list">
         {faqs.map((item, i) => (
-          <div class="faq-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+          <div class="faq-item" style="background:white; border-radius:16px; box-shadow:0 1px 4px rgba(0,0,0,.06); overflow:hidden; border:1px solid rgba(108,34,255,.07);">
             <button
-              class="faq-btn w-full text-right px-8 py-6 flex items-center justify-between gap-4 hover:bg-[#F8F7FF] transition-colors"
+              class="faq-btn"
               data-index={i}
+              style="width:100%; text-align:right; padding:1.15rem 1.5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; background:transparent; border:none; cursor:pointer; transition:background .15s; font-family:'Heebo',sans-serif;"
             >
-              <span class="font-bold text-[#12023C] text-lg">{item.q}</span>
-              <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-[#6C22FF]/10 flex items-center justify-center text-[#6C22FF] font-bold text-xl transition-transform">+</span>
+              <span class="font-bold text-[#12023C]" style="font-size:1rem; line-height:1.4;">{item.q}</span>
+              <span class="faq-icon" style="flex-shrink:0; width:30px; height:30px; border-radius:50%; background:rgba(108,34,255,.1); display:flex; align-items:center; justify-content:center; color:#6C22FF; font-weight:700; font-size:1.15rem; transition:transform .2s, background .2s;">+</span>
             </button>
-            <div class="faq-answer hidden px-8 pb-6">
-              <p class="text-gray-600 leading-relaxed text-right">{item.a}</p>
+            <div class="faq-answer hidden" style="padding:0 1.5rem 1.15rem; text-align:right;">
+              <p style="color:#4B5563; line-height:1.75; font-size:.925rem; margin:0; border-top:1px solid rgba(108,34,255,.08); padding-top:.9rem;">{item.a}</p>
             </div>
           </div>
         ))}
@@ -87,10 +88,12 @@ const faqs = [
   </section>
 
   <!-- CTA -->
-  <section class="py-16 px-6 bg-white text-center">
-    <p class="text-xl text-gray-500 mb-6">לא מצאתם תשובה? אנחנו כאן</p>
+  <section class="text-center" style="padding:2.75rem 1.5rem; background:white; border-bottom:1px solid #ede9fe;">
+    <p style="font-size:1.05rem; color:#6B7280; margin-bottom:1.25rem;">לא מצאתם תשובה? אנחנו כאן</p>
     <a href="/#contact"
-      class="inline-block bg-[#6C22FF] text-white font-bold text-lg px-10 py-4 rounded-full hover:bg-[#5a1dd6] transition-colors">
+      style="display:inline-block; background:#6C22FF; color:white; font-weight:700; font-size:.95rem; padding:.8rem 2rem; border-radius:50px; text-decoration:none; transition:background .2s, transform .15s; box-shadow:0 4px 16px rgba(108,34,255,.3);"
+      onmouseover="this.style.background='#5a1dd6';this.style.transform='translateY(-1px)'"
+      onmouseout="this.style.background='#6C22FF';this.style.transform=''">
       שלחו לנו הודעה
     </a>
   </section>
@@ -111,12 +114,24 @@ const faqs = [
       document.querySelectorAll('.faq-icon').forEach(ic => {
         ic.textContent = '+';
         (ic as HTMLElement).style.transform = '';
+        (ic as HTMLElement).style.background = 'rgba(108,34,255,.1)';
+        (ic as HTMLElement).style.color = '#6C22FF';
       });
 
       if (!isOpen) {
         answer.classList.remove('hidden');
         icon.textContent = '−';
+        (icon as HTMLElement).style.background = '#6C22FF';
+        (icon as HTMLElement).style.color = 'white';
       }
+    });
+
+    // hover state
+    btn.addEventListener('mouseenter', () => {
+      (btn as HTMLElement).style.background = '#F8F7FF';
+    });
+    btn.addEventListener('mouseleave', () => {
+      (btn as HTMLElement).style.background = 'transparent';
     });
   });
 </script>

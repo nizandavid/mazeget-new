@@ -7,73 +7,79 @@ import Header from '../components/Header.astro';
   <Header />
 
   <!-- Hero -->
-  <section class="py-20 px-6 text-center" style="background: linear-gradient(135deg, #6C22FF 0%, #E879F9 100%);">
-    <h1 class="text-5xl text-white font-black mb-4" style="font-family: 'Secular One', sans-serif;">מחירון</h1>
-    <p class="text-white/90 text-xl">שקוף, פשוט, ללא הפתעות</p>
+  <section class="text-center" style="padding:3.5rem 1.5rem 3rem; background:linear-gradient(135deg,#6C22FF 0%,#E879F9 100%);">
+    <h1 class="text-white font-black" style="font-size:clamp(2.2rem,5vw,3.2rem); font-family:'Secular One',sans-serif; margin-bottom:.6rem;">מחירון</h1>
+    <p style="color:rgba(255,255,255,0.88); font-size:1.1rem; margin:0;">שקוף, פשוט, ללא הפתעות</p>
   </section>
 
   <!-- Packages -->
-  <section class="py-20 px-6 bg-[#F8F7FF]">
+  <section style="padding:3.5rem 1.5rem; background:#F8F7FF;">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-black text-[#12023C] text-center mb-12" style="font-family: 'Secular One', sans-serif;">חבילות מצגות</h2>
+      <h2 class="text-center font-black text-[#12023C]" style="font-size:clamp(1.6rem,3vw,2rem); font-family:'Secular One',sans-serif; margin-bottom:2.5rem;">חבילות מצגות</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
         <!-- Basic -->
-        <div class="bg-white rounded-2xl p-8 shadow-md text-right hover:shadow-xl transition-shadow">
-          <h3 class="text-xl font-black text-[#12023C] mb-2">מצגת קצרה</h3>
-          <div class="text-4xl font-black text-[#6C22FF] mb-4">₪360</div>
-          <ul class="text-gray-600 text-sm flex flex-col gap-2 mb-6">
-            <li>✓ עד 3 דקות</li>
-            <li>✓ כ-60 תמונות</li>
-            <li>✓ כותרת פתיחה</li>
-            <li>✓ סרטוני וידאו</li>
-            <li>✓ מוזיקה וברכה</li>
-            <li class="text-gray-400">דקה נוספת: ₪75</li>
-          </ul>
-          <a href="/#contact" class="block text-center bg-[#F8F7FF] text-[#6C22FF] font-bold py-3 rounded-full hover:bg-[#6C22FF] hover:text-white transition-colors">
+        <div class="bg-white rounded-2xl shadow-md text-right hover:shadow-xl transition-shadow flex flex-col" style="padding:1.75rem;">
+          <div style="margin-bottom:auto;">
+            <h3 class="font-black text-[#12023C]" style="font-size:1.15rem; margin-bottom:.5rem;">מצגת קצרה</h3>
+            <div class="font-black text-[#6C22FF]" style="font-size:2.5rem; line-height:1; margin-bottom:1.1rem;">₪360</div>
+            <ul class="text-gray-600 flex flex-col" style="font-size:.875rem; gap:.55rem; margin-bottom:1.4rem;">
+              <li>&#10003; עד 3 דקות</li>
+              <li>&#10003; כ-60 תמונות</li>
+              <li>&#10003; כותרת פתיחה</li>
+              <li>&#10003; סרטוני וידאו</li>
+              <li>&#10003; מוזיקה וברכה</li>
+              <li class="text-gray-400">דקה נוספת: ₪75</li>
+            </ul>
+          </div>
+          <a href="/#contact" class="block text-center font-bold rounded-full transition-colors" style="background:#F8F7FF; color:#6C22FF; padding:.75rem 1rem; font-size:.92rem;" onmouseover="this.style.background='#6C22FF';this.style.color='white'" onmouseout="this.style.background='#F8F7FF';this.style.color='#6C22FF'">
             לפרטים
           </a>
         </div>
 
         <!-- Standard - highlighted -->
-        <div class="rounded-2xl p-8 shadow-xl text-right relative" style="background:#DDD6FE;">
-          <div class="absolute -top-4 right-1/2 translate-x-1/2 bg-[#F59E0B] text-white text-sm font-bold px-4 py-1 rounded-full">
+        <div class="rounded-2xl shadow-xl text-right relative flex flex-col" style="background:#DDD6FE; padding:1.75rem;">
+          <div style="position:absolute; top:-14px; right:50%; transform:translateX(50%); background:#F59E0B; color:white; font-size:.78rem; font-weight:700; padding:.28rem 1rem; border-radius:50px; white-space:nowrap;">
             הכי פופולרי
           </div>
-          <h3 class="text-xl font-black mb-2" style="color:#12023C;">מצגת בסיסית</h3>
-          <div class="text-4xl font-black mb-4" style="color:#7C3AED;">₪550</div>
-          <ul class="text-sm flex flex-col gap-2 mb-6" style="color:#4B4580;">
-            <li>✓ עד 6 דקות</li>
-            <li>✓ כ-120 תמונות</li>
-            <li>✓ תוכן מורחב</li>
-            <li>✓ סרטוני וידאו</li>
-            <li style="color:#9490B8;">דקה נוספת: ₪75</li>
-          </ul>
-          <a href="/#contact" class="block text-center font-bold py-3 rounded-full" style="background:#7C3AED; color:white;">
+          <div style="margin-bottom:auto;">
+            <h3 class="font-black" style="color:#12023C; font-size:1.15rem; margin-bottom:.5rem;">מצגת בסיסית</h3>
+            <div class="font-black" style="color:#7C3AED; font-size:2.5rem; line-height:1; margin-bottom:1.1rem;">₪550</div>
+            <ul class="flex flex-col" style="color:#4B4580; font-size:.875rem; gap:.55rem; margin-bottom:1.4rem;">
+              <li>&#10003; עד 6 דקות</li>
+              <li>&#10003; כ-120 תמונות</li>
+              <li>&#10003; תוכן מורחב</li>
+              <li>&#10003; סרטוני וידאו</li>
+              <li style="color:#9490B8;">דקה נוספת: ₪75</li>
+            </ul>
+          </div>
+          <a href="/#contact" class="block text-center font-bold rounded-full" style="background:#7C3AED; color:white; padding:.75rem 1rem; font-size:.92rem; margin-bottom:1.25rem;">
             לפרטים
           </a>
-          <div style="margin:1.5rem -2rem -2rem -2rem; background:linear-gradient(135deg,#F59E0B,#EA580C); padding:.7rem 1.2rem; border-radius:0 0 16px 16px; text-align:center;">
-            <span style="color:white; font-weight:800; font-size:.76rem;">🎁 הזמן מצגת של 6 או 10 דקות וקבל דקה נוספת במתנה</span>
+          <div style="margin:0 -1.75rem -1.75rem -1.75rem; background:linear-gradient(135deg,#F59E0B,#EA580C); padding:.6rem 1rem; border-radius:0 0 16px 16px; text-align:center;">
+            <span style="color:white; font-weight:800; font-size:.74rem;">🎁 הזמן מצגת של 6 או 10 דקות וקבל דקה נוספת במתנה</span>
           </div>
         </div>
 
         <!-- Premium -->
-        <div class="rounded-2xl p-8 shadow-md text-right" style="background:#4C1D95;">
-          <h3 class="text-xl font-black mb-2" style="color:white;">מצגת פרימיום</h3>
-          <div class="text-4xl font-black mb-4" style="color:#C4B5FD;">₪750</div>
-          <ul class="text-sm flex flex-col gap-2 mb-6" style="color:rgba(255,255,255,0.85);">
-            <li>✓ עד 10 דקות</li>
-            <li>✓ כ-170 תמונות</li>
-            <li>✓ וידאו ללא הגבלה</li>
-            <li>✓ חלוקה לנושאים</li>
-            <li style="color:rgba(255,255,255,0.5);">דקה נוספת: ₪75</li>
-          </ul>
-          <a href="/#contact" class="block text-center font-bold py-3 rounded-full" style="background:white; color:#4C1D95;">
+        <div class="rounded-2xl shadow-md text-right flex flex-col" style="background:#4C1D95; padding:1.75rem;">
+          <div style="margin-bottom:auto;">
+            <h3 class="font-black" style="color:white; font-size:1.15rem; margin-bottom:.5rem;">מצגת פרימיום</h3>
+            <div class="font-black" style="color:#C4B5FD; font-size:2.5rem; line-height:1; margin-bottom:1.1rem;">₪750</div>
+            <ul class="flex flex-col" style="color:rgba(255,255,255,0.85); font-size:.875rem; gap:.55rem; margin-bottom:1.4rem;">
+              <li>&#10003; עד 10 דקות</li>
+              <li>&#10003; כ-170 תמונות</li>
+              <li>&#10003; וידאו ללא הגבלה</li>
+              <li>&#10003; חלוקה לנושאים</li>
+              <li style="color:rgba(255,255,255,0.45);">דקה נוספת: ₪75</li>
+            </ul>
+          </div>
+          <a href="/#contact" class="block text-center font-bold rounded-full" style="background:white; color:#4C1D95; padding:.75rem 1rem; font-size:.92rem; margin-bottom:1.25rem;">
             לפרטים
           </a>
-          <div style="margin:1.5rem -2rem -2rem -2rem; background:linear-gradient(135deg,#F59E0B,#EA580C); padding:.7rem 1.2rem; border-radius:0 0 16px 16px; text-align:center;">
-            <span style="color:white; font-weight:800; font-size:.76rem;">🎁 הזמן מצגת של 6 או 10 דקות וקבל דקה נוספת במתנה</span>
+          <div style="margin:0 -1.75rem -1.75rem -1.75rem; background:linear-gradient(135deg,#F59E0B,#EA580C); padding:.6rem 1rem; border-radius:0 0 16px 16px; text-align:center;">
+            <span style="color:white; font-weight:800; font-size:.74rem;">🎁 הזמן מצגת של 6 או 10 דקות וקבל דקה נוספת במתנה</span>
           </div>
         </div>
 
@@ -82,43 +88,43 @@ import Header from '../components/Header.astro';
   </section>
 
   <!-- Extra Services -->
-  <section class="py-20 px-6 bg-white">
+  <section style="padding:3.5rem 1.5rem; background:white;">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-black text-[#12023C] text-center mb-12" style="font-family: 'Secular One', sans-serif;">שירותים נוספים</h2>
+      <h2 class="text-center font-black text-[#12023C]" style="font-size:clamp(1.6rem,3vw,2rem); font-family:'Secular One',sans-serif; margin-bottom:2rem;">שירותים נוספים</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
 
-        <div class="bg-[#F8F7FF] rounded-2xl p-8 text-right">
-          <h3 class="text-xl font-black text-[#12023C] mb-2">שיר שלטים</h3>
-          <div class="text-3xl font-black text-[#E879F9] mb-3">₪540</div>
-          <p class="text-gray-500 text-sm mb-2">עד 3 דקות עם משתתפי המשפחה</p>
-          <p class="text-gray-400 text-sm">דקה נוספת: ₪180</p>
+        <div class="rounded-2xl text-right" style="background:#F8F7FF; padding:1.5rem 1.75rem;">
+          <h3 class="font-black text-[#12023C]" style="font-size:1.1rem; margin-bottom:.4rem;">שיר שלטים</h3>
+          <div class="font-black text-[#E879F9]" style="font-size:1.9rem; line-height:1.1; margin-bottom:.5rem;">₪540</div>
+          <p class="text-gray-500" style="font-size:.875rem; margin-bottom:.2rem;">עד 3 דקות עם משתתפי המשפחה</p>
+          <p class="text-gray-400" style="font-size:.85rem; margin:0;">דקה נוספת: ₪180</p>
         </div>
 
-        <div class="bg-[#F8F7FF] rounded-2xl p-8 text-right">
-          <h3 class="text-xl font-black text-[#12023C] mb-2">סליחה על השאלה</h3>
-          <div class="text-3xl font-black text-[#E879F9] mb-3">₪540</div>
-          <p class="text-gray-500 text-sm mb-2">עד 3 דקות בסגנון קוויז משפחתי</p>
-          <p class="text-gray-400 text-sm">דקה נוספת: ₪180</p>
+        <div class="rounded-2xl text-right" style="background:#F8F7FF; padding:1.5rem 1.75rem;">
+          <h3 class="font-black text-[#12023C]" style="font-size:1.1rem; margin-bottom:.4rem;">סליחה על השאלה</h3>
+          <div class="font-black text-[#E879F9]" style="font-size:1.9rem; line-height:1.1; margin-bottom:.5rem;">₪540</div>
+          <p class="text-gray-500" style="font-size:.875rem; margin-bottom:.2rem;">עד 3 דקות בסגנון קוויז משפחתי</p>
+          <p class="text-gray-400" style="font-size:.85rem; margin:0;">דקה נוספת: ₪180</p>
         </div>
 
       </div>
 
       <!-- Add-ons -->
-      <div class="mt-12 bg-[#F8F7FF] rounded-2xl p-8 text-right">
-        <h3 class="text-xl font-black text-[#12023C] mb-6">תוספות בתשלום</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="rounded-2xl text-right" style="background:#F8F7FF; padding:1.5rem 1.75rem;">
+        <h3 class="font-black text-[#12023C]" style="font-size:1.05rem; margin-bottom:1rem;">תוספות בתשלום</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
           <div class="flex items-center gap-3">
-            <span class="text-2xl">🤖</span>
-            <span class="text-gray-600">דיבוב AI של דמויות מוכרות</span>
+            <span style="font-size:1.5rem;">🤖</span>
+            <span class="text-gray-600" style="font-size:.875rem;">דיבוב AI של דמויות מוכרות</span>
           </div>
           <div class="flex items-center gap-3">
-            <span class="text-2xl">🖼️</span>
-            <span class="text-gray-600">הוספת תמונות AI</span>
+            <span style="font-size:1.5rem;">🖼️</span>
+            <span class="text-gray-600" style="font-size:.875rem;">הוספת תמונות AI</span>
           </div>
           <div class="flex items-center gap-3">
-            <span class="text-2xl">🎬</span>
-            <span class="text-gray-600">עריכת וידאו מיוחדת</span>
+            <span style="font-size:1.5rem;">🎬</span>
+            <span class="text-gray-600" style="font-size:.875rem;">עריכת וידאו מיוחדת</span>
           </div>
         </div>
       </div>
@@ -126,10 +132,10 @@ import Header from '../components/Header.astro';
   </section>
 
   <!-- CTA -->
-  <section class="py-16 px-6 text-center" style="background: linear-gradient(135deg, #6C22FF 0%, #06B6D4 100%);">
-    <h2 class="text-3xl font-black text-white mb-4" style="font-family: 'Secular One', sans-serif;">מוכנים להתחיל?</h2>
-    <p class="text-white/90 mb-8">צרו קשר ונבנה יחד את המצגת המושלמת</p>
-    <a href="/#contact" class="inline-block bg-white text-[#6C22FF] font-bold text-lg px-10 py-4 rounded-full hover:scale-105 transition-transform">
+  <section class="text-center" style="padding:3rem 1.5rem; background:linear-gradient(135deg,#6C22FF 0%,#06B6D4 100%);">
+    <h2 class="font-black text-white" style="font-size:clamp(1.6rem,3vw,2rem); font-family:'Secular One',sans-serif; margin-bottom:.6rem;">מוכנים להתחיל?</h2>
+    <p style="color:rgba(255,255,255,0.88); margin-bottom:1.75rem; font-size:.95rem;">צרו קשר ונבנה יחד את המצגת המושלמת</p>
+    <a href="/#contact" class="inline-block font-bold rounded-full transition-transform hover:scale-105" style="background:white; color:#6C22FF; font-size:1rem; padding:.85rem 2.25rem; box-shadow:0 6px 22px rgba(0,0,0,.18);">
       צרו קשר עכשיו
     </a>
   </section>

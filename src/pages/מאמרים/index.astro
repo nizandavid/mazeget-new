@@ -7,29 +7,74 @@ import Header from '../../components/Header.astro';
   <Header />
 
   <!-- Hero -->
-  <section class="py-20 px-6 text-center" style="background: linear-gradient(135deg, #12023C 0%, #6C22FF 100%);">
-    <h1 class="text-5xl text-white font-black mb-4" style="font-family: 'Secular One', sans-serif;">מאמרים וטיפים</h1>
-    <p class="text-white/90 text-xl max-w-xl mx-auto">כל מה שצריך לדעת על מצגות וידאו לאירועים</p>
+  <section class="py-10 px-6 text-center" style="background: linear-gradient(135deg, #12023C 0%, #6C22FF 100%);">
+    <p class="text-[#E879F9] text-sm font-semibold uppercase tracking-widest mb-2">הבלוג שלנו</p>
+    <h1 class="text-4xl md:text-5xl text-white font-black mb-3 leading-tight" style="font-family: 'Secular One', sans-serif;">מאמרים וטיפים</h1>
+    <p class="text-white/75 text-base max-w-md mx-auto">כל מה שצריך לדעת על מצגות וידאו לאירועים</p>
   </section>
 
   <!-- Category Filter -->
-  <section id="cat-filter" class="py-8 px-6 bg-white border-b border-gray-100" style="display:none;">
-    <div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-3" id="cat-buttons"></div>
+  <section id="cat-filter" class="py-5 px-6 bg-white border-b border-gray-100 sticky top-0 z-10" style="display:none;">
+    <div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-2" id="cat-buttons"></div>
   </section>
 
   <!-- Posts Grid -->
-  <section class="py-16 px-6 bg-[#F8F7FF]">
+  <section class="py-12 px-6 bg-[#F8F7FF] min-h-[40vh]">
     <div class="max-w-5xl mx-auto">
-      <div id="posts-loading" class="text-center py-20 text-gray-400">טוען מאמרים...</div>
-      <div id="posts-error" class="text-center py-20 text-red-400" style="display:none;"></div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="posts-grid" style="display:none;"></div>
+      <div id="posts-loading" class="flex flex-col items-center justify-center py-20 gap-3 text-[#6C22FF]/50">
+        <svg class="animate-spin w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+        </svg>
+        <span class="text-sm font-medium">טוען מאמרים...</span>
+      </div>
+      <div id="posts-error" class="text-center py-16 text-gray-400 text-sm" style="display:none;"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="posts-grid" style="display:none;"></div>
     </div>
   </section>
 
 </Layout>
 
+<style>
+  .post-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(108, 34, 255, 0.08);
+    box-shadow: 0 2px 12px rgba(18, 2, 60, 0.06);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+  }
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(108, 34, 255, 0.15);
+  }
+  .post-card .card-arrow {
+    transition: transform 0.2s ease;
+  }
+  .post-card:hover .card-arrow {
+    transform: translateX(-4px);
+  }
+  .cat-btn-active {
+    background: #6C22FF !important;
+    color: white !important;
+    border-color: #6C22FF !important;
+    box-shadow: 0 4px 14px rgba(108, 34, 255, 0.3);
+  }
+  .cat-btn-inactive {
+    background: white;
+    color: #6C22FF;
+    border-color: rgba(108, 34, 255, 0.3);
+  }
+  .cat-btn-inactive:hover {
+    background: #F5F3FF;
+    border-color: #6C22FF;
+  }
+</style>
+
 <script>
-  const WP_API = '/api/wp/wp/v2';
+  const WP_API = window.location.hostname === 'localhost'
+    ? 'https://wp.mazeget.com/wp-json/wp/v2'
+    : '/api/wp/wp/v2';
 
   function formatDate(dateStr: string) {
     return new Date(dateStr).toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -40,14 +85,15 @@ import Header from '../../components/Header.astro';
     grid.innerHTML = posts
       .filter(p => activeCat === 'all' || p.categories.includes(Number(activeCat)))
       .map(post => `
-        <article class="post-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer" data-categories='${JSON.stringify(post.categories)}'>
-          <a href="/מאמרים/${decodeURIComponent(post.slug)}">
-            <div class="p-6 text-right">
-              <p class="text-xs text-gray-400 mb-2">${formatDate(post.date)}</p>
-              <h2 class="font-black text-[#12023C] text-lg mb-3 leading-tight">${post.title.rendered}</h2>
-              <p class="text-gray-500 text-sm leading-relaxed line-clamp-3">${post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 120)}...</p>
-              <span class="inline-block mt-4 text-[#6C22FF] font-medium text-sm">קרא עוד ←</span>
-            </div>
+        <article class="post-card" data-categories='${JSON.stringify(post.categories)}'>
+          <a href="/מאמרים/${decodeURIComponent(post.slug)}" class="block p-6 text-right h-full">
+            <p class="text-xs text-[#6C22FF]/50 font-medium mb-3 tracking-wide">${formatDate(post.date)}</p>
+            <h2 class="font-black text-[#12023C] text-lg mb-3 leading-snug" style="font-family: 'Secular One', sans-serif;">${post.title.rendered}</h2>
+            <p class="text-gray-400 text-sm leading-relaxed line-clamp-3 mb-5">${post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 120)}...</p>
+            <span class="inline-flex items-center gap-1 text-[#6C22FF] font-semibold text-sm card-arrow">
+              קרא עוד
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
           </a>
         </article>
       `).join('');
@@ -78,14 +124,14 @@ import Header from '../../components/Header.astro';
 
         const allBtn = document.createElement('button');
         allBtn.dataset.cat = 'all';
-        allBtn.className = 'cat-btn px-5 py-2 rounded-full text-sm font-medium border-2 border-[#6C22FF] bg-[#6C22FF] text-white transition-all';
+        allBtn.className = 'cat-btn cat-btn-active px-5 py-1.5 rounded-full text-sm font-semibold border-2 transition-all';
         allBtn.textContent = 'הכל';
         btnContainer.appendChild(allBtn);
 
         categories.filter((c: any) => c.count > 0).forEach((cat: any) => {
           const btn = document.createElement('button');
           btn.dataset.cat = String(cat.id);
-          btn.className = 'cat-btn px-5 py-2 rounded-full text-sm font-medium border-2 border-[#6C22FF] text-[#6C22FF] bg-white transition-all';
+          btn.className = 'cat-btn cat-btn-inactive px-5 py-1.5 rounded-full text-sm font-semibold border-2 transition-all';
           btn.textContent = `${cat.name} (${cat.count})`;
           btnContainer.appendChild(btn);
         });
@@ -93,11 +139,11 @@ import Header from '../../components/Header.astro';
         btnContainer.querySelectorAll('.cat-btn').forEach(btn => {
           btn.addEventListener('click', () => {
             btnContainer.querySelectorAll('.cat-btn').forEach(b => {
-              (b as HTMLElement).style.background = 'white';
-              (b as HTMLElement).style.color = '#6C22FF';
+              b.classList.remove('cat-btn-active');
+              b.classList.add('cat-btn-inactive');
             });
-            (btn as HTMLElement).style.background = '#6C22FF';
-            (btn as HTMLElement).style.color = 'white';
+            btn.classList.remove('cat-btn-inactive');
+            btn.classList.add('cat-btn-active');
             renderPosts(posts, (btn as HTMLElement).dataset.cat || 'all');
           });
         });

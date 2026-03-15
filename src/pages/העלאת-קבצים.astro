@@ -13,23 +13,60 @@ import Header from '../components/Header.astro';
   </section>
 
   <!-- Unique Feature -->
-  <section class="py-16 px-6 bg-white">
-    <div class="max-w-3xl mx-auto text-center">
-      <div class="inline-block bg-[#F59E0B]/10 text-[#F59E0B] font-bold px-6 py-2 rounded-full mb-6 text-sm">
-        ✨ טכנולוגיה בלעדית
+  <section class="py-14 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="feature-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;">
+
+        <!-- טקסט — ימין -->
+        <div style="text-align:right;">
+          <div class="inline-block bg-[#F59E0B]/10 text-[#F59E0B] font-bold px-6 py-2 rounded-full mb-6 text-sm">
+            ✨ טכנולוגיה בלעדית
+          </div>
+          <h2 class="text-3xl font-black text-[#12023C] mb-6" style="font-family: 'Secular One', sans-serif;">
+            מערכת העלאה שפיתחנו במיוחד בשבילכם
+          </h2>
+          <p class="text-gray-600 text-lg leading-relaxed mb-4">
+            אחרי שיוצרים איתנו קשר, אתם מקבלים <strong>קישור אישי</strong> למערכת ייחודית שפיתחנו —
+            אין דבר כזה בשום מקום אחר.
+          </p>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            עובדת מושלם מ<strong>טלפון או מחשב</strong>, בלי להוריד שום דבר.
+          </p>
+        </div>
+
+        <!-- תמונה — שמאל -->
+        <div style="position:relative; display:flex; justify-content:center;">
+          <div style="position:relative; border-radius:20px; overflow:hidden; width:100%; max-width:460px; aspect-ratio:4/3; box-shadow:0 24px 64px rgba(108,34,255,.18);">
+            <img
+              src="https://mazeget.com/wp-content/uploads/2025/12/nizandavid_back_view_of_a_parent_holding_a_smartphone_showing_9cb1bf4d-e0c2-465e-9759-c47895e61566_0.png"
+              alt="מערכת העלאת קבצים ייחודית"
+              style="width:100%; height:100%; object-fit:cover; object-position:center top;"
+            />
+          </div>
+          <!-- Badge בלוב צף ובולט -->
+          <div class="badge-blob" style="position:absolute; top:-34px; right:-28px; width:168px; height:144px; cursor:default; transition:transform .25s ease, filter .25s ease;">
+            <img src="/badge-blob.svg" alt="" style="width:100%; height:100%; position:absolute; inset:0;" />
+            <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding-bottom:12px; text-align:center; line-height:1.2;">
+              <span style="font-size:.72rem; font-weight:800; color:#1a1a1a; letter-spacing:1px; text-transform:uppercase;">✨ בלעדי</span>
+              <span style="font-size:.88rem; font-weight:900; color:#1a1a1a;">טכנולוגיה</span>
+              <span style="font-size:.88rem; font-weight:900; color:#1a1a1a;">בלעדית</span>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <h2 class="text-3xl font-black text-[#12023C] mb-6" style="font-family: 'Secular One', sans-serif;">
-        מערכת העלאה שפיתחנו במיוחד בשבילכם
-      </h2>
-      <p class="text-gray-600 text-lg leading-relaxed mb-4">
-        אחרי שיוצרים איתנו קשר, אתם מקבלים <strong>קישור אישי</strong> למערכת ייחודית שפיתחנו —
-        אין דבר כזה בשום מקום אחר.
-      </p>
-      <p class="text-gray-600 text-lg leading-relaxed">
-        עובדת מושלם מ<strong>טלפון או מחשב</strong>, בלי להוריד שום דבר.
-      </p>
     </div>
   </section>
+
+  <style>
+    .badge-blob:hover {
+      transform: scale(1.1) rotate(-4deg);
+      filter: drop-shadow(0 8px 18px rgba(253,216,56,.5));
+    }
+    @media(max-width:768px){
+      .feature-grid { grid-template-columns:1fr !important; }
+    }
+  </style>
 
   <!-- Steps -->
   <section class="py-20 px-6 bg-[#F8F7FF]">
