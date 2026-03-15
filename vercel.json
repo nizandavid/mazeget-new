@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/wp/:path*",
+      "destination": "https://wp.mazeget.com/wp-json/:path*"
+    }
+  ]
+}
