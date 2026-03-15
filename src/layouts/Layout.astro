@@ -6,13 +6,17 @@ interface Props {
   title?: string;
   description?: string;
   pageUrl?: string;
+  ogImage?: string;
 }
 
 const {
   title = 'Mazeget — מצגות לאירועים משפחתיים',
   description = 'Mazeget מתמחה במצגות וידאו מרגשות לאירועים משפחתיים — בר מצווה, בת מצווה, ימי הולדת וחתונות.',
-  pageUrl
+  pageUrl,
+  ogImage = 'https://mazeget.com/og-image.jpg'
 } = Astro.props;
+
+const canonicalUrl = `https://mazeget.com${Astro.url.pathname}`;
 
 let rankMathHead = '';
 if (pageUrl) {
@@ -33,10 +37,15 @@ if (pageUrl) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <link rel="canonical" href={canonicalUrl} />
     {!rankMathHead && <meta name="description" content={description} />}
     {!rankMathHead && <meta property="og:title" content={title} />}
     {!rankMathHead && <meta property="og:description" content={description} />}
     {!rankMathHead && <meta property="og:type" content="website" />}
+    {!rankMathHead && <meta property="og:url" content={canonicalUrl} />}
+    {!rankMathHead && <meta property="og:image" content={ogImage} />}
+    {!rankMathHead && <meta property="og:locale" content="he_IL" />}
+    {!rankMathHead && <meta property="og:site_name" content="Mazeget" />}
     {rankMathHead && <Fragment set:html={rankMathHead} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
