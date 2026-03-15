@@ -34,7 +34,10 @@ const showTopicFilter = topicValues.length > 1;
 const showIntroFilter = introValues.length > 1;
 ---
 
-<Layout title={`${catInfo?.label} — מצגות וידאו | Mazeget`}>
+<Layout
+  title={`${catInfo?.label} — מצגות וידאו | Mazeget`}
+  description={`${catInfo?.description}. צפו בדוגמאות אמיתיות של מצגות ${catInfo?.label} שיצרנו — עיצוב מקצועי עם AI, מוכן להקרנה באירוע.`}
+>
   <Header />
 
   <!-- Hero -->

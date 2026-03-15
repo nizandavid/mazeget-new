@@ -47,6 +47,20 @@ if (pageUrl) {
     {!rankMathHead && <meta property="og:locale" content="he_IL" />}
     {!rankMathHead && <meta property="og:site_name" content="Mazeget" />}
     {rankMathHead && <Fragment set:html={rankMathHead} />}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Mazeget",
+      "url": "https://mazeget.com",
+      "logo": "https://mazeget.com/og-image.jpg",
+      "description": "מצגות וידאו מרגשות לאירועים משפחתיים — בר מצווה, בת מצווה, ימי הולדת וחתונות",
+      "telephone": "+972526780531",
+      "areaServed": "IL",
+      "priceRange": "₪₪",
+      "inLanguage": "he"
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Secular+One&display=swap" rel="stylesheet" />

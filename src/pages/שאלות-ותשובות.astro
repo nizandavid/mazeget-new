@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Contact from '../components/Contact.astro';
 
-const faqs = [
+const faqs: { q: string; a: string }[] = [
   {
     q: "כמה זמן לוקח להכין מצגת?",
     a: "בדרך כלל 3–7 ימי עסקים מרגע קבלת כל התמונות והסרטונים. לאירועים דחופים — צרו קשר ונתאים לוח זמנים."
@@ -53,6 +53,16 @@ const faqs = [
     a: "בסיום התהליך, אנחנו סוגרים ושולחים קובץ סופי ואתם מקבלים דרישות תשלום, ביט, פייבוקס, העברה בנקאית."
   },
 ];
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a }
+  }))
+});
 ---
 
 <Layout title="שאלות ותשובות — Mazeget מצגות" description="כל השאלות הנפוצות על הזמנת מצגת וידאו — זמני הכנה, העלאת תמונות, מוזיקה, תיקונים ותשלום. כאן תמצאו את כל התשובות.">
@@ -99,6 +109,7 @@ const faqs = [
   </section>
 
   <Contact />
+  <script type="application/ld+json" set:html={faqSchema}></script>
 </Layout>
 
 <script>
