@@ -52,8 +52,8 @@ export const categories: { key: string; label: string; description: string; emoj
   },
   {
     key: 'other',
-    label: 'מצגות שונות',
-    description: 'מצגות וידאו לאירועים מיוחדים — יצירתיות ללא גבולות',
+    label: 'תוספות מיוחדות',
+    description: 'שיר שלטים, דיבוב AI, "סליחה על השאלה" ועוד תוספות שהופכות כל אירוע לבלתי נשכח',
     emoji: '✨',
   },
 ];
