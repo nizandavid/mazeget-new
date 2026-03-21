@@ -25,6 +25,31 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 
+const featuredImage = post?._embedded?.['wp:featuredmedia']?.[0]?.source_url;
+const excerpt = post?.excerpt?.rendered?.replace(/<[^>]*>/g, '').substring(0, 160) ?? '';
+
+const articleSchema = post ? JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": post.title.rendered.replace(/<[^>]*>/g, ''),
+  "datePublished": post.date,
+  "dateModified": post.modified || post.date,
+  "author": {
+    "@type": "Person",
+    "name": "ניצן שמיר",
+    "url": "https://mazeget.com/אודותינו"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mazeget",
+    "logo": { "@type": "ImageObject", "url": "https://mazeget.com/og-image.jpg" }
+  },
+  "image": featuredImage || "https://mazeget.com/og-image.jpg",
+  "url": `https://mazeget.com/מאמרים/${post.slug}`,
+  "inLanguage": "he",
+  "description": excerpt
+}) : null;
+
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' });
 }
@@ -44,7 +69,13 @@ function processContent(html: string): string {
 }
 ---
 
-<Layout title={post ? post.title.rendered + ' — Mazeget' : 'מאמר — Mazeget'} pageUrl={post?.link}>
+<Layout
+  title={post ? post.title.rendered + ' — Mazeget' : 'מאמר — Mazeget'}
+  description={excerpt || undefined}
+  ogImage={featuredImage || undefined}
+  pageUrl={post?.link}
+>
+  {articleSchema && <script type="application/ld+json" is:inline set:html={articleSchema} slot="head" />}
   <Header />
 
   {!post ? (
