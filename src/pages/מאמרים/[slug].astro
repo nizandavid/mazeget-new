@@ -7,24 +7,23 @@ const WP_URL = 'https://wp.mazeget.com';
 export async function getStaticPaths() {
   const wpUrl = 'https://wp.mazeget.com';
   try {
-    const res = await fetch(`${wpUrl}/wp-json/wp/v2/posts?per_page=100&_fields=slug`);
-    const posts = await res.json();
-    return posts.map((post: any) => ({ params: { slug: decodeURIComponent(post.slug) } }));
+    const [res1, res2] = await Promise.all([
+      fetch(`${wpUrl}/wp-json/wp/v2/posts?per_page=100&page=1&_embed`),
+      fetch(`${wpUrl}/wp-json/wp/v2/posts?per_page=100&page=2&_embed`),
+    ]);
+    const posts1 = await res1.json();
+    const posts2 = res2.ok ? await res2.json() : [];
+    const posts = [...posts1, ...(Array.isArray(posts2) ? posts2 : [])];
+    return posts.map((post: any) => ({
+      params: { slug: decodeURIComponent(post.slug) },
+      props: { post }
+    }));
   } catch (e) {
     return [];
   }
 }
 
-const { slug } = Astro.params;
-
-let post = null;
-try {
-  const res = await fetch(`${WP_URL}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_embed`);
-  const data = await res.json();
-  post = data[0] || null;
-} catch (e) {
-  post = null;
-}
+const { post } = Astro.props;
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -63,10 +62,22 @@ function processContent(html: string): string {
           set:html={post.title.rendered} />
       </section>
 
+      <!-- Featured Image -->
+      {post._embedded?.['wp:featuredmedia']?.[0]?.source_url && (
+        <div class="max-w-2xl mx-auto px-6 pt-10">
+          <img
+            src={post._embedded['wp:featuredmedia'][0].source_url}
+            alt={post._embedded['wp:featuredmedia'][0].alt_text || post.title.rendered}
+            class="w-full rounded-2xl"
+            style="max-height:400px;object-fit:cover;"
+          />
+        </div>
+      )}
+
       <!-- Content -->
       <article class="py-16 px-6">
         <div class="max-w-2xl mx-auto text-right">
-          <div class="prose prose-lg prose-headings:font-black prose-headings:text-[#12023C] prose-p:text-gray-600 prose-p:leading-relaxed max-w-none"
+          <div dir="rtl" class="prose prose-lg prose-headings:font-black prose-headings:text-[#12023C] prose-p:text-gray-600 prose-p:leading-relaxed max-w-none"
             set:html={processContent(post.content.rendered)} />
 
           <!-- Back Link -->
