@@ -50,15 +50,43 @@ if (pageUrl) {
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Mazeget",
+      "@type": "LocalBusiness",
+      "name": "Mazeget — מצגות וידאו לאירועים",
+      "alternateName": "ניצן שמיר מצגות",
       "url": "https://mazeget.com",
       "logo": "https://mazeget.com/og-image.jpg",
-      "description": "מצגות וידאו מרגשות לאירועים משפחתיים — בר מצווה, בת מצווה, ימי הולדת וחתונות",
+      "image": "https://mazeget.com/og-image.jpg",
+      "description": "מצגות וידאו מרגשות לאירועים משפחתיים — בר מצווה, בת מצווה, ימי הולדת וחתונות. עריכה מקצועית, מוזיקה, AI ואפקטים.",
       "telephone": "+972526780531",
-      "areaServed": "IL",
+      "email": "nizan.shamir@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "רחוב הנדיב 3",
+        "addressLocality": "הרצליה",
+        "addressRegion": "מרכז",
+        "addressCountry": "IL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 32.1676,
+        "longitude": 34.8378
+      },
+      "areaServed": {"@type": "Country", "name": "Israel"},
       "priceRange": "₪₪",
-      "inLanguage": "he"
+      "currenciesAccepted": "ILS",
+      "inLanguage": "he",
+      "openingHours": "Mo-Su 09:00-22:00",
+      "sameAs": ["https://wa.me/972526780531"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "מצגות וידאו לאירועים",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "מצגת לבר מצווה"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "מצגת לבת מצווה"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "מצגת ליום הולדת"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "מצגת לחתונה"}}
+        ]
+      }
     }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
