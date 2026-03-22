@@ -129,6 +129,74 @@ const all = showcases;
     </div>
   </section>
 
+  <!-- ═══ CATEGORIES ═══ -->
+  <section style="padding: 5rem 1.5rem; background: white;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 3rem;" class="reveal">
+        <h2 style="font-family: 'Secular One', sans-serif; font-size: clamp(1.7rem, 3.5vw, 2.4rem); color: #12023C; margin: 0;">מה אפשר לעשות עם AI</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;">
+        <div class="reveal" style="background: #F5F3FF; border-radius: 24px; padding: 2rem 1.75rem; text-align: right;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎬</div>
+          <h3 style="font-family: 'Secular One', sans-serif; font-size: 1.25rem; color: #12023C; margin: 0 0 1rem;">וידאו AI</h3>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .6rem; color: #555; font-size: .92rem; line-height: 1.55;">
+            <li>✓ טרנספורמציות וסצנות בתנועה</li>
+            <li>✓ אנימציות על תמונות סטילס</li>
+            <li>✓ אפקטים קולנועיים מרהיבים</li>
+            <li>✓ פתיחות קולנועיות ייחודיות</li>
+          </ul>
+        </div>
+        <div class="reveal" style="background: #F5F3FF; border-radius: 24px; padding: 2rem 1.75rem; text-align: right;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🖼️</div>
+          <h3 style="font-family: 'Secular One', sans-serif; font-size: 1.25rem; color: #12023C; margin: 0 0 1rem;">תמונות AI</h3>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .6rem; color: #555; font-size: .92rem; line-height: 1.55;">
+            <li>✓ סצנות דמיוניות שלא צולמו</li>
+            <li>✓ רקעים מיוחדים ומרהיבים</li>
+            <li>✓ קומפוזיציות ייחודיות</li>
+            <li>✓ עולמות פנטזיה ואגדה</li>
+          </ul>
+        </div>
+        <div class="reveal" style="background: #F5F3FF; border-radius: 24px; padding: 2rem 1.75rem; text-align: right;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎵</div>
+          <h3 style="font-family: 'Secular One', sans-serif; font-size: 1.25rem; color: #12023C; margin: 0 0 1rem;">אודיו AI</h3>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .6rem; color: #555; font-size: .92rem; line-height: 1.55;">
+            <li>✓ שירים מותאמים אישית</li>
+            <li>✓ דיבוב בקולות מוכרים</li>
+            <li>✓ ברכות קוליות ייחודיות</li>
+            <li>✓ מוזיקת רקע מותאמת</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AI IDEAS ═══ -->
+  <section style="padding: 5rem 1.5rem; background: #12023C;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 3rem;" class="reveal">
+        <h2 style="font-family: 'Secular One', sans-serif; font-size: clamp(1.7rem, 3.5vw, 2.4rem); color: white; margin: 0 0 .75rem;">רעיונות למצגות עם AI</h2>
+        <p style="color: rgba(255,255,255,.6); font-size: 1rem; max-width: 500px; margin: 0 auto;">אפשר לשלב בכל אירוע — בר מצווה, בת מצווה, יום הולדת, חתונה</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.2rem;">
+        {[
+          { icon: '👸', text: 'להפוך את הילדה לנסיכה מהאגדות' },
+          { icon: '🌍', text: 'ליצור סצנה של טיול דמיוני בעולם' },
+          { icon: '🎬', text: 'לשלב פתיחה קולנועית מיוחדת' },
+          { icon: '🎵', text: 'ליצור שיר אישי בעזרת AI' },
+          { icon: '🎤', text: 'לשלב ברכה בקול מוכר' },
+          { icon: '⚽', text: 'סלפי עם כוכבי ספורט אהובים' },
+          { icon: '🗼', text: 'לשים את הילד בכל מקום בעולם' },
+          { icon: '✨', text: 'תמונה שמתחילה לזוז ולחיות' },
+        ].map(idea => (
+          <div class="reveal" style="background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 1.2rem 1.4rem; display: flex; align-items: center; gap: .9rem;">
+            <span style="font-size: 1.8rem; flex-shrink: 0;">{idea.icon}</span>
+            <p style="color: rgba(255,255,255,.85); font-size: .9rem; font-weight: 600; margin: 0; line-height: 1.45;">{idea.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ HOW IT WORKS ═══ -->
   <section style="padding: 5rem 1.5rem; background: white;">
     <div style="max-width: 1100px; margin: 0 auto;">
