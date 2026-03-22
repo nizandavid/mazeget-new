@@ -247,10 +247,9 @@ import Contact from '../components/Contact.astro';
         </p>
       </div>
 
-      <!-- 3 שלבים -->
-      <div class="reveal" style="display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 1rem; align-items: center;">
+      <!-- שורה עליונה: 2 תמונות -->
+      <div class="reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
 
-        <!-- שלב 1: תמונות מקוריות -->
         <div style="text-align: center;">
           <div style="border-radius: 18px; overflow: hidden; box-shadow: 0 6px 30px rgba(108,34,255,.1);">
             <img
@@ -260,13 +259,9 @@ import Contact from '../components/Contact.astro';
               loading="lazy"
             />
           </div>
-          <p style="margin-top: .75rem; font-weight: 700; color: #12023C; font-size: .88rem; line-height: 1.4;">📸 6 תמונות מקוריות</p>
+          <p style="margin-top: .75rem; font-weight: 700; color: #12023C; font-size: .88rem;">📸 6 תמונות מקוריות</p>
         </div>
 
-        <!-- חץ -->
-        <div style="color: #E879F9; font-size: 2rem; font-weight: 900; text-align: center;">←</div>
-
-        <!-- שלב 2: סלפי -->
         <div style="text-align: center;">
           <div style="border-radius: 18px; overflow: hidden; box-shadow: 0 6px 30px rgba(108,34,255,.15);">
             <img
@@ -276,24 +271,26 @@ import Contact from '../components/Contact.astro';
               loading="lazy"
             />
           </div>
-          <p style="margin-top: .75rem; font-weight: 700; color: #12023C; font-size: .88rem; line-height: 1.4;">🤳 סלפי קבוצתי עם AI</p>
+          <p style="margin-top: .75rem; font-weight: 700; color: #12023C; font-size: .88rem;">🤳 סלפי קבוצתי עם AI</p>
         </div>
 
-        <!-- חץ -->
-        <div style="color: #E879F9; font-size: 2rem; font-weight: 900; text-align: center;">←</div>
+      </div>
 
-        <!-- שלב 3: וידאו -->
-        <div style="text-align: center;">
-          <div style="border-radius: 18px; overflow: hidden; box-shadow: 0 0 0 3px #E879F9, 0 0 30px rgba(232,121,249,.4);">
-            <video
-              src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20elements/football.mp4"
-              autoplay loop muted playsinline
-              style="width: 100%; height: auto; display: block;"
-            ></video>
-          </div>
-          <p style="margin-top: .75rem; font-weight: 700; color: #6C22FF; font-size: .88rem; line-height: 1.4;">🎬 וידאו סלפי חי</p>
+      <!-- חץ -->
+      <div class="reveal" style="text-align: center; margin-bottom: 1.5rem;">
+        <span style="color: #E879F9; font-size: 2rem; font-weight: 900;">↓</span>
+      </div>
+
+      <!-- וידאו רוחב מלא -->
+      <div class="reveal" style="text-align: center;">
+        <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.45);">
+          <video
+            src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20elements/football.mp4"
+            autoplay loop muted playsinline
+            style="width: 100%; height: auto; display: block;"
+          ></video>
         </div>
-
+        <p style="margin-top: 1rem; font-weight: 700; color: #6C22FF; font-size: .95rem;">🎬 וידאו סלפי חי — שנוצר בעזרת AI</p>
       </div>
     </div>
   </section>
