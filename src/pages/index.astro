@@ -110,11 +110,12 @@ try {
   </div>
 
   <!-- AI SHOWCASE: THAILAND -->
-  <section style="padding: 3.5rem 6%; background: linear-gradient(135deg, #0a0118, #1a0540);">
-    <div style="max-width: 1100px; margin: 0 auto;">
+  <section id="ai-home-section" style="padding: 3.5rem 6%; background: #120330; position: relative; overflow: hidden;">
+    <canvas id="ai-home-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" aria-hidden="true"></canvas>
+    <div style="max-width: 1100px; margin: 0 auto; position: relative; z-index: 1;">
       <div style="text-align: center; margin-bottom: 2.5rem;" class="reveal">
-        <div style="display: inline-block; background: linear-gradient(90deg, #6C22FF, #E879F9); color: white; font-size: .72rem; font-weight: 800; letter-spacing: 2px; padding: .35rem 1.1rem; border-radius: 50px; margin-bottom: 1rem;">וידאו AI</div>
-        <h2 style="font-family: 'Secular One', sans-serif; font-size: clamp(1.5rem, 3vw, 2.2rem); color: white; margin: 0 0 .6rem;">תמונה שהפכה לסרטון חי</h2>
+        <div style="display: inline-block; background: linear-gradient(90deg, #6C22FF, #E879F9); color: white; font-size: .72rem; font-weight: 800; letter-spacing: 2px; padding: .35rem 1.1rem; border-radius: 50px; margin-bottom: 1rem;">✨ שדרוגי AI</div>
+        <h2 style="font-family: 'Secular One', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: white; margin: 0 0 .6rem;">שדרוגי AI למצגות</h2>
         <p style="color: rgba(255,255,255,.65); font-size: .97rem; max-width: 500px; margin: 0 auto; line-height: 1.7;">הנוף מתחיל לזוז, הגלים חיים — זה מה שנוצר מתמונה אחת שהלקוח שלח</p>
       </div>
       <div class="reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
@@ -137,6 +138,84 @@ try {
       </div>
     </div>
   </section>
+
+  <script is:inline>
+  (function() {
+    const canvas = document.getElementById('ai-home-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const section = document.getElementById('ai-home-section');
+    let W, H, dots, mouse = { x: -999, y: -999 };
+
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+    function makeDots(n) {
+      return Array.from({ length: n }, () => ({
+        x: Math.random() * W, y: Math.random() * H,
+        vx: (Math.random() - .5) * .5, vy: (Math.random() - .5) * .5,
+        r: Math.random() * 2.2 + 1,
+      }));
+    }
+    resize();
+    dots = makeDots(60);
+    window.addEventListener('resize', () => { resize(); dots = makeDots(60); });
+
+    section.addEventListener('mousemove', e => {
+      const r = section.getBoundingClientRect();
+      mouse.x = e.clientX - r.left;
+      mouse.y = e.clientY - r.top;
+    });
+    section.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999; });
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+
+      // רקע גרדיאנט דינמי לפי מיקום העכבר
+      const mx = mouse.x < 0 ? W / 2 : mouse.x;
+      const my = mouse.y < 0 ? H / 2 : mouse.y;
+      const grad = ctx.createRadialGradient(mx, my, 0, mx, my, Math.max(W, H) * 0.7);
+      grad.addColorStop(0, 'rgba(108,34,255,0.18)');
+      grad.addColorStop(0.5, 'rgba(232,121,249,0.07)');
+      grad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      for (const d of dots) {
+        const dx = d.x - mouse.x, dy = d.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 100) { d.vx += dx / dist * .12; d.vy += dy / dist * .12; }
+        d.vx = Math.max(-1.8, Math.min(1.8, d.vx));
+        d.vy = Math.max(-1.8, Math.min(1.8, d.vy));
+        d.x += d.vx; d.y += d.vy;
+        if (d.x < 0 || d.x > W) d.vx *= -1;
+        if (d.y < 0 || d.y > H) d.vy *= -1;
+        const near = dist < 120;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        ctx.fillStyle = near ? 'rgba(232,121,249,0.75)' : 'rgba(160,100,255,0.35)';
+        ctx.fill();
+      }
+      for (let i = 0; i < dots.length; i++) {
+        for (let j = i + 1; j < dots.length; j++) {
+          const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 120) {
+            ctx.beginPath();
+            ctx.moveTo(dots[i].x, dots[i].y);
+            ctx.lineTo(dots[j].x, dots[j].y);
+            ctx.strokeStyle = `rgba(180,80,255,${(1 - d / 120) * 0.3})`;
+            ctx.lineWidth = .8;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+  </script>
 
   <!-- GALLERY HEADING -->
   <section id="gallery" style="padding:1.5rem 6% 0; background:#F5F3FF; text-align:center;">
