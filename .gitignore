@@ -8,3 +8,5 @@ categorize-posts.mjs
 
 .superpowers/
 .claude/
+.vercel
+.env*.local

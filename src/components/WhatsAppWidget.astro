@@ -1,0 +1,200 @@
+---
+const phone = '972526780531';
+const message = encodeURIComponent('שלום, ראיתי את האתר שלכם ואשמח לשמוע על מצגת לאירוע שלי 🙂');
+const waLink = `https://wa.me/${phone}?text=${message}`;
+---
+
+<!-- WhatsApp floating widget -->
+<div id="wa-widget" style="position:fixed; bottom:1.8rem; left:1.8rem; z-index:300; display:flex; flex-direction:column; align-items:flex-start; gap:.65rem;">
+
+  <!-- Chat window -->
+  <div id="wa-chat" class="wa-chat-hidden" style="
+    width:290px;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 24px 64px rgba(0,0,0,.32), 0 4px 16px rgba(76,29,149,.2);
+    background:#EDE9F8;
+    pointer-events:none;
+  ">
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#1e0a4a 0%,#4c1d95 100%); padding:.9rem 1rem; display:flex; align-items:center; gap:.65rem; direction:rtl;">
+      <div style="width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#7c3aed,#a855f7); display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:0 0 0 2px rgba(255,255,255,.25);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+        </svg>
+      </div>
+      <div style="flex:1;">
+        <div style="color:white; font-weight:800; font-size:.87rem; font-family:'Heebo',sans-serif; line-height:1.2;">מצגת — זה כל הסיפור</div>
+        <div style="color:rgba(255,255,255,.6); font-size:.7rem; display:flex; align-items:center; gap:.3rem; margin-top:.15rem; direction:rtl;">
+          <div style="width:6px; height:6px; border-radius:50%; background:#4ade80; flex-shrink:0; animation:wa-pulse 2s ease infinite;"></div>
+          מחכים לכם בוואטסאפ
+        </div>
+      </div>
+      <button id="wa-close-btn" aria-label="סגור" style="background:none; border:none; cursor:pointer; color:rgba(255,255,255,.5); padding:.2rem; line-height:0; transition:color .2s; margin-right:.25rem;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,.5)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </div>
+
+    <!-- Chat body -->
+    <div style="padding:.9rem .9rem .6rem; display:flex; flex-direction:column; gap:.5rem; direction:rtl;">
+
+      <!-- Typing indicator → fades to message -->
+      <div id="wa-typing" style="display:flex; align-items:center; gap:.4rem; opacity:1; transition:opacity .3s;">
+        <div style="background:white; border-radius:0 12px 12px 12px; padding:.55rem .8rem; box-shadow:0 1px 4px rgba(0,0,0,.07); display:flex; align-items:center; gap:.25rem;">
+          <span class="wa-dot" style="width:7px;height:7px;border-radius:50%;background:#9333ea;display:inline-block;animation:wa-bounce .9s ease infinite;"></span>
+          <span class="wa-dot" style="width:7px;height:7px;border-radius:50%;background:#9333ea;display:inline-block;animation:wa-bounce .9s ease .2s infinite;"></span>
+          <span class="wa-dot" style="width:7px;height:7px;border-radius:50%;background:#9333ea;display:inline-block;animation:wa-bounce .9s ease .4s infinite;"></span>
+        </div>
+      </div>
+
+      <!-- Message (hidden, reveals after "typing") -->
+      <div id="wa-msg" style="opacity:0; transform:translateY(4px); transition:opacity .4s, transform .4s; direction:rtl;">
+        <div style="
+          background:white;
+          border-radius:0 14px 14px 14px;
+          padding:.75rem 1rem;
+          font-size:.83rem;
+          line-height:1.65;
+          color:#1e0a4a;
+          font-family:'Heebo',sans-serif;
+          box-shadow:0 1px 6px rgba(0,0,0,.07);
+          max-width:90%;
+        ">
+          שלום! 👋<br>
+          נשמח לעזור עם מצגת וידאו מרגשת לאירוע שלכם.<br>
+          <span style="color:#7c3aed; font-weight:700;">איזה אירוע אתם חוגגים?</span>
+        </div>
+        <div style="font-size:.65rem; color:#9ca3af; margin-top:.3rem; padding-right:.2rem;">
+          עכשיו
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div style="padding:.5rem .9rem 1rem;">
+      <a
+        href={waLink}
+        target="_blank"
+        rel="noopener"
+        style="
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          gap:.55rem;
+          background:#25D366;
+          color:white;
+          padding:.75rem 1.2rem;
+          border-radius:50px;
+          text-decoration:none;
+          font-weight:800;
+          font-size:.85rem;
+          font-family:'Heebo',sans-serif;
+          box-shadow:0 4px 18px rgba(37,211,102,.4);
+          transition:transform .15s, box-shadow .15s;
+          direction:rtl;
+        "
+        onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 8px 24px rgba(37,211,102,.5)'"
+        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 18px rgba(37,211,102,.4)'"
+      >
+        <svg width="17" height="17" fill="white" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        המשך בוואטסאפ
+      </a>
+    </div>
+  </div>
+
+  <!-- Floating button -->
+  <button
+    id="wa-open-btn"
+    aria-label="פתח שיחה בוואטסאפ"
+    style="
+      width:58px; height:58px;
+      border-radius:50%;
+      background:#25D366;
+      border:none;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 6px 24px rgba(37,211,102,.45);
+      transition:transform .2s, box-shadow .2s;
+      position:relative;
+    "
+    onmouseover="this.style.transform='scale(1.08)'; this.style.boxShadow='0 10px 32px rgba(37,211,102,.55)'"
+    onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 24px rgba(37,211,102,.45)'"
+  >
+    <!-- Pulse ring -->
+    <span style="position:absolute; inset:0; border-radius:50%; background:#25D366; animation:wa-ring 2.5s ease-out infinite; opacity:0;"></span>
+    <svg width="30" height="30" fill="white" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </button>
+</div>
+
+<style>
+  .wa-chat-hidden {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+    pointer-events: none;
+    transition: opacity .3s cubic-bezier(.34,1.56,.64,1), transform .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .wa-chat-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+  }
+
+  @keyframes wa-ring {
+    0%   { transform: scale(1);   opacity: 0.6; }
+    100% { transform: scale(1.7); opacity: 0; }
+  }
+  @keyframes wa-bounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30%            { transform: translateY(-5px); }
+  }
+  @keyframes wa-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: .4; }
+  }
+</style>
+
+<script>
+  const chat    = document.getElementById('wa-chat');
+  const openBtn = document.getElementById('wa-open-btn');
+  const closeBtn = document.getElementById('wa-close-btn');
+  const typing  = document.getElementById('wa-typing');
+  const msg     = document.getElementById('wa-msg');
+
+  let opened = false;
+
+  function openChat() {
+    chat?.classList.remove('wa-chat-hidden');
+    chat?.classList.add('wa-chat-visible');
+    opened = true;
+
+    // typing → message after 1.4s
+    setTimeout(() => {
+      if (typing) typing.style.opacity = '0';
+      setTimeout(() => {
+        if (typing) typing.style.display = 'none';
+        if (msg) { msg.style.opacity = '1'; msg.style.transform = 'translateY(0)'; }
+      }, 300);
+    }, 1400);
+  }
+
+  function closeChat() {
+    chat?.classList.remove('wa-chat-visible');
+    chat?.classList.add('wa-chat-hidden');
+    opened = false;
+  }
+
+  openBtn?.addEventListener('click', () => {
+    opened ? closeChat() : openChat();
+  });
+
+  closeBtn?.addEventListener('click', () => {
+    closeChat();
+  });
+</script>
