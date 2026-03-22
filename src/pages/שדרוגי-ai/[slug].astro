@@ -98,8 +98,8 @@ const others = showcases.filter(x => x.slug !== slug).slice(0, 3);
         <>
           <div class="reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; margin-bottom: 2.5rem;">
             <div style="text-align: center;">
-              <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(108,34,255,.1); display: flex; justify-content: center; padding: 1rem;">
-                <img src={s.portrait!.src} alt={s.portrait!.alt} style="height: 300px; width: auto; display: block; border-radius: 12px;" loading="lazy" />
+              <div style="display: flex; justify-content: center;">
+                <img src={s.portrait!.src} alt={s.portrait!.alt} style="height: 300px; width: auto; display: block; border-radius: 20px; box-shadow: 0 8px 40px rgba(108,34,255,.15);" loading="lazy" />
               </div>
               <div style="margin-top: 1rem; display: inline-block; background: #F5F3FF; color: #6C22FF; font-weight: 700; font-size: .85rem; padding: .45rem 1.2rem; border-radius: 50px;">
                 {s.portrait!.label}
