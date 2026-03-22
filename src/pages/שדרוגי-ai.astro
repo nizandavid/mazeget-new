@@ -105,11 +105,11 @@ import Contact from '../components/Contact.astro';
       <!-- Original + Video -->
       <div class="demo-grid reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; margin-bottom: 2.5rem;">
         <div style="text-align: center;">
-          <div style="background: #F5F3FF; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(108,34,255,.1);">
+          <div style="background: #F5F3FF; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(108,34,255,.1); height:300px; position:relative;">
             <img
               src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20elements/alex.png"
               alt="תמונה מקורית של אלכס"
-              style="width: 100%; height: 300px; object-fit: cover; object-position: top; display: block;"
+              style="position:absolute; top:50%; left:50%; width:300px; height:530px; object-fit:cover; transform:translate(-50%,-50%) rotate(-90deg); display:block;"
               loading="lazy"
             />
           </div>
@@ -135,25 +135,14 @@ import Contact from '../components/Contact.astro';
       <div style="text-align: center; margin-bottom: 1.5rem;" class="reveal">
         <p style="color: #6C22FF; font-weight: 700; font-size: 1rem;">ואז — מה יעשה אלכס אחרי הפרישה?</p>
       </div>
-      <div class="reveal" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+      <div class="reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start;">
 
+        <!-- עמודה ימין: תמונה עומדת — אורז -->
         <div style="text-align: center;">
           <div style="border-radius: 18px; overflow: hidden; box-shadow: 0 6px 30px rgba(108,34,255,.12);">
             <img
-              src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20elements/alex-1.jpg"
-              alt="אלכס בקזינו — תמונת AI"
-              style="width: 100%; height: auto; display: block;"
-              loading="lazy"
-            />
-          </div>
-          <p style="margin-top: .75rem; font-weight: 700; color: #12023C; font-size: .92rem;">🎰 להמר בקזינו</p>
-        </div>
-
-        <div style="text-align: center;">
-          <div style="border-radius: 18px; overflow: hidden; box-shadow: 0 6px 30px rgba(108,34,255,.12);">
-            <img
-              src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20elements/alex-2.jpg"
-              alt="אלכס בשדות אורז — תמונת AI"
+              src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20elements/alex-3.jpg"
+              alt="אלכס בשדות האורז — תמונת AI"
               style="width: 100%; height: auto; display: block;"
               loading="lazy"
             />
@@ -161,16 +150,30 @@ import Contact from '../components/Contact.astro';
           <p style="margin-top: .75rem; font-weight: 700; color: #12023C; font-size: .92rem;">🌾 לעבוד בשדות האורז</p>
         </div>
 
-        <div style="text-align: center;">
-          <div style="border-radius: 18px; overflow: hidden; box-shadow: 0 6px 30px rgba(108,34,255,.12);">
-            <img
-              src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20elements/alex-3.jpg"
-              alt="אלכס במדיטציה — תמונת AI"
-              style="width: 100%; height: auto; display: block;"
-              loading="lazy"
-            />
+        <!-- עמודה שמאל: שתי תמונות רוחב -->
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="text-align: center;">
+            <div style="border-radius: 18px; overflow: hidden; box-shadow: 0 6px 30px rgba(108,34,255,.12);">
+              <img
+                src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20elements/alex-1.jpg"
+                alt="אלכס במדיטציה — תמונת AI"
+                style="width: 100%; height: auto; display: block;"
+                loading="lazy"
+              />
+            </div>
+            <p style="margin-top: .75rem; font-weight: 700; color: #12023C; font-size: .92rem;">🧘 לעשות מדיטציה</p>
           </div>
-          <p style="margin-top: .75rem; font-weight: 700; color: #12023C; font-size: .92rem;">🧘 לעשות מדיטציה</p>
+          <div style="text-align: center;">
+            <div style="border-radius: 18px; overflow: hidden; box-shadow: 0 6px 30px rgba(108,34,255,.12);">
+              <img
+                src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20elements/alex-2.jpg"
+                alt="אלכס בקזינו — תמונת AI"
+                style="width: 100%; height: auto; display: block;"
+                loading="lazy"
+              />
+            </div>
+            <p style="margin-top: .75rem; font-weight: 700; color: #12023C; font-size: .92rem;">🎰 להמר בקזינו</p>
+          </div>
         </div>
 
       </div>
