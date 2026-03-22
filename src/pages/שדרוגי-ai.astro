@@ -11,12 +11,8 @@ import Contact from '../components/Contact.astro';
   <Header />
 
   <!-- ═══ HERO ═══ -->
-  <section style="background: #0a0118; padding: 5rem 1.5rem 5.5rem; text-align: center; position: relative; overflow: hidden;">
-    <div class="star-field" aria-hidden="true"></div>
-    <div class="ai-orb ai-orb-1" aria-hidden="true"></div>
-    <div class="ai-orb ai-orb-2" aria-hidden="true"></div>
-    <div class="ai-orb ai-orb-3" aria-hidden="true"></div>
-    <div class="ai-orb ai-orb-4" aria-hidden="true"></div>
+  <section id="ai-hero" style="background: #0a0118; padding: 5rem 1.5rem 5.5rem; text-align: center; position: relative; overflow: hidden;">
+    <canvas id="ai-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" aria-hidden="true"></canvas>
     <div style="position: relative; z-index: 1; max-width: 800px; margin: 0 auto;" class="reveal">
       <div style="display: inline-block; background: linear-gradient(90deg, #E879F9, #A855F7); color: white; font-size: .72rem; font-weight: 800; letter-spacing: 2px; padding: .35rem 1.1rem; border-radius: 50px; margin-bottom: 1.5rem; box-shadow: 0 4px 18px rgba(232,121,249,.45);">
         חדש — שדרוגי AI
@@ -256,56 +252,123 @@ import Contact from '../components/Contact.astro';
 
 </Layout>
 
+<script is:inline>
+(function() {
+  const canvas = document.getElementById('ai-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const hero = document.getElementById('ai-hero');
+
+  let mouse = { x: -9999, y: -9999 };
+  let dots = [];
+  const DOT_COUNT = 80;
+  const CONNECT_DIST = 130;
+  const REPEL_DIST = 90;
+
+  function resize() {
+    canvas.width = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+  }
+
+  function initDots() {
+    dots = [];
+    for (let i = 0; i < DOT_COUNT; i++) {
+      dots.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        ox: 0, oy: 0,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 2 + 1.5,
+      });
+      dots[i].ox = dots[i].x;
+      dots[i].oy = dots[i].y;
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // move dots
+    dots.forEach(d => {
+      // gentle drift
+      d.ox += d.vx;
+      d.oy += d.vy;
+      if (d.ox < 0 || d.ox > canvas.width) d.vx *= -1;
+      if (d.oy < 0 || d.oy > canvas.height) d.vy *= -1;
+
+      // repel from mouse
+      const dx = d.ox - mouse.x;
+      const dy = d.oy - mouse.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < REPEL_DIST && dist > 0) {
+        const force = (REPEL_DIST - dist) / REPEL_DIST;
+        d.x = d.ox + (dx / dist) * force * 55;
+        d.y = d.oy + (dy / dist) * force * 55;
+      } else {
+        d.x = d.ox;
+        d.y = d.oy;
+      }
+    });
+
+    // draw connections
+    for (let i = 0; i < dots.length; i++) {
+      for (let j = i + 1; j < dots.length; j++) {
+        const dx = dots[i].x - dots[j].x;
+        const dy = dots[i].y - dots[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < CONNECT_DIST) {
+          const alpha = (1 - dist / CONNECT_DIST) * 0.55;
+          // purple near dots, pink near mouse
+          const mx = (dots[i].x + dots[j].x) / 2;
+          const my = (dots[i].y + dots[j].y) / 2;
+          const md = Math.sqrt((mx - mouse.x) ** 2 + (my - mouse.y) ** 2);
+          const t = Math.max(0, 1 - md / 200);
+          const r = Math.round(108 + t * 124);
+          const g = Math.round(34 + t * 87);
+          const b = Math.round(255 - t * 6);
+          ctx.beginPath();
+          ctx.moveTo(dots[i].x, dots[i].y);
+          ctx.lineTo(dots[j].x, dots[j].y);
+          ctx.strokeStyle = `rgba(${r},${g},${b},${alpha})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // draw dots
+    dots.forEach(d => {
+      const dx = d.x - mouse.x;
+      const dy = d.y - mouse.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const glow = dist < REPEL_DIST * 1.5;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, glow ? d.r * 1.8 : d.r, 0, Math.PI * 2);
+      ctx.fillStyle = glow ? 'rgba(232,121,249,0.95)' : 'rgba(168,85,247,0.7)';
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  hero.addEventListener('mousemove', e => {
+    const rect = hero.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+  hero.addEventListener('mouseleave', () => {
+    mouse.x = -9999; mouse.y = -9999;
+  });
+
+  window.addEventListener('resize', () => { resize(); initDots(); });
+  resize();
+  initDots();
+  draw();
+})();
+</script>
+
 <style>
-  .star-field {
-    position: absolute;
-    inset: 0;
-    background-image:
-      radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px),
-      radial-gradient(circle, rgba(232,121,249,0.15) 1px, transparent 1px);
-    background-size: 50px 50px, 80px 80px;
-    background-position: 0 0, 25px 25px;
-    pointer-events: none;
-  }
-  .ai-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-    animation: floatOrb 8s ease-in-out infinite;
-  }
-  .ai-orb-1 {
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(108,34,255,0.55), transparent 70%);
-    top: -150px; right: -100px;
-    animation-duration: 9s;
-  }
-  .ai-orb-2 {
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(232,121,249,0.45), transparent 70%);
-    bottom: -100px; left: -80px;
-    animation-duration: 11s;
-    animation-delay: -3s;
-  }
-  .ai-orb-3 {
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(168,85,247,0.4), transparent 70%);
-    top: 40%; left: 30%;
-    animation-duration: 13s;
-    animation-delay: -6s;
-  }
-  .ai-orb-4 {
-    width: 250px; height: 250px;
-    background: radial-gradient(circle, rgba(232,121,249,0.3), transparent 70%);
-    top: 10%; left: 15%;
-    animation-duration: 10s;
-    animation-delay: -2s;
-  }
-  @keyframes floatOrb {
-    0%, 100% { transform: translateY(0) scale(1); }
-    33% { transform: translateY(-30px) scale(1.05); }
-    66% { transform: translateY(20px) scale(0.95); }
-  }
   .idea-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 36px rgba(108,34,255,.16) !important;
