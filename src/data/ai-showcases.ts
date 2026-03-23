@@ -8,6 +8,7 @@ export interface AIShowcase {
   thumbnail: string;
   thumbnailIsVideo: boolean;
   featured?: boolean;
+  hasSound?: boolean;
   type: 'image-video' | 'portrait-scenes' | 'grid-video' | 'selfie' | 'single-video';
   // image-video
   original?: { src: string; alt: string; label: string };
@@ -128,6 +129,7 @@ export const showcases: AIShowcase[] = [
     slug: 'ronaldo',
     title: 'רונלדו מברך את שגיא',
     badge: 'וידאו AI',
+    hasSound: true,
     description: 'רוצים ברכה מכדורגלן מפורסם? אם AI אין בעיה',
     thumbnail: `${R2}/ronaldo%20blessing.mp4`,
     thumbnailIsVideo: true,

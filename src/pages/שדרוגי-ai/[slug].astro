@@ -171,11 +171,19 @@ const others = showcases.filter(x => x.slug !== slug).slice(0, 3);
       {s.type === 'single-video' && (
         <div class="reveal" style="text-align: center;">
           <video
+            id="main-video"
             src={s.mainVideo}
             autoplay loop muted playsinline
             style="height: auto; max-height: 65vh; max-width: 52%; border-radius: 20px; box-shadow: 0 0 0 3px #E879F9, 0 0 50px rgba(232,121,249,.5), 0 12px 50px rgba(108,34,255,.3); display: inline-block;"
           ></video>
-          <p style="text-align: center; margin-top: 1.2rem; color: #6C22FF; font-weight: 700; font-size: .95rem;">{s.videoCaption}</p>
+          {s.hasSound && (
+            <div style="margin-top: 1.2rem;">
+              <button id="sound-btn" onclick="const v=document.getElementById('main-video');v.muted=!v.muted;this.textContent=v.muted?'🔇 לחץ לשמוע את רונלדו מברך':'🔊 מושתק — לחץ שוב לשמוע';" style="background: linear-gradient(90deg,#E879F9,#6C22FF); color: white; font-weight: 800; font-size: 1rem; padding: .7rem 2rem; border-radius: 50px; border: none; cursor: pointer; box-shadow: 0 6px 24px rgba(232,121,249,.4);">
+                🔇 לחץ לשמוע את רונלדו מברך
+              </button>
+            </div>
+          )}
+          <p style="text-align: center; margin-top: 1rem; color: #6C22FF; font-weight: 700; font-size: .95rem;">{s.videoCaption}</p>
         </div>
       )}
 
