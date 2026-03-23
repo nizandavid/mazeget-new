@@ -70,13 +70,19 @@ const all = showcases;
           </div>
           <!-- תוצאת AI -->
           <div style="text-align: center;">
-            <div style={`border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.5), 0 8px 40px rgba(108,34,255,.25); ${s.videoStyle === 'portrait' ? 'background: #0a0118; display: flex; justify-content: center;' : ''}`}>
-              {s.aiResult!.isVideo ? (
-                <video src={s.aiResult!.src} autoplay loop muted playsinline style={s.videoStyle === 'portrait' ? "height: 340px; width: auto; display: block;" : "width: 100%; height: 340px; object-fit: cover; display: block;"}></video>
+            {s.aiResult!.isVideo ? (
+              s.videoStyle === 'portrait' ? (
+                <video src={s.aiResult!.src} autoplay loop muted playsinline style="height: 340px; width: auto; display: block; margin: 0 auto; border-radius: 20px; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.5), 0 8px 40px rgba(108,34,255,.25);"></video>
               ) : (
+                <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.5), 0 8px 40px rgba(108,34,255,.25);">
+                  <video src={s.aiResult!.src} autoplay loop muted playsinline style="width: 100%; height: 340px; object-fit: cover; display: block;"></video>
+                </div>
+              )
+            ) : (
+              <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.5), 0 8px 40px rgba(108,34,255,.25);">
                 <img src={s.aiResult!.src} alt={s.aiResult!.alt || s.title} style="width: 100%; height: 340px; object-fit: cover; display: block;" loading="lazy" />
-              )}
-            </div>
+              </div>
+            )}
             <div style="margin-top: 1rem; display: inline-block; background: linear-gradient(90deg, #E879F9, #6C22FF); color: white; font-weight: 700; font-size: .85rem; padding: .45rem 1.2rem; border-radius: 50px; box-shadow: 0 4px 18px rgba(232,121,249,.4);">
               {s.aiResult!.label}
             </div>
