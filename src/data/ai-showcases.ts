@@ -51,6 +51,7 @@ export const showcases: AIShowcase[] = [
     videoStyle: 'portrait',
     original: { src: `${R2}/Noia-overlay.png`, alt: '6 תמונות של נויה בגילאים שונים', label: '6 תמונות מקוריות מהמשפחה' },
     aiResult: { src: `${R2}/noia-stage.mp4`, isVideo: true, label: 'סרטון טרנספורמציה שנוצר בעזרת AI' },
+    realPresentation: { slug: 'video-1155967673', label: 'מצגת הבת מצווה של נויה' },
   },
   {
     slug: 'alex',
