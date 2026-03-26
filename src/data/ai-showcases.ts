@@ -68,6 +68,7 @@ export const showcases: AIShowcase[] = [
       { src: `${R2}/alex-1.jpg`, alt: 'אלכס במדיטציה — תמונת AI', caption: '🧘 לעשות מדיטציה' },
       { src: `${R2}/alex-2.jpg`, alt: 'אלכס בקזינו — תמונת AI', caption: '🎰 להמר בקזינו' },
     ],
+    realPresentation: { slug: 'video-1156459544', label: 'מצגת הפרישה של אלכס' },
   },
   {
     slug: 'football',
