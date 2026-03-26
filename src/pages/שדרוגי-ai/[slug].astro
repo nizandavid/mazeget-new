@@ -99,21 +99,6 @@ const others = showcases.filter(x => x.slug !== slug).slice(0, 3);
         </div>
       )}
 
-      {s.type === 'image-video' && s.realPresentation && (
-        <div class="reveal" style="margin-top: 3rem; text-align: center;">
-          <a
-            href={`/matzget/${s.realPresentation.slug}`}
-            style="display: inline-flex; align-items: center; gap: .7rem; background: #F5F3FF; border: 2px solid #6C22FF; color: #6C22FF; font-weight: 700; font-size: .95rem; padding: .8rem 1.8rem; border-radius: 50px; text-decoration: none;"
-          >
-            🎬 לצפייה ב{s.realPresentation.label}
-            {s.realPresentation.timeCode && (
-              <span style="background: #6C22FF; color: white; font-size: .78rem; padding: .2rem .6rem; border-radius: 20px;">⏱ {s.realPresentation.timeCode}</span>
-            )}
-            ←
-          </a>
-        </div>
-      )}
-
       {/* portrait-scenes layout (Alex) */}
       {s.type === 'portrait-scenes' && (
         <>
@@ -156,20 +141,6 @@ const others = showcases.filter(x => x.slug !== slug).slice(0, 3);
               ))}
             </div>
           </div>
-          {s.realPresentation && (
-            <div class="reveal" style="margin-top: 3rem; text-align: center;">
-              <a
-                href={`/matzget/${s.realPresentation.slug}`}
-                style="display: inline-flex; align-items: center; gap: .7rem; background: #F5F3FF; border: 2px solid #6C22FF; color: #6C22FF; font-weight: 700; font-size: .95rem; padding: .8rem 1.8rem; border-radius: 50px; text-decoration: none;"
-              >
-                🎬 לצפייה ב{s.realPresentation.label}
-                {s.realPresentation.timeCode && (
-                  <span style="background: #6C22FF; color: white; font-size: .78rem; padding: .2rem .6rem; border-radius: 20px;">⏱ {s.realPresentation.timeCode}</span>
-                )}
-                ←
-              </a>
-            </div>
-          )}
         </>
       )}
 
