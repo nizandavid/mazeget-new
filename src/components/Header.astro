@@ -12,7 +12,7 @@ import { categories } from '../data/categories';
     align-items: center;
     justify-content: space-between;
     padding: 0 6%;
-    background: rgba(250,250,250,0.82);
+    background: rgba(250,250,250,0.92);
     backdrop-filter: blur(18px);
     border-bottom: 1px solid var(--border);
     transition: box-shadow .3s;
@@ -29,7 +29,8 @@ import { categories } from '../data/categories';
   .nav-logo-text { font-size:1.05rem; font-weight:800; color:var(--text); line-height:1; }
   .nav-logo-sub  { font-size:.68rem; color:var(--text-muted); font-weight:400; }
 
-  .nav-links { display:flex; align-items:center; gap:1.8rem; list-style:none; }
+  /* ── Desktop links ── */
+  .nav-links { display:flex; align-items:center; gap:1.8rem; list-style:none; margin:0; padding:0; }
   .nav-links a {
     color:var(--text-mid); text-decoration:none;
     font-size:.88rem; font-weight:500;
@@ -88,7 +89,136 @@ import { categories } from '../data/categories';
   .nav-cta:hover { background: var(--purple); color: #fff; }
   .nav-cta::after { display:none !important; }
 
-  .spacer { height:68px; }
+  /* ── Hamburger ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 8px;
+    transition: background .2s;
+  }
+  .hamburger:hover { background: var(--purple-light); }
+  .hamburger span {
+    display: block;
+    height: 2.5px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform .3s, opacity .3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+  /* ── Mobile overlay menu ── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 68px 0 0;
+    background: rgba(250,250,250,0.97);
+    backdrop-filter: blur(18px);
+    z-index: 199;
+    overflow-y: auto;
+    padding: 1.5rem 6% 3rem;
+    flex-direction: column;
+    gap: .25rem;
+  }
+  .mobile-menu.open { display: flex; }
+
+  .mobile-link {
+    display: block;
+    padding: .9rem 1rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    border-radius: 12px;
+    transition: background .15s, color .15s;
+  }
+  .mobile-link:hover, .mobile-link:active { background: var(--purple-light); color: var(--purple); }
+
+  .mobile-ai-link {
+    background: linear-gradient(90deg, #6C22FF, #E879F9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+  }
+  .mobile-ai-link:hover, .mobile-ai-link:active {
+    background: var(--purple-light);
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: var(--purple);
+  }
+
+  /* Mobile dropdown */
+  .mobile-dropdown-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .9rem 1rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    background: none;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'Heebo', sans-serif;
+    transition: background .15s;
+    text-align: right;
+  }
+  .mobile-dropdown-btn:hover { background: var(--purple-light); color: var(--purple); }
+  .mobile-dropdown-btn svg { transition: transform .3s; }
+  .mobile-dropdown-btn.open svg { transform: rotate(180deg); }
+
+  .mobile-sub {
+    display: none;
+    flex-direction: column;
+    padding: .25rem 0 .25rem 1rem;
+    gap: .1rem;
+  }
+  .mobile-sub.open { display: flex; }
+  .mobile-sub a {
+    display: block;
+    padding: .7rem 1rem;
+    font-size: .95rem;
+    font-weight: 500;
+    color: var(--text-mid);
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background .15s, color .15s;
+    border-right: 2px solid var(--border);
+  }
+  .mobile-sub a:hover { background: var(--purple-light); color: var(--purple); border-color: var(--purple); }
+
+  .mobile-divider { height: 1px; background: var(--border); margin: .5rem 0; }
+
+  .mobile-cta {
+    display: block;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--purple);
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 800;
+    text-align: center;
+    border-radius: 14px;
+    text-decoration: none;
+  }
+
+  .spacer { height: 68px; }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
 </style>
 
 <nav id="main-nav">
@@ -97,7 +227,7 @@ import { categories } from '../data/categories';
     <img src="/logo-matzget.png" alt="מצגת – זה כל הסיפור" style="height:44px; width:auto; display:block;" />
   </a>
 
-  <!-- Links -->
+  <!-- Desktop links -->
   <ul class="nav-links">
     <li><a href="/שדרוגי-ai" style="background: linear-gradient(90deg, #6C22FF, #E879F9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">✨ שדרוגי AI</a></li>
     <li class="dropdown">
@@ -120,6 +250,75 @@ import { categories } from '../data/categories';
     <li><a href="/אודותינו">אודותינו</a></li>
     <li><a href="/#contact" class="nav-cta">צרו קשר</a></li>
   </ul>
+
+  <!-- Hamburger -->
+  <button class="hamburger" id="hamburger" aria-label="פתח תפריט" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </nav>
 
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/שדרוגי-ai" class="mobile-link mobile-ai-link">✨ שדרוגי AI</a>
+
+  <div class="mobile-divider"></div>
+
+  <!-- Dropdown: המצגות שלנו -->
+  <button class="mobile-dropdown-btn" id="mobile-dropdown-btn">
+    המצגות שלנו
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+      <path d="M19 9l-7 7-7-7"/>
+    </svg>
+  </button>
+  <div class="mobile-sub" id="mobile-sub">
+    {categories.filter(cat => !cat.hideFromNav).map(cat => (
+      <a href={`/מצגות/${cat.key}`}>{cat.label}</a>
+    ))}
+  </div>
+
+  <a href="/מחירון" class="mobile-link">מחירון</a>
+  <a href="/העלאת-קבצים" class="mobile-link">העלאת קבצים</a>
+  <a href="/שאלות-ותשובות" class="mobile-link">שאלות ותשובות</a>
+  <a href="/מאמרים" class="mobile-link">מאמרים</a>
+  <a href="/אודותינו" class="mobile-link">אודותינו</a>
+
+  <a href="/#contact" class="mobile-cta">צרו קשר</a>
+</div>
+
 <div class="spacer"></div>
+
+<script is:inline>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileDropBtn = document.getElementById('mobile-dropdown-btn');
+  const mobileSub = document.getElementById('mobile-sub');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  mobileDropBtn.addEventListener('click', () => {
+    mobileSub.classList.toggle('open');
+    mobileDropBtn.classList.toggle('open');
+  });
+
+  // Close menu on link click
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Scrolled state
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+</script>
