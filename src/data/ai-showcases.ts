@@ -37,6 +37,7 @@ export const showcases: AIShowcase[] = [
     type: 'image-video',
     original: { src: `${R2}/thailand.png`, alt: 'תמונה מקורית מהלקוח — תמונת תאילנד', label: 'תמונה מקורית מהלקוח' },
     aiResult: { src: `${R2}/thailand.mp4`, isVideo: true, label: 'סרטון שנוצר בעזרת AI' },
+    realPresentation: { slug: 'video-1141048032', label: 'המצגת המלאה' },
   },
   {
     slug: 'noia',
