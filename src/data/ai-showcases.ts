@@ -22,6 +22,7 @@ export interface AIShowcase {
   mainVideo?: string;
   videoCaption?: string;
   videoStyle?: 'landscape' | 'portrait';
+  realPresentation?: { slug: string; label: string; timeCode?: string };
 }
 
 export const showcases: AIShowcase[] = [
@@ -138,6 +139,7 @@ export const showcases: AIShowcase[] = [
     mainVideo: `${R2}/ronaldo%20blessing.mp4`,
     videoCaption: '⚽ ברכה מרונלדו — שנוצרה בעזרת AI',
     videoStyle: 'portrait',
+    realPresentation: { slug: 'video-1119001336', label: 'מצגת הבר מצווה של שגיא', timeCode: '9:20' },
   },
   {
     slug: 'world-travel',
