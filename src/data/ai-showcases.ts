@@ -111,6 +111,7 @@ export const showcases: AIShowcase[] = [
     type: 'image-video',
     original: { src: `${R2}/paris.jpeg`, alt: 'נער יושב על ספסל בתל אביב', label: '📍 ספסל בתל אביב' },
     aiResult: { src: `${R2}/paris.mp4`, isVideo: true, label: '🗼 פריז — שנוצר בעזרת AI' },
+    realPresentation: { slug: 'video-1135018876', label: 'המצגת המלאה' },
   },
   {
     slug: 'singers',
