@@ -13,23 +13,12 @@ const waLink = `https://wa.me/${phone}?text=${message}`;
     border-radius:18px;
     overflow:hidden;
     box-shadow:0 24px 64px rgba(0,0,0,.32), 0 4px 16px rgba(76,29,149,.2);
-    background:#EDE9F8;
+    background:#D4CCF0;
   ">
     <!-- Header -->
-    <div style="background:linear-gradient(135deg,#075E54 0%,#128C7E 100%); padding:.9rem 1rem; display:flex; align-items:center; gap:.65rem; direction:rtl;">
-      <div style="width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#7c3aed,#a855f7); display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:0 0 0 2px rgba(255,255,255,.25);">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-        </svg>
-      </div>
-      <div style="flex:1;">
-        <div style="color:white; font-weight:800; font-size:.87rem; font-family:'Heebo',sans-serif; line-height:1.2;">מצגת — זה כל הסיפור</div>
-        <div style="color:rgba(255,255,255,.6); font-size:.7rem; display:flex; align-items:center; gap:.3rem; margin-top:.15rem; direction:rtl;">
-          <div style="width:6px; height:6px; border-radius:50%; background:#4ade80; flex-shrink:0; animation:wa-pulse 2s ease infinite;"></div>
-          מחכים לכם בוואטסאפ
-        </div>
-      </div>
-      <button id="wa-close-btn" aria-label="סגור" style="background:none; border:none; cursor:pointer; color:rgba(255,255,255,.5); padding:.2rem; line-height:0; transition:color .2s; margin-right:.25rem;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,.5)'">
+    <div style="background:white; padding:.75rem 1rem; display:flex; align-items:center; justify-content:space-between; border-bottom:2px solid #f0f0f0; direction:rtl;">
+      <img src="/logo-matzget.png" alt="מצגת" style="height:40px; object-fit:contain;" />
+      <button id="wa-close-btn" aria-label="סגור" style="background:none; border:none; cursor:pointer; color:#aaa; padding:.2rem; line-height:0; transition:color .2s;" onmouseover="this.style.color='#333'" onmouseout="this.style.color='#aaa'">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
       </button>
     </div>
