@@ -5,7 +5,7 @@ const waLink = `https://wa.me/${phone}?text=${message}`;
 ---
 
 <!-- WhatsApp floating widget -->
-<div id="wa-widget" style="position:fixed; bottom:1.8rem; left:1.8rem; z-index:300; display:flex; flex-direction:column; align-items:flex-start; gap:.65rem;">
+<div id="wa-widget" style="position:fixed; bottom:1.8rem; right:1.8rem; z-index:300; display:flex; flex-direction:row; align-items:flex-end; gap:.65rem;">
 
   <!-- Chat window -->
   <div id="wa-chat" class="wa-chat-hidden" style="
@@ -16,7 +16,7 @@ const waLink = `https://wa.me/${phone}?text=${message}`;
     background:#EDE9F8;
   ">
     <!-- Header -->
-    <div style="background:linear-gradient(135deg,#1e0a4a 0%,#4c1d95 100%); padding:.9rem 1rem; display:flex; align-items:center; gap:.65rem; direction:rtl;">
+    <div style="background:linear-gradient(135deg,#075E54 0%,#128C7E 100%); padding:.9rem 1rem; display:flex; align-items:center; gap:.65rem; direction:rtl;">
       <div style="width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#7c3aed,#a855f7); display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:0 0 0 2px rgba(255,255,255,.25);">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
@@ -135,14 +135,16 @@ const waLink = `https://wa.me/${phone}?text=${message}`;
 <style>
   .wa-chat-hidden {
     opacity: 0;
-    transform: translateY(12px) scale(0.96);
+    max-width: 0;
     pointer-events: none;
-    transition: opacity .3s cubic-bezier(.34,1.56,.64,1), transform .3s cubic-bezier(.34,1.56,.64,1);
+    overflow: hidden;
+    transition: opacity .3s, max-width .35s cubic-bezier(.34,1.56,.64,1);
   }
   .wa-chat-visible {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    max-width: 320px;
     pointer-events: all;
+    overflow: visible;
   }
 
   @keyframes wa-ring {
@@ -196,4 +198,14 @@ const waLink = `https://wa.me/${phone}?text=${message}`;
   closeBtn?.addEventListener('click', () => {
     closeChat();
   });
+
+  // Auto-open after 25% scroll — every page visit
+  const onScroll = () => {
+    const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    if (scrolled >= 0.25) {
+      openChat();
+      window.removeEventListener('scroll', onScroll);
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
 </script>
