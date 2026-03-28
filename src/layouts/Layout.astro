@@ -8,13 +8,15 @@ interface Props {
   description?: string;
   pageUrl?: string;
   ogImage?: string;
+  eventLabel?: string;
 }
 
 const {
   title = 'Mazeget — מצגות לאירועים משפחתיים',
   description = 'Mazeget מתמחה במצגות וידאו מרגשות לאירועים משפחתיים — בר מצווה, בת מצווה, ימי הולדת וחתונות.',
   pageUrl,
-  ogImage = 'https://mazeget.com/logo.png'
+  ogImage = 'https://mazeget.com/logo.png',
+  eventLabel
 } = Astro.props;
 
 const canonicalUrl = `https://mazeget.com${Astro.url.pathname}`;
@@ -115,7 +117,7 @@ if (pageUrl) {
 
     <Footer />
 
-    <WhatsAppWidget />
+    <WhatsAppWidget eventLabel={eventLabel} />
 
     <script>
       // Scroll reveal

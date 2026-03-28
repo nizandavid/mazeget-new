@@ -63,6 +63,7 @@ const breadcrumbSchema = JSON.stringify({
 <Layout
   title={`${catInfo?.label} — מצגות וידאו | Mazeget`}
   description={`${catInfo?.description}. צפו בדוגמאות אמיתיות של מצגות ${catInfo?.label} שיצרנו — עיצוב מקצועי עם AI, מוכן להקרנה באירוע.`}
+  eventLabel={catInfo?.label}
 >
   <script type="application/ld+json" is:inline set:html={serviceSchema} slot="head" />
   <script type="application/ld+json" is:inline set:html={breadcrumbSchema} slot="head" />
