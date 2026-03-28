@@ -54,9 +54,19 @@ const waLink = `https://wa.me/${phone}?text=${encodeURIComponent(messageText)}`;
           box-shadow:0 1px 6px rgba(0,0,0,.07);
           max-width:90%;
         ">
-          שלום! 👋<br>
-          נשמח לעזור עם מצגת וידאו מרגשת לאירוע שלכם.<br>
-          <span style="color:#7c3aed; font-weight:700;">איזה אירוע אתם חוגגים?</span>
+          {eventLabel ? (
+            <>
+              שלום! 👋<br>
+              <span style="color:#7c3aed; font-weight:700;">נשמח לעזור עם מצגת ל{eventLabel}!</span><br>
+              לחצו לשיחה מהירה
+            </>
+          ) : (
+            <>
+              שלום! 👋<br>
+              נשמח לעזור עם מצגת וידאו מרגשת לאירוע שלכם.<br>
+              <span style="color:#7c3aed; font-weight:700;">איזה אירוע אתם חוגגים?</span>
+            </>
+          )}
         </div>
         <div style="font-size:.65rem; color:#9ca3af; margin-top:.3rem; padding-right:.2rem;">
           עכשיו
