@@ -46,31 +46,31 @@ import { categories } from '../data/categories';
       </div>
 
       <!-- Right: form -->
-      <div style="background:rgba(255,255,255,0.88); border:1px solid rgba(255,255,255,0.6); border-radius:20px; padding:2rem; backdrop-filter:blur(14px);" class="reveal">
+      <div style="background:rgba(76,29,149,0.75); border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:2rem; backdrop-filter:blur(14px);" class="reveal">
         <form style="display:flex; flex-direction:column; gap:.85rem; text-align:right;">
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:.85rem;">
             <div>
-              <label style="display:block; font-size:.68rem; font-weight:700; color:#6b21a8; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">שם</label>
+              <label style="display:block; font-size:.68rem; font-weight:700; color:rgba(255,255,255,0.7); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">שם</label>
               <input type="text" placeholder="השם שלכם" style="width:100%; background:#f3f4f6; border:1.5px solid #e5e7eb; border-radius:11px; padding:.72rem .95rem; color:#1f2937; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; transition:border-color .2s; box-sizing:border-box;" onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='#e5e7eb'" />
             </div>
             <div>
-              <label style="display:block; font-size:.68rem; font-weight:700; color:#6b21a8; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">טלפון</label>
+              <label style="display:block; font-size:.68rem; font-weight:700; color:rgba(255,255,255,0.7); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">טלפון</label>
               <input type="tel" placeholder="050-000-0000" style="width:100%; background:#f3f4f6; border:1.5px solid #e5e7eb; border-radius:11px; padding:.72rem .95rem; color:#1f2937; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; transition:border-color .2s; box-sizing:border-box;" onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='#e5e7eb'" />
             </div>
           </div>
           <div>
-            <label style="display:block; font-size:.68rem; font-weight:700; color:#6b21a8; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">אימייל</label>
+            <label style="display:block; font-size:.68rem; font-weight:700; color:rgba(255,255,255,0.7); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">אימייל</label>
             <input type="email" placeholder="your@email.com" style="width:100%; background:#f3f4f6; border:1.5px solid #e5e7eb; border-radius:11px; padding:.72rem .95rem; color:#1f2937; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; transition:border-color .2s; box-sizing:border-box;" onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='#e5e7eb'" />
           </div>
           <div>
-            <label style="display:block; font-size:.68rem; font-weight:700; color:#6b21a8; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">סוג האירוע</label>
+            <label style="display:block; font-size:.68rem; font-weight:700; color:rgba(255,255,255,0.7); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">סוג האירוע</label>
             <select style="width:100%; background:#f3f4f6; border:1.5px solid #e5e7eb; border-radius:11px; padding:.72rem .95rem; color:#1f2937; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; appearance:none; cursor:pointer; box-sizing:border-box;">
               <option value="">בחרו...</option>
               {categories.map(c => <option value={c.key}>{c.label}</option>)}
             </select>
           </div>
           <div>
-            <label style="display:block; font-size:.68rem; font-weight:700; color:#6b21a8; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">הערות</label>
+            <label style="display:block; font-size:.68rem; font-weight:700; color:rgba(255,255,255,0.7); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">הערות</label>
             <textarea placeholder="ספרו לנו על האירוע..." rows="3" style="width:100%; background:#f3f4f6; border:1.5px solid #e5e7eb; border-radius:11px; padding:.72rem .95rem; color:#1f2937; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; resize:vertical; box-sizing:border-box;" onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='#e5e7eb'"></textarea>
           </div>
           <button type="submit" style="width:100%; background:linear-gradient(135deg,#7C3AED,#9D5CF6); color:white; border:none; padding:.9rem; border-radius:50px; font-weight:700; font-size:.95rem; font-family:'Heebo',sans-serif; cursor:pointer; box-shadow:0 6px 22px rgba(124,58,237,.45); transition:transform .15s, box-shadow .15s;" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 8px 28px rgba(124,58,237,.55)'" onmouseout="this.style.transform='';this.style.boxShadow='0 6px 22px rgba(124,58,237,.45)'">
