@@ -2,26 +2,19 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 
-export async function getStaticPaths() {
-  const wpUrl = 'https://wp.mazeget.com';
-  try {
-    const [res1, res2] = await Promise.all([
-      fetch(`${wpUrl}/wp-json/wp/v2/posts?per_page=100&page=1&_embed`),
-      fetch(`${wpUrl}/wp-json/wp/v2/posts?per_page=100&page=2&_embed`),
-    ]);
-    const posts1 = await res1.json();
-    const posts2 = res2.ok ? await res2.json() : [];
-    const posts = [...posts1, ...(Array.isArray(posts2) ? posts2 : [])];
-    return posts.map((post: any) => ({
-      params: { slug: decodeURIComponent(post.slug) },
-      props: { post }
-    }));
-  } catch (e) {
-    return [];
-  }
-}
+export const prerender = false;
 
-const { post } = Astro.props;
+const { slug } = Astro.params;
+const decodedSlug = decodeURIComponent(slug ?? '');
+
+let post: any = null;
+try {
+  const res = await fetch(`https://wp.mazeget.com/wp-json/wp/v2/posts?slug=${encodeURIComponent(decodedSlug)}&_embed`);
+  const data = await res.json();
+  post = Array.isArray(data) ? data[0] : null;
+} catch (e) {
+  post = null;
+}
 
 const featuredImage = post?._embedded?.['wp:featuredmedia']?.[0]?.source_url;
 const excerpt = post?.excerpt?.rendered?.replace(/<[^>]*>/g, '').substring(0, 160) ?? '';
