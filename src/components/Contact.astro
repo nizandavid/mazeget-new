@@ -46,32 +46,32 @@ import { categories } from '../data/categories';
       </div>
 
       <!-- Right: form -->
-      <div style="background:rgba(255,255,255,0.92); border:1px solid rgba(255,255,255,0.7); border-radius:20px; padding:2rem; backdrop-filter:blur(14px);" class="reveal">
+      <div style="background:rgba(255,255,255,0.55); border:1px solid rgba(255,255,255,0.4); border-radius:20px; padding:2rem; backdrop-filter:blur(14px);" class="reveal">
         <form style="display:flex; flex-direction:column; gap:.85rem; text-align:right;">
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:.85rem;">
             <div>
               <label style="display:block; font-size:.68rem; font-weight:700; color:#7c3aed; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">שם</label>
-              <input type="text" placeholder="השם שלכם" style="width:100%; background:rgba(237,233,254,0.7); border:1.5px solid rgba(196,181,253,0.4); border-radius:11px; padding:.72rem .95rem; color:#1e1b4b; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; transition:border-color .2s; box-sizing:border-box;" onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='rgba(196,181,253,0.4)'" />
+              <input type="text" placeholder="השם שלכם" style="width:100%; background:rgba(196,181,253,0.35); border:1.5px solid rgba(167,139,250,0.5); border-radius:11px; padding:.72rem .95rem; color:#1e1b4b; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; transition:border-color .2s; box-sizing:border-box;" onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='rgba(196,181,253,0.4)'" />
             </div>
             <div>
               <label style="display:block; font-size:.68rem; font-weight:700; color:#7c3aed; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">טלפון</label>
-              <input type="tel" placeholder="050-000-0000" style="width:100%; background:rgba(237,233,254,0.7); border:1.5px solid rgba(196,181,253,0.4); border-radius:11px; padding:.72rem .95rem; color:#1e1b4b; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; transition:border-color .2s; box-sizing:border-box;" onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='rgba(196,181,253,0.4)'" />
+              <input type="tel" placeholder="050-000-0000" style="width:100%; background:rgba(196,181,253,0.35); border:1.5px solid rgba(167,139,250,0.5); border-radius:11px; padding:.72rem .95rem; color:#1e1b4b; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; transition:border-color .2s; box-sizing:border-box;" onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='rgba(196,181,253,0.4)'" />
             </div>
           </div>
           <div>
             <label style="display:block; font-size:.68rem; font-weight:700; color:#7c3aed; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">אימייל</label>
-            <input type="email" placeholder="your@email.com" style="width:100%; background:rgba(237,233,254,0.7); border:1.5px solid rgba(196,181,253,0.4); border-radius:11px; padding:.72rem .95rem; color:#1e1b4b; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; transition:border-color .2s; box-sizing:border-box;" onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='rgba(196,181,253,0.4)'" />
+            <input type="email" placeholder="your@email.com" style="width:100%; background:rgba(196,181,253,0.35); border:1.5px solid rgba(167,139,250,0.5); border-radius:11px; padding:.72rem .95rem; color:#1e1b4b; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; transition:border-color .2s; box-sizing:border-box;" onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='rgba(196,181,253,0.4)'" />
           </div>
           <div>
             <label style="display:block; font-size:.68rem; font-weight:700; color:#7c3aed; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">סוג האירוע</label>
-            <select style="width:100%; background:rgba(237,233,254,0.7); border:1.5px solid rgba(196,181,253,0.4); border-radius:11px; padding:.72rem .95rem; color:#1e1b4b; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; appearance:none; cursor:pointer; box-sizing:border-box;">
+            <select style="width:100%; background:rgba(196,181,253,0.35); border:1.5px solid rgba(167,139,250,0.5); border-radius:11px; padding:.72rem .95rem; color:#1e1b4b; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; appearance:none; cursor:pointer; box-sizing:border-box;">
               <option value="">בחרו...</option>
               {categories.map(c => <option value={c.key}>{c.label}</option>)}
             </select>
           </div>
           <div>
             <label style="display:block; font-size:.68rem; font-weight:700; color:#7c3aed; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">הערות</label>
-            <textarea placeholder="ספרו לנו על האירוע..." rows="3" style="width:100%; background:rgba(237,233,254,0.7); border:1.5px solid rgba(196,181,253,0.4); border-radius:11px; padding:.72rem .95rem; color:#1e1b4b; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; resize:vertical; box-sizing:border-box;" onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='rgba(196,181,253,0.4)'"></textarea>
+            <textarea placeholder="ספרו לנו על האירוע..." rows="3" style="width:100%; background:rgba(196,181,253,0.35); border:1.5px solid rgba(167,139,250,0.5); border-radius:11px; padding:.72rem .95rem; color:#1e1b4b; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; resize:vertical; box-sizing:border-box;" onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='rgba(196,181,253,0.4)'"></textarea>
           </div>
           <button type="submit" style="width:100%; background:linear-gradient(135deg,#7C3AED,#9D5CF6); color:#1e1b4b; border:none; padding:.9rem; border-radius:50px; font-weight:700; font-size:.95rem; font-family:'Heebo',sans-serif; cursor:pointer; box-shadow:0 6px 22px rgba(124,58,237,.45); transition:transform .15s, box-shadow .15s;" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 8px 28px rgba(124,58,237,.55)'" onmouseout="this.style.transform='';this.style.boxShadow='0 6px 22px rgba(124,58,237,.45)'">
             שליחה &rarr;
