@@ -12,10 +12,15 @@ export async function getStaticPaths() {
     const posts1 = await res1.json();
     const posts2 = res2.ok ? await res2.json() : [];
     const posts = [...posts1, ...(Array.isArray(posts2) ? posts2 : [])];
-    return posts.map((post: any) => ({
-      params: { slug: decodeURIComponent(post.slug) },
-      props: { post }
-    }));
+    return posts.flatMap((post: any) => {
+      const decoded = decodeURIComponent(post.slug);
+      const encoded = encodeURIComponent(decoded);
+      const paths = [{ params: { slug: decoded }, props: { post } }];
+      if (encoded !== decoded) {
+        paths.push({ params: { slug: encoded }, props: { post } });
+      }
+      return paths;
+    });
   } catch (e) {
     return [];
   }
