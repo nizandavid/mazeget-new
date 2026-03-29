@@ -114,9 +114,7 @@ import Header from '../../components/Header.astro';
 </style>
 
 <script>
-  const WP_API = window.location.hostname === 'localhost'
-    ? 'https://wp.mazeget.com/wp-json/wp/v2'
-    : '/api/wp/wp/v2';
+  const WP_API = 'https://wp.mazeget.com/wp-json/wp/v2';
 
   function formatDate(dateStr: string) {
     return new Date(dateStr).toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' });
