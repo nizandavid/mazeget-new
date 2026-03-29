@@ -7,6 +7,10 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://mazeget.com',
+  trailingSlash: 'never',
+  build: {
+    format: 'directory'
+  },
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()]
