@@ -2,6 +2,26 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "astro",
+  "redirects": [
+    { "source": "/מצגת-לבר-מצווה",                        "destination": "/מצגות/bar_mitzva",  "permanent": true },
+    { "source": "/מצגת-לבר-מצווה/",                       "destination": "/מצגות/bar_mitzva",  "permanent": true },
+    { "source": "/מצגת-לבת-מצווה",                        "destination": "/מצגות/bat_mitzva",  "permanent": true },
+    { "source": "/מצגת-לבת-מצווה/",                       "destination": "/מצגות/bat_mitzva",  "permanent": true },
+    { "source": "/מצגת-לימי-הולדת",                       "destination": "/מצגות/birthday",    "permanent": true },
+    { "source": "/מצגת-לימי-הולדת/",                      "destination": "/מצגות/birthday",    "permanent": true },
+    { "source": "/מצגת-לחתונת-כסף-וזהב-ועוד",            "destination": "/מצגות/wedding",     "permanent": true },
+    { "source": "/מצגת-לחתונת-כסף-וזהב-ועוד/",           "destination": "/מצגות/wedding",     "permanent": true },
+    { "source": "/%d7%98%d7%99%d7%95%d7%9c%d7%99%d7%9d-%d7%91%d7%97%d7%95%d7%b4%d7%9c-2",  "destination": "/מצגות/trip", "permanent": true },
+    { "source": "/%d7%98%d7%99%d7%95%d7%9c%d7%99%d7%9d-%d7%91%d7%97%d7%95%d7%b4%d7%9c-2/", "destination": "/מצגות/trip", "permanent": true },
+    { "source": "/שיר-שלטים",                             "destination": "/מצגות/sign_song",   "permanent": true },
+    { "source": "/שיר-שלטים/",                            "destination": "/מצגות/sign_song",   "permanent": true },
+    { "source": "/ימי-הולדת-2",                           "destination": "/מצגות/other",       "permanent": true },
+    { "source": "/ימי-הולדת-2/",                          "destination": "/מצגות/other",       "permanent": true },
+    { "source": "/העלאת-תמונות-וסרטונים-למצגת",          "destination": "/העלאת-קבצים",       "permanent": true },
+    { "source": "/העלאת-תמונות-וסרטונים-למצגת/",         "destination": "/העלאת-קבצים",       "permanent": true },
+    { "source": "/ai-test-2",                              "destination": "/שדרוגי-ai",          "permanent": true },
+    { "source": "/ai-test-2/",                             "destination": "/שדרוגי-ai",          "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/api/wp/:path*",
