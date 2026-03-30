@@ -70,6 +70,7 @@ function processContent(html: string): string {
   title={post ? post.title.rendered + ' — Mazeget' : 'מאמר — Mazeget'}
   description={excerpt || undefined}
   ogImage={featuredImage || undefined}
+  noAutoOpen={true}
   pageUrl={post?.link}
 >
   {articleSchema && <script type="application/ld+json" is:inline set:html={articleSchema} slot="head" />}

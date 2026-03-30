@@ -1,8 +1,9 @@
 ---
 interface Props {
   eventLabel?: string;
+  noAutoOpen?: boolean;
 }
-const { eventLabel } = Astro.props;
+const { eventLabel, noAutoOpen = false } = Astro.props;
 const phone = '972559618858';
 const messageText = eventLabel
   ? `שלום, ראיתי את האתר שלכם ואשמח לשמוע על מצגת ל${eventLabel} 🙂`
@@ -11,7 +12,7 @@ const waLink = `https://wa.me/${phone}?text=${encodeURIComponent(messageText)}`;
 ---
 
 <!-- WhatsApp floating widget -->
-<div id="wa-widget" style="position:fixed; bottom:1.8rem; right:1.8rem; z-index:300; display:flex; flex-direction:row; align-items:flex-end; gap:.65rem;">
+<div id="wa-widget" data-no-auto-open={noAutoOpen ? 'true' : 'false'} style="position:fixed; bottom:1.8rem; right:1.8rem; z-index:300; display:flex; flex-direction:row; align-items:flex-end; gap:.65rem;">
 
   <!-- Chat window -->
   <div id="wa-chat" class="wa-chat-hidden" style="
@@ -204,13 +205,16 @@ const waLink = `https://wa.me/${phone}?text=${encodeURIComponent(messageText)}`;
     closeChat();
   });
 
-  // Auto-open after 25% scroll — every page visit
-  const onScroll = () => {
-    const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-    if (scrolled >= 0.25) {
-      openChat();
-      window.removeEventListener('scroll', onScroll);
-    }
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
+  // Auto-open after 25% scroll — disabled on some pages
+  const noAutoOpen = document.getElementById('wa-widget')?.dataset.noAutoOpen === 'true';
+  if (!noAutoOpen) {
+    const onScroll = () => {
+      const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+      if (scrolled >= 0.25) {
+        openChat();
+        window.removeEventListener('scroll', onScroll);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
 </script>
