@@ -1,6 +1,18 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
+import postsData from '../../data/posts.json';
+
+const posts = (postsData as any[]).map(p => ({
+  id: p.id,
+  slug: p.slug,
+  title: p.title,
+  excerpt: p.excerpt,
+  date: p.date,
+  categories: p.categories,
+  _embedded: p._embedded,
+}));
+const postsJson = JSON.stringify(posts);
 ---
 
 <Layout
@@ -32,6 +44,7 @@ import Header from '../../components/Header.astro';
         </svg>
         <span class="text-sm font-medium">טוען מאמרים...</span>
       </div>
+      <script id="posts-data" type="application/json" set:html={postsJson}></script>
       <div id="posts-error" class="text-center py-16 text-gray-400 text-sm" style="display:none;"></div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="posts-grid" style="display:none;"></div>
 
@@ -114,8 +127,6 @@ import Header from '../../components/Header.astro';
 </style>
 
 <script>
-  const WP_API = 'https://wp.mazeget.com/wp-json/wp/v2';
-
   function formatDate(dateStr: string) {
     return new Date(dateStr).toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' });
   }
@@ -232,72 +243,21 @@ import Header from '../../components/Header.astro';
     updateGrid();
   }
 
-  async function loadPosts() {
+  function loadPosts() {
     const loading = document.getElementById('posts-loading')!;
-    const errorEl = document.getElementById('posts-error')!;
+    const posts = JSON.parse(document.getElementById('posts-data')!.textContent || '[]');
 
-    try {
-      const FIELDS = 'id,slug,title,excerpt,date,categories,_links';
-      const [page1Res, page2Res, catsRes] = await Promise.all([
-        fetch(`${WP_API}/posts?per_page=100&page=1&_fields=${FIELDS}&_embed`),
-        fetch(`${WP_API}/posts?per_page=100&page=2&_fields=${FIELDS}&_embed`),
-        fetch(`${WP_API}/categories?per_page=50`)
-      ]);
+    loading.style.display = 'none';
 
-      if (!page1Res.ok) throw new Error('שגיאה בטעינת מאמרים');
-      const posts1 = await page1Res.json();
-      const posts2 = page2Res.ok ? await page2Res.json() : [];
-      const posts = [...posts1, ...(Array.isArray(posts2) ? posts2 : [])];
-      const categories = catsRes.ok ? await catsRes.json() : [];
-
-      loading.style.display = 'none';
-
-      // Category buttons
-      if (categories.filter((c: any) => c.count > 0).length > 0) {
-        const filterSection = document.getElementById('cat-filter')!;
-        const btnContainer = document.getElementById('cat-buttons')!;
-        filterSection.style.display = '';
-
-        const allBtn = document.createElement('button');
-        allBtn.dataset.cat = 'all';
-        allBtn.className = 'cat-btn cat-btn-active px-5 py-1.5 rounded-full text-sm font-semibold border-2 transition-all';
-        allBtn.textContent = 'הכל';
-        btnContainer.appendChild(allBtn);
-
-        categories.filter((c: any) => c.count > 0).forEach((cat: any) => {
-          const btn = document.createElement('button');
-          btn.dataset.cat = String(cat.id);
-          btn.className = 'cat-btn cat-btn-inactive px-5 py-1.5 rounded-full text-sm font-semibold border-2 transition-all';
-          btn.textContent = `${cat.name} (${cat.count})`;
-          btnContainer.appendChild(btn);
-        });
-
-        btnContainer.querySelectorAll('.cat-btn').forEach(btn => {
-          btn.addEventListener('click', () => {
-            btnContainer.querySelectorAll('.cat-btn').forEach(b => {
-              b.classList.remove('cat-btn-active');
-              b.classList.add('cat-btn-inactive');
-            });
-            btn.classList.remove('cat-btn-inactive');
-            btn.classList.add('cat-btn-active');
-            renderPosts((btn as HTMLElement).dataset.cat || 'all');
-          });
-        });
-      }
-
-      if (posts.length === 0) {
-        errorEl.textContent = 'אין מאמרים להצגה כרגע';
-        errorEl.style.display = '';
-      } else {
-        allPosts = posts;
-        renderPosts();
-      }
-
-    } catch (e: any) {
-      loading.style.display = 'none';
-      errorEl.textContent = 'לא הצלחנו לטעון את המאמרים, נסה שוב מאוחר יותר';
+    if (posts.length === 0) {
+      const errorEl = document.getElementById('posts-error')!;
+      errorEl.textContent = 'אין מאמרים להצגה כרגע';
       errorEl.style.display = '';
+      return;
     }
+
+    allPosts = posts;
+    renderPosts();
   }
 
   loadPosts();
