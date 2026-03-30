@@ -140,7 +140,7 @@ const postsJson = JSON.stringify(posts);
     return `
         <article class="post-card" data-categories='${JSON.stringify(post.categories)}'>
           <a href="/מאמרים/${decodeURIComponent(post.slug)}" class="block text-right h-full">
-            ${post._embedded?.['wp:featuredmedia']?.[0]?.source_url ? `<img src="${post._embedded['wp:featuredmedia'][0].source_url}" alt="${post.title.rendered}" style="width:100%;height:180px;object-fit:cover;border-radius:12px 12px 0 0;" />` : ''}
+            ${post._embedded?.['wp:featuredmedia']?.[0]?.source_url ? `<img src="${post._embedded['wp:featuredmedia'][0].source_url}" alt="${post.title.rendered}" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:12px 12px 0 0;" />` : ''}
             <div class="p-6">
             <p class="text-xs text-[#6C22FF]/50 font-medium mb-3 tracking-wide">${formatDate(post.date)}</p>
             <h2 class="font-black text-[#12023C] text-lg mb-3 leading-snug" style="font-family: 'Secular One', sans-serif;">${post.title.rendered}</h2>
