@@ -73,6 +73,10 @@ import { categories } from '../data/categories';
             <label style="display:block; font-size:.68rem; font-weight:700; color:#7c3aed; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.4rem;">הערות</label>
             <textarea name="notes" placeholder="ספרו לנו על האירוע..." rows="3" style="width:100%; background:#f0f0f5; border:1.5px solid #e8e8f0; border-radius:11px; padding:.72rem .95rem; color:#374151; font-family:'Heebo',sans-serif; font-size:.88rem; outline:none; resize:vertical; box-sizing:border-box;" onfocus="this.style.borderColor='#a78bfa'" onblur="this.style.borderColor='#e8e8f0'"></textarea>
           </div>
+          <!-- honeypot — נסתר מבני אדם, בוטים ממלאים אותו -->
+          <div style="display:none;" aria-hidden="true">
+            <input name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
           <button id="contact-submit" type="submit" style="width:100%; background:linear-gradient(135deg,#7C3AED,#9D5CF6); color:white; border:none; padding:.9rem; border-radius:50px; font-weight:700; font-size:.95rem; font-family:'Heebo',sans-serif; cursor:pointer; box-shadow:0 6px 22px rgba(124,58,237,.45); transition:transform .15s, box-shadow .15s;" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 8px 28px rgba(124,58,237,.55)'" onmouseout="this.style.transform='';this.style.boxShadow='0 6px 22px rgba(124,58,237,.45)'">
             שליחה &rarr;
           </button>
@@ -97,6 +101,14 @@ import { categories } from '../data/categories';
             submitBtn.textContent = 'שולח...';
 
             const data = Object.fromEntries(new FormData(form));
+
+            // honeypot — אם השדה הנסתר מלא, זה בוט
+            if (data.website) {
+              form.style.display = 'none';
+              if (success) success.style.display = 'block';
+              return;
+            }
+
             try {
               await fetch('https://mazegetapi-production.up.railway.app/contact', {
                 method: 'POST',
