@@ -1,10 +1,48 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+
+const pricingSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "מצגות וידאו לאירועים",
+  "url": "https://mazeget.com/מחירון/",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Mazeget",
+    "url": "https://mazeget.com"
+  },
+  "areaServed": "IL",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "מצגת קצרה",
+      "price": "360",
+      "priceCurrency": "ILS",
+      "description": "מצגת וידאו עד 3 דקות, כ-60 תמונות, כותרת פתיחה, מוזיקה וברכה"
+    },
+    {
+      "@type": "Offer",
+      "name": "מצגת בסיסית",
+      "price": "550",
+      "priceCurrency": "ILS",
+      "description": "מצגת וידאו עד 6 דקות, כ-120 תמונות, תוכן מורחב וסרטוני וידאו"
+    },
+    {
+      "@type": "Offer",
+      "name": "מצגת פרימיום",
+      "price": "750",
+      "priceCurrency": "ILS",
+      "description": "מצגת וידאו עד 10 דקות, כ-170 תמונות, וידאו ללא הגבלה וחלוקה לנושאים"
+    }
+  ]
+});
 ---
 
-<Layout title="מחירון מצגות וידאו — בר מצווה, חתונה ויום הולדת" description="מחירון מצגות וידאו לאירועים — חבילות בסיסית, סטנדרט ופרימיום. מחירים ברורים, ללא הפתעות. בר מצווה, בת מצווה, ימי הולדת וחתונות.">
+<Layout title="מחירון מצגות וידאו — בר מצווה, חתונה ויום הולדת" description="מחירון מצגות וידאו — ₪360 למצגת קצרה, ₪550 לבסיסית, ₪750 לפרימיום. שקוף וללא הפתעות. בר מצווה, בת מצווה, חתונה ויום הולדת.">
   <Header />
+
+  <script type="application/ld+json" is:inline set:html={pricingSchema}></script>
 
   <!-- Hero -->
   <section class="text-center" style="padding:3.5rem 1.5rem 3rem; background:linear-gradient(135deg,#6C22FF 0%,#E879F9 100%);">
@@ -184,12 +222,22 @@ import Header from '../components/Header.astro';
 
         <div class="bg-white rounded-2xl text-right" style="padding:1.5rem 1.75rem;">
           <h3 class="font-black text-[#12023C]" style="font-size:1rem; margin-bottom:.5rem;">כמה עולה מצגת לבר מצווה או בת מצווה?</h3>
-          <p class="text-gray-600" style="font-size:.9rem;">המחיר משתנה בהתאם לאורך המצגת והחומרים, אך לרוב מצגת מתחילה בכמה מאות שקלים ומעלה. הדרך המדויקת לדעת היא לשלוח חומרים ולקבל הצעת מחיר מסודרת.</p>
+          <p class="text-gray-600" style="font-size:.9rem;">מצגת לבר מצווה או בת מצווה ב-Mazeget מתחילה מ-<strong>₪360</strong> (מצגת קצרה עד 3 דקות). מצגת בסיסית של עד 6 דקות עולה <strong>₪550</strong>, ומצגת פרימיום של עד 10 דקות עולה <strong>₪750</strong>.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl text-right" style="padding:1.5rem 1.75rem;">
+          <h3 class="font-black text-[#12023C]" style="font-size:1rem; margin-bottom:.5rem;">כמה עולה מצגת לחתונה?</h3>
+          <p class="text-gray-600" style="font-size:.9rem;">מצגת לחתונה מתחילה מ-<strong>₪360</strong> למצגת קצרה עד 3 דקות. לרוב זוגות בוחרים את חבילת הבסיסית (<strong>₪550</strong>) או הפרימיום (<strong>₪750</strong>) שנותנות יותר זמן לסיפור האהבה.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl text-right" style="padding:1.5rem 1.75rem;">
+          <h3 class="font-black text-[#12023C]" style="font-size:1rem; margin-bottom:.5rem;">כמה עולה מצגת ליום הולדת?</h3>
+          <p class="text-gray-600" style="font-size:.9rem;">מצגת ליום הולדת (40, 50, 60 ומעלה) מתחילה מ-<strong>₪360</strong>. לאירועים גדולים עם הרבה תמונות וסרטונים ממליצים על חבילת הבסיסית ב-<strong>₪550</strong> או הפרימיום ב-<strong>₪750</strong>.</p>
         </div>
 
         <div class="bg-white rounded-2xl text-right" style="padding:1.5rem 1.75rem;">
           <h3 class="font-black text-[#12023C]" style="font-size:1rem; margin-bottom:.5rem;">מה משפיע הכי הרבה על מחיר המצגת?</h3>
-          <p class="text-gray-600" style="font-size:.9rem;">הגורם המרכזי הוא אורך המצגת. בנוסף, כמות התמונות, סרטונים ושימוש באפקטים מיוחדים יכולים להשפיע.</p>
+          <p class="text-gray-600" style="font-size:.9rem;">הגורם המרכזי הוא אורך המצגת. מצגת קצרה (עד 3 דקות) — ₪360. בסיסית (עד 6 דקות) — ₪550. פרימיום (עד 10 דקות) — ₪750. תוספות AI מחויבות בנפרד.</p>
         </div>
 
         <div class="bg-white rounded-2xl text-right" style="padding:1.5rem 1.75rem;">
@@ -199,32 +247,17 @@ import Header from '../components/Header.astro';
 
         <div class="bg-white rounded-2xl text-right" style="padding:1.5rem 1.75rem;">
           <h3 class="font-black text-[#12023C]" style="font-size:1rem; margin-bottom:.5rem;">כמה זמן לוקח להכין מצגת?</h3>
-          <p class="text-gray-600" style="font-size:.9rem;">בדרך כלל בין יום לשלושה ימים מרגע קבלת החומרים, כולל סקיצה ותיקונים.</p>
-        </div>
-
-        <div class="bg-white rounded-2xl text-right" style="padding:1.5rem 1.75rem;">
-          <h3 class="font-black text-[#12023C]" style="font-size:1rem; margin-bottom:.5rem;">אפשר להכין מצגת דחופה?</h3>
-          <p class="text-gray-600" style="font-size:.9rem;">כן, ניתן להכין מצגת גם בזמנים קצרים מאוד — בהתאם לזמינות.</p>
+          <p class="text-gray-600" style="font-size:.9rem;">בדרך כלל 3–7 ימי עסקים מרגע קבלת כל החומרים, כולל סקיצה ותיקונים. לאירועים דחופים ניתן לתאם זמן קצר יותר.</p>
         </div>
 
         <div class="bg-white rounded-2xl text-right" style="padding:1.5rem 1.75rem;">
           <h3 class="font-black text-[#12023C]" style="font-size:1rem; margin-bottom:.5rem;">כמה תמונות צריך למצגת?</h3>
-          <p class="text-gray-600" style="font-size:.9rem;">לרוב בין 50 ל-150 תמונות, תלוי באורך המצגת ובסגנון.</p>
-        </div>
-
-        <div class="bg-white rounded-2xl text-right" style="padding:1.5rem 1.75rem;">
-          <h3 class="font-black text-[#12023C]" style="font-size:1rem; margin-bottom:.5rem;">אפשר לשלב סרטוני וידאו?</h3>
-          <p class="text-gray-600" style="font-size:.9rem;">בהחלט. שילוב סרטונים מוסיף המון רגש ועניין למצגת.</p>
-        </div>
-
-        <div class="bg-white rounded-2xl text-right" style="padding:1.5rem 1.75rem;">
-          <h3 class="font-black text-[#12023C]" style="font-size:1rem; margin-bottom:.5rem;">האם אתם עוזרים בבחירת מוזיקה?</h3>
-          <p class="text-gray-600" style="font-size:.9rem;">כן, אנחנו מלווים אתכם בבחירת מוזיקה שמתאימה לאופי האירוע.</p>
+          <p class="text-gray-600" style="font-size:.9rem;">תלוי בחבילה — כ-60 תמונות למצגת קצרה (₪360), כ-120 לבסיסית (₪550), וכ-170 לפרימיום (₪750). סרטוני וידאו יכולים להחליף חלק מהתמונות.</p>
         </div>
 
         <div class="bg-white rounded-2xl text-right" style="padding:1.5rem 1.75rem;">
           <h3 class="font-black text-[#12023C]" style="font-size:1rem; margin-bottom:.5rem;">מה מקבלים בסוף?</h3>
-          <p class="text-gray-600" style="font-size:.9rem;">קובץ וידאו באיכות גבוהה (HD) מוכן להקרנה באירוע.</p>
+          <p class="text-gray-600" style="font-size:.9rem;">קובץ וידאו באיכות גבוהה (HD) מוכן להקרנה באירוע, בטלפון, מחשב או מקרן.</p>
         </div>
 
       </div>
