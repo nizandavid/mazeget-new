@@ -53,7 +53,7 @@ export const categories: { key: string; label: string; description: string; emoj
   {
     key: 'other',
     label: 'תוספות מיוחדות',
-    description: 'שיר שלטים, דיבוב AI, "סליחה על השאלה" ועוד תוספות שהופכות כל אירוע לבלתי נשכח',
+    description: 'שיר שלטים, דיבוב AI ותוספות ייחודיות שיפתיעו את כל הקהל',
     emoji: '✨',
   },
 ];

@@ -243,7 +243,7 @@ try {
         {barMitzvaVideos.map(v => (
           <div class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || `video-${v.vimeo_id}`}>
             <div class="video-thumb-wrap" style="background:#1a0533;">
-              {v.thumbnail && <img src={v.thumbnail} alt={v.title} class="video-thumb-img" loading="lazy" />}
+              {v.thumbnail && <img src={v.thumbnail} alt={v.title} class="video-thumb-img" width="640" height="360" loading="lazy" />}
               <div class="video-play-overlay">
                 <div class="play-btn purple-play">
                   <svg width="20" height="20" fill="#7C3AED" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -278,7 +278,7 @@ try {
         {batMitzvaVideos.map(v => (
           <div class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || `video-${v.vimeo_id}`}>
             <div class="video-thumb-wrap" style="background:#500724;">
-              {v.thumbnail && <img src={v.thumbnail} alt={v.title} class="video-thumb-img" loading="lazy" />}
+              {v.thumbnail && <img src={v.thumbnail} alt={v.title} class="video-thumb-img" width="640" height="360" loading="lazy" />}
               <div class="video-play-overlay">
                 <div class="play-btn pink-play">
                   <svg width="20" height="20" fill="#BE185D" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -313,7 +313,7 @@ try {
         {birthdayVideos.map(v => (
           <div class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || `video-${v.vimeo_id}`}>
             <div class="video-thumb-wrap" style="background:#451a03;">
-              {v.thumbnail && <img src={v.thumbnail} alt={v.title} class="video-thumb-img" loading="lazy" />}
+              {v.thumbnail && <img src={v.thumbnail} alt={v.title} class="video-thumb-img" width="640" height="360" loading="lazy" />}
               <div class="video-play-overlay">
                 <div class="play-btn amber-play">
                   <svg width="20" height="20" fill="#D97706" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -348,7 +348,7 @@ try {
         {extrasVideos.map(v => (
           <div class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || `video-${v.vimeo_id}`}>
             <div class="video-thumb-wrap" style="background:#042f2e;">
-              {v.thumbnail && <img src={v.thumbnail} alt={v.title} class="video-thumb-img" loading="lazy" />}
+              {v.thumbnail && <img src={v.thumbnail} alt={v.title} class="video-thumb-img" width="640" height="360" loading="lazy" />}
               <div class="video-play-overlay">
                 <div class="play-btn teal-play">
                   <svg width="20" height="20" fill="#0D9488" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>

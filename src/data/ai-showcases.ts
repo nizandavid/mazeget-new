@@ -90,7 +90,7 @@ export const showcases: AIShowcase[] = [
   },
   {
     slug: 'wicked',
-    title: 'ביקור בסט הצילומים של Wicked ו-Harry Potter',
+    title: 'ביקור בסט Wicked ו-Harry Potter',
     badge: 'תמונות AI',
     description: 'מתמונה אחת — AI שילב את הילדה בסטים של הסרטים האהובים עליה',
     thumbnail: `${R2}/meet%20your%20favorite%20actor.png`,

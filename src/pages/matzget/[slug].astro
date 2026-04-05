@@ -78,7 +78,7 @@ const faqs = FAQ_MAP[page.category_key] ?? FAQ_MAP['other'];
 
 <Layout
   title={`${page.title} | Mazeget`}
-  description={page.description || `${page.section1?.slice(0, 150) || `מצגת וידאו ל${page.category_label} — מקצועית ומרגשת`}.`}
+  description={(page.description?.length > 155 ? page.description.slice(0, 152) + '...' : page.description) || `${page.section1?.slice(0, 150) || `מצגת וידאו ל${page.category_label} — מקצועית ומרגשת`}.`}
 >
   <Header />
 
@@ -190,7 +190,7 @@ const faqs = FAQ_MAP[page.category_key] ?? FAQ_MAP['other'];
           {page.related.map((v, i) => (
             <div style="border-radius:16px; overflow:hidden; background:#F8F7FF; box-shadow:0 4px 16px rgba(0,0,0,.06); cursor:pointer;" class="related-card" data-video-id={v.id}>
               <div style="aspect-ratio:16/9; position:relative; background:#1a0533; overflow:hidden;">
-                <img src={`https://vumbnail.com/${v.id}.jpg`} alt={v.title} style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />
+                <img src={`https://vumbnail.com/${v.id}.jpg`} alt={v.title} width="640" height="360" style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />
                 <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
                   <div style="width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,.9); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(0,0,0,.25);">
                     <svg width="18" height="18" fill="#7C3AED" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
