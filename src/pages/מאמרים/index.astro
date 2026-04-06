@@ -169,6 +169,9 @@ const postsJson = JSON.stringify(posts);
   }
 
   function getFiltered() {
+    if (activeCatGlobal === 'new') {
+      return [...allPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 5);
+    }
     return allPosts.filter(p => activeCatGlobal === 'all' || p.categories.includes(Number(activeCatGlobal)));
   }
 
@@ -275,6 +278,14 @@ const postsJson = JSON.stringify(posts);
     allBtn.addEventListener('click', () => setActiveCategory('all', allBtn));
     buttonsContainer.appendChild(allBtn);
 
+    // "חדש" button
+    const newBtn = document.createElement('button');
+    newBtn.textContent = '✨ חדש';
+    newBtn.className = 'px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-inactive';
+    newBtn.dataset.cat = 'new';
+    newBtn.addEventListener('click', () => setActiveCategory('new', newBtn));
+    buttonsContainer.appendChild(newBtn);
+
     cats.forEach(([id, name]) => {
       const btn = document.createElement('button');
       btn.textContent = name;
@@ -290,7 +301,7 @@ const postsJson = JSON.stringify(posts);
       btn.className = 'px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-inactive';
     });
     activeBtn.className = 'px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-active';
-    renderPosts(catId === 'all' ? 'all' : Number(catId));
+    renderPosts(catId === 'all' || catId === 'new' ? catId : Number(catId));
   }
 
   function loadPosts() {
