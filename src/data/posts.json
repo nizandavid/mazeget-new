@@ -29,7 +29,9 @@
     "template": "",
     "format": "standard",
     "meta": {},
-    "categories": [],
+    "categories": [
+      6
+    ],
     "tags": [],
     "class_list": [],
     "acf": {},
@@ -39,6 +41,15 @@
         {
           "source_url": "https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20elements/Noia-overlay.png"
         }
+      ],
+      "wp:term": [
+        [
+          {
+            "id": 6,
+            "name": "בר ובת מצווה"
+          }
+        ],
+        []
       ]
     }
   },
@@ -72,7 +83,10 @@
     "template": "",
     "format": "standard",
     "meta": {},
-    "categories": [],
+    "categories": [
+      6,
+      9
+    ],
     "tags": [],
     "class_list": [],
     "acf": {},
@@ -82,6 +96,19 @@
         {
           "source_url": "https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20elements/meet%20your%20favorite%20actor.png"
         }
+      ],
+      "wp:term": [
+        [
+          {
+            "id": 6,
+            "name": "בר ובת מצווה"
+          },
+          {
+            "id": 9,
+            "name": "בינה מלאכותית"
+          }
+        ],
+        []
       ]
     }
   },
@@ -115,7 +142,10 @@
     "template": "",
     "format": "standard",
     "meta": {},
-    "categories": [],
+    "categories": [
+      6,
+      8
+    ],
     "tags": [],
     "class_list": [],
     "acf": {},
@@ -125,6 +155,19 @@
         {
           "source_url": "https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20elements/singer-post.png"
         }
+      ],
+      "wp:term": [
+        [
+          {
+            "id": 6,
+            "name": "בר ובת מצווה"
+          },
+          {
+            "id": 8,
+            "name": "השראה ורעיונות"
+          }
+        ],
+        []
       ]
     }
   },
