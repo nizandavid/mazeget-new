@@ -11,7 +11,18 @@ const posts = (postsData as any[]).map(p => ({
   date: p.date,
   categories: p.categories,
   _embedded: p._embedded,
+  _terms: p._embedded?.['wp:term']?.[0] ?? [],
 }));
+
+// Build category map: id → name
+const catMap: Record<number, string> = {};
+for (const p of postsData as any[]) {
+  const terms = p._embedded?.['wp:term']?.[0] ?? [];
+  for (const t of terms) {
+    if (t.id && t.name) catMap[t.id] = t.name;
+  }
+}
+const catMapJson = JSON.stringify(catMap);
 const postsJson = JSON.stringify(posts);
 ---
 
@@ -46,6 +57,7 @@ const postsJson = JSON.stringify(posts);
         <span class="text-sm font-medium">טוען מאמרים...</span>
       </div>
       <script id="posts-data" type="application/json" set:html={postsJson}></script>
+      <script id="cat-map-data" type="application/json" set:html={catMapJson}></script>
       <div id="posts-error" class="text-center py-16 text-gray-400 text-sm" style="display:none;"></div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="posts-grid" style="display:none;"></div>
 
@@ -244,9 +256,47 @@ const postsJson = JSON.stringify(posts);
     updateGrid();
   }
 
+  function buildCategoryFilter(catMap: Record<string, string>) {
+    const usedCatIds = new Set<string>();
+    allPosts.forEach(p => p.categories.forEach((c: number) => usedCatIds.add(String(c))));
+
+    const cats = Object.entries(catMap).filter(([id]) => usedCatIds.has(id));
+    if (cats.length === 0) return;
+
+    const filterSection = document.getElementById('cat-filter')!;
+    const buttonsContainer = document.getElementById('cat-buttons')!;
+    filterSection.style.display = '';
+
+    // "הכל" button
+    const allBtn = document.createElement('button');
+    allBtn.textContent = 'הכל';
+    allBtn.className = 'px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-active';
+    allBtn.dataset.cat = 'all';
+    allBtn.addEventListener('click', () => setActiveCategory('all', allBtn));
+    buttonsContainer.appendChild(allBtn);
+
+    cats.forEach(([id, name]) => {
+      const btn = document.createElement('button');
+      btn.textContent = name;
+      btn.className = 'px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-inactive';
+      btn.dataset.cat = id;
+      btn.addEventListener('click', () => setActiveCategory(id, btn));
+      buttonsContainer.appendChild(btn);
+    });
+  }
+
+  function setActiveCategory(catId: string, activeBtn: HTMLElement) {
+    document.querySelectorAll('#cat-buttons button').forEach(btn => {
+      btn.className = 'px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-inactive';
+    });
+    activeBtn.className = 'px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-active';
+    renderPosts(catId === 'all' ? 'all' : Number(catId));
+  }
+
   function loadPosts() {
     const loading = document.getElementById('posts-loading')!;
     const posts = JSON.parse(document.getElementById('posts-data')!.textContent || '[]');
+    const catMap = JSON.parse(document.getElementById('cat-map-data')!.textContent || '{}');
 
     loading.style.display = 'none';
 
@@ -258,6 +308,7 @@ const postsJson = JSON.stringify(posts);
     }
 
     allPosts = posts;
+    buildCategoryFilter(catMap);
     renderPosts();
   }
 
