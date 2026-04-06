@@ -35,9 +35,7 @@ const others = showcases.filter(x => x.slug !== slug).slice(0, 3);
       <h1 style="font-family: 'Secular One', sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); color: white; margin: 0 0 1rem; line-height: 1.1;">
         {s.title}
       </h1>
-      <p style="color: rgba(255,255,255,.75); font-size: 1.05rem; line-height: 1.75; max-width: 560px; margin: 0 auto;">
-        {s.description}
-      </p>
+      <p style="color: rgba(255,255,255,.75); font-size: 1.05rem; line-height: 1.75; max-width: 560px; margin: 0 auto;" set:html={s.description}></p>
     </div>
   </section>
 

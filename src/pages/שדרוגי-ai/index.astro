@@ -52,7 +52,7 @@ const all = showcases;
           <h2 style="font-family: 'Secular One', sans-serif; font-size: clamp(1.7rem, 3.5vw, 2.4rem); color: #12023C; margin: 0 0 .75rem;">
             {s.title}
           </h2>
-          <p style="color: #555; font-size: 1rem; max-width: 560px; margin: 0 auto; line-height: 1.7;">{s.description}</p>
+          <p style="color: #555; font-size: 1rem; max-width: 560px; margin: 0 auto; line-height: 1.7;" set:html={s.description}></p>
         </div>
 
         <div class="reveal ai-compare-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center;">
@@ -128,7 +128,7 @@ const all = showcases;
             <div style="padding: 1.2rem 1.4rem;">
               <div style="color: #E879F9; font-size: .72rem; font-weight: 700; letter-spacing: 1.5px; margin-bottom: .5rem;">{s.badge}</div>
               <h3 style="color: white; font-weight: 800; font-size: 1rem; margin: 0 0 .5rem; line-height: 1.35;">{s.title}</h3>
-              <p style="color: rgba(255,255,255,.55); font-size: .82rem; margin: 0; line-height: 1.55;">{s.description}</p>
+              <p style="color: rgba(255,255,255,.55); font-size: .82rem; margin: 0; line-height: 1.55;" set:html={s.description}></p>
               <div style="margin-top: 1rem; color: #E879F9; font-size: .82rem; font-weight: 700;">ראו את הסיפור ←</div>
             </div>
           </a>
