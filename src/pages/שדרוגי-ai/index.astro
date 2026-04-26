@@ -446,13 +446,27 @@ const all = showcases;
     const totalPages = Math.ceil(total / PAGE_SIZE);
     let currentPage = 1;
 
+    function getPagesToShow(current, total) {
+      if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+      const pages = [];
+      pages.push(total);
+      if (current < total - 2) pages.push('...');
+      for (let i = Math.min(total - 1, current + 1); i >= Math.max(2, current - 1); i--) {
+        pages.push(i);
+      }
+      if (current > 3) pages.push('...');
+      pages.push(1);
+      return pages;
+    }
+
     function goToPage(page) {
       currentPage = page;
       items.forEach((item, i) => {
         const start = (page - 1) * PAGE_SIZE;
         item.style.display = (i >= start && i < start + PAGE_SIZE) ? 'block' : 'none';
       });
-      document.getElementById('ai-page-info').textContent = 'עמוד ' + page + ' מתוך ' + totalPages;
+      const info = document.getElementById('ai-page-info');
+      if (info) info.textContent = currentPage < totalPages ? 'עוד שדרוגי AI בעמודים הבאים ↓' : 'עמוד ' + currentPage + ' מתוך ' + totalPages;
       buildPagination();
       const section = document.getElementById('showcases-section');
       if (section) window.scrollTo({ top: section.offsetTop - 90, behavior: 'smooth' });
@@ -469,13 +483,20 @@ const all = showcases;
       prev.addEventListener('click', () => goToPage(currentPage - 1));
       container.appendChild(prev);
 
-      for (let i = 1; i <= totalPages; i++) {
-        const btn = document.createElement('button');
-        btn.className = 'page-btn' + (i === currentPage ? ' active' : '');
-        btn.textContent = String(i);
-        btn.addEventListener('click', () => goToPage(i));
-        container.appendChild(btn);
-      }
+      getPagesToShow(currentPage, totalPages).forEach(p => {
+        if (p === '...') {
+          const dots = document.createElement('span');
+          dots.textContent = '…';
+          dots.style.cssText = 'color:#A78BFA; font-weight:700; padding:0 .2rem; display:flex; align-items:center;';
+          container.appendChild(dots);
+        } else {
+          const btn = document.createElement('button');
+          btn.className = 'page-btn' + (p === currentPage ? ' active' : '');
+          btn.textContent = String(p);
+          btn.addEventListener('click', () => goToPage(p));
+          container.appendChild(btn);
+        }
+      });
 
       const next = document.createElement('button');
       next.className = 'page-btn arrow';
