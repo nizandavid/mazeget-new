@@ -339,7 +339,7 @@ const all = showcases;
 
 </Layout>
 
-<style>
+<style is:global>
   .page-btn {
     width: 38px; height: 38px;
     border-radius: 50%;
@@ -355,7 +355,6 @@ const all = showcases;
   .page-btn.active { background: #6C22FF; color: white; border-color: #6C22FF; box-shadow: 0 4px 14px rgba(108,34,255,.3); }
   .page-btn.arrow { font-size: 1.1rem; }
   .page-btn:disabled { opacity: .3; cursor: default; }
-  .showcase-full-link:hover { background: #6C22FF !important; color: white !important; }
   @media (max-width: 640px) {
     .ai-compare-grid {
       grid-template-columns: 1fr !important;
