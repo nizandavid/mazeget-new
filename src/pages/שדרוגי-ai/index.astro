@@ -69,10 +69,10 @@ const all = showcases;
             <div class="ai-compare-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; margin-bottom: 1.5rem;">
               <div style="text-align: center;">
                 <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(108,34,255,.12);">
-                  <img src={s.original!.src} alt={s.original!.alt} style="width: 100%; height: 300px; object-fit: cover; display: block;" loading="lazy" />
+                  <img src={s.type === 'selfie' ? s.portrait!.src : s.original!.src} alt={s.type === 'selfie' ? s.portrait!.alt : s.original!.alt} style="width: 100%; height: 300px; object-fit: cover; display: block;" loading="lazy" />
                 </div>
                 <div style="margin-top: 1rem; display: inline-block; background: white; color: #6C22FF; font-weight: 700; font-size: .85rem; padding: .45rem 1.2rem; border-radius: 50px; box-shadow: 0 2px 12px rgba(108,34,255,.15);">
-                  {s.original!.label}
+                  {s.type === 'selfie' ? s.portrait!.label : s.original!.label}
                 </div>
               </div>
               <div style="text-align: center;">
