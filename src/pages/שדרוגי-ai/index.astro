@@ -69,7 +69,7 @@ const all = showcases;
             <div class="ai-compare-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; margin-bottom: 1.5rem;">
               <div style="text-align: center;">
                 <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(108,34,255,.12);">
-                  <img src={s.type === 'selfie' ? s.portrait!.src : s.original!.src} alt={s.type === 'selfie' ? s.portrait!.alt : s.original!.alt} style="width: 100%; height: 300px; object-fit: cover; display: block;" loading="lazy" />
+                  <img src={s.type === 'selfie' ? s.portrait!.src : s.original!.src} alt={s.type === 'selfie' ? s.portrait!.alt : s.original!.alt} width="600" height="300" style="width: 100%; height: 300px; object-fit: cover; display: block;" loading="lazy" />
                 </div>
                 <div style="margin-top: 1rem; display: inline-block; background: white; color: #6C22FF; font-weight: 700; font-size: .85rem; padding: .45rem 1.2rem; border-radius: 50px; box-shadow: 0 2px 12px rgba(108,34,255,.15);">
                   {s.type === 'selfie' ? s.portrait!.label : s.original!.label}
@@ -86,7 +86,7 @@ const all = showcases;
                   )
                 ) : (
                   <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.5);">
-                    <img src={s.aiResult!.src} alt={s.aiResult!.alt || s.title} style="width: 100%; height: 300px; object-fit: cover; display: block;" loading="lazy" />
+                    <img src={s.aiResult!.src} alt={s.aiResult!.alt || s.title} width="600" height="300" style="width: 100%; height: 300px; object-fit: cover; display: block;" loading="lazy" />
                   </div>
                 )}
                 <div style="margin-top: 1rem; display: inline-block; background: linear-gradient(90deg, #E879F9, #6C22FF); color: white; font-weight: 700; font-size: .85rem; padding: .45rem 1.2rem; border-radius: 50px;">
@@ -100,7 +100,7 @@ const all = showcases;
             <div class="ai-compare-grid" style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; align-items: start; margin-bottom: 1.5rem;">
               <div style="text-align: center;">
                 <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(108,34,255,.12);">
-                  <img src={s.portrait!.src} alt={s.portrait!.alt} style="width: 100%; height: 280px; object-fit: cover; display: block;" loading="lazy" />
+                  <img src={s.portrait!.src} alt={s.portrait!.alt} width="600" height="280" style="width: 100%; height: 280px; object-fit: cover; display: block;" loading="lazy" />
                 </div>
                 <div style="margin-top: 1rem; display: inline-block; background: white; color: #6C22FF; font-weight: 700; font-size: .85rem; padding: .45rem 1.2rem; border-radius: 50px; box-shadow: 0 2px 12px rgba(108,34,255,.15);">
                   {s.portrait!.label || 'תמונה מקורית'}
@@ -110,7 +110,7 @@ const all = showcases;
                 {s.scenarios!.map(sc => (
                   <div style="text-align: center;">
                     <div style="border-radius: 16px; overflow: hidden; box-shadow: 0 0 0 3px #E879F9, 0 0 30px rgba(232,121,249,.35);">
-                      <img src={sc.src} alt={sc.alt} style="width: 100%; height: 200px; object-fit: cover; display: block;" loading="lazy" />
+                      <img src={sc.src} alt={sc.alt} width="300" height="200" style="width: 100%; height: 200px; object-fit: cover; display: block;" loading="lazy" />
                     </div>
                     <p style="margin-top: .6rem; color: #6C22FF; font-size: .82rem; font-weight: 600;">{sc.caption}</p>
                   </div>
@@ -125,7 +125,7 @@ const all = showcases;
                 {s.gridImages!.map(img => (
                   <div style="text-align: center;">
                     <div style="border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(108,34,255,.12);">
-                      <img src={img.src} alt={img.alt} style="width: 100%; height: 160px; object-fit: cover; display: block;" loading="lazy" />
+                      <img src={img.src} alt={img.alt} width="300" height="160" style="width: 100%; height: 160px; object-fit: cover; display: block;" loading="lazy" />
                     </div>
                     <p style="margin-top: .5rem; color: #555; font-size: .78rem;">{img.caption}</p>
                   </div>
