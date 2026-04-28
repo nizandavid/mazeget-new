@@ -61,7 +61,7 @@ function processContent(html: string): string {
     // URL גולמי של תמונה בתוך <p> → <img>
     .replace(
       /<p>(https?:\/\/[^\s<"]+\.(jpg|jpeg|png|gif|webp)[^<]*)<\/p>/gi,
-      '<p><img src="$1" style="max-width:100%;border-radius:8px;"></p>'
+      '<p><img src="$1" alt="" style="max-width:100%;border-radius:8px;"></p>'
     );
 }
 ---

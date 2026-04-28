@@ -79,6 +79,7 @@ const faqs = FAQ_MAP[page.category_key] ?? FAQ_MAP['other'];
 <Layout
   title={`${page.title} | Mazeget`}
   description={(page.description?.length > 155 ? page.description.slice(0, 152) + '...' : page.description) || `${page.section1?.slice(0, 150) || `מצגת וידאו ל${page.category_label} — מקצועית ומרגשת`}.`}
+  ogImage={page.thumbnail || undefined}
 >
   <Header />
 

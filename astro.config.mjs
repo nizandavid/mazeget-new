@@ -9,7 +9,11 @@ export default defineConfig({
   site: 'https://mazeget.com',
   output: 'static',
   adapter: vercel({ webAnalytics: false }),
-  integrations: [sitemap()],
+  integrations: [sitemap({
+    serialize(item) {
+      return { ...item, lastmod: new Date().toISOString().split('T')[0] };
+    }
+  })],
   vite: {
     plugins: [tailwindcss()]
   }

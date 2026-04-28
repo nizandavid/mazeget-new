@@ -23,6 +23,7 @@ export interface AIShowcase {
   videoCaption?: string;
   videoStyle?: 'landscape' | 'portrait';
   realPresentation?: { slug: string; label: string; timeCode?: string };
+  categoryLink?: { href: string; label: string };
 }
 
 export const showcases: AIShowcase[] = [
@@ -144,6 +145,32 @@ export const showcases: AIShowcase[] = [
     videoCaption: '⚽ ברכה מרונלדו — שנוצרה בעזרת AI',
     videoStyle: 'portrait',
     realPresentation: { slug: 'video-1119001336', label: 'מצגת הבר מצווה של שגיא', timeCode: '9:20' },
+  },
+  {
+    slug: 'golden-wedding',
+    title: 'חתונת הזהב של מירי ויוסי',
+    badge: 'וידאו AI',
+    description: 'תמונה ישנה מהחתונה — ו-AI החיה אותה לסרטון קסום. <strong>גם אתם יכולים לשחזר את רגעי הקסם מהחתונה שלכם, כל מה שאנחנו צריכים זה תמונה ישנה.</strong>',
+    thumbnail: `${R2}/wedding-movie.mp4`,
+    thumbnailIsVideo: true,
+    featured: false,
+    type: 'image-video',
+    original: { src: `${R2}/wedding-photo.jpg`, alt: 'תמונה מקורית מחתונת מירי ויוסי', label: 'תמונה מקורית מהחתונה' },
+    aiResult: { src: `${R2}/wedding-movie.mp4`, isVideo: true, label: 'סרטון שנוצר בעזרת AI' },
+    categoryLink: { href: '/מצגות/wedding', label: 'גלריית מצגות חתונות' },
+  },
+  {
+    slug: 'army-friends',
+    title: 'שמוליק חוגג 70 — הרגע ההוא עם חברי הצבא',
+    badge: 'וידאו AI',
+    description: 'המשפחה בחרה להנפיש את הרגע עם החברים שאיתו עד עצם היום הזה. <strong>יש לכם תמונה ישנה שמספרת סיפור? אנחנו נחיה אותה.</strong>',
+    thumbnail: `${R2}/army-movie.mp4`,
+    thumbnailIsVideo: true,
+    featured: false,
+    type: 'image-video',
+    original: { src: `${R2}/army-photo.jpg`, alt: 'תמונה מקורית של שמוליק עם חברי הצבא', label: 'תמונה מקורית מהצבא' },
+    aiResult: { src: `${R2}/army-movie.mp4`, isVideo: true, label: 'סרטון שנוצר בעזרת AI' },
+    categoryLink: { href: '/מצגות/birthday', label: 'גלריית מצגות ימי הולדת' },
   },
   {
     slug: 'world-travel',

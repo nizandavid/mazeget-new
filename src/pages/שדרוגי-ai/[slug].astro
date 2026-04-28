@@ -191,6 +191,19 @@ const others = showcases.filter(x => x.slug !== slug).slice(0, 3);
         </div>
       )}
 
+      {/* קישור לגלריה */}
+      {s.categoryLink && (
+        <div class="reveal" style="margin-top: 3rem; text-align: center;">
+          <a
+            href={s.categoryLink.href}
+            style="display: inline-flex; align-items: center; gap: .7rem; background: #F5F3FF; border: 2px solid #6C22FF; color: #6C22FF; font-weight: 700; font-size: .95rem; padding: .8rem 1.8rem; border-radius: 50px; text-decoration: none;"
+          >
+            🎬 לצפייה ב{s.categoryLink.label}
+            ←
+          </a>
+        </div>
+      )}
+
       {/* קישור למצגת האמיתית */}
       {s.realPresentation && (
         <div class="reveal" style="margin-top: 3rem; text-align: center;">
