@@ -22,7 +22,8 @@
     { "source": "/ai-test-2",                              "destination": "/שדרוגי-ai",          "permanent": true },
     { "source": "/ai-test-2/",                             "destination": "/שדרוגי-ai",          "permanent": true },
     { "source": "/%D7%9E%D7%A6%D7%92%D7%95%D7%AA/%D7%9E%D7%A6%D7%92%D7%95%D7%AA%20%D7%97%D7%AA%D7%95%D7%A0%D7%95%D7%AA", "destination": "/מצגות/wedding", "permanent": true },
-    { "source": "/%D7%9E%D7%A6%D7%92%D7%95%D7%AA/%D7%9E%D7%A6%D7%92%D7%95%D7%AA%20%D7%97%D7%AA%D7%95%D7%A0%D7%95%D7%AA/", "destination": "/מצגות/wedding", "permanent": true }
+    { "source": "/%D7%9E%D7%A6%D7%92%D7%95%D7%AA/%D7%9E%D7%A6%D7%92%D7%95%D7%AA%20%D7%97%D7%AA%D7%95%D7%A0%D7%95%D7%AA/", "destination": "/מצגות/wedding", "permanent": true },
+    { "source": "/:year(\\d{4})/:month(\\d{2})/:day(\\d{2})/:slug*", "destination": "/מאמרים/:slug", "permanent": true }
   ],
   "rewrites": [
     {
