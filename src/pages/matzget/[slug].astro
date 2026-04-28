@@ -74,13 +74,55 @@ const FAQ_MAP: Record<string, { q: string; a: string }[]> = {
 };
 
 const faqs = FAQ_MAP[page.category_key] ?? FAQ_MAP['other'];
+
+const pageUrl = `https://mazeget.com/matzget/${page.slug}`;
+const thumbnailUrl = `https://vumbnail.com/${page.vimeo_id}.jpg`;
+
+const videoSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": page.title,
+  "description": page.description || page.section1 || `מצגת וידאו ל${page.category_label} — מקצועית ומרגשת`,
+  "thumbnailUrl": thumbnailUrl,
+  "embedUrl": `https://player.vimeo.com/video/${page.vimeo_id}`,
+  "uploadDate": "2024-01-01",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mazeget",
+    "url": "https://mazeget.com",
+    "logo": { "@type": "ImageObject", "url": "https://mazeget.com/logo.png" }
+  }
+});
+
+const breadcrumbSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "דף הבית", "item": "https://mazeget.com" },
+    { "@type": "ListItem", "position": 2, "name": page.category_he, "item": `https://mazeget.com/מצגות/${page.category_key}` },
+    { "@type": "ListItem", "position": 3, "name": page.title, "item": pageUrl }
+  ]
+});
+
+const pageFaqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a }
+  }))
+});
 ---
 
 <Layout
   title={`${page.title} | Mazeget`}
   description={(page.description?.length > 155 ? page.description.slice(0, 152) + '...' : page.description) || `${page.section1?.slice(0, 150) || `מצגת וידאו ל${page.category_label} — מקצועית ומרגשת`}.`}
-  ogImage={page.thumbnail || undefined}
+  ogImage={thumbnailUrl}
 >
+  <script type="application/ld+json" is:inline set:html={videoSchema} slot="head"></script>
+  <script type="application/ld+json" is:inline set:html={breadcrumbSchema} slot="head"></script>
+  <script type="application/ld+json" is:inline set:html={pageFaqSchema} slot="head"></script>
   <Header />
 
   <!-- 1. כותרת + Breadcrumb -->
