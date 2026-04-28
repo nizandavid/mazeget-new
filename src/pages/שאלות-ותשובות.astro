@@ -66,6 +66,7 @@ const faqSchema = JSON.stringify({
 ---
 
 <Layout title="שאלות ותשובות — כל מה שצריך לדעת על מצגת וידאו" description="כל השאלות הנפוצות על הזמנת מצגת וידאו — זמני הכנה, העלאת תמונות, מוזיקה, תיקונים ותשלום. כאן תמצאו את כל התשובות.">
+  <script type="application/ld+json" is:inline set:html={faqSchema} slot="head"></script>
   <Header />
 
   <!-- Hero -->
@@ -109,7 +110,6 @@ const faqSchema = JSON.stringify({
   </section>
 
   <Contact />
-  <script type="application/ld+json" set:html={faqSchema}></script>
 </Layout>
 
 <script>
