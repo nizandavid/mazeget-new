@@ -22,7 +22,7 @@ const TAB_MAP: Record<string, string> = {
 };
 
 async function fetchTab(tabName: string): Promise<Video[]> {
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(tabName)}`;
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(tabName)}&t=${Date.now()}`;
   const res = await fetch(url);
   const text = await res.text();
 
@@ -86,13 +86,13 @@ export interface VideoPage {
 }
 
 export async function getVideoPages(): Promise<VideoPage[]> {
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('עמודי מצגות')}`;
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('עמודי מצגות')}&t=${Date.now()}`;
   const res = await fetch(url);
   const text = await res.text();
   const json = JSON.parse(text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1));
   const rows: any[] = json.table?.rows ?? [];
 
-  return rows
+  const all = rows
     .map((row) => {
       const c = row.c ?? [];
       const val = (i: number) => String(c[i]?.v ?? '');
@@ -123,4 +123,13 @@ export async function getVideoPages(): Promise<VideoPage[]> {
       };
     })
     .filter(p => p.vimeo_id && p.slug && /^\d+$/.test(p.vimeo_id));
+
+  // deduplicate by vimeo_id — prefer row with most content
+  const best = new Map<string, typeof all[0]>();
+  for (const p of all) {
+    const existing = best.get(p.vimeo_id);
+    const score = (x: typeof p) => (x.section1 ? 3 : 0) + (x.title ? 1 : 0) + (x.description ? 1 : 0);
+    if (!existing || score(p) > score(existing)) best.set(p.vimeo_id, p);
+  }
+  return Array.from(best.values());
 }
