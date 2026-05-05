@@ -5,6 +5,7 @@ import Contact from '../../components/Contact.astro';
 import { showcases } from '../../data/ai-showcases';
 
 const all = showcases;
+const allTags = [...new Set(showcases.flatMap(s => s.tags ?? []))];
 ---
 
 <Layout
@@ -50,8 +51,13 @@ const all = showcases;
         <p style="color: #6C22FF; font-size: 1rem;" id="ai-page-info"></p>
       </div>
 
-      <!-- Tag filter chips (built by JS) -->
-      <div id="ai-tag-filter" style="display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin-bottom:2.5rem;"></div>
+      <!-- Tag filter chips -->
+      <div id="ai-tag-filter" style="display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin-bottom:2.5rem;">
+        <button class="tag-chip active" data-tag="">הכל</button>
+        {allTags.map(tag => (
+          <button class="tag-chip" data-tag={tag}>{tag}</button>
+        ))}
+      </div>
 
       {all.map((s, i) => (
         <div class="showcase-item" data-index={i} data-tags={s.tags?.join(',') || ''} style="display: none; margin-bottom: 3.5rem; background: white; border-radius: 28px; padding: 2.5rem; box-shadow: 0 4px 32px rgba(108,34,255,.08);">
@@ -481,35 +487,15 @@ const all = showcases;
     const allItems = Array.from(document.querySelectorAll('.showcase-item'));
     let activeTag = null;
 
-    // Build tag chips
-    const tagSet = new Set();
-    allItems.forEach(item => (item.dataset.tags || '').split(',').filter(Boolean).forEach(t => tagSet.add(t.trim())));
-    const filterEl = document.getElementById('ai-tag-filter');
-    if (filterEl && tagSet.size > 0) {
-      const allBtn = makeChip('הכל', true);
-      allBtn.addEventListener('click', () => setTag(null, allBtn));
-      filterEl.appendChild(allBtn);
-      tagSet.forEach(tag => {
-        const btn = makeChip(tag, false);
-        btn.addEventListener('click', () => setTag(tag, btn));
-        filterEl.appendChild(btn);
+    // Wire up tag chip clicks
+    document.querySelectorAll('#ai-tag-filter .tag-chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#ai-tag-filter .tag-chip').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeTag = btn.dataset.tag || null;
+        goToPage(1);
       });
-    }
-
-    function makeChip(label, active) {
-      const btn = document.createElement('button');
-      btn.textContent = label;
-      btn.className = 'tag-chip' + (active ? ' active' : '');
-      return btn;
-    }
-
-    function setTag(tag, clickedBtn) {
-      activeTag = tag;
-      currentPage = 1;
-      document.querySelectorAll('.tag-chip').forEach(b => b.classList.remove('active'));
-      clickedBtn.classList.add('active');
-      goToPage(1);
-    }
+    });
 
     function getFiltered() {
       if (!activeTag) return allItems;
