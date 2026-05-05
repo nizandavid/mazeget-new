@@ -24,6 +24,7 @@ export interface AIShowcase {
   videoStyle?: 'landscape' | 'portrait';
   realPresentation?: { slug: string; label: string; timeCode?: string };
   categoryLink?: { href: string; label: string };
+  tags?: string[];
 }
 
 export const showcases: AIShowcase[] = [
@@ -39,6 +40,7 @@ export const showcases: AIShowcase[] = [
     original: { src: `${R2}/thailand.png`, alt: 'תמונה מקורית מהלקוח — תמונת תאילנד', label: 'תמונה מקורית מהלקוח' },
     aiResult: { src: `${R2}/thailand.mp4`, isVideo: true, label: 'סרטון שנוצר בעזרת AI' },
     realPresentation: { slug: 'video-1141048032', label: 'המצגת המלאה' },
+    tags: ['תמונה חיה', 'טיולים'],
   },
   {
     slug: 'noia',
@@ -53,6 +55,7 @@ export const showcases: AIShowcase[] = [
     original: { src: `${R2}/Noia-overlay.png`, alt: '6 תמונות של נויה בגילאים שונים', label: '6 תמונות מקוריות מהמשפחה' },
     aiResult: { src: `${R2}/noia-stage.mp4`, isVideo: true, label: 'סרטון טרנספורמציה שנוצר בעזרת AI' },
     realPresentation: { slug: 'video-1155967673', label: 'מצגת הבת מצווה של נויה' },
+    tags: ['תמונה חיה', 'טרנספורמציה', 'בת מצווה'],
   },
   {
     slug: 'alex',
@@ -71,6 +74,7 @@ export const showcases: AIShowcase[] = [
       { src: `${R2}/alex-2.jpg`, alt: 'אלכס בקזינו — תמונת AI', caption: '🎰 להמר בקזינו' },
     ],
     realPresentation: { slug: 'video-1156459544', label: 'מצגת הפרישה של אלכס' },
+    tags: ['תמונות AI', 'פרישה'],
   },
   {
     slug: 'football',
@@ -88,6 +92,7 @@ export const showcases: AIShowcase[] = [
     mainVideo: `${R2}/football.mp4`,
     videoCaption: '🎬 וידאו סלפי חי — שנוצר בעזרת AI',
     videoStyle: 'landscape',
+    tags: ['סלפי', 'תמונות AI', 'בר מצווה', 'ספורט'],
   },
   {
     slug: 'wicked',
@@ -100,6 +105,7 @@ export const showcases: AIShowcase[] = [
     type: 'selfie',
     portrait: { src: `${R2}/shai.png`, alt: 'תמונה מקורית של שי', label: 'תמונה מקורית' },
     aiResult: { src: `${R2}/meet%20your%20favorite%20actor.png`, alt: 'שי בסט הצילומים של Wicked ו-Harry Potter', label: '✨ AI הביא אותה לסט' },
+    tags: ['תמונות AI', 'סלפי', 'בת מצווה', 'קולנוע'],
   },
   {
     slug: 'paris',
@@ -113,6 +119,7 @@ export const showcases: AIShowcase[] = [
     original: { src: `${R2}/paris.jpeg`, alt: 'נער יושב על ספסל בתל אביב', label: '📍 ספסל בתל אביב' },
     aiResult: { src: `${R2}/paris.mp4`, isVideo: true, label: '🗼 פריז — שנוצר בעזרת AI' },
     realPresentation: { slug: 'video-1135018876', label: 'המצגת המלאה' },
+    tags: ['תמונה חיה', 'בר מצווה'],
   },
   {
     slug: 'singers',
@@ -130,6 +137,7 @@ export const showcases: AIShowcase[] = [
     mainVideo: `${R2}/singer%20video.mp4`,
     videoCaption: '🎬 וידאו סלפי חי — שנוצר בעזרת AI',
     videoStyle: 'portrait',
+    tags: ['סלפי', 'תמונות AI', 'בת מצווה', 'מוסיקה'],
   },
   {
     slug: 'ronaldo',
@@ -145,6 +153,7 @@ export const showcases: AIShowcase[] = [
     videoCaption: '⚽ ברכה מרונלדו — שנוצרה בעזרת AI',
     videoStyle: 'portrait',
     realPresentation: { slug: 'video-1119001336', label: 'מצגת הבר מצווה של שגיא', timeCode: '9:20' },
+    tags: ['ברכה מכוכב', 'בר מצווה', 'ספורט'],
   },
   {
     slug: 'golden-wedding',
@@ -158,6 +167,7 @@ export const showcases: AIShowcase[] = [
     original: { src: `${R2}/wedding-photo.jpg`, alt: 'תמונה מקורית מחתונת מירי ויוסי', label: 'תמונה מקורית מהחתונה' },
     aiResult: { src: `${R2}/wedding-movie.mp4`, isVideo: true, label: 'סרטון שנוצר בעזרת AI' },
     categoryLink: { href: '/מצגות/wedding', label: 'גלריית מצגות חתונות' },
+    tags: ['תמונה חיה', 'חתונה'],
   },
   {
     slug: 'alon-astronaut',
@@ -176,6 +186,7 @@ export const showcases: AIShowcase[] = [
     videoCaption: '👨‍🚀 ברכה מהאסטרונאוטים — שנוצרה בעזרת AI',
     videoStyle: 'portrait',
     realPresentation: { slug: '1183711457', label: 'מצגת הבר מצווה של אלון' },
+    tags: ['תמונות AI', 'ברכה מכוכב', 'בר מצווה', 'חלל'],
   },
   {
     slug: 'army-friends',
@@ -189,6 +200,7 @@ export const showcases: AIShowcase[] = [
     original: { src: `${R2}/army-photo.jpg`, alt: 'תמונה מקורית של שמוליק עם חברי הצבא', label: 'תמונה מקורית מהצבא' },
     aiResult: { src: `${R2}/army-movie.mp4`, isVideo: true, label: 'סרטון שנוצר בעזרת AI' },
     categoryLink: { href: '/מצגות/birthday', label: 'גלריית מצגות ימי הולדת' },
+    tags: ['תמונה חיה', 'יום הולדת'],
   },
   {
     slug: 'world-travel',
@@ -202,5 +214,6 @@ export const showcases: AIShowcase[] = [
     mainVideo: `${R2}/world-places.mp4`,
     videoCaption: '🌍 כל העולם — מתמונה אחת שהמשפחה שלחה',
     videoStyle: 'portrait',
+    tags: ['תמונות AI', 'פרישה'],
   },
 ];
