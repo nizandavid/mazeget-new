@@ -160,10 +160,22 @@ const others = showcases.filter(x => x.slug !== slug).slice(0, 3);
           </div>
           <div class="reveal" style="text-align: center;">
             {s.videoStyle === 'portrait' ? (
-              <video src={s.mainVideo} autoplay loop muted playsinline style="height: auto; max-height: 65vh; max-width: 52%; border-radius: 20px; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.45); display: inline-block;"></video>
+              <div style="position:relative; display:inline-block;">
+                <video src={s.mainVideo} autoplay loop muted playsinline style="height: auto; max-height: 65vh; max-width: 100%; border-radius: 20px; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.45); display: block;"></video>
+                {s.hasSound && (
+                  <button class="sound-btn" onclick="toggleSound(this)" title="הפעל צליל">
+                    <svg viewBox="0 0 24 24" fill="white" width="20" height="20"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.9 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                  </button>
+                )}
+              </div>
             ) : (
-              <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.45);">
+              <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.45); position:relative;">
                 <video src={s.mainVideo} autoplay loop muted playsinline style="width: 100%; height: auto; display: block;"></video>
+                {s.hasSound && (
+                  <button class="sound-btn" onclick="toggleSound(this)" title="הפעל צליל">
+                    <svg viewBox="0 0 24 24" fill="white" width="20" height="20"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.9 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                  </button>
+                )}
               </div>
             )}
             <p style="margin-top: 1rem; font-weight: 700; color: #6C22FF; font-size: .95rem;">{s.videoCaption}</p>
@@ -174,19 +186,18 @@ const others = showcases.filter(x => x.slug !== slug).slice(0, 3);
       {/* single-video layout */}
       {s.type === 'single-video' && (
         <div class="reveal" style="text-align: center;">
-          <video
-            id="main-video"
-            src={s.mainVideo}
-            autoplay loop muted playsinline
-            style="height: auto; max-height: 65vh; max-width: 52%; border-radius: 20px; box-shadow: 0 0 0 3px #E879F9, 0 0 50px rgba(232,121,249,.5), 0 12px 50px rgba(108,34,255,.3); display: inline-block;"
-          ></video>
-          {s.hasSound && (
-            <div style="margin-top: 1.2rem;">
-              <button id="sound-btn" onclick="const v=document.getElementById('main-video');v.muted=!v.muted;this.textContent=v.muted?'🔇 לחץ לשמוע את רונלדו מברך':'🔊 מושתק — לחץ שוב לשמוע';" style="background: linear-gradient(90deg,#E879F9,#6C22FF); color: white; font-weight: 800; font-size: 1rem; padding: .7rem 2rem; border-radius: 50px; border: none; cursor: pointer; box-shadow: 0 6px 24px rgba(232,121,249,.4);">
-                🔇 לחץ לשמוע את רונלדו מברך
+          <div style="position:relative; display:inline-block;">
+            <video
+              src={s.mainVideo}
+              autoplay loop muted playsinline
+              style="height: auto; max-height: 65vh; max-width: 52vw; border-radius: 20px; box-shadow: 0 0 0 3px #E879F9, 0 0 50px rgba(232,121,249,.5), 0 12px 50px rgba(108,34,255,.3); display: block;"
+            ></video>
+            {s.hasSound && (
+              <button class="sound-btn" onclick="toggleSound(this)" title="הפעל צליל">
+                <svg viewBox="0 0 24 24" fill="white" width="20" height="20"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.9 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
               </button>
-            </div>
-          )}
+            )}
+          </div>
           <p style="text-align: center; margin-top: 1rem; color: #6C22FF; font-weight: 700; font-size: .95rem;">{s.videoCaption}</p>
         </div>
       )}
@@ -269,3 +280,40 @@ const others = showcases.filter(x => x.slug !== slug).slice(0, 3);
   <Contact />
 
 </Layout>
+
+<style>
+  .sound-btn {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    z-index: 10;
+    background: rgba(220, 38, 38, 0.82);
+    border: none;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  .sound-btn:hover {
+    transform: scale(1.1);
+  }
+</style>
+
+<script is:inline>
+  var SVG_MUTED = '<svg viewBox="0 0 24 24" fill="white" width="20" height="20"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.9 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>';
+  var SVG_SOUND = '<svg viewBox="0 0 24 24" fill="white" width="20" height="20"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
+
+  function toggleSound(btn) {
+    var video = btn.previousElementSibling;
+    if (!video || video.tagName !== 'VIDEO') return;
+    video.muted = !video.muted;
+    btn.innerHTML = video.muted ? SVG_MUTED : SVG_SOUND;
+    btn.style.background = video.muted ? 'rgba(220,38,38,.82)' : 'rgba(34,197,94,.85)';
+    btn.title = video.muted ? 'הפעל צליל' : 'השתק';
+  }
+</script>
