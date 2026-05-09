@@ -4,42 +4,216 @@
   <meta charset="UTF-8">
 </head>
 <body>
-  <div data-composition-id="mazeget-promo" data-width="1920" data-height="1080" data-start="0">
+  <div data-composition-id="mazeget-promo" data-width="1920" data-height="1080">
 
     <!-- Scene 1: Intro (0–4.5s) -->
-    <div id="s1" class="clip" data-start="0" data-duration="4.5" data-track-index="0"></div>
+    <div id="s1" data-start="0" data-duration="4.5" data-track-index="0">
+      <div class="scene-content intro-content">
+        <img class="intro-logo" src="assets/logo-matzget.png" alt="Mazeget">
+        <p class="intro-tagline">תעשו וואו לאורחים שלכם</p>
+      </div>
+    </div>
 
     <!-- Transition 1 (4.0–5.0s) -->
-    <div id="t1" class="clip" data-start="4.0" data-duration="1.0" data-track-index="1"></div>
+    <div id="t1" class="flash" data-start="4.0" data-duration="1.0" data-track-index="1"></div>
 
     <!-- Scene 2: Bar Mitzvah (4.5–12.5s) -->
-    <div id="s2" class="clip" data-start="4.5" data-duration="8" data-track-index="0"></div>
+    <div id="s2" class="cat-scene" data-start="4.5" data-duration="8" data-track-index="0">
+      <div class="scene-content cat-content">
+        <div class="cat-header">
+          <span class="cat-emoji">💜</span>
+          <h2 class="cat-title bar-title">בר מצווה</h2>
+        </div>
+        <div class="thumbs-row">
+          <img class="thumb" src="assets/bar-1.jpg" alt="">
+          <img class="thumb" src="assets/bar-2.jpg" alt="">
+          <img class="thumb" src="assets/bar-3.jpg" alt="">
+        </div>
+      </div>
+    </div>
 
     <!-- Transition 2 (12.0–13.0s) -->
-    <div id="t2" class="clip" data-start="12.0" data-duration="1.0" data-track-index="1"></div>
+    <div id="t2" class="flash" data-start="12.0" data-duration="1.0" data-track-index="1"></div>
 
     <!-- Scene 3: Bat Mitzvah (12.5–20.5s) -->
-    <div id="s3" class="clip" data-start="12.5" data-duration="8" data-track-index="0"></div>
+    <div id="s3" class="cat-scene" data-start="12.5" data-duration="8" data-track-index="0">
+      <div class="scene-content cat-content">
+        <div class="cat-header">
+          <span class="cat-emoji">🩷</span>
+          <h2 class="cat-title bat-title">בת מצווה</h2>
+        </div>
+        <div class="thumbs-row">
+          <img class="thumb" src="assets/bat-1.jpg" alt="">
+          <img class="thumb" src="assets/bat-2.jpg" alt="">
+          <img class="thumb" src="assets/bat-3.jpg" alt="">
+        </div>
+      </div>
+    </div>
 
     <!-- Transition 3 (20.0–21.0s) -->
-    <div id="t3" class="clip" data-start="20.0" data-duration="1.0" data-track-index="1"></div>
+    <div id="t3" class="flash" data-start="20.0" data-duration="1.0" data-track-index="1"></div>
 
     <!-- Scene 4: Birthdays (20.5–28.5s) -->
-    <div id="s4" class="clip" data-start="20.5" data-duration="8" data-track-index="0"></div>
+    <div id="s4" class="cat-scene" data-start="20.5" data-duration="8" data-track-index="0">
+      <div class="scene-content cat-content">
+        <div class="cat-header">
+          <span class="cat-emoji">🎂</span>
+          <h2 class="cat-title bday-title">ימי הולדת</h2>
+        </div>
+        <div class="thumbs-row">
+          <img class="thumb" src="assets/bday-1.jpg" alt="">
+          <img class="thumb" src="assets/bday-2.jpg" alt="">
+          <img class="thumb" src="assets/bday-3.jpg" alt="">
+        </div>
+      </div>
+    </div>
 
     <!-- Transition 4 (28.0–29.0s) -->
-    <div id="t4" class="clip" data-start="28.0" data-duration="1.0" data-track-index="1"></div>
+    <div id="t4" class="flash" data-start="28.0" data-duration="1.0" data-track-index="1"></div>
 
     <!-- Scene 5: Energy Burst (28.5–34.5s) -->
-    <div id="s5" class="clip" data-start="28.5" data-duration="6" data-track-index="0"></div>
+    <div id="s5" data-start="28.5" data-duration="6" data-track-index="0">
+      <div class="scene-content burst-content">
+        <img class="burst-thumb" src="assets/bar-1.jpg" alt="">
+        <img class="burst-thumb" src="assets/bat-1.jpg" alt="">
+        <img class="burst-thumb" src="assets/bday-1.jpg" alt="">
+        <img class="burst-thumb" src="assets/bar-2.jpg" alt="">
+        <img class="burst-thumb" src="assets/bat-2.jpg" alt="">
+        <img class="burst-thumb" src="assets/bday-2.jpg" alt="">
+        <img class="burst-thumb" src="assets/bar-3.jpg" alt="">
+        <img class="burst-thumb" src="assets/bat-3.jpg" alt="">
+        <img class="burst-thumb" src="assets/bday-3.jpg" alt="">
+      </div>
+    </div>
 
     <!-- Transition 5 (34.0–35.0s) -->
-    <div id="t5" class="clip" data-start="34.0" data-duration="1.0" data-track-index="1"></div>
+    <div id="t5" class="flash" data-start="34.0" data-duration="1.0" data-track-index="1"></div>
 
     <!-- Scene 6: Outro (34.5–40.5s) -->
-    <div id="s6" class="clip" data-start="34.5" data-duration="6" data-track-index="0"></div>
+    <div id="s6" data-start="34.5" data-duration="6" data-track-index="0">
+      <div class="scene-content outro-content">
+        <img class="outro-logo" src="assets/logo-matzget.png" alt="Mazeget">
+        <p class="outro-url">mazeget.com</p>
+        <div class="outro-cta">צרו קשר עכשיו ←</div>
+      </div>
+    </div>
 
-    <style></style>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      [data-composition-id="mazeget-promo"] {
+        font-family: 'Heebo', sans-serif;
+        direction: rtl;
+      }
+
+      /* Shared scene layout */
+      .scene-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 120px;
+      }
+
+      /* --- Scene 1: Intro --- */
+      #s1 { background: linear-gradient(135deg, #1e0a4a 0%, #4c1d95 50%, #7c3aed 100%); }
+      .intro-content { flex-direction: column; gap: 36px; }
+      .intro-logo { height: 110px; object-fit: contain; }
+      .intro-tagline {
+        font-family: 'Secular One', sans-serif;
+        font-size: 80px;
+        color: white;
+        text-align: center;
+        text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+        max-width: 1400px;
+      }
+
+      /* --- Transition flash overlay --- */
+      .flash { background: #000; width: 100%; height: 100%; }
+
+      /* --- Category scenes (shared) --- */
+      #s2 { background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+      #s3 { background: linear-gradient(135deg, #fdf2f8, #fce7f3); }
+      #s4 { background: linear-gradient(135deg, #fffbeb, #fef3c7); }
+
+      .cat-content {
+        flex-direction: column;
+        gap: 40px;
+        justify-content: center;
+      }
+
+      .cat-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+      }
+      .cat-emoji { font-size: 88px; line-height: 1; }
+      .cat-title {
+        font-family: 'Secular One', sans-serif;
+        font-size: 100px;
+        line-height: 1.1;
+        text-align: center;
+      }
+      .bar-title { color: #4c1d95; }
+      .bat-title { color: #9d174d; }
+      .bday-title { color: #92400e; }
+
+      .thumbs-row {
+        display: flex;
+        flex-direction: row;
+        gap: 18px;
+        width: 100%;
+      }
+      .thumb {
+        flex: 1;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        border-radius: 14px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      }
+
+      /* --- Scene 5: Energy Burst --- */
+      #s5 { background: linear-gradient(135deg, #1e0a4a, #4c1d95); }
+      .burst-content {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 14px;
+        padding: 40px;
+        align-items: stretch;
+      }
+      .burst-thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      }
+
+      /* --- Scene 6: Outro --- */
+      #s6 { background: linear-gradient(135deg, #1e0a4a, #4c1d95); }
+      .outro-content { flex-direction: column; gap: 28px; }
+      .outro-logo { height: 90px; object-fit: contain; }
+      .outro-url {
+        font-family: 'Heebo', sans-serif;
+        font-size: 52px;
+        color: #c4b5fd;
+        letter-spacing: 2px;
+      }
+      .outro-cta {
+        font-family: 'Secular One', sans-serif;
+        font-size: 44px;
+        color: white;
+        background: #7c3aed;
+        padding: 22px 64px;
+        border-radius: 50px;
+        box-shadow: 0 8px 32px rgba(124, 58, 237, 0.5);
+      }
+    </style>
+
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <script>
       window.__timelines = window.__timelines || {};
