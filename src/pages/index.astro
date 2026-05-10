@@ -244,7 +244,7 @@ try {
       </div>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem;" class="reveal thumb-grid">
         {barMitzvaVideos.map(v => (
-          <div class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || `video-${v.vimeo_id}`}>
+          <div class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || ''}>
             <div class="video-thumb-wrap" style="background:#1a0533;">
               {v.thumbnail && <img src={v.thumbnail} alt={v.title} class="video-thumb-img" width="640" height="360" loading="lazy" />}
               <div class="video-play-overlay">
@@ -279,7 +279,7 @@ try {
       </div>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem;" class="reveal thumb-grid">
         {batMitzvaVideos.map(v => (
-          <div class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || `video-${v.vimeo_id}`}>
+          <div class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || ''}>
             <div class="video-thumb-wrap" style="background:#500724;">
               {v.thumbnail && <img src={v.thumbnail} alt={v.title} class="video-thumb-img" width="640" height="360" loading="lazy" />}
               <div class="video-play-overlay">
@@ -314,7 +314,7 @@ try {
       </div>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem;" class="reveal thumb-grid">
         {birthdayVideos.map(v => (
-          <div class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || `video-${v.vimeo_id}`}>
+          <div class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || ''}>
             <div class="video-thumb-wrap" style="background:#451a03;">
               {v.thumbnail && <img src={v.thumbnail} alt={v.title} class="video-thumb-img" width="640" height="360" loading="lazy" />}
               <div class="video-play-overlay">
@@ -349,7 +349,7 @@ try {
       </div>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem;" class="reveal thumb-grid">
         {extrasVideos.map(v => (
-          <div class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || `video-${v.vimeo_id}`}>
+          <div class="video-card" data-video-id={v.vimeo_id} data-video-type="vimeo" data-page-slug={slugMap.get(v.vimeo_id) || ''}>
             <div class="video-thumb-wrap" style="background:#042f2e;">
               {v.thumbnail && <img src={v.thumbnail} alt={v.title} class="video-thumb-img" width="640" height="360" loading="lazy" />}
               <div class="video-play-overlay">

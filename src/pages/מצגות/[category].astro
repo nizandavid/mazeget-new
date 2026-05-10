@@ -137,7 +137,7 @@ const breadcrumbSchema = JSON.stringify({
                 data-video-id={v.vimeo_id}
                 data-subcategory={v.subcategory || ''}
                 data-index={i}
-                data-page-slug={slugMap.get(v.vimeo_id) || `video-${v.vimeo_id}`}
+                data-page-slug={pageMap.has(v.vimeo_id) ? `video-${v.vimeo_id}` : ''}
                 data-topic={pageMap.get(v.vimeo_id)?.detail_style || ''}
                 data-intro={pageMap.get(v.vimeo_id)?.detail_elements || ''}
                 style={i >= 6 ? 'display:none' : ''}
