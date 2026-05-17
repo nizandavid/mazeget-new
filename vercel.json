@@ -2,6 +2,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "astro",
+  "trailingSlash": false,
   "redirects": [
     { "source": "/מצגת-לבר-מצווה",                        "destination": "/מצגות/bar_mitzva",  "permanent": true },
     { "source": "/מצגת-לבר-מצווה/",                       "destination": "/מצגות/bar_mitzva",  "permanent": true },
