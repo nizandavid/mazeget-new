@@ -155,6 +155,14 @@ const breadcrumbSchema = JSON.stringify({
                 <div class="p-4 text-right">
                   <h3 class="font-bold text-[#12023C] mb-1">{v.title}</h3>
                   {v.description && <p class="text-sm text-gray-500 leading-relaxed">{v.description}</p>}
+                  {pageMap.has(v.vimeo_id) && (
+                    <a
+                      href={`/matzget/video-${v.vimeo_id}`}
+                      class="inline-block mt-2 text-sm text-[#6C22FF] font-semibold hover:underline"
+                    >
+                      לפרטים נוספים ←
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
