@@ -28,20 +28,11 @@ try {
   </div>
 
   <!-- HERO -->
-  <section style="position:relative; overflow:hidden; min-height:92vh; display:flex; align-items:center; justify-content:center;">
-    <!-- Video background -->
-    <video
-      id="hero-bg-video"
-      src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20soccer%20compressed.mp4"
-      autoplay loop muted playsinline
-      style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;"
-    ></video>
+  <section style="padding: 2.5rem 6% 2rem; text-align:center; position:relative; background:linear-gradient(145deg,#1e0a4a 0%,#4c1d95 55%,#7c3aed 100%); overflow:hidden;">
+    <div class="section-orb" style="width:600px;height:600px;background:#6d28d9;top:-200px;right:-150px;animation-delay:0s;opacity:0.3;"></div>
+    <div class="section-orb" style="width:400px;height:400px;background:#EC4899;bottom:-100px;left:-100px;animation-delay:-8s;opacity:0.2;"></div>
 
-    <!-- Dark gradient overlay -->
-    <div style="position:absolute; inset:0; background:linear-gradient(to bottom, rgba(20,4,60,.75) 0%, rgba(76,29,149,.55) 50%, rgba(20,4,60,.88) 100%); z-index:1;"></div>
-
-    <!-- Content -->
-    <div style="position:relative; z-index:2; max-width:860px; margin:0 auto; text-align:center; padding:6rem 1.5rem;">
+    <div style="max-width:860px; margin:0 auto; position:relative; z-index:1;">
 
       <!-- Eyebrow -->
       <div style="display:inline-flex; align-items:center; gap:.6rem; background:rgba(255,255,255,.15); border-radius:50px; padding:.4rem 1.1rem; font-size:.78rem; font-weight:700; color:white; margin-bottom:1.8rem; letter-spacing:.5px;" class="reveal">
@@ -50,13 +41,13 @@ try {
       </div>
 
       <!-- Title -->
-      <h1 style="font-size:clamp(2.8rem,5.5vw,4.6rem); font-weight:900; line-height:1.12; margin-bottom:1.4rem; color:white; letter-spacing:-.5px; text-shadow:0 2px 20px rgba(0,0,0,.4);" class="reveal">
+      <h1 style="font-size:clamp(2.8rem,5.5vw,4.6rem); font-weight:900; line-height:1.12; margin-bottom:1.4rem; color:white; letter-spacing:-.5px;" class="reveal">
         כל אירוע הוא סיפור.<br>
         <em class="shimmer-text hero-shimmer" style="font-style:normal;">אנחנו הופכים אותו למצגת וידאו שמרגשת את כולם.</em>
       </h1>
 
       <!-- Subtitle -->
-      <p style="font-size:1.1rem; color:rgba(255,255,255,.85); line-height:1.9; margin-bottom:1.6rem; max-width:560px; margin-inline:auto; margin-top:0; text-shadow:0 1px 8px rgba(0,0,0,.3);" class="reveal">
+      <p style="font-size:1.1rem; color:rgba(255,255,255,.78); line-height:1.9; margin-bottom:1.6rem; max-width:560px; margin-inline:auto; margin-top:0;" class="reveal">
         מצגות וידאו מקצועיות עם עריכה מדויקת, מוזיקה מרגשת וטכנולוגיית AI יצירתית.
       </p>
 
@@ -65,22 +56,16 @@ try {
         <a href="#contact" class="hero-cta-primary">קבלו הצעת מחיר</a>
         <a href="#gallery" class="hero-cta-secondary">▷ צפו בדוגמאות</a>
       </div>
-      <p style="margin-top:1rem; color:rgba(255,255,255,.7); font-size:.85rem;" class="reveal">
+      <p style="margin-top:1rem; color:rgba(255,255,255,.6); font-size:.85rem;" class="reveal">
         מצגת בסיסית עולה <strong style="color:white;">360₪ בלבד!</strong>
       </p>
     </div>
-
-    <!-- Sound toggle button -->
-    <button id="hero-bg-sound-btn" onclick="toggleHeroBgSound()" title="הפעל צליל"
-      style="position:absolute; bottom:1.5rem; left:1.5rem; z-index:3; background:rgba(0,0,0,.45); border:1px solid rgba(255,255,255,.25); border-radius:50%; width:44px; height:44px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s; backdrop-filter:blur(6px);">
-      <svg viewBox="0 0 24 24" fill="white" width="20" height="20"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.9 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-    </button>
   </section>
 
   <!-- VIDEO — מצד לצד, ללא שוליים -->
   <div style="position:relative; line-height:0; background:#F5F3FF; display:flex; justify-content:center;">
     <video id="hero-video" autoplay muted loop playsinline style="width:75%; display:block; object-fit:contain;">
-      <source src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/Ai-story-web.mp4" type="video/mp4" />
+      <source src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20soccer%20compressed.mp4" type="video/mp4" />
     </video>
     <!-- כפתור סאונד -->
     <div style="position:absolute; bottom:-28px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:6px; z-index:10;">
@@ -409,18 +394,6 @@ try {
 </Layout>
 
 <script>
-  // ── Hero background video sound toggle ─────────────
-  function toggleHeroBgSound() {
-    const video = document.getElementById('hero-bg-video') as HTMLVideoElement;
-    const btn   = document.getElementById('hero-bg-sound-btn');
-    if (!video || !btn) return;
-    video.muted = !video.muted;
-    btn.innerHTML = video.muted
-      ? '<svg viewBox="0 0 24 24" fill="white" width="20" height="20"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.9 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>'
-      : '<svg viewBox="0 0 24 24" fill="white" width="20" height="20"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
-    btn.style.background = video.muted ? 'rgba(0,0,0,.45)' : 'rgba(34,197,94,.75)';
-  }
-
   // ── Popup ──────────────────────────────────────────
   function closePopup() {
     const el = document.getElementById('popup-overlay');
