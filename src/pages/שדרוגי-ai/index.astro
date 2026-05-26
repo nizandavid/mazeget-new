@@ -521,12 +521,13 @@ const allTags = [...new Set(all.flatMap(s => s.tags ?? []))];
       const info = document.getElementById('ai-page-info');
       if (info) info.textContent = page < totalPages ? 'עוד שדרוגי AI בעמודים הבאים ↓' : filtered.length + ' דוגמאות';
       buildPagination(page, totalPages);
+      const showVideo = page === 1 && !activeTag;
       const videoSection = document.getElementById('ai-video-section');
       const videoSpacer = document.getElementById('ai-video-spacer');
       const videoCta = document.getElementById('ai-video-cta');
-      if (videoSection) videoSection.style.display = page === 1 ? '' : 'none';
-      if (videoSpacer) videoSpacer.style.display = page === 1 ? '' : 'none';
-      if (videoCta) videoCta.style.display = page === 1 ? '' : 'none';
+      if (videoSection) videoSection.style.display = showVideo ? '' : 'none';
+      if (videoSpacer) videoSpacer.style.display = showVideo ? '' : 'none';
+      if (videoCta) videoCta.style.display = showVideo ? '' : 'none';
       if (page > 1) { const s = document.getElementById('showcases-section'); if (s) window.scrollTo({ top: s.offsetTop - 90, behavior: 'smooth' }); }
     }
 
