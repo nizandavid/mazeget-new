@@ -11,3 +11,4 @@ categorize-posts.mjs
 .claude/
 .vercel
 .env*.local
+.wrangler/
