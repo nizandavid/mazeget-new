@@ -22,6 +22,7 @@ export interface AIShowcase {
   mainVideo?: string;
   videoCaption?: string;
   videoStyle?: 'landscape' | 'portrait';
+  containImage?: boolean;
   realPresentation?: { slug: string; label: string; timeCode?: string };
   categoryLink?: { href: string; label: string };
   tags?: string[];
@@ -277,6 +278,8 @@ AI משחזר את הרגש: מוסיף תנועה עדינה לבגדים, לש
     thumbnail: 'https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20soccer%20titled%20compressed.mp4',
     thumbnailIsVideo: true,
     featured: false,
+    hasSound: true,
+    containImage: true,
     type: 'image-video',
     original: {
       src: `${R2}/nadav-grow-4-web.jpg`,
