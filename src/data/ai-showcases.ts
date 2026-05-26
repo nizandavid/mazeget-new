@@ -23,6 +23,7 @@ export interface AIShowcase {
   videoCaption?: string;
   videoStyle?: 'landscape' | 'portrait';
   containImage?: boolean;
+  hideFromGrid?: boolean;
   realPresentation?: { slug: string; label: string; timeCode?: string };
   categoryLink?: { href: string; label: string };
   tags?: string[];
@@ -280,6 +281,7 @@ AI משחזר את הרגש: מוסיף תנועה עדינה לבגדים, לש
     featured: false,
     hasSound: true,
     containImage: true,
+    hideFromGrid: true,
     type: 'image-video',
     original: {
       src: `${R2}/nadav-grow-4-web.jpg`,

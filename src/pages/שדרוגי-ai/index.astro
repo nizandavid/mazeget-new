@@ -4,7 +4,7 @@ import Header from '../../components/Header.astro';
 import Contact from '../../components/Contact.astro';
 import { showcases } from '../../data/ai-showcases';
 
-const all = showcases;
+const all = showcases.filter(s => !s.hideFromGrid);
 const allTags = [...new Set(showcases.flatMap(s => s.tags ?? []))];
 ---
 

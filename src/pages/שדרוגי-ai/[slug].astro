@@ -10,7 +10,7 @@ export function getStaticPaths() {
 
 const { slug } = Astro.params;
 const s = showcases.find(x => x.slug === slug)!;
-const others = showcases.filter(x => x.slug !== slug).slice(0, 3);
+const others = showcases.filter(x => x.slug !== slug && !x.hideFromGrid).slice(0, 3);
 ---
 
 <Layout
