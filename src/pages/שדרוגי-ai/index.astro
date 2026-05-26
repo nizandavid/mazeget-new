@@ -31,7 +31,7 @@ const allTags = [...new Set(showcases.flatMap(s => s.tags ?? []))];
   </section>
 
   <!-- ═══ VIDEO ═══ -->
-  <div style="position:relative; line-height:0; background:#F5F3FF; display:flex; justify-content:center;">
+  <div id="ai-video-section" style="position:relative; line-height:0; background:#F5F3FF; display:flex; justify-content:center;">
     <video id="ai-section-video" autoplay muted loop playsinline style="width:75%; display:block; object-fit:contain;">
       <source src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20soccer%20titled%20compressed.mp4" type="video/mp4" />
     </video>
@@ -48,7 +48,7 @@ const allTags = [...new Set(showcases.flatMap(s => s.tags ?? []))];
     </div>
   </div>
   <!-- spacer for sound button -->
-  <div style="height:44px; background:#F5F3FF;"></div>
+  <div id="ai-video-spacer" style="height:44px; background:#F5F3FF;"></div>
 
   <!-- ═══ ALL SHOWCASES PAGINATED ═══ -->
   <section style="padding: 5rem 1.5rem; background: #F5F3FF;" id="showcases-section">
@@ -514,6 +514,10 @@ const allTags = [...new Set(showcases.flatMap(s => s.tags ?? []))];
       const info = document.getElementById('ai-page-info');
       if (info) info.textContent = page < totalPages ? 'עוד שדרוגי AI בעמודים הבאים ↓' : filtered.length + ' דוגמאות';
       buildPagination(page, totalPages);
+      const videoSection = document.getElementById('ai-video-section');
+      const videoSpacer = document.getElementById('ai-video-spacer');
+      if (videoSection) videoSection.style.display = page === 1 ? '' : 'none';
+      if (videoSpacer) videoSpacer.style.display = page === 1 ? '' : 'none';
       if (page > 1) { const s = document.getElementById('showcases-section'); if (s) window.scrollTo({ top: s.offsetTop - 90, behavior: 'smooth' }); }
     }
 
