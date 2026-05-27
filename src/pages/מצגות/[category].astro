@@ -22,7 +22,7 @@ const subcategories = isOther
 
 // נתוני עמודי מצגות לסינון לפי נושא / פתיח
 const allPages = await getVideoPages();
-const pageMap = new Map(allPages.filter(p => p.category_key === category).map(p => [p.vimeo_id, p]));
+const pageMap = new Map(allPages.map(p => [p.vimeo_id, p]));
 
 const topicValues = [...new Set([...pageMap.values()].map(p => p.detail_style).filter(Boolean))];
 const introValues = [...new Set(
