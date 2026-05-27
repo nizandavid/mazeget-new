@@ -137,7 +137,7 @@ const breadcrumbSchema = JSON.stringify({
                 data-video-id={v.vimeo_id}
                 data-subcategory={v.subcategory || ''}
                 data-index={i}
-                data-page-slug={pageMap.has(v.vimeo_id) ? `video-${v.vimeo_id}` : ''}
+                data-page-slug={pageMap.get(v.vimeo_id)?.slug || ''}
                 data-topic={pageMap.get(v.vimeo_id)?.detail_style || ''}
                 data-intro={pageMap.get(v.vimeo_id)?.detail_elements || ''}
                 style={i >= 6 ? 'display:none' : ''}
@@ -157,7 +157,7 @@ const breadcrumbSchema = JSON.stringify({
                   {v.description && <p class="text-sm text-gray-500 leading-relaxed">{v.description}</p>}
                   {pageMap.has(v.vimeo_id) && (
                     <a
-                      href={`/matzget/video-${v.vimeo_id}`}
+                      href={`/matzget/${pageMap.get(v.vimeo_id)?.slug}`}
                       class="inline-block mt-2 text-sm text-[#6C22FF] font-semibold hover:underline"
                     >
                       לפרטים נוספים ←
