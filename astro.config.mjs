@@ -11,7 +11,14 @@ export default defineConfig({
   adapter: vercel({ webAnalytics: false }),
   integrations: [sitemap({
     serialize(item) {
-      return { ...item, lastmod: new Date().toISOString().split('T')[0] };
+      // Strip the trailing slash so sitemap URLs match the live site
+      // (trailingSlash: false) and don't trigger a 308 redirect on every URL.
+      // Keep the homepage root ("https://mazeget.com/") as-is.
+      let url = item.url;
+      if (url.endsWith('/') && url !== 'https://mazeget.com/') {
+        url = url.slice(0, -1);
+      }
+      return { ...item, url, lastmod: new Date().toISOString().split('T')[0] };
     }
   })],
   vite: {
