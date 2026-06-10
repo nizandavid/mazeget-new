@@ -74,6 +74,21 @@ body {
 .reveal { opacity: 1; transform: none; }
 .reveal.in { opacity: 1; transform: none; }
 
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .mesh-orb,
+  .section-orb,
+  .shimmer-text,
+  .hero-shimmer,
+  .sound-round-btn {
+    animation: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
 /* Shimmer text */
 .shimmer-text {
   background: linear-gradient(120deg, var(--purple) 0%, var(--pink) 60%, var(--teal) 100%);
@@ -106,4 +121,28 @@ body {
   opacity: 0.45;
   pointer-events: none;
   animation: drift 22s ease-in-out infinite;
+}
+
+/* Thumbnail skeleton shimmer */
+.thumb-skeleton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0)    0%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0)    100%
+  );
+  background-size: 200% 100%;
+  animation: thumb-shimmer 1.4s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+@keyframes thumb-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .thumb-skeleton::before { animation: none; }
 }
