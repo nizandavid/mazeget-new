@@ -132,5 +132,21 @@ if (pageUrl) {
         }, { passive: true });
       }
     </script>
+
+    <script is:inline>
+      // לחיצה על סרטון (שמתארח אצלנו) עוצרת/ממשיכה אותו.
+      // מדלגים על סרטונים בתוך קישור (תמונות ממוזערות בגלריה — לחיצה עליהן פותחת דף)
+      // ועל נגני Vimeo (iframe) שיש להם נגן משלהם.
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('video').forEach(function (video) {
+          if (video.closest('a')) return;
+          video.style.cursor = 'pointer';
+          video.addEventListener('click', function (e) {
+            if (e.target !== video) return;
+            if (video.paused) { video.play(); } else { video.pause(); }
+          });
+        });
+      });
+    </script>
   </body>
 </html>

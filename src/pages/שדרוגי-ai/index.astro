@@ -181,7 +181,7 @@ const allTags = [...new Set(all.flatMap(s => s.tags ?? []))];
             </div>
           )}
 
-          {s.type === 'single-video' && (
+          {(s.type === 'single-video' || s.type === 'single-video-wide') && (
             <div style="text-align: center; margin-bottom: 1.5rem;">
               {s.videoStyle === 'portrait' ? (
                 <div style="position:relative; display:inline-block;">

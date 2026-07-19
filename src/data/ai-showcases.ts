@@ -9,7 +9,7 @@ export interface AIShowcase {
   thumbnailIsVideo: boolean;
   featured?: boolean;
   hasSound?: boolean;
-  type: 'image-video' | 'portrait-scenes' | 'grid-video' | 'selfie' | 'single-video';
+  type: 'image-video' | 'portrait-scenes' | 'grid-video' | 'selfie' | 'single-video' | 'single-video-wide';
   // image-video
   original?: { src: string; alt: string; label: string };
   aiResult?: { src: string; isVideo?: boolean; label: string; alt?: string };
@@ -28,9 +28,110 @@ export interface AIShowcase {
   categoryLink?: { href: string; label: string };
   tags?: string[];
   bodyContent?: string;
+  detailsPanel?: { heading: string; body: string }[];
 }
 
 export const showcases: AIShowcase[] = [
+  {
+    slug: 'omer',
+    title: 'בר מצווה עומר — הסיפור של ילד עם חלומות גדולים',
+    badge: 'פתיח AI',
+    description: 'פתיח קולנועי שנבנה עם AI — 6 פתיחים מקוריים, כל אחד עם אווירה משלו, כולם סביב מי שעומר באמת.',
+    thumbnail: 'https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20videos/omer.mp4',
+    thumbnailIsVideo: true,
+    featured: true,
+    hasSound: true,
+    type: 'single-video-wide',
+    mainVideo: 'https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20videos/omer.mp4',
+    videoCaption: '🎬 פתיח קולנועי שנבנה עם AI',
+    realPresentation: { slug: '1209835048', label: 'המצגת המלאה של עומר' },
+    tags: ['פתיח קולנועי', 'בר מצווה'],
+    detailsPanel: [
+      {
+        heading: 'על המצגת',
+        body: 'עומר הגיע לבר המצווה שלו עם שלושה דברים שמגדירים אותו: כדורסל בדם, שליטה מושלמת בעולמות הגיימינג, ותוכניות לעתיד שגדולות ממנו. המצגת שלו לא הייתה רק סרטון — היא הייתה הצצה אמיתית לנשמה של ילד שיודע בדיוק לאן הוא הולך. בנינו יחד סיפור שמתחיל מהקורט ומגיע עד לחלומות הכי גדולים שלו, ובדרך — עצרנו כמה רגעים שרק המשפחה הקרובה מכירה.',
+      },
+      {
+        heading: 'מה מיוחד במצגת הזאת',
+        body: 'מה שהפך את המצגת הזאת לבלתי נשכחת הוא שילוב חכם של בינה מלאכותית עם ממשק אישי לגמרי — 6 פתיחים מקוריים, כל אחד עם אווירה שונה, כולם בנויים סביב מי שעומר הוא באמת. אחרי שתצפו, לא תצטרכו שאף אחד יציג אתכם אליו — אתם כבר תדעו.',
+      },
+    ],
+  },
+  {
+    slug: 'ido',
+    title: 'מצגת בר מצווה לעידו — הסיפור שלו, בדרך שלו',
+    badge: 'פתיח AI',
+    description: 'פתיח מונפש ב-AI בסגנון Arcane / Spider-Verse — הכניסה לאולם שהפכה לרגע קולנועי שנחקק בזיכרון.',
+    thumbnail: 'https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20videos/ido-arcane-spiderverse.mp4',
+    thumbnailIsVideo: true,
+    featured: true,
+    hasSound: true,
+    type: 'single-video-wide',
+    mainVideo: 'https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20videos/ido-arcane-spiderverse.mp4',
+    videoCaption: '🎬 פתיח מונפש שנבנה עם AI',
+    realPresentation: { slug: '1201729568', label: 'המצגת המלאה של עידו' },
+    tags: ['פתיח קולנועי', 'בר מצווה'],
+    detailsPanel: [
+      {
+        heading: 'על המצגת',
+        body: 'כשעידו נכנס לאולם, כולם כבר ידעו — הערב הזה שייך לו. המצגת שיצרנו עבורו פתחה עם סיקוונס AI דינמי שהציג את עידו בדיוק כפי שהוא — הדרך שעשה, הרגעים שצייר אותו, הדמות שהפך להיות. לא מצגת של תמונות. סיפור של ילד שגדל.',
+      },
+      {
+        heading: 'מה מיוחד במצגת הזאת',
+        body: 'הפתיח המונפש ב-AI הפך את הכניסה לאולם לרגע קולנועי שנחקק בזיכרון. המצגת עוצבה במיוחד להצגה באולם — אור, עוצמה, וקצב שמרגיש כמו פרמייר אמיתי. זה לא רקע — זה הדבר עצמו.',
+      },
+    ],
+  },
+  {
+    slug: 'ami',
+    title: 'בת המצווה של אמי — סיפור חייה בסגנון פיקסאר עם AI',
+    badge: 'פתיח AI',
+    description: 'סיפור חייה בארבעה פרקים, בסגנון הצבעוני של פיקסאר — פתיח וסיום שנוצרו ב-AI וריגשו את כל האולם.',
+    thumbnail: 'https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20videos/ami.mp4',
+    thumbnailIsVideo: true,
+    featured: true,
+    hasSound: true,
+    type: 'single-video-wide',
+    mainVideo: 'https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20videos/ami.mp4',
+    videoCaption: '🎬 פתיח וסיום שנבנו עם AI',
+    realPresentation: { slug: '1205382472', label: 'המצגת המלאה של אמי' },
+    tags: ['פתיח קולנועי', 'בת מצווה'],
+    detailsPanel: [
+      {
+        heading: 'על המצגת',
+        body: 'כשהמשפחה של אמי החליטה לחגוג את יום הולדתה ה-12, הם ידעו שהם רוצים משהו שיגרום לה לבכות מרוב שמחה. הם בחרו לספר את הסיפור שלה דרך ארבעה פרקים — ארבעה עולמות שמרכיבים אותה. פתיח מרהיב וסיום מרגש נוצרו כולם בעזרת בינה מלאכותית, וביחד הם יצרו סרטון שהקהל בבת המצווה פשוט לא הפסיק לדבר עליו.',
+      },
+      {
+        heading: 'מה מיוחד במצגת הזאת',
+        body: 'מה שהופך את הסרטון של אמי לבלתי נשכח הוא השילוב המושלם בין חום אישי לבין טכנולוגיה מתקדמת — כל פריים נוצר בסגנון הצבעוני והחביב של פיקסאר, עם הקראה ברקע שמושכת את הלב. הבינה המלאכותית לא החליפה את הסיפור האישי — היא נתנה לו כנפיים.',
+      },
+    ],
+  },
+  {
+    slug: 'adel',
+    title: 'מצגת בת מצווה לאדל — הטירה הקסומה שמחכה לה',
+    badge: 'פתיח AI',
+    description: 'פתיח בסגנון אנימציה דיסנית שנוצר ב-AI — אדל נכנסת לתוך טירה קסומה שנבנתה רק בשבילה, ורואה את הדמות שלה קמה לחיים על המסך.',
+    thumbnail: 'https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20videos/adel-story.mp4',
+    thumbnailIsVideo: true,
+    featured: true,
+    hasSound: true,
+    type: 'single-video-wide',
+    mainVideo: 'https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20videos/adel-story.mp4',
+    videoCaption: '🎬 פתיח קולנועי שנבנה עם AI',
+    realPresentation: { slug: '1208374783', label: 'המצגת המלאה של אדל' },
+    tags: ['פתיח קולנועי', 'בת מצווה'],
+    detailsPanel: [
+      {
+        heading: 'על המצגת',
+        body: 'היה פעם ספר זכרונות שחיכה לה בתוך טירה קסומה — וכשאדל פתחה אותו, הסיפור שלה התחיל להתגלות בפני כולם. הפתיח נוצר בטכנולוגיית AI בסגנון אנימציה דיסנית, ובו אדל — חובבת הסוסים והכלבים שבלב — מגיעה לשערי הטירה, פוסעת בתוך עולם קסום שנבנה רק בשבילה. הרגע שבו האורחים ראו את הדמות שלה קמה לחיים על המסך — האולם עצר נשימה. מרגע לרגע הסיפור שלה התפרש, עם תמונות ילדות, רגעים אהובים, ואהבות שמגדירות אותה.',
+      },
+      {
+        heading: 'מה מיוחד במצגת הזאת',
+        body: 'מה שהופך את המצגת הזאת לבלתי נשכחת הוא השילוב בין עולם האנימציה לבין הסיפור האמיתי — עולם שנבנה סביב מה שאדל אוהבת באמת: הסוסים שהיא רוכבת עליהם, הכלבים שהיא מחבקת, והלב הגדול שמאחורי הכל. פתיח ה-AI בסגנון דיסני לא רק פתח את הערב — הוא הציב את אדל בתור הגיבורה הראשית של הסיפור שלה, כזו שכל מי שנכח באולם לא ישכח.',
+      },
+    ],
+  },
   {
     slug: 'thailand',
     title: 'תמונה שהפכה לסרטון חי',
