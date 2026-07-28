@@ -22,7 +22,8 @@ const {
   noAutoOpen = false
 } = Astro.props;
 
-const canonicalUrl = `https://mazeget.com${Astro.url.pathname}`;
+const canonicalPath = Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, '');
+const canonicalUrl = `https://mazeget.com${canonicalPath}`;
 
 let rankMathHead = '';
 if (pageUrl) {
