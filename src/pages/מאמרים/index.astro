@@ -3,27 +3,52 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import postsData from '../../data/posts.json';
 
+const PAGE_SIZE = 12;
+const NEW_COUNT = 5;
+
+const stripTags = (html: string) => (html ?? '').replace(/<[^>]*>/g, '');
+
+// WordPress stores &#8211; / &quot; / &hellip; — decode them, since Astro
+// escapes text output (the old client-side innerHTML decoded them for free)
+const decodeEntities = (s: string) => (s ?? '')
+  .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
+  .replace(/&#x([0-9a-fA-F]+);/g, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+  .replace(/&nbsp;/g, ' ')
+  .replace(/&hellip;/g, '…')
+  .replace(/&quot;/g, '"')
+  .replace(/&apos;/g, "'")
+  .replace(/&lt;/g, '<')
+  .replace(/&gt;/g, '>')
+  .replace(/&amp;/g, '&');
+
+const clean = (html: string) => decodeEntities(stripTags(html));
+
 const posts = (postsData as any[]).map(p => ({
   id: p.id,
-  slug: p.slug,
-  title: p.title,
-  excerpt: p.excerpt,
+  slug: decodeURIComponent(p.slug),
+  title: clean(p.title?.rendered),
+  excerpt: clean(p.excerpt?.rendered).trim().substring(0, 120),
   date: p.date,
-  categories: p.categories,
-  _embedded: p._embedded,
-  _terms: p._embedded?.['wp:term']?.[0] ?? [],
+  dateLabel: new Date(p.date).toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' }),
+  categories: p.categories ?? [],
+  image: p._embedded?.['wp:featuredmedia']?.[0]?.source_url ?? null,
 }));
 
-// Build category map: id → name
+// The 5 newest posts power the "✨ חדש" filter — resolved at build time
+const newestIds = new Set(
+  [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, NEW_COUNT).map(p => p.id)
+);
+
+// Build category map: id → name, keeping only categories actually in use
 const catMap: Record<number, string> = {};
 for (const p of postsData as any[]) {
-  const terms = p._embedded?.['wp:term']?.[0] ?? [];
-  for (const t of terms) {
+  for (const t of p._embedded?.['wp:term']?.[0] ?? []) {
     if (t.id && t.name) catMap[t.id] = t.name;
   }
 }
-const catMapJson = JSON.stringify(catMap);
-const postsJson = JSON.stringify(posts);
+const usedCatIds = new Set(posts.flatMap(p => p.categories.map(Number)));
+const categories = Object.entries(catMap).filter(([id]) => usedCatIds.has(Number(id)));
 ---
 
 <Layout
@@ -54,30 +79,59 @@ const postsJson = JSON.stringify(posts);
   </section>
 
   <!-- Category Filter -->
-  <section id="cat-filter" class="py-5 px-6 bg-white border-b border-gray-100 sticky top-0 z-10" style="display:none;">
-    <div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-2" id="cat-buttons"></div>
-  </section>
+  {categories.length > 0 && (
+    <section id="cat-filter" class="py-5 px-6 bg-white border-b border-gray-100 sticky top-0 z-10">
+      <div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-2" id="cat-buttons">
+        <button data-cat="all" class="px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-active">הכל</button>
+        <button data-cat="new" class="px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-inactive">✨ חדש</button>
+        {categories.map(([id, name]) => (
+          <button data-cat={id} class="px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-inactive">{name}</button>
+        ))}
+      </div>
+    </section>
+  )}
 
-  <!-- Posts Grid -->
+  <!-- Posts Grid — rendered at build time so every article is a real link -->
   <section class="py-12 px-6 bg-[#F8F7FF] min-h-[40vh]">
     <div class="max-w-5xl mx-auto">
-      <div id="posts-loading" class="flex flex-col items-center justify-center py-20 gap-3 text-[#6C22FF]/50">
-        <svg class="animate-spin w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-        </svg>
-        <span class="text-sm font-medium">טוען מאמרים...</span>
-      </div>
-      <script id="posts-data" type="application/json" set:html={postsJson}></script>
-      <script id="cat-map-data" type="application/json" set:html={catMapJson}></script>
-      <div id="posts-error" class="text-center py-16 text-gray-400 text-sm" style="display:none;"></div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="posts-grid" style="display:none;"></div>
+      {posts.length === 0 ? (
+        <div class="text-center py-16 text-gray-400 text-sm">אין מאמרים להצגה כרגע</div>
+      ) : (
+        <>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="posts-grid">
+            {posts.map((post, i) => (
+              <article
+                class="post-card"
+                data-categories={post.categories.join(',')}
+                data-new={newestIds.has(post.id) ? '1' : '0'}
+                style={i >= PAGE_SIZE ? 'display:none' : undefined}
+              >
+                <a href={`/מאמרים/${post.slug}`} class="block text-right h-full">
+                  {post.image && (
+                    <img src={post.image} alt={post.title} loading="lazy"
+                      style="width:100%;height:180px;object-fit:cover;border-radius:12px 12px 0 0;" />
+                  )}
+                  <div class="p-6">
+                    <p class="text-xs text-[#6C22FF]/50 font-medium mb-3 tracking-wide">{post.dateLabel}</p>
+                    <h2 class="font-black text-[#12023C] text-lg mb-3 leading-snug" style="font-family: 'Secular One', sans-serif;">{post.title}</h2>
+                    <p class="text-gray-400 text-sm leading-relaxed line-clamp-3 mb-5">{post.excerpt}...</p>
+                    <span class="inline-flex items-center gap-1 text-[#6C22FF] font-semibold text-sm card-arrow">
+                      קרא עוד
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
 
-      <!-- Pagination -->
-      <div id="pagination-wrap" class="mt-10" style="display:none;">
-        <div class="flex flex-wrap items-center justify-center gap-2" id="pagination-buttons"></div>
-        <p class="text-center text-sm text-gray-400 mt-3" id="pagination-info"></p>
-      </div>
+          <!-- Pagination -->
+          <div id="pagination-wrap" class="mt-10" style="display:none;">
+            <div class="flex flex-wrap items-center justify-center gap-2" id="pagination-buttons"></div>
+            <p class="text-center text-sm text-gray-400 mt-3" id="pagination-info"></p>
+          </div>
+        </>
+      )}
     </div>
   </section>
 
@@ -152,188 +206,102 @@ const postsJson = JSON.stringify(posts);
 </style>
 
 <script>
-  function formatDate(dateStr: string) {
-    return new Date(dateStr).toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' });
-  }
-
+  // Cards are already in the HTML. This only shows/hides them —
+  // every article link stays in the page for crawlers either way.
   const PAGE_SIZE = 12;
-  let allPosts: any[] = [];
-  let currentPage = 1;
-  let activeCatGlobal: string | number = 'all';
 
-  function postCard(post: any) {
-    return `
-        <article class="post-card" data-categories='${JSON.stringify(post.categories)}'>
-          <a href="/מאמרים/${decodeURIComponent(post.slug)}" class="block text-right h-full">
-            ${post._embedded?.['wp:featuredmedia']?.[0]?.source_url ? `<img src="${post._embedded['wp:featuredmedia'][0].source_url}" alt="${post.title.rendered}" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:12px 12px 0 0;" />` : ''}
-            <div class="p-6">
-            <p class="text-xs text-[#6C22FF]/50 font-medium mb-3 tracking-wide">${formatDate(post.date)}</p>
-            <h2 class="font-black text-[#12023C] text-lg mb-3 leading-snug" style="font-family: 'Secular One', sans-serif;">${post.title.rendered}</h2>
-            <p class="text-gray-400 text-sm leading-relaxed line-clamp-3 mb-5">${post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 120)}...</p>
-            <span class="inline-flex items-center gap-1 text-[#6C22FF] font-semibold text-sm card-arrow">
-              קרא עוד
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-            </div>
-          </a>
-        </article>
-      `;
-  }
-
-  function getFiltered() {
-    if (activeCatGlobal === 'new') {
-      return [...allPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 5);
-    }
-    return allPosts.filter(p => activeCatGlobal === 'all' || p.categories.includes(Number(activeCatGlobal)));
-  }
-
-  function goToPage(page: number) {
-    currentPage = page;
-    updateGrid();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function updateGrid() {
-    const grid = document.getElementById('posts-grid')!;
+  const grid = document.getElementById('posts-grid');
+  if (grid) {
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>('.post-card'));
     const paginationWrap = document.getElementById('pagination-wrap')!;
     const paginationButtons = document.getElementById('pagination-buttons')!;
     const paginationInfo = document.getElementById('pagination-info')!;
 
-    const filtered = getFiltered();
-    const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
-    const start = (currentPage - 1) * PAGE_SIZE;
-    const end = start + PAGE_SIZE;
+    let currentPage = 1;
+    let activeCat: string = 'all';
 
-    grid.innerHTML = filtered.slice(start, end).map(postCard).join('');
-    grid.style.display = 'grid';
-
-    if (totalPages <= 1) {
-      paginationWrap.style.display = 'none';
-      return;
+    function getFiltered() {
+      if (activeCat === 'new') return cards.filter(c => c.dataset.new === '1');
+      if (activeCat === 'all') return cards;
+      return cards.filter(c => (c.dataset.categories ?? '').split(',').includes(activeCat));
     }
 
-    paginationWrap.style.display = '';
-    paginationInfo.textContent = `עמוד ${currentPage} מתוך ${totalPages}`;
+    function getPagesToShow(current: number, total: number): (number | string)[] {
+      if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+      const pages: (number | string)[] = [1];
+      if (current > 3) pages.push('...');
+      for (let i = Math.max(2, current - 1); i <= Math.min(total - 1, current + 1); i++) pages.push(i);
+      if (current < total - 2) pages.push('...');
+      pages.push(total);
+      return pages;
+    }
 
-    // Build page buttons
-    paginationButtons.innerHTML = '';
+    function goToPage(page: number) {
+      currentPage = page;
+      updateGrid();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-    // Arrow right (prev) — RTL so right = prev
-    const prevBtn = document.createElement('button');
-    prevBtn.className = 'page-btn arrow';
-    prevBtn.textContent = '›';
-    prevBtn.disabled = currentPage === 1;
-    prevBtn.addEventListener('click', () => goToPage(currentPage - 1));
-    paginationButtons.appendChild(prevBtn);
+    function updateGrid() {
+      const filtered = getFiltered();
+      const start = (currentPage - 1) * PAGE_SIZE;
+      const visible = new Set(filtered.slice(start, start + PAGE_SIZE));
 
-    // Page numbers with ellipsis
-    const pages = getPagesToShow(currentPage, totalPages);
-    pages.forEach(p => {
-      if (p === '...') {
-        const dots = document.createElement('span');
-        dots.textContent = '…';
-        dots.className = 'text-gray-400 px-1';
-        paginationButtons.appendChild(dots);
-      } else {
-        const btn = document.createElement('button');
-        btn.className = `page-btn${p === currentPage ? ' active' : ''}`;
-        btn.textContent = String(p);
-        btn.addEventListener('click', () => goToPage(Number(p)));
-        paginationButtons.appendChild(btn);
+      cards.forEach(c => { c.style.display = visible.has(c) ? '' : 'none'; });
+
+      const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+      if (totalPages <= 1) {
+        paginationWrap.style.display = 'none';
+        return;
       }
+
+      paginationWrap.style.display = '';
+      paginationInfo.textContent = `עמוד ${currentPage} מתוך ${totalPages}`;
+      paginationButtons.innerHTML = '';
+
+      // RTL: right arrow = previous
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'page-btn arrow';
+      prevBtn.textContent = '›';
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.addEventListener('click', () => goToPage(currentPage - 1));
+      paginationButtons.appendChild(prevBtn);
+
+      getPagesToShow(currentPage, totalPages).forEach(p => {
+        if (p === '...') {
+          const dots = document.createElement('span');
+          dots.textContent = '…';
+          dots.className = 'text-gray-400 px-1';
+          paginationButtons.appendChild(dots);
+        } else {
+          const btn = document.createElement('button');
+          btn.className = `page-btn${p === currentPage ? ' active' : ''}`;
+          btn.textContent = String(p);
+          btn.addEventListener('click', () => goToPage(Number(p)));
+          paginationButtons.appendChild(btn);
+        }
+      });
+
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'page-btn arrow';
+      nextBtn.textContent = '‹';
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.addEventListener('click', () => goToPage(currentPage + 1));
+      paginationButtons.appendChild(nextBtn);
+    }
+
+    document.querySelectorAll<HTMLElement>('#cat-buttons button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#cat-buttons button').forEach(b => {
+          b.className = 'px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-inactive';
+        });
+        btn.className = 'px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-active';
+        activeCat = btn.dataset.cat ?? 'all';
+        currentPage = 1;
+        updateGrid();
+      });
     });
 
-    // Arrow left (next)
-    const nextBtn = document.createElement('button');
-    nextBtn.className = 'page-btn arrow';
-    nextBtn.textContent = '‹';
-    nextBtn.disabled = currentPage === totalPages;
-    nextBtn.addEventListener('click', () => goToPage(currentPage + 1));
-    paginationButtons.appendChild(nextBtn);
-  }
-
-  function getPagesToShow(current: number, total: number): (number | string)[] {
-    if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
-    const pages: (number | string)[] = [];
-    pages.push(1);
-    if (current > 3) pages.push('...');
-    for (let i = Math.max(2, current - 1); i <= Math.min(total - 1, current + 1); i++) {
-      pages.push(i);
-    }
-    if (current < total - 2) pages.push('...');
-    pages.push(total);
-    return pages;
-  }
-
-  function renderPosts(activeCat: string | number = 'all') {
-    activeCatGlobal = activeCat;
-    currentPage = 1;
     updateGrid();
   }
-
-  function buildCategoryFilter(catMap: Record<string, string>) {
-    const usedCatIds = new Set<string>();
-    allPosts.forEach(p => p.categories.forEach((c: number) => usedCatIds.add(String(c))));
-
-    const cats = Object.entries(catMap).filter(([id]) => usedCatIds.has(id));
-    if (cats.length === 0) return;
-
-    const filterSection = document.getElementById('cat-filter')!;
-    const buttonsContainer = document.getElementById('cat-buttons')!;
-    filterSection.style.display = '';
-
-    // "הכל" button
-    const allBtn = document.createElement('button');
-    allBtn.textContent = 'הכל';
-    allBtn.className = 'px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-active';
-    allBtn.dataset.cat = 'all';
-    allBtn.addEventListener('click', () => setActiveCategory('all', allBtn));
-    buttonsContainer.appendChild(allBtn);
-
-    // "חדש" button
-    const newBtn = document.createElement('button');
-    newBtn.textContent = '✨ חדש';
-    newBtn.className = 'px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-inactive';
-    newBtn.dataset.cat = 'new';
-    newBtn.addEventListener('click', () => setActiveCategory('new', newBtn));
-    buttonsContainer.appendChild(newBtn);
-
-    cats.forEach(([id, name]) => {
-      const btn = document.createElement('button');
-      btn.textContent = name;
-      btn.className = 'px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-inactive';
-      btn.dataset.cat = id;
-      btn.addEventListener('click', () => setActiveCategory(id, btn));
-      buttonsContainer.appendChild(btn);
-    });
-  }
-
-  function setActiveCategory(catId: string, activeBtn: HTMLElement) {
-    document.querySelectorAll('#cat-buttons button').forEach(btn => {
-      btn.className = 'px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-inactive';
-    });
-    activeBtn.className = 'px-4 py-1.5 rounded-full border font-semibold text-sm transition-all cat-btn-active';
-    renderPosts(catId === 'all' || catId === 'new' ? catId : Number(catId));
-  }
-
-  function loadPosts() {
-    const loading = document.getElementById('posts-loading')!;
-    const posts = JSON.parse(document.getElementById('posts-data')!.textContent || '[]');
-    const catMap = JSON.parse(document.getElementById('cat-map-data')!.textContent || '{}');
-
-    loading.style.display = 'none';
-
-    if (posts.length === 0) {
-      const errorEl = document.getElementById('posts-error')!;
-      errorEl.textContent = 'אין מאמרים להצגה כרגע';
-      errorEl.style.display = '';
-      return;
-    }
-
-    allPosts = posts;
-    buildCategoryFilter(catMap);
-    renderPosts();
-  }
-
-  loadPosts();
 </script>
