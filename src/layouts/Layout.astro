@@ -37,7 +37,12 @@ if (pageUrl) {
     // אבל Rank Math מחזיר את ה-head של עמוד הוורדפרס, כולל אותו noindex,
     // וההזרקה שלו לעמוד הציבורי אמרה לגוגל לא לאנדקס מאמרים אמיתיים.
     // מסירים כאן את הנחיית ה-robots; מי שמחליט עליה הוא ה-Layout בלבד.
-    if (data.success) rankMathHead = String(data.head).replace(/<meta[^>]+name=["']robots["'][^>]*>\s*/gi, '');
+    // og:url מגיע משם גם הוא ומצביע על wp.mazeget.com — מה שגורם לתצוגה
+    // המקדימה בוואטסאפ/פייסבוק להצביע על המטבח במקום על העמוד הציבורי.
+    // מפנים אותו לכתובת הקנונית. תמונות ה-og נשארות בוורדפרס, שם מקומן.
+    if (data.success) rankMathHead = String(data.head)
+      .replace(/<meta[^>]+name=["']robots["'][^>]*>\s*/gi, '')
+      .replace(/(<meta[^>]+property=["']og:url["'][^>]+content=["'])[^"']*(["'])/gi, `$1${canonicalUrl}$2`);
   } catch (e) {
     // אם ה-API לא זמין — ממשיכים בלי SEO
   }
