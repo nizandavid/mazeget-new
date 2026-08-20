@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Contact from '../../components/Contact.astro';
-import { getVideoPages } from '../../lib/sheets';
+import { getVideoPages, getVisibleVideoIds } from '../../lib/sheets';
 
 export async function getStaticPaths() {
   let pages: Awaited<ReturnType<typeof getVideoPages>> = [];
@@ -11,13 +11,22 @@ export async function getStaticPaths() {
   } catch {
     // אם הגיליון לא קיים עדיין, בונים בלי עמודי מצגות
   }
+  // מצגת שמופיעה באיזושהי גלריה = יש אליה קישור מהאתר = ראויה לאינדוקס.
+  // מצגת שהוסתרה מהגלריה נשארת חיה לשליחה בקישור, אבל מסומנת noindex.
+  let visible = new Set<string>();
+  try {
+    visible = await getVisibleVideoIds();
+  } catch {
+    // אם לא הצלחנו לקרוא את הגלריות — לא מסמנים כלום, כדי לא להסתיר בטעות
+  }
+
   return pages.map(p => ({
     params: { slug: p.slug },
-    props:  { page: p },
+    props:  { page: p, indexable: visible.size === 0 || visible.has(p.vimeo_id) },
   }));
 }
 
-const { page } = Astro.props;
+const { page, indexable } = Astro.props;
 
 const sections = [
   { title: 'על המצגת',                                       text: page.section1 },
@@ -119,6 +128,7 @@ const pageFaqSchema = JSON.stringify({
   title={`${page.title} | Mazeget`}
   description={(page.description?.length > 155 ? page.description.slice(0, 152) + '...' : page.description) || `${page.section1?.slice(0, 150) || `מצגת וידאו ל${page.category_label} — מקצועית ומרגשת`}.`}
   ogImage={thumbnailUrl}
+  noindex={!indexable}
 >
   <script type="application/ld+json" is:inline set:html={videoSchema} slot="head"></script>
   <script type="application/ld+json" is:inline set:html={breadcrumbSchema} slot="head"></script>

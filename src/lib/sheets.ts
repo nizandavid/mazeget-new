@@ -56,6 +56,23 @@ export async function getVideosForCategory(categoryKey: string): Promise<Video[]
   return videos.sort((a, b) => a.order - b.order);
 }
 
+// כל ה-vimeo_id שמופיעים בפועל באיזושהי גלריה (כלומר לא "מוסתר").
+// זהו מקור האמת ל"האם יש קישור לעמוד הזה מהאתר".
+// לא משתמשים ב-page_status שבטאב "עמודי מצגות" — הוא ריק ברוב השורות.
+// עמוד שאינו כאן מקבל noindex: הוא נשאר חי לשליחה בקישור ישיר,
+// אבל גוגל לא מתבקש לאנדקס עמוד שאף אחד באתר לא מקשר אליו.
+export async function getVisibleVideoIds(): Promise<Set<string>> {
+  const visible = new Set<string>();
+  for (const tab of Object.values(TAB_MAP)) {
+    try {
+      for (const v of await fetchTab(tab)) visible.add(v.vimeo_id);
+    } catch {
+      // טאב שלא נטען — מדלגים, עדיף לפספס noindex מאשר להסתיר עמוד בטעות
+    }
+  }
+  return visible;
+}
+
 // רק סרטוני "ראשי" לדף הבית
 export async function getHomepageVideos(categoryKey: string): Promise<Video[]> {
   const videos = await getVideosForCategory(categoryKey);

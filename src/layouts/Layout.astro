@@ -11,6 +11,8 @@ interface Props {
   ogImage?: string;
   eventLabel?: string;
   noAutoOpen?: boolean;
+  /** לא לאנדקס בגוגל. הדף נשאר חי וניתן לשליחה בקישור ישיר. */
+  noindex?: boolean;
 }
 
 const {
@@ -19,7 +21,8 @@ const {
   pageUrl,
   ogImage = 'https://mazeget.com/logo.png',
   eventLabel,
-  noAutoOpen = false
+  noAutoOpen = false,
+  noindex = false
 } = Astro.props;
 
 const canonicalPath = Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, '');
@@ -30,7 +33,11 @@ if (pageUrl) {
   try {
     const res = await fetch(`https://wp.mazeget.com/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(pageUrl)}`);
     const data = await res.json();
-    if (data.success) rankMathHead = data.head;
+    // wp.mazeget.com הוא ה"מטבח" — הוא מוגדר noindex בכוונה, וזה נכון.
+    // אבל Rank Math מחזיר את ה-head של עמוד הוורדפרס, כולל אותו noindex,
+    // וההזרקה שלו לעמוד הציבורי אמרה לגוגל לא לאנדקס מאמרים אמיתיים.
+    // מסירים כאן את הנחיית ה-robots; מי שמחליט עליה הוא ה-Layout בלבד.
+    if (data.success) rankMathHead = String(data.head).replace(/<meta[^>]+name=["']robots["'][^>]*>\s*/gi, '');
   } catch (e) {
     // אם ה-API לא זמין — ממשיכים בלי SEO
   }
@@ -45,6 +52,7 @@ if (pageUrl) {
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     {!rankMathHead && <meta name="description" content={description} />}
     {!rankMathHead && <meta property="og:title" content={title} />}
     {!rankMathHead && <meta property="og:description" content={description} />}
