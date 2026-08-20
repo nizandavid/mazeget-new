@@ -1,27 +1,40 @@
-export const categories: { key: string; label: string; description: string; emoji: string; hideFromNav?: boolean }[] = [
+// seoTitle / seoDescription — מה שגוגל מציג בתוצאות החיפוש.
+// נכתבו כך שיפתחו בביטוי המדויק שאנשים מחפשים ("מצגת בת מצווה"),
+// כי גוגל מדגיש את המילים התואמות ו-CTR עולה. אם לא מוגדרים —
+// [category].astro חוזר לתבנית הכללית. המחירים והשנה מגיעים
+// מעמוד המחירון ומעמוד "אודותינו", לא מומצאים.
+export const categories: { key: string; label: string; description: string; emoji: string; hideFromNav?: boolean; seoTitle?: string; seoDescription?: string }[] = [
   {
     key: 'bar_mitzva',
     label: 'בר מצווה',
     description: 'מצגות וידאו מרגשות לאירוע הבר מצווה — מרגע הלידה ועד הגדולה',
     emoji: '✡️',
+    seoTitle: 'מצגת בר מצווה — דוגמאות אמיתיות ומחירים | Mazeget',
+    seoDescription: 'מצגת בר מצווה מרגשת, מרגע הלידה ועד העלייה לתורה. צפו בדוגמאות אמיתיות מאירועים, כולל שדרוגי AI. החל מ-₪360, ליווי אישי מאז 2010.',
   },
   {
     key: 'bat_mitzva',
     label: 'בת מצווה',
     description: 'מצגות וידאו קסומות לאירוע הבת מצווה — כל הרגעים המיוחדים',
     emoji: '🌸',
+    seoTitle: 'מצגת בת מצווה — דוגמאות אמיתיות ומחירים | Mazeget',
+    seoDescription: 'מצגת בת מצווה שמרגשת את כל האולם. צפו בדוגמאות אמיתיות מאירועים, כולל שדרוגי AI. החל מ-₪360, ליווי אישי מאז 2010.',
   },
   {
     key: 'birthday',
     label: 'ימי הולדת',
     description: 'מצגות וידאו לימי הולדת — 40, 50, 60 ועוד — חגיגה של חיים',
     emoji: '🎂',
+    seoTitle: 'מצגת ליום הולדת — 40, 50, 60 | דוגמאות ומחירים',
+    seoDescription: 'מצגת ליום הולדת שמספרת סיפור חיים שלם — 40, 50, 60 ומעלה. צפו בדוגמאות אמיתיות, כולל שדרוגי AI. החל מ-₪360, ליווי אישי מאז 2010.',
   },
   {
     key: 'wedding',
     label: 'חתונות',
     description: 'מצגות וידאו לחתונות — סיפור אהבה שישמר לנצח',
     emoji: '💍',
+    seoTitle: 'מצגת לחתונה — דוגמאות אמיתיות ומחירים | Mazeget',
+    seoDescription: 'מצגת לחתונה שמספרת את סיפור האהבה שלכם. צפו בדוגמאות אמיתיות מחתונות, כולל שדרוגי AI. החל מ-₪360, ליווי אישי מאז 2010.',
   },
   {
     key: 'trip',
