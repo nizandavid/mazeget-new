@@ -61,7 +61,7 @@ export const showcases: AIShowcase[] = [
     title: 'יום אחד מושלם — סרט בת מצווה שנבנה כולו ב-AI',
     badge: 'סרט AI מלא',
     description: 'יום שלם בחייה של ילדה, מהבוקר על החוף ועד הריקוד האחרון. סרט כזה יכול להיבנות גם עבורכם — מותאם אישית לסיפור שלכם.',
-    thumbnail: 'https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20videos/Ami%27s%20Bat%20Mitzvah%20Party%20-%20small.mp4',
+    thumbnail: 'https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20videos/ami-preview.mp4',
     thumbnailIsVideo: true,
     featured: true,
     hasSound: true,
