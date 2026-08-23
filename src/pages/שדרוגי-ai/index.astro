@@ -32,8 +32,8 @@ const allTags = [...new Set(all.flatMap(s => s.tags ?? []))];
 
   <!-- ═══ VIDEO ═══ -->
   <div id="ai-video-section" style="position:relative; line-height:0; background:#F5F3FF; direction:ltr;">
-    <video id="ai-section-video" autoplay muted loop playsinline style="width:75%; display:block; margin:0 auto; object-fit:contain;">
-      <source src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20soccer%20titled%20compressed.mp4" type="video/mp4" />
+    <video id="ai-section-video" autoplay muted loop playsinline preload="none" style="width:75%; display:block; margin:0 auto; object-fit:contain;">
+      <source data-src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20soccer%20titled%20compressed.mp4" type="video/mp4" />
     </video>
     <div style="position:absolute; bottom:-28px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:6px; z-index:10;">
       <button id="ai-section-sound-btn" class="sound-round-btn">
@@ -103,10 +103,10 @@ const allTags = [...new Set(all.flatMap(s => s.tags ?? []))];
               <div style="text-align: center;">
                 {s.aiResult!.isVideo ? (
                   s.videoStyle === 'portrait' ? (
-                    <video src={s.thumbnail} autoplay loop muted playsinline style="height: 300px; width: auto; display: block; margin: 0 auto; border-radius: 20px; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.5);"></video>
+                    <video data-src={s.thumbnail} preload="none" autoplay loop muted playsinline style="height: 300px; width: auto; display: block; margin: 0 auto; border-radius: 20px; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.5);"></video>
                   ) : (
                     <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.5);">
-                      <video src={s.thumbnail} autoplay loop muted playsinline style="width: 100%; height: 300px; object-fit: cover; display: block;"></video>
+                      <video data-src={s.thumbnail} preload="none" autoplay loop muted playsinline style="width: 100%; height: 300px; object-fit: cover; display: block;"></video>
                     </div>
                   )
                 ) : (
@@ -159,7 +159,7 @@ const allTags = [...new Set(all.flatMap(s => s.tags ?? []))];
               <div style="text-align: center;">
                 {s.videoStyle === 'portrait' ? (
                   <div style="position:relative; display:inline-block;">
-                    <video src={s.mainVideo} autoplay loop muted playsinline style="height: 300px; width: auto; display: block; margin: 0 auto; border-radius: 20px; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.5);"></video>
+                    <video data-src={s.mainVideo} preload="none" autoplay loop muted playsinline style="height: 300px; width: auto; display: block; margin: 0 auto; border-radius: 20px; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.5);"></video>
                     {s.hasSound && (
                       <button class="sound-btn" onclick="toggleSound(this)" title="הפעל צליל">
                         <svg viewBox="0 0 24 24" fill="white" width="20" height="20"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.9 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
@@ -168,7 +168,7 @@ const allTags = [...new Set(all.flatMap(s => s.tags ?? []))];
                   </div>
                 ) : (
                   <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.5); position:relative;">
-                    <video src={s.mainVideo} autoplay loop muted playsinline style="width: 100%; height: 300px; object-fit: cover; display: block;"></video>
+                    <video data-src={s.mainVideo} preload="none" autoplay loop muted playsinline style="width: 100%; height: 300px; object-fit: cover; display: block;"></video>
                     {s.hasSound && (
                       <button class="sound-btn" onclick="toggleSound(this)" title="הפעל צליל">
                         <svg viewBox="0 0 24 24" fill="white" width="20" height="20"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.9 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
@@ -185,12 +185,12 @@ const allTags = [...new Set(all.flatMap(s => s.tags ?? []))];
             <div style="text-align: center; margin-bottom: 1.5rem;">
               {s.videoStyle === 'portrait' ? (
                 <div style="position:relative; display:inline-block;">
-                  <video src={s.thumbnail} autoplay loop muted playsinline style="height: 360px; width: auto; display: block; margin: 0 auto; border-radius: 20px; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.5);"></video>
+                  <video data-src={s.thumbnail} preload="none" autoplay loop muted playsinline style="height: 360px; width: auto; display: block; margin: 0 auto; border-radius: 20px; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.5);"></video>
                   {s.hasSound && <button class="sound-btn" onclick="toggleSound(this)" title="הפעל צליל">🔇</button>}
                 </div>
               ) : (
                 <div style="max-width: 700px; margin: 0 auto; border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 3px #E879F9, 0 0 40px rgba(232,121,249,.5); position:relative;">
-                  <video src={s.thumbnail} autoplay loop muted playsinline style="width: 100%; display: block;"></video>
+                  <video data-src={s.thumbnail} preload="none" autoplay loop muted playsinline style="width: 100%; display: block;"></video>
                   {s.hasSound && <button class="sound-btn" onclick="toggleSound(this)" title="הפעל צליל">🔇</button>}
                 </div>
               )}
@@ -442,6 +442,31 @@ const allTags = [...new Set(all.flatMap(s => s.tags ?? []))];
 </style>
 
 <script is:inline>
+  // כל הסרטונים בעמוד נטענים רק כשמתקרבים אליהם בגלילה
+  (function () {
+    function reveal(v) {
+      var s = v.querySelector('source[data-src]');
+      if (s) { s.src = s.dataset.src; }
+      else if (v.dataset.src) { v.src = v.dataset.src; }
+      else { return; }
+      v.load();
+      var pr = v.play();
+      if (pr && pr.catch) pr.catch(function () {});
+    }
+    var vids = document.querySelectorAll('#ai-section-video, video[data-src]');
+    if (!('IntersectionObserver' in window)) {          // דפדפן ישן — טוען הכל כמו קודם
+      vids.forEach(reveal); return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        reveal(e.target);
+      });
+    }, { rootMargin: '300px' });                         // מתחיל להוריד קצת לפני שרואים
+    vids.forEach(function (v) { io.observe(v); });
+  })();
+
   // AI section video sound toggle
   const aiVideo    = document.getElementById('ai-section-video');
   const aiBtn      = document.getElementById('ai-section-sound-btn');
