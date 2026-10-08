@@ -9,7 +9,7 @@ const allTags = [...new Set(all.flatMap(s => s.tags ?? []))];
 ---
 
 <Layout
-  title="שדרוגי AI למצגות — אפקטים, דיבוב ויצירות מיוחדות"
+  title="סרטוני AI למצגות — אפקטים, דיבוב ויצירות מיוחדות"
   description="אלמנטים מיוחדים, אפקטים וסצנות שנוצרים בעזרת AI — שדרוגים שהופכים כל מצגת לחוויה בלתי נשכחת."
 >
   <Header />
@@ -18,10 +18,10 @@ const allTags = [...new Set(all.flatMap(s => s.tags ?? []))];
   <section id="ai-hero" style="background: #2e0975; padding: 5rem 1.5rem 5.5rem; text-align: center; position: relative; overflow: hidden;">
     <div style="position: relative; z-index: 1; max-width: 800px; margin: 0 auto;" class="reveal">
       <div style="display: inline-block; background: linear-gradient(90deg, #E879F9, #A855F7); color: white; font-size: .72rem; font-weight: 800; letter-spacing: 2px; padding: .35rem 1.1rem; border-radius: 50px; margin-bottom: 1.5rem; box-shadow: 0 4px 18px rgba(232,121,249,.45);">
-        חדש — שדרוגי AI
+        חדש — סרטוני AI
       </div>
       <h1 style="font-family: 'Secular One', sans-serif; font-size: clamp(2.6rem, 6vw, 4.2rem); color: white; margin: 0 0 1.2rem; line-height: 1.1;">
-        מצגות וידאו עם שדרוגי AI — מהתמונות שלכם לחוויה שכולם יזכרו
+        מצגות וידאו עם סרטוני AI — מהתמונות שלכם לחוויה שכולם יזכרו
       </h1>
       <p style="font-size: clamp(1rem, 2.2vw, 1.15rem); color: rgba(255,255,255,0.82); line-height: 1.75; max-width: 640px; margin: 0 auto;">
         תמונה שמתחילה לזוז. ילד שמופיע בסט של Harry Potter. ברכה מרונלדו.<br><br>
@@ -544,7 +544,7 @@ const allTags = [...new Set(all.flatMap(s => s.tags ?? []))];
       allItems.forEach(item => item.style.display = 'none');
       filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).forEach(item => item.style.display = 'block');
       const info = document.getElementById('ai-page-info');
-      if (info) info.textContent = page < totalPages ? 'עוד שדרוגי AI בעמודים הבאים ↓' : filtered.length + ' דוגמאות';
+      if (info) info.textContent = page < totalPages ? 'עוד סרטוני AI בעמודים הבאים ↓' : filtered.length + ' דוגמאות';
       buildPagination(page, totalPages);
       const showVideo = page === 1 && !activeTag;
       const videoSection = document.getElementById('ai-video-section');

@@ -100,15 +100,21 @@ const pricingSchema = JSON.stringify({
   <!-- Packages -->
   <section style="padding:3.5rem 1.5rem; background:#F8F7FF;">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-center font-black text-[#12023C]" style="font-size:clamp(1.6rem,3vw,2rem); font-family:'Secular One',sans-serif; margin-bottom:2.5rem;">חבילות מצגות</h2>
+      <h2 class="text-center font-black text-[#12023C]" style="font-size:clamp(1.6rem,3vw,2rem); font-family:'Secular One',sans-serif; margin-bottom:.6rem;">בחרו את האורך. אנחנו נדאג לרגש.</h2>
+      <p class="text-center text-gray-500" style="font-size:.95rem; margin-bottom:2.5rem;">לכל חבילה יש מצגת אמיתית שאפשר לצפות בה, פשוט לחצו על התמונה.</p>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
         <!-- Basic -->
         <div class="bg-white rounded-2xl shadow-md text-right hover:shadow-xl transition-shadow flex flex-col" style="padding:1.75rem;">
+          <a href="/matzget/video-996099018" aria-label="צפו בדוגמה: נוגה חוגגת בת מצווה" style="display:block; margin:-1.75rem -1.75rem 1.25rem; border-radius:16px 16px 0 0; overflow:hidden; aspect-ratio:16/9; position:relative; background:#12023C;">
+            <img src="https://vumbnail.com/996099018.jpg" alt="מצגת לדוגמה — נוגה חוגגת בת מצווה" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <span style="position:absolute; bottom:.75rem; right:.75rem; background:rgba(18,2,60,.8); color:white; font-size:.78rem; font-weight:700; padding:.3rem .85rem; border-radius:50px;">▶ צפו בדוגמה · 2:58</span>
+          </a>
           <div style="margin-bottom:auto;">
             <h3 class="font-black text-[#12023C]" style="font-size:1.15rem; margin-bottom:.5rem;">מצגת קצרה</h3>
-            <div class="font-black text-[#6C22FF]" style="font-size:2.5rem; line-height:1; margin-bottom:1.1rem;">₪360</div>
+            <p style="font-size:.9rem; color:#6B7280; margin:-.2rem 0 .9rem;">רגע אחד מרגש, מוכן מהר</p>
+            <div class="font-black text-[#6C22FF]" data-count="360" style="font-size:2.5rem; line-height:1; margin-bottom:1.1rem;">₪360</div>
             <ul class="text-gray-600 flex flex-col" style="font-size:.875rem; gap:.55rem; margin-bottom:1.4rem;">
               <li>&#10003; עד 3 דקות</li>
               <li>&#10003; כ-60 תמונות</li>
@@ -117,21 +123,25 @@ const pricingSchema = JSON.stringify({
               <li>&#10003; מוזיקה וברכה</li>
               <li class="text-gray-400">דקה נוספת: ₪75</li>
             </ul>
-            <a href="/matzget/video-996099018" style="display:inline-block; margin:-.6rem 0 1.2rem; font-size:.85rem; font-weight:700; color:#6C22FF; text-decoration:underline;">▶ לצפייה בדוגמה (2:58 דקות)</a>
           </div>
           <a href="/#contact" class="block text-center font-bold rounded-full transition-colors" style="background:#F8F7FF; color:#6C22FF; padding:.75rem 1rem; font-size:.92rem;" onmouseover="this.style.background='#6C22FF';this.style.color='white'" onmouseout="this.style.background='#F8F7FF';this.style.color='#6C22FF'">
-            לפרטים
+            אני רוצה מצגת כזו
           </a>
         </div>
 
         <!-- Standard - highlighted -->
         <div class="rounded-2xl shadow-xl text-right relative flex flex-col" style="background:#DDD6FE; padding:1.75rem;">
+          <a href="/matzget/video-1188968759" aria-label="צפו בדוגמה: מצגת בת מצווה לשקד" style="display:block; margin:-1.75rem -1.75rem 1.25rem; border-radius:16px 16px 0 0; overflow:hidden; aspect-ratio:16/9; position:relative; background:#12023C;">
+            <img src="https://vumbnail.com/1188968759.jpg" alt="מצגת לדוגמה — מצגת בת מצווה לשקד" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <span style="position:absolute; bottom:.75rem; right:.75rem; background:rgba(18,2,60,.8); color:white; font-size:.78rem; font-weight:700; padding:.3rem .85rem; border-radius:50px;">▶ צפו בדוגמה · 6:07</span>
+          </a>
           <div style="position:absolute; top:-14px; right:50%; transform:translateX(50%); background:#F59E0B; color:white; font-size:.78rem; font-weight:700; padding:.28rem 1rem; border-radius:50px; white-space:nowrap;">
             הכי פופולרי
           </div>
           <div style="margin-bottom:auto;">
             <h3 class="font-black" style="color:#12023C; font-size:1.15rem; margin-bottom:.5rem;">מצגת בסיסית</h3>
-            <div class="font-black" style="color:#7C3AED; font-size:2.5rem; line-height:1; margin-bottom:1.1rem;">₪550</div>
+            <p style="font-size:.9rem; color:#4B4580; margin:-.2rem 0 .9rem;">הסיפור המלא של החוגג/ת</p>
+            <div class="font-black" data-count="550" style="color:#7C3AED; font-size:2.5rem; line-height:1; margin-bottom:1.1rem;">₪550</div>
             <ul class="flex flex-col" style="color:#4B4580; font-size:.875rem; gap:.55rem; margin-bottom:1.4rem;">
               <li>&#10003; עד 6 דקות</li>
               <li>&#10003; כ-120 תמונות</li>
@@ -139,10 +149,9 @@ const pricingSchema = JSON.stringify({
               <li>&#10003; סרטוני וידאו</li>
               <li style="color:#9490B8;">דקה נוספת: ₪75</li>
             </ul>
-            <a href="/matzget/video-1188968759" style="display:inline-block; margin:-.6rem 0 1.2rem; font-size:.85rem; font-weight:700; color:#7C3AED; text-decoration:underline;">▶ לצפייה בדוגמה (6:07 דקות)</a>
           </div>
           <a href="/#contact" class="block text-center font-bold rounded-full" style="background:#7C3AED; color:white; padding:.75rem 1rem; font-size:.92rem; margin-bottom:1.25rem;">
-            לפרטים
+            אני רוצה מצגת כזו
           </a>
           <div style="margin:0 -1.75rem -1.75rem -1.75rem; background:linear-gradient(135deg,#F59E0B,#EA580C); padding:.6rem 1rem; border-radius:0 0 16px 16px; text-align:center;">
             <span style="color:white; font-weight:800; font-size:.74rem; display:inline-flex; align-items:center; gap:.4rem;">
@@ -154,9 +163,14 @@ const pricingSchema = JSON.stringify({
 
         <!-- Premium -->
         <div class="rounded-2xl shadow-md text-right flex flex-col" style="background:#4C1D95; padding:1.75rem;">
+          <a href="/matzget/video-1091724751" aria-label="צפו בדוגמה: הבת מצווה של נויה" style="display:block; margin:-1.75rem -1.75rem 1.25rem; border-radius:16px 16px 0 0; overflow:hidden; aspect-ratio:16/9; position:relative; background:#12023C;">
+            <img src="https://vumbnail.com/1091724751.jpg" alt="מצגת לדוגמה — הבת מצווה של נויה" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <span style="position:absolute; bottom:.75rem; right:.75rem; background:rgba(18,2,60,.8); color:white; font-size:.78rem; font-weight:700; padding:.3rem .85rem; border-radius:50px;">▶ צפו בדוגמה · 9:52</span>
+          </a>
           <div style="margin-bottom:auto;">
             <h3 class="font-black" style="color:white; font-size:1.15rem; margin-bottom:.5rem;">מצגת פרימיום</h3>
-            <div class="font-black" style="color:#C4B5FD; font-size:2.5rem; line-height:1; margin-bottom:1.1rem;">₪750</div>
+            <p style="font-size:.9rem; color:rgba(255,255,255,0.8); margin:-.2rem 0 .9rem;">מצגת קולנועית, פרק אחרי פרק</p>
+            <div class="font-black" data-count="750" style="color:#C4B5FD; font-size:2.5rem; line-height:1; margin-bottom:1.1rem;">₪750</div>
             <ul class="flex flex-col" style="color:rgba(255,255,255,0.85); font-size:.875rem; gap:.55rem; margin-bottom:1.4rem;">
               <li>&#10003; עד 10 דקות</li>
               <li>&#10003; כ-170 תמונות</li>
@@ -164,10 +178,9 @@ const pricingSchema = JSON.stringify({
               <li>&#10003; חלוקה לנושאים</li>
               <li style="color:rgba(255,255,255,0.45);">דקה נוספת: ₪75</li>
             </ul>
-            <a href="/matzget/video-1091724751" style="display:inline-block; margin:-.6rem 0 1.2rem; font-size:.85rem; font-weight:700; color:#C4B5FD; text-decoration:underline;">▶ לצפייה בדוגמה (9:52 דקות)</a>
           </div>
           <a href="/#contact" class="block text-center font-bold rounded-full" style="background:white; color:#4C1D95; padding:.75rem 1rem; font-size:.92rem; margin-bottom:1.25rem;">
-            לפרטים
+            אני רוצה מצגת כזו
           </a>
           <div style="margin:0 -1.75rem -1.75rem -1.75rem; background:linear-gradient(135deg,#F59E0B,#EA580C); padding:.6rem 1rem; border-radius:0 0 16px 16px; text-align:center;">
             <span style="color:white; font-weight:800; font-size:.74rem; display:inline-flex; align-items:center; gap:.4rem;">
@@ -185,24 +198,15 @@ const pricingSchema = JSON.stringify({
   <section style="padding:3.5rem 1.5rem; background:linear-gradient(180deg,#F5F3FF,#FFFFFF);">
     <div class="max-w-5xl mx-auto">
       <div class="text-center" style="margin-bottom:2.5rem;">
-        <h2 class="font-black text-[#12023C]" style="font-size:clamp(1.6rem,3vw,2rem); font-family:'Secular One',sans-serif;">שדרוגי AI למצגת</h2>
-        <p class="text-gray-500" style="font-size:.95rem; margin-top:.5rem;">תוספת קטנה שהופכת מצגת טובה לבלתי נשכחת</p>
+        <h2 class="font-black text-[#12023C]" style="font-size:clamp(1.6rem,3vw,2rem); font-family:'Secular One',sans-serif;">סרטוני AI למצגות</h2>
+        <p class="text-gray-500" style="font-size:.95rem; margin-top:.5rem;">סרטונים קולנועיים שנוצרים במיוחד עבורכם, ופותחים את המצגת ברגש</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <!-- אנימציית פתיחה -->
-        <div class="bg-white rounded-2xl shadow-md text-right flex flex-col" style="padding:1.75rem; border:2px solid #F3E8FF;">
-          <h3 class="font-black text-[#12023C]" style="font-size:1.1rem; margin-bottom:.4rem;">אנימציית פתיחה</h3>
-          <p class="text-gray-500" style="font-size:.85rem; margin-bottom:1rem;">תמונת החוגג/ת קמה לחיים על רקע AI — הרגע שפותח את המצגת</p>
-          <div class="flex items-baseline gap-2" style="margin-top:auto;">
-            <span class="font-black" style="color:#16A34A; font-size:1.7rem; line-height:1;">מתנה 🎁</span>
-            <span class="text-gray-400" style="font-size:.9rem; text-decoration:line-through;">₪75</span>
-          </div>
-        </div>
-
         <!-- פתיח נושא -->
         <div class="bg-white rounded-2xl shadow-md text-right flex flex-col" style="padding:1.75rem; border:2px solid #F3E8FF;">
+          <video data-lazy-src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20videos/omer-preview.mp4" muted loop playsinline preload="none" aria-label="דוגמה לפתיחים של עומר" style="display:block; margin:-1.75rem -1.75rem 1.25rem; width:calc(100% + 3.5rem); max-width:none; border-radius:16px 16px 0 0; aspect-ratio:16/9; object-fit:cover; background:#12023C;"></video>
           <h3 class="font-black text-[#12023C]" style="font-size:1.1rem; margin-bottom:.4rem;">פתיח נושא AI</h3>
           <p class="text-gray-500" style="font-size:.85rem; margin-bottom:1rem;">קליפ קולנועי של 12 שניות שפותח נושא במצגת, עם קריינות</p>
           <div class="flex items-baseline gap-2" style="margin-top:auto;">
@@ -213,9 +217,12 @@ const pricingSchema = JSON.stringify({
           </div>
         </div>
 
+        
+
         <!-- סרטון פתיחה -->
         <div class="rounded-2xl shadow-xl text-right relative flex flex-col" style="background:#DDD6FE; padding:1.75rem;">
           <div style="position:absolute; top:-14px; right:1.75rem; background:#F59E0B; color:white; font-size:.72rem; font-weight:700; padding:.28rem 1rem; border-radius:50px;">הכי מרשים</div>
+          <video data-lazy-src="https://pub-0fce3727bd4b426f910073f9e5070a72.r2.dev/ai%20videos/ido-preview.mp4" muted loop playsinline preload="none" aria-label="דוגמה לפתיח של עידו" style="display:block; margin:-1.75rem -1.75rem 1.25rem; width:calc(100% + 3.5rem); max-width:none; border-radius:16px 16px 0 0; aspect-ratio:16/9; object-fit:cover; background:#12023C;"></video>
           <h3 class="font-black" style="color:#12023C; font-size:1.1rem; margin-bottom:.4rem;">סרטון פתיחה AI</h3>
           <p style="color:#4B4580; font-size:.85rem; margin-bottom:.6rem;">סרטון רציף אחד שמחבר את נושאי המצגת, או כמה קליפים שפותחים כל נושא. הסרטון בנוי מקליפים של 12 שניות, ודקה שלמה היא 5 קליפים.</p>
           <p style="color:#4B4580; font-size:.85rem; margin-bottom:1rem;">
@@ -231,6 +238,20 @@ const pricingSchema = JSON.stringify({
             <p style="color:#6E6796; font-size:.8rem; margin-top:.5rem;">לדוגמה: דקה ₪600 · 7 קליפים (דקה ו-24 שניות) ₪800 · 10 קליפים (שתי דקות) ₪1,100</p>
           </div>
         </div>
+
+        
+
+        <!-- אנימציית פתיחה -->
+        <div class="bg-white rounded-2xl shadow-md text-right flex flex-col" style="padding:1.75rem; border:2px solid #F3E8FF;">
+          <h3 class="font-black text-[#12023C]" style="font-size:1.1rem; margin-bottom:.4rem;">אנימציית פתיחה</h3>
+          <p class="text-gray-500" style="font-size:.85rem; margin-bottom:1rem;">תמונת החוגג/ת קמה לחיים על רקע AI — הרגע שפותח את המצגת</p>
+          <div class="flex items-baseline gap-2" style="margin-top:auto;">
+            <span class="font-black" style="color:#16A34A; font-size:1.7rem; line-height:1;">מתנה 🎁</span>
+            <span class="text-gray-400" style="font-size:.9rem; text-decoration:line-through;">₪75</span>
+          </div>
+        </div>
+
+        
 
         <!-- סרט קולנועי -->
         <div class="rounded-2xl shadow-md text-right flex flex-col" style="background:#4C1D95; padding:1.75rem;">
@@ -430,4 +451,39 @@ const pricingSchema = JSON.stringify({
     </a>
   </section>
 
+
+  <script is:inline>
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var vids = document.querySelectorAll('video[data-lazy-src]');
+      vids.forEach(function (v) {
+        v.src = v.dataset.lazySrc;
+        if (reduce) { v.preload = 'metadata'; }
+      });
+      if (!reduce && 'IntersectionObserver' in window) {
+        var vo = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { e.isIntersecting ? e.target.play().catch(function () {}) : e.target.pause(); });
+        }, { threshold: 0.4 });
+        vids.forEach(function (v) { vo.observe(v); });
+
+        var prices = document.querySelectorAll('[data-count]');
+        var po = new IntersectionObserver(function (es) {
+          es.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            po.unobserve(e.target);
+            var el = e.target, end = +el.dataset.count, t0 = null;
+            function step(t) {
+              t0 = t0 || t;
+              var k = Math.min((t - t0) / 900, 1), ease = 1 - Math.pow(1 - k, 3);
+              el.textContent = '\u20AA' + Math.round(end * ease);
+              if (k < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+            setTimeout(function () { el.textContent = '\u20AA' + end; }, 1300);
+          });
+        }, { threshold: 0.6 });
+        prices.forEach(function (p) { po.observe(p); });
+      }
+    })();
+  </script>
 </Layout>
