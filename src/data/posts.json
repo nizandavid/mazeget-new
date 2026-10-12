@@ -2963,8 +2963,8 @@
     "guid": {
       "rendered": "https://mazeget.com/?p=12050"
     },
-    "modified": "2026-03-29T13:38:54",
-    "modified_gmt": "2026-03-29T10:38:54",
+    "modified": "2026-10-12T09:50:23",
+    "modified_gmt": "2026-10-12T06:50:23",
     "slug": "%d7%9e%d7%95%d7%96%d7%99%d7%a7%d7%94-%d7%9c%d7%95%d7%99%d7%93%d7%90%d7%95-%d7%99%d7%95%d7%9d-%d7%94%d7%95%d7%9c%d7%93%d7%aa-%d7%90%d7%99%d7%9a-%d7%9c%d7%91%d7%97%d7%95%d7%a8-%d7%a9%d7%99%d7%a8-%d7%a9",
     "status": "publish",
     "type": "post",
@@ -2977,7 +2977,7 @@
       "protected": false
     },
     "excerpt": {
-      "rendered": "<p>מוזיקה לוידאו יום הולדת: איך לבחור שיר שמתאים לסרטון בווידאו יום הולדת מושקע באמת, המוזיקה היא לא &quot;עוד שכבה ברקע&quot;. היא הלב הפועם של הסרטון. היא זו שמצליחה לרגש, להצחיק, להחזיר זיכרונות, ולחבר בין כל התמונות והקליפים לסיפור אחד שלם. אנחנו בניצן-שמיר-מעצבים פוגשים את זה בכל פרויקט מחדש: בחירת השיר הנכון יכולה להפוך סרטון נחמד [&hellip;]</p>\n",
+      "rendered": "<p>איך בוחרים שיר לסרטון יום הולדת? טיפים להתאמת המוזיקה לחוגג, לסוג התוכן ולקצב העריכה, כדי שהסרטון ירגש באמת.</p>\n",
       "protected": false
     },
     "author": 1,
@@ -3041,14 +3041,14 @@
       ],
       "version-history": [
         {
-          "count": 7,
+          "count": 8,
           "href": "https://wp.mazeget.com/wp-json/wp/v2/posts/12050/revisions"
         }
       ],
       "predecessor-version": [
         {
-          "id": 12724,
-          "href": "https://wp.mazeget.com/wp-json/wp/v2/posts/12050/revisions/12724"
+          "id": 12864,
+          "href": "https://wp.mazeget.com/wp-json/wp/v2/posts/12050/revisions/12864"
         }
       ],
       "wp:featuredmedia": [
@@ -8732,8 +8732,8 @@
     "guid": {
       "rendered": "https://mazeget.com/?p=2609"
     },
-    "modified": "2026-03-29T13:41:35",
-    "modified_gmt": "2026-03-29T10:41:35",
+    "modified": "2026-10-12T09:50:24",
+    "modified_gmt": "2026-10-12T06:50:24",
     "slug": "%d7%9e%d7%a6%d7%92%d7%aa-%d7%99%d7%95%d7%9d-%d7%94%d7%95%d7%9c%d7%93%d7%aa-%d7%9c%d7%9e%d7%a1%d7%a4%d7%a8-%d7%92%d7%99%d7%9c%d7%90%d7%99%d7%9d-%d7%a8%d7%a2%d7%99%d7%95%d7%a0%d7%95%d7%aa-%d7%9c%d7%9b",
     "status": "publish",
     "type": "post",
@@ -8746,7 +8746,7 @@
       "protected": false
     },
     "excerpt": {
-      "rendered": "<p>מצגת יום הולדת למספר גילאים: רעיונות לכל עשור יום הולדת 40 או 50 הוא ציון דרך חשוב בחייו של כל אדם. זהו גיל שנחשב &quot;אמצע החיים&quot; ולכן זוהי הזדמנות נהדרת לחגוג את החווית וההישגים של חוגג יום ההולדת עם המשפחה והחברים הקרובים. באמצעות סרטון יום הולדת 40 או 50 תוכלו לציין את האירוע המיוחד בדרך [&hellip;]</p>\n",
+      "rendered": "<p>רעיונות למצגת וסרטון יום הולדת 40 ו-50: מסע בזמן, מוזיקה מתאימה, וכמה עולה להפיק סרטון יום הולדת עגול.</p>\n",
       "protected": false
     },
     "author": 1,
@@ -8810,14 +8810,14 @@
       ],
       "version-history": [
         {
-          "count": 5,
+          "count": 6,
           "href": "https://wp.mazeget.com/wp-json/wp/v2/posts/2609/revisions"
         }
       ],
       "predecessor-version": [
         {
-          "id": 12743,
-          "href": "https://wp.mazeget.com/wp-json/wp/v2/posts/2609/revisions/12743"
+          "id": 12865,
+          "href": "https://wp.mazeget.com/wp-json/wp/v2/posts/2609/revisions/12865"
         }
       ],
       "wp:featuredmedia": [
@@ -29735,8 +29735,8 @@
     "guid": {
       "rendered": "https://mazeget.com/?p=1963"
     },
-    "modified": "2026-03-29T13:53:15",
-    "modified_gmt": "2026-03-29T10:53:15",
+    "modified": "2026-10-12T09:50:26",
+    "modified_gmt": "2026-10-12T06:50:26",
     "slug": "%d7%a1%d7%a8%d7%98%d7%95%d7%9f-%d7%aa%d7%9e%d7%95%d7%a0%d7%95%d7%aa-%d7%99%d7%95%d7%9d-%d7%94%d7%95%d7%9c%d7%93%d7%aa",
     "status": "publish",
     "type": "post",
@@ -29749,7 +29749,7 @@
       "protected": false
     },
     "excerpt": {
-      "rendered": "<p>היכן נולד רעיון סרטון תמונות יום הולדת 40 וסרטון יום הולדת 50? &quot;ויהי ביום השלישי יום הולדת את פרעה ויעש משתה לכל עבדיו וישא את ראש שר המשקים ואת ראש שר האופים בתוך עבדיו&quot; (בראשית מ' כ') מנהג מצרי עתיק שהשפיע על תרבות ימי ההולדת זהו מנהג מצרי עתיק שנחגג במצרים העתיקה בתקופת הפרעונים בו [&hellip;]</p>\n",
+      "rendered": "<p>מאיפה הגיע המנהג לחגוג יום הולדת, ואיך הוא הפך לסרטון תמונות מרגש ליום הולדת 40 ו-50? הסיפור והרעיונות ליצירה.</p>\n",
       "protected": false
     },
     "author": 1,
@@ -29813,14 +29813,14 @@
       ],
       "version-history": [
         {
-          "count": 4,
+          "count": 5,
           "href": "https://wp.mazeget.com/wp-json/wp/v2/posts/1963/revisions"
         }
       ],
       "predecessor-version": [
         {
-          "id": 12811,
-          "href": "https://wp.mazeget.com/wp-json/wp/v2/posts/1963/revisions/12811"
+          "id": 12866,
+          "href": "https://wp.mazeget.com/wp-json/wp/v2/posts/1963/revisions/12866"
         }
       ],
       "wp:featuredmedia": [
