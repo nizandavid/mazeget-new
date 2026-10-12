@@ -6,8 +6,8 @@
     "guid": {
       "rendered": "https://wp.mazeget.com/?p=12824"
     },
-    "modified": "2026-10-12T09:24:33",
-    "modified_gmt": "2026-10-12T06:24:33",
+    "modified": "2026-10-12T13:53:10",
+    "modified_gmt": "2026-10-12T10:53:10",
     "slug": "%D7%A1%D7%A8%D7%98%D7%95%D7%A0%D7%99-ai-%D7%9C%D7%9E%D7%A6%D7%92%D7%AA-%D7%95%D7%9C%D7%97%D7%AA%D7%95%D7%A0%D7%94",
     "status": "publish",
     "type": "post",
@@ -24,7 +24,7 @@
       "protected": false
     },
     "author": 1,
-    "featured_media": 0,
+    "featured_media": 12867,
     "comment_status": "open",
     "ping_status": "open",
     "sticky": false,
@@ -116,6 +116,12 @@
           "href": "https://api.w.org/{rel}",
           "templated": true
         }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "href": "https://wp.mazeget.com/wp-json/wp/v2/media/12867"
+        }
       ]
     },
     "_embedded": {
@@ -198,6 +204,142 @@
           }
         ],
         []
+      ],
+      "wp:featuredmedia": [
+        {
+          "id": 12867,
+          "date": "2026-10-12T13:52:42",
+          "slug": "featured-ai-videos",
+          "type": "attachment",
+          "link": "https://wp.mazeget.com/2026/10/12/%d7%a1%d7%a8%d7%98%d7%95%d7%a0%d7%99-ai-%d7%9c%d7%9e%d7%a6%d7%92%d7%aa-%d7%95%d7%9c%d7%97%d7%aa%d7%95%d7%a0%d7%94/featured-ai-videos/",
+          "title": {
+            "rendered": "featured-ai-videos"
+          },
+          "author": 1,
+          "featured_media": 0,
+          "acf": [],
+          "caption": {
+            "rendered": ""
+          },
+          "alt_text": "פריים מסרט חתונה שנוצר בבינה מלאכותית: דגל גרמניה ודגל ישראל, והזוג מול האגם",
+          "media_type": "image",
+          "mime_type": "image/jpeg",
+          "media_details": {
+            "width": 1280,
+            "height": 672,
+            "file": "2026/10/featured-ai-videos.jpg",
+            "filesize": 215857,
+            "sizes": {
+              "medium": {
+                "file": "featured-ai-videos-300x158.jpg",
+                "width": 300,
+                "height": 158,
+                "filesize": 16662,
+                "mime_type": "image/jpeg",
+                "source_url": "https://wp.mazeget.com/wp-content/uploads/2026/10/featured-ai-videos-300x158.jpg"
+              },
+              "large": {
+                "file": "featured-ai-videos-1024x538.jpg",
+                "width": 1024,
+                "height": 538,
+                "filesize": 115320,
+                "mime_type": "image/jpeg",
+                "source_url": "https://wp.mazeget.com/wp-content/uploads/2026/10/featured-ai-videos-1024x538.jpg"
+              },
+              "thumbnail": {
+                "file": "featured-ai-videos-150x150.jpg",
+                "width": 150,
+                "height": 150,
+                "filesize": 7786,
+                "mime_type": "image/jpeg",
+                "source_url": "https://wp.mazeget.com/wp-content/uploads/2026/10/featured-ai-videos-150x150.jpg"
+              },
+              "medium_large": {
+                "file": "featured-ai-videos-768x403.jpg",
+                "width": 768,
+                "height": 403,
+                "filesize": 75450,
+                "mime_type": "image/jpeg",
+                "source_url": "https://wp.mazeget.com/wp-content/uploads/2026/10/featured-ai-videos-768x403.jpg"
+              },
+              "full": {
+                "file": "featured-ai-videos.jpg",
+                "width": 1280,
+                "height": 672,
+                "mime_type": "image/jpeg",
+                "source_url": "https://wp.mazeget.com/wp-content/uploads/2026/10/featured-ai-videos.jpg"
+              }
+            },
+            "image_meta": {
+              "aperture": "0",
+              "credit": "",
+              "camera": "",
+              "caption": "",
+              "created_timestamp": "0",
+              "copyright": "",
+              "focal_length": "0",
+              "iso": "0",
+              "shutter_speed": "0",
+              "title": "",
+              "orientation": "0",
+              "keywords": []
+            }
+          },
+          "source_url": "https://wp.mazeget.com/wp-content/uploads/2026/10/featured-ai-videos.jpg",
+          "_links": {
+            "self": [
+              {
+                "href": "https://wp.mazeget.com/wp-json/wp/v2/media/12867",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://wp.mazeget.com/wp-json/wp/v2/media"
+              }
+            ],
+            "about": [
+              {
+                "href": "https://wp.mazeget.com/wp-json/wp/v2/types/attachment"
+              }
+            ],
+            "author": [
+              {
+                "embeddable": true,
+                "href": "https://wp.mazeget.com/wp-json/wp/v2/users/1"
+              }
+            ],
+            "replies": [
+              {
+                "embeddable": true,
+                "href": "https://wp.mazeget.com/wp-json/wp/v2/comments?post=12867"
+              }
+            ],
+            "wp:attached-to": [
+              {
+                "embeddable": true,
+                "post_type": "post",
+                "id": 12824,
+                "href": "https://wp.mazeget.com/wp-json/wp/v2/posts/12824"
+              }
+            ],
+            "curies": [
+              {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+              }
+            ]
+          }
+        }
       ]
     }
   },
