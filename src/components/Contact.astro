@@ -77,6 +77,8 @@ import { categories } from '../data/categories';
           <div style="display:none;" aria-hidden="true">
             <input name="website" type="text" tabindex="-1" autocomplete="off" />
           </div>
+          <!-- Cloudflare Turnstile — "אני לא רובוט" -->
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAAGE6BmQIrVnzwFOnJvJ9JLMgczE" data-language="he" style="align-self:center;"></div>
           <button id="contact-submit" type="submit" style="width:100%; background:linear-gradient(135deg,#7C3AED,#9D5CF6); color:white; border:none; padding:.9rem; border-radius:50px; font-weight:700; font-size:.95rem; font-family:'Heebo',sans-serif; cursor:pointer; box-shadow:0 6px 22px rgba(124,58,237,.45); transition:transform .15s, box-shadow .15s;" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 8px 28px rgba(124,58,237,.55)'" onmouseout="this.style.transform='';this.style.boxShadow='0 6px 22px rgba(124,58,237,.45)'">
             שליחה &rarr;
           </button>
@@ -91,6 +93,7 @@ import { categories } from '../data/categories';
           <p style="color:#6b7280; font-size:.92rem; line-height:1.6;">קיבלנו את פנייתך ונחזור אליך בהקדם עם הצעה מותאמת אישית.</p>
         </div>
 
+        <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
         <script>
           const form = document.getElementById('contact-form') as HTMLFormElement | null;
           const success = document.getElementById('contact-success');
@@ -112,11 +115,19 @@ import { categories } from '../data/categories';
             }
 
             try {
-              await fetch('https://mazegetapi-production.up.railway.app/contact', {
+              const res = await fetch('https://mazegetapi-production.up.railway.app/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
               });
+              // אימות "אני לא רובוט" נכשל — לא להציג תודה, לתת לנסות שוב
+              if (res.status === 403) {
+                alert('לא הצלחנו לאמת שאתם לא רובוט. נסו שוב, או כתבו לנו בוואטסאפ.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'שליחה →';
+                (window as any).turnstile?.reset();
+                return;
+              }
             } catch (_) {}
 
             form.style.display = 'none';
