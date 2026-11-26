@@ -23,6 +23,8 @@ export interface AIShowcase {
   videoCaption?: string;
   videoStyle?: 'landscape' | 'portrait';
   containImage?: boolean;
+  // תמונה מקורית לאורך: מוצגת בלי חיתוך (גובה קבוע, רוחב לפי היחס)
+  portraitPair?: boolean;
   hideFromGrid?: boolean;
   realPresentation?: { slug: string; label: string; timeCode?: string };
   categoryLink?: { href: string; label: string };
@@ -355,6 +357,37 @@ export const showcases: AIShowcase[] = [
 כל אירוע יכול לכלול רגע כזה: מצגת בר מצווה עם תמונה שחיה, מצגת יום הולדת עם זיכרון שזזה, מצגת פרישה עם רגע ישן שחוזר לחיות. שלחו לנו תמונה — נראה לכם מה אפשר לעשות איתה.`,
   },
   {
+    slug: 'girl-with-bow',
+    title: 'תמונה שהפכה לסרטון חי: הילדה עם הסרט',
+    badge: 'וידאו AI',
+    description: 'תמונה ישנה בשחור-לבן של ילדה קטנה, והיא קמה לחיים, בצבע, מחייכת ומסתכלת למטה. <strong>יש לכם תמונה ישנה של סבתא, של אבא או של עצמכם? שלחו לנו ונחיה אותה.</strong>',
+    thumbnail: `${R2}/girl-bow-movie.mp4`,
+    thumbnailIsVideo: true,
+    featured: false,
+    type: 'image-video',
+    videoStyle: 'portrait',
+    portraitPair: true,
+    original: { src: `${R2}/girl-bow-photo.jpg`, alt: 'תמונה ישנה של ילדה קטנה עם סרט בשיער', label: 'התמונה המקורית' },
+    aiResult: { src: `${R2}/girl-bow-movie.mp4`, isVideo: true, label: 'התמונה הפכה לסרטון חי' },
+    tags: ['תמונה חיה', 'תמונה ישנה'],
+  },
+  {
+    slug: 'old-wedding-couple',
+    title: 'תמונה שהפכה לסרטון חי: החתן והכלה',
+    badge: 'וידאו AI',
+    description: 'תמונת חתונה ישנה, והזוג מסתכל זה על זה ומחייך. <strong>גם אתם יכולים להחיות את תמונת החתונה של ההורים או הסבים, כל מה שצריך זה תמונה אחת.</strong>',
+    thumbnail: `${R2}/couple-movie.mp4`,
+    thumbnailIsVideo: true,
+    featured: false,
+    type: 'image-video',
+    videoStyle: 'portrait',
+    portraitPair: true,
+    original: { src: `${R2}/couple-photo.jpg`, alt: 'תמונת חתונה ישנה של חתן וכלה', label: 'התמונה המקורית' },
+    aiResult: { src: `${R2}/couple-movie.mp4`, isVideo: true, label: 'התמונה הפכה לסרטון חי' },
+    categoryLink: { href: '/מצגות/wedding', label: 'גלריית מצגות חתונות' },
+    tags: ['תמונה חיה', 'חתונה'],
+  },
+  {
     slug: 'nadav-soccer',
     title: 'מילדות למגרש הגדול',
     badge: 'וידאו גדילה AI',
@@ -551,33 +584,6 @@ AI מייצר קול שמשלב את הסגנון, ההגייה, ואפילו ה
 AI משחזר את הרגש: מוסיף תנועה עדינה לבגדים, לשיער, לאוויר — ומייצר רגע שגרם לזוגות שחגגו חתונת כסף, זהב, ויובל לבכות ולצחוק בו זמנית. מצגות חתונה שמשלבות תמונות חיות ישנות הן מהיפות והמרגשות ביותר שאנחנו יוצרים.
 
 לא צריך תמונה באיכות גבוהה — אפילו תמונה סרוקה מאלבום ישן עובדת. שלחו לנו מה שיש, ואנחנו נחיה אותה.`,
-  },
-  {
-    slug: 'girl-with-bow',
-    title: 'תמונה שהפכה לסרטון חי: הילדה עם הסרט',
-    badge: 'וידאו AI',
-    description: 'תמונה ישנה בשחור-לבן של ילדה קטנה, והיא קמה לחיים, בצבע, מחייכת ומסתכלת למטה. <strong>יש לכם תמונה ישנה של סבתא, של אבא או של עצמכם? שלחו לנו ונחיה אותה.</strong>',
-    thumbnail: `${R2}/girl-bow-movie.mp4`,
-    thumbnailIsVideo: true,
-    featured: false,
-    type: 'image-video',
-    original: { src: `${R2}/girl-bow-photo.jpg`, alt: 'תמונה ישנה של ילדה קטנה עם סרט בשיער', label: 'התמונה המקורית' },
-    aiResult: { src: `${R2}/girl-bow-movie.mp4`, isVideo: true, label: 'התמונה הפכה לסרטון חי' },
-    tags: ['תמונה חיה', 'תמונה ישנה'],
-  },
-  {
-    slug: 'old-wedding-couple',
-    title: 'תמונה שהפכה לסרטון חי: החתן והכלה',
-    badge: 'וידאו AI',
-    description: 'תמונת חתונה ישנה, והזוג מסתכל זה על זה ומחייך. <strong>גם אתם יכולים להחיות את תמונת החתונה של ההורים או הסבים, כל מה שצריך זה תמונה אחת.</strong>',
-    thumbnail: `${R2}/couple-movie.mp4`,
-    thumbnailIsVideo: true,
-    featured: false,
-    type: 'image-video',
-    original: { src: `${R2}/couple-photo.jpg`, alt: 'תמונת חתונה ישנה של חתן וכלה', label: 'התמונה המקורית' },
-    aiResult: { src: `${R2}/couple-movie.mp4`, isVideo: true, label: 'התמונה הפכה לסרטון חי' },
-    categoryLink: { href: '/מצגות/wedding', label: 'גלריית מצגות חתונות' },
-    tags: ['תמונה חיה', 'חתונה'],
   },
   {
     slug: 'alon-astronaut',

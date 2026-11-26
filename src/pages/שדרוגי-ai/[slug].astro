@@ -47,8 +47,8 @@ const others = showcases.filter(x => x.slug !== slug).slice(0, 3);
       {s.type === 'image-video' && (
         <div class="reveal" style={`display: grid; grid-template-columns: ${s.containImage ? '0.6fr 1.4fr' : '1fr 1fr'}; gap: 2.5rem; align-items: ${s.containImage ? 'start' : 'center'};`}>
           <div style="text-align: center;">
-            <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(108,34,255,.12);">
-              <img src={s.original!.src} alt={s.original!.alt} style={`width: 100%; ${s.containImage ? 'height: auto;' : 'height: 380px; object-fit: cover;'} display: block;`} loading="lazy" />
+            <div style={`border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(108,34,255,.12);${s.portraitPair ? ' width: fit-content; margin: 0 auto;' : ''}`}>
+              <img src={s.original!.src} alt={s.original!.alt} style={s.portraitPair ? 'height: 380px; width: auto; display: block;' : `width: 100%; ${s.containImage ? 'height: auto;' : 'height: 380px; object-fit: cover;'} display: block;`} loading="lazy" />
             </div>
             <div style="margin-top: 1rem; display: inline-block; background: white; color: #6C22FF; font-weight: 700; font-size: .85rem; padding: .45rem 1.2rem; border-radius: 50px; box-shadow: 0 2px 12px rgba(108,34,255,.15);">
               {s.original!.label}
